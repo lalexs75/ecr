@@ -254,7 +254,7 @@ type
     //ver 10.4.2
     function SoftLockInit(Handle:TLibFPtrHandle):Integer;
     function SoftLockQuerySessionCode(Handle:TLibFPtrHandle):Integer;
-    function SoftLockValidate = (Handle:TLibFPtrHandle):Integer;
+    function SoftLockValidate(Handle:TLibFPtrHandle):Integer;
     function UtilCalcTax(Handle:TLibFPtrHandle):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
@@ -2174,6 +2174,27 @@ begin
     Flibfptr_set_non_printable_param_bytearray(Handle, ParamId, @Value[0], Length(Value))
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_non_printable_param_bytearray']);
+end;
+
+function TAtollLibraryV10.SoftLockInit(Handle: TLibFPtrHandle): Integer;
+begin
+
+end;
+
+function TAtollLibraryV10.SoftLockQuerySessionCode(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+
+end;
+
+function TAtollLibraryV10.SoftLockValidate(Handle: TLibFPtrHandle): Integer;
+begin
+
+end;
+
+function TAtollLibraryV10.UtilCalcTax(Handle: TLibFPtrHandle): Integer;
+begin
+
 end;
 
 end.
