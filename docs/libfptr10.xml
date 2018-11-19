@@ -6,6 +6,39 @@
       </element><element name="AtollWideStrToString"><short>Платформено-независимая функция перевода кодировки строки, используемого дравйвером АТОЛ, в кодировку UTF8</short>
       </element><element name="StringToAtollWideStr"><short>Платформено-независимая функция перевода кодировки строки, из UTF8 в используемую дравйвером АТОЛ</short>
       </element>
+    <element name="libfptr_error"><short>Список кодов ошибок</short>
+      </element><element name="libfptr_error.LIBFPTR_OK"><short>Ошибок нет</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_CONNECTION_DISABLED"><short>Соединение не установлено</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NO_CONNECTION"><short>Нет связи</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_PORT_BUSY"><short>Порт занят</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_PORT_NOT_AVAILABLE"><short>Порт недоступен</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INCORRECT_DATA"><short>Некорректные данные от устройства</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INTERNAL"><short>Внутренняя ошибка библиотеки</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_UNSUPPORTED_CAST"><short>Неподдерживаемое преобразование типа параметра</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NO_REQUIRED_PARAM"><short>Не найден обязательный параметр</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_SETTINGS"><short>Некорректные настройки</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NOT_CONFIGURED"><short>Драйвер не настроен</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NOT_SUPPORTED"><short>Не поддерживается в данной версии (драйвера или ККТ)</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_MODE"><short>Не поддерживается в данном режиме</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_PARAM"><short>Нeкорректное значение параметра</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NOT_LOADED"><short>Не удалось загрузить библиотеку</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_UNKNOWN"><short>Неизвестная ошибка</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_SUM"><short>Неверная цена (сумма)</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_QUANTITY"><short>Неверное количество</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_CASH_COUNTER_OVERFLOW"><short>Переполнение счетчика наличности</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LAST_OPERATION_STORNO_DENIED"><short>Невозможно сторно последней операции</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_STORNO_BY_CODE_DENIED"><short>Сторно по коду невозможно</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LAST_OPERATION_NOT_REPEATABLE"><short>Невозможен повтор последней операции</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DISCOUNT_NOT_REPEATABLE"><short>Повторная скидка на операцию невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DISCOUNT_DENIED"><short>Невозможно начислить скидку/надбавку</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_COMMODITY_CODE"><short>Неверный код товара</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_COMMODITY_BARCODE"><short>Неверный штрихкод товара</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_COMMAND_FORMAT"><short>Неверный формат команды</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_COMMAND_LENGTH"><short>Неверная длина</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_BLOCKED_IN_DATE_INPUT_MODE"><short>ККТ заблокирована в режиме ввода даты</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NEED_DATE_ACCEPT"><short>Требуется подтверждение ввода даты</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NO_MORE_DATA"><short>Нет больше данных</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

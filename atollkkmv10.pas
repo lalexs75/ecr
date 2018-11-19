@@ -128,6 +128,12 @@ type
     Flibfptr_set_non_printable_param_datetime:Tlibfptr_set_non_printable_param_datetime;
     Flibfptr_set_non_printable_param_bytearray:Tlibfptr_set_non_printable_param_bytearray;
 
+    //v10.4.2
+    Flibfptr_soft_lock_init:Tlibfptr_soft_lock_init;
+    Flibfptr_soft_lock_query_session_code:Tlibfptr_soft_lock_query_session_code;
+    Flibfptr_soft_lock_validate:Tlibfptr_soft_lock_validate;
+    Flibfptr_util_calc_tax:Tlibfptr_util_calc_tax;
+
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -244,6 +250,12 @@ type
     procedure SetNonPrintableParamStr(Handle:TLibFPtrHandle; ParamId:Integer; Value:string);
     procedure SetNonPrintableParamDateTime(Handle: TLibFPtrHandle; ParamId:Integer; Value:TDateTime);
     procedure SetNonPrintableParamByteArray(Handle: TLibFPtrHandle; ParamId: Integer; const Value: TBytes);
+
+    //ver 10.4.2
+    function SoftLockInit(Handle:TLibFPtrHandle):Integer;
+    function SoftLockQuerySessionCode(Handle:TLibFPtrHandle):Integer;
+    function SoftLockValidate = (Handle:TLibFPtrHandle):Integer;
+    function UtilCalcTax(Handle:TLibFPtrHandle):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -1090,6 +1102,12 @@ begin
   Flibfptr_set_non_printable_param_str:=nil;
   Flibfptr_set_non_printable_param_datetime:=nil;
   Flibfptr_set_non_printable_param_bytearray:=nil;
+  //ver 10.4.2
+  Flibfptr_soft_lock_init:=nil;
+  Flibfptr_soft_lock_query_session_code:=nil;
+  Flibfptr_soft_lock_validate:=nil;
+  Flibfptr_util_calc_tax:=nil;
+
   //
   FAtollLib:=NilHandle;
 end;
@@ -1234,6 +1252,11 @@ begin
     Flibfptr_set_non_printable_param_str:=Tlibfptr_set_non_printable_param_str(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_str'));
     Flibfptr_set_non_printable_param_datetime:=Tlibfptr_set_non_printable_param_datetime(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_datetime'));
     Flibfptr_set_non_printable_param_bytearray:=Tlibfptr_set_non_printable_param_bytearray(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
+    //ver 10.4.2
+    Flibfptr_soft_lock_init:=Tlibfptr_soft_lock_init(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
+    Flibfptr_soft_lock_query_session_code:=Tlibfptr_soft_lock_query_session_code(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
+    Flibfptr_soft_lock_validate:=Tlibfptr_soft_lock_validate(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
+    Flibfptr_util_calc_tax:=Tlibfptr_util_calc_tax(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
   end;
 end;
 

@@ -31,15 +31,15 @@ object Form1: TForm1
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ClientHeight = 617
+      ClientHeight = 618
       ClientWidth = 969
       object Button1: TButton
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
         Left = 6
-        Height = 36
+        Height = 31
         Top = 6
-        Width = 89
+        Width = 86
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Simple test'
@@ -50,10 +50,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button1
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet1
-        Left = 101
-        Height = 36
+        Left = 98
+        Height = 31
         Top = 6
-        Width = 99
+        Width = 97
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Standart test'
@@ -64,10 +64,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button2
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet1
-        Left = 206
-        Height = 36
+        Left = 201
+        Height = 31
         Top = 6
-        Width = 99
+        Width = 98
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Config dialog'
@@ -78,10 +78,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button3
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet1
-        Left = 311
-        Height = 36
+        Left = 305
+        Height = 31
         Top = 6
-        Width = 165
+        Width = 170
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Тестовый "плохой" чек'
@@ -99,9 +99,9 @@ object Form1: TForm1
       end
       object Button18: TButton
         Left = 104
-        Height = 36
+        Height = 31
         Top = 80
-        Width = 118
+        Width = 117
         AutoSize = True
         Caption = 'С поставщиком'
         OnClick = Button18Click
@@ -109,7 +109,7 @@ object Form1: TForm1
       end
       object SpinEdit1: TSpinEdit
         Left = 102
-        Height = 37
+        Height = 31
         Top = 136
         Width = 114
         TabOrder = 6
@@ -117,7 +117,7 @@ object Form1: TForm1
     end
     object TabSheet2: TTabSheet
       Caption = 'Отчёты'
-      ClientHeight = 617
+      ClientHeight = 618
       ClientWidth = 969
       object Button5: TButton
         AnchorSideLeft.Control = TabSheet2
@@ -149,7 +149,7 @@ object Form1: TForm1
     end
     object TabSheet3: TTabSheet
       Caption = 'Сервисные параметры'
-      ClientHeight = 617
+      ClientHeight = 618
       ClientWidth = 969
       object Button7: TButton
         AnchorSideLeft.Control = TabSheet3
@@ -330,7 +330,7 @@ object Form1: TForm1
     end
     object TabSheet4: TTabSheet
       Caption = 'Регистрация'
-      ClientHeight = 617
+      ClientHeight = 618
       ClientWidth = 969
       object Button8: TButton
         AnchorSideRight.Control = TabSheet4
@@ -1109,7 +1109,7 @@ object Form1: TForm1
     end
     object TabSheet5: TTabSheet
       Caption = 'Параметры организации'
-      ClientHeight = 617
+      ClientHeight = 618
       ClientWidth = 969
       object Label4: TLabel
         AnchorSideLeft.Control = TabSheet5
@@ -1198,7 +1198,7 @@ object Form1: TForm1
     end
     object TabSheet6: TTabSheet
       Caption = 'Прочие функции'
-      ClientHeight = 617
+      ClientHeight = 618
       ClientWidth = 969
       object Button13: TButton
         AnchorSideLeft.Control = TabSheet6

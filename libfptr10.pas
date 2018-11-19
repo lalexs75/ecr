@@ -290,6 +290,15 @@ extern "C"
     LIBFPTR_ERROR_USER_MEMORY_FAULT,
     LIBFPTR_ERROR_SERVICE_COUNTERS_FAULT,
     LIBFPTR_ERROR_ATTRIBUTES_FAULT,
+    LIBFPTR_ERROR_ALREADY_IN_UPDATE_MODE,
+    LIBFPTR_ERROR_INVALID_FIRMWARE,
+    LIBFPTR_ERROR_INVALID_CHANNEL,
+    LIBFPTR_ERROR_INTERFACE_DOWN,
+    LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1212_1030,
+    LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1214,
+    LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1212,
+    LIBFPTR_ERROR_SYNC_TIME,
+    LIBFPTR_ERROR_VAT18_VAT20_IN_RECEIPT,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
@@ -488,6 +497,23 @@ extern "C"
     LIBFPTR_PARAM_FIRMWARE_CHUNK_DATA,
     LIBFPTR_PARAM_FN_FLAGS,
     LIBFPTR_PARAM_PRINT_FOOTER,
+    LIBFPTR_PARAM_PUBLIC_KEY,
+    LIBFPTR_PARAM_MAGIC_NUMBER,
+    LIBFPTR_PARAM_SIGN,
+    LIBFPTR_PARAM_SOFT_NAME,
+    LIBFPTR_PARAM_SESSION_CODE,
+    LIBFPTR_PARAM_ETHERNET_CONFIG_TIMEOUT,
+    LIBFPTR_PARAM_ETHERNET_DHCP,
+    LIBFPTR_PARAM_ETHERNET_IP,
+    LIBFPTR_PARAM_ETHERNET_MASK,
+    LIBFPTR_PARAM_ETHERNET_GATEWAY,
+    LIBFPTR_PARAM_ETHERNET_PORT,
+    LIBFPTR_PARAM_ETHERNET_DNS_IP,
+    LIBFPTR_PARAM_ETHERNET_DNS_STATIC,
+    LIBFPTR_PARAM_STORE_IN_JOURNAL,
+    LIBFPTR_PARAM_NEW_PLATFORM,
+    LIBFPTR_PARAM_UNIT_RELEASE_VERSION,
+    LIBFPTR_PARAM_USE_VAT18,
 
     LIBFPTR_PARAM_LAST
   );
@@ -512,6 +538,8 @@ extern "C"
     LIBFPTR_MODEL_ATOL_91F = 82,
     LIBFPTR_MODEL_ATOL_92F = 84,
     LIBFPTR_MODEL_ATOL_SIGMA_10 = 86,
+    LIBFPTR_MODEL_ATOL_SIGMA_7F = 90,
+    LIBFPTR_MODEL_ATOL_SIGMA_8F = 91,
     LIBFPTR_MODEL_KAZNACHEY_FA = 76
   );
   Tlibfptr_model = libfptr_model;
@@ -790,7 +818,8 @@ type
     LIBFPTR_DT_LK_USER_CODE,
     LIBFPTR_DT_LAST_SENT_OFD_DOCUMENT_DATE_TIME,
     LIBFPTR_DT_SHORT_STATUS,
-    LIBFPTR_DT_PICTURES_ARRAY_INFO
+    LIBFPTR_DT_PICTURES_ARRAY_INFO,
+    LIBFPTR_DT_ETHERNET_INFO,
   );
   Tlibfptr_kkt_data_type = libfptr_kkt_data_type;
 
@@ -1220,6 +1249,16 @@ type
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_flash_firmware(libfptr_handle handle);
   Tlibfptr_flash_firmware = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_soft_lock_init(libfptr_handle handle);
+  Tlibfptr_soft_lock_init = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_soft_lock_query_session_code(libfptr_handle handle);
+  Tlibfptr_soft_lock_query_session_code = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_soft_lock_validate(libfptr_handle handle);
+  Tlibfptr_soft_lock_validate = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_util_calc_tax(libfptr_handle handle);
+  Tlibfptr_util_calc_tax = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;

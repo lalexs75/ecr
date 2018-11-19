@@ -570,7 +570,7 @@ begin
   Result:=slibFPPtr10FileName;
   {$ENDIF}
   {$IFDEF LINUX}
-  Result:=AppendPathDelim(ExtractFileDir(ParamStr(0))) + AppendPathDelim('dll-so-10.4.1');
+  Result:=AppendPathDelim(ExtractFileDir(ParamStr(0))) + AppendPathDelim('dll-so-10.4.2');
   {$IFDEF cpux86_64}
   Result:=Result + AppendPathDelim('linux-x64');
   {$ENDIF}
