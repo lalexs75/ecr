@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="42">
+      <Unit0>
+        <Filename Value="project1.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="47"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unit1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="150"/>
+        <CursorPos Y="78"/>
+        <UsageCount Value="47"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="C:\install\source\fpcsrc\rtl\inc\varianth.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="202"/>
+        <CursorPos X="10" Y="223"/>
+        <UsageCount Value="10"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="C:\install\source\fpcsrc\packages\winunits-base\src\comobj.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="261"/>
+        <CursorPos X="14" Y="282"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\egLib\egate_class.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="85"/>
+        <CursorPos X="8" Y="105"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\egLib\egate_consts.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\egLib\egate_lib.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="438"/>
+        <UsageCount Value="10"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\egLib\egate_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="319"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\sbrf\sbrf_pc_com.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="7"/>
+        <UsageCount Value="13"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\kkm_atol.pas"/>
+        <UnitName Value="KKM_Atol"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2767"/>
+        <CursorPos Y="2803"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\sbrf_pc.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="3" Y="11"/>
+        <UsageCount Value="10"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\alexs_plastic_cards_abstract.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="17"/>
+        <CursorPos X="3" Y="28"/>
+        <UsageCount Value="12"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="C:\lazarus\components\ecr_atol\sbrf\sbrf_pc_consts.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="3" Y="20"/>
+        <UsageCount Value="12"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="C:\lazarus\components\ecr_atol\egLib\egate_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="67"/>
+        <CursorPos Y="13"/>
+        <UsageCount Value="11"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="C:\lazarus\components\ecr_atol\egLib\egate_class.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="49"/>
+        <CursorPos Y="65"/>
+        <UsageCount Value="14"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\lazarus\components\ecr_atol\sbrf\sbrf_pc_com.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="226"/>
+        <CursorPos Y="241"/>
+        <UsageCount Value="14"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="C:\lazarus\components\ecr_atol\alexs_plastic_cards_abstract.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="21"/>
+        <CursorPos Y="40"/>
+        <UsageCount Value="13"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="C:\lazarus\components\rxnew\rxcontrols\rxcurredit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="295"/>
+        <CursorPos Y="319"/>
+        <UsageCount Value="10"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\lazarus\lcl\include\spinedit.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="212"/>
+        <CursorPos Y="228"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="unit1.lfm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\sbrf\sbrf_pc_consts.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="17" Y="32"/>
+        <UsageCount Value="13"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\sbrf\sbrf_plastic_console.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="269"/>
+        <CursorPos X="62" Y="300"/>
+        <UsageCount Value="13"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="C:\usr\local\share\lazarus\components\lazutils\utf8process.pp"/>
+        <UnitName Value="UTF8Process"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="17" Y="12"/>
+        <UsageCount Value="11"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="C:\install\source\fpcsrc\packages\fcl-process\src\process.pp"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="13" Y="15"/>
+        <UsageCount Value="10"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="C:\install\source\fpcsrc\rtl\unix\cwstring.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="454"/>
+        <CursorPos Y="483"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="C:\install\source\fpcsrc\packages\rtl-objpas\src\inc\variants.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="4189"/>
+        <CursorPos Y="4208"/>
+        <UsageCount Value="10"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="C:\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="351"/>
+        <CursorPos X="83" Y="364"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="C:\install\source\fpcsrc\rtl\inc\astrings.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="160"/>
+        <CursorPos Y="189"/>
+        <UsageCount Value="10"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="C:\install\source\fpcsrc\rtl\linux\x86_64\syscall.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="90"/>
+        <CursorPos Y="109"/>
+        <UsageCount Value="10"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="C:\install\source\fpcsrc\rtl\inc\except.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="169"/>
+        <CursorPos Y="200"/>
+        <UsageCount Value="10"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="C:\usr\local\share\lazarus\lcl\include\spinedit.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="208"/>
+        <CursorPos Y="228"/>
+        <UsageCount Value="10"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="C:\usr\local\share\lazarus\components\rxnew\rxcontrols\rxcurredit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="291"/>
+        <CursorPos Y="319"/>
+        <UsageCount Value="10"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="C:\usr\local\share\lazarus\components\ecr_atol\sbrf\sprfpaysplashunit.pas"/>
+        <ComponentName Value="sprfPaySplashForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="sprfPaySplashUnit"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="20" Y="30"/>
+        <UsageCount Value="20"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="C:\install\source\fpcsrc\rtl\objpas\sysutils\fina.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="36"/>
+        <CursorPos Y="67"/>
+        <UsageCount Value="10"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="C:\lazarus\components\ecr_atol\sbrf\sbrf_plastic_console.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="345"/>
+        <CursorPos Y="356"/>
+        <UsageCount Value="10"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="204"/>
+        <CursorPos X="62" Y="221"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="..\..\..\..\..\lcl\include\spinedit.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="208"/>
+        <CursorPos Y="228"/>
+        <UsageCount Value="10"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="..\..\..\..\rxnew\rxcontrols\rxcurredit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="291"/>
+        <CursorPos Y="319"/>
+        <UsageCount Value="10"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\rtl\objpas\sysutils\fina.inc"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="39"/>
+        <CursorPos Y="67"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\rtl\inc\astrings.inc"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="160"/>
+        <CursorPos Y="189"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="25"/>
+        <CursorPos Y="49"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\pipes.inc"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="9"/>
+        <CursorPos Y="40"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit41>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="450" TopLine="432"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="451" TopLine="432"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="452" TopLine="432"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="460" TopLine="431"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="461" TopLine="431"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="462" TopLine="431"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="463" TopLine="432"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="464" TopLine="433"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="465" TopLine="434"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="453" TopLine="435"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="222" TopLine="195"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="44" TopLine="25"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="45" TopLine="25"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="48" TopLine="25"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\..\..\..\..\..\..\..\..\home\install\source\fpcsrc\packages\fcl-process\src\unix\process.inc"/>
+        <Caret Line="49" TopLine="25"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="228" TopLine="195"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="224" Column="3" TopLine="204"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="216" TopLine="204"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="224" TopLine="204"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="227" Column="7" TopLine="204"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="216" TopLine="204"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="224" Column="42" TopLine="204"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="216" TopLine="204"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="224" TopLine="204"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="225" TopLine="204"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="218" Column="125" TopLine="204"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="224" TopLine="204"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="228" TopLine="204"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="229" TopLine="204"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Caret Line="232" TopLine="204"/>
+      </Position30>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode="default"/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\sbrf\sbrf_plastic_console.pas"/>
+        <Line Value="228"/>
+      </Item1>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>

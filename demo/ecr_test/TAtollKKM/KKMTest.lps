@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="31">
+      <Unit0>
+        <Filename Value="KKMTest.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="152"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="kkmtestunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="KKMTestForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="kkmTestUnit"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="460"/>
+        <CursorPos Y="477"/>
+        <UsageCount Value="152"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../../../TradeEquipmentDrv/kkm/kkm_atol.pas"/>
+        <UnitName Value="KKM_Atol"/>
+        <TopLine Value="2023"/>
+        <CursorPos Y="2038"/>
+        <UsageCount Value="96"/>
+        <Bookmarks Count="3">
+          <Item0 X="57" Y="1035" ID="1"/>
+          <Item1 X="37" Y="2086" ID="2"/>
+          <Item2 X="14" Y="559" ID="9"/>
+        </Bookmarks>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../../../synapse/synaser.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="356"/>
+        <CursorPos X="15" Y="370"/>
+        <UsageCount Value="12"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../../../install/fpcsrc/rtl/linux/termios.inc"/>
+        <TopLine Value="915"/>
+        <CursorPos X="4" Y="931"/>
+        <UsageCount Value="3"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../../../../lcl/include/control.inc"/>
+        <TopLine Value="2703"/>
+        <CursorPos Y="2719"/>
+        <UsageCount Value="3"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../../../install/fpcsrc/rtl/objpas/sysutils/filutilh.inc"/>
+        <TopLine Value="69"/>
+        <CursorPos X="10" Y="85"/>
+        <UsageCount Value="0"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../../../synapse/synautil.pas"/>
+        <TopLine Value="137"/>
+        <CursorPos X="10" Y="153"/>
+        <UsageCount Value="0"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../../../../../install/fpcsrc/rtl/objpas/sysutils/osutilsh.inc"/>
+        <TopLine Value="12"/>
+        <CursorPos X="11" Y="28"/>
+        <UsageCount Value="0"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="../../../lazutils/fileutil.pas"/>
+        <UnitName Value="FileUtil"/>
+        <TopLine Value="187"/>
+        <CursorPos X="10" Y="202"/>
+        <UsageCount Value="0"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../../rxnew/rxstrutils.pas"/>
+        <TopLine Value="17"/>
+        <CursorPos X="5" Y="40"/>
+        <UsageCount Value="0"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="../../../lazutils/fileutil.inc"/>
+        <TopLine Value="32"/>
+        <CursorPos Y="53"/>
+        <UsageCount Value="0"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="../../../rxnew/rx.inc"/>
+        <TopLine Value="29"/>
+        <CursorPos X="26" Y="50"/>
+        <UsageCount Value="0"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../../../../install/fpcsrc/rtl/objpas/sysutils/sysutilh.inc"/>
+        <TopLine Value="97"/>
+        <CursorPos X="4" Y="107"/>
+        <UsageCount Value="3"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="../../../../lcl/forms.pp"/>
+        <UnitName Value="Forms"/>
+        <TopLine Value="134"/>
+        <CursorPos X="52" Y="134"/>
+        <UsageCount Value="0"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../../../../install/fpcsrc/rtl/inc/objpash.inc"/>
+        <TopLine Value="177"/>
+        <CursorPos X="23" Y="192"/>
+        <UsageCount Value="3"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../../../../install/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
+        <TopLine Value="231"/>
+        <CursorPos X="10" Y="261"/>
+        <UsageCount Value="2"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../../../../../install/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <TopLine Value="2563"/>
+        <CursorPos X="19" Y="2578"/>
+        <UsageCount Value="2"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../../../../install/fpcsrc/rtl/objpas/fmtbcd.pp"/>
+        <UnitName Value="FmtBCD"/>
+        <TopLine Value="835"/>
+        <CursorPos Y="866"/>
+        <UsageCount Value="1"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../../../lcl/include/customcombobox.inc"/>
+        <TopLine Value="903"/>
+        <CursorPos Y="923"/>
+        <UsageCount Value="2"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../../component1.pas"/>
+        <CursorPos X="33" Y="11"/>
+        <UsageCount Value="7"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="../../kkm_atol.pas"/>
+        <UnitName Value="KKM_Atol"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="2620"/>
+        <CursorPos X="22" Y="2648"/>
+        <UsageCount Value="26"/>
+        <Bookmarks Count="3">
+          <Item0 X="14" Y="766" ID="2"/>
+          <Item1 X="3" Y="860" ID="3"/>
+          <Item2 Y="1646" ID="1"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="../../../synapse/blcksock.pas"/>
+        <CursorPos X="13" Y="2"/>
+        <UsageCount Value="7"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="../../kkm_atolpropsunit.pas"/>
+        <UnitName Value="KKM_AtolPropsUnit"/>
+        <CursorPos Y="30"/>
+        <UsageCount Value="7"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="../../atol_ecr.pas"/>
+        <CursorPos X="46" Y="16"/>
+        <UsageCount Value="7"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
+        <TopLine Value="1779"/>
+        <CursorPos Y="1794"/>
+        <UsageCount Value="8"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="../../ecr_icon.inc"/>
+        <UsageCount Value="17"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="../../../../lcl/dialogs.pp"/>
+        <UnitName Value="Dialogs"/>
+        <TopLine Value="19"/>
+        <CursorPos X="38" Y="38"/>
+        <UsageCount Value="9"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="../../../lazutils/lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="206"/>
+        <CursorPos Y="232"/>
+        <UsageCount Value="9"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="S:/fpcsrc/rtl/win/wininc/struct.inc"/>
+        <TopLine Value="799"/>
+        <CursorPos X="11" Y="815"/>
+        <UsageCount Value="9"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="S:/fpcsrc/rtl/objpas/classes/classesh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1808"/>
+        <CursorPos X="14" Y="1823"/>
+        <UsageCount Value="9"/>
+      </Unit30>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="855" Column="32" TopLine="827"/>
+      </Position1>
+      <Position2>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1069" Column="18" TopLine="1041"/>
+      </Position2>
+      <Position3>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1120" Column="20" TopLine="1092"/>
+      </Position3>
+      <Position4>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1344" Column="20" TopLine="1316"/>
+      </Position4>
+      <Position5>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1387" Column="20" TopLine="1359"/>
+      </Position5>
+      <Position6>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1537" Column="20" TopLine="1509"/>
+      </Position6>
+      <Position7>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1564" Column="3" TopLine="1546"/>
+      </Position7>
+      <Position8>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1568" Column="20" TopLine="1546"/>
+      </Position8>
+      <Position9>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1613" Column="23" TopLine="1597"/>
+      </Position9>
+      <Position10>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1617" Column="21" TopLine="1597"/>
+      </Position10>
+      <Position11>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1618" Column="23" TopLine="1597"/>
+      </Position11>
+      <Position12>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1545" TopLine="1525"/>
+      </Position12>
+      <Position13>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="766" Column="14" TopLine="749"/>
+      </Position13>
+      <Position14>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1653" Column="18" TopLine="1628"/>
+      </Position14>
+      <Position15>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1718" Column="18" TopLine="1701"/>
+      </Position15>
+      <Position16>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1750" Column="20" TopLine="1728"/>
+      </Position16>
+      <Position17>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1807" Column="20" TopLine="1779"/>
+      </Position17>
+      <Position18>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1863" Column="22" TopLine="1835"/>
+      </Position18>
+      <Position19>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1931" Column="22" TopLine="1903"/>
+      </Position19>
+      <Position20>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="1973" Column="20" TopLine="1945"/>
+      </Position20>
+      <Position21>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2029" Column="20" TopLine="2001"/>
+      </Position21>
+      <Position22>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2065" Column="22" TopLine="2037"/>
+      </Position22>
+      <Position23>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2132" Column="20" TopLine="2104"/>
+      </Position23>
+      <Position24>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2301" Column="22" TopLine="2273"/>
+      </Position24>
+      <Position25>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2411" Column="24" TopLine="2383"/>
+      </Position25>
+      <Position26>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2450" Column="20" TopLine="2422"/>
+      </Position26>
+      <Position27>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2498" Column="22" TopLine="2470"/>
+      </Position27>
+      <Position28>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2549" Column="22" TopLine="2521"/>
+      </Position28>
+      <Position29>
+        <Filename Value="../../kkm_atol.pas"/>
+        <Caret Line="2599" Column="22" TopLine="2571"/>
+      </Position29>
+      <Position30>
+        <Filename Value="kkmtestunit.pas"/>
+        <Caret Line="395" Column="124" TopLine="382"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="kkmtestunit.pas"/>
+        <Line Value="420"/>
+      </Item1>
+    </BreakPoints>
+    <Watches Count="6">
+      <Item1>
+        <Expression Value="FBufArray"/>
+        <DisplayStyle Value="wdfMemDump"/>
+      </Item1>
+      <Item2>
+        <Expression Value="FCurPos"/>
+      </Item2>
+      <Item3>
+        <Expression Value="B"/>
+      </Item3>
+      <Item4>
+        <Expression Value="FCommandBuf"/>
+        <DisplayStyle Value="wdfMemDump"/>
+      </Item4>
+      <Item5>
+        <Expression Value="FCommandBufLen"/>
+      </Item5>
+      <Item6>
+        <Expression Value="AAA"/>
+      </Item6>
+    </Watches>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,114 @@
+object kkmAtolPropsForm: TkkmAtolPropsForm
+  Left = 487
+  Height = 181
+  Top = 267
+  Width = 369
+  Caption = 'Свойства'
+  ClientHeight = 181
+  ClientWidth = 369
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.1'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 15
+    Top = 6
+    Width = 31
+    BorderSpacing.Around = 6
+    Caption = 'Порт'
+    ParentColor = False
+  end
+  object cbPortList: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label2
+    Left = 12
+    Height = 27
+    Top = 27
+    Width = 166
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Sorted = True
+    TabOrder = 0
+  end
+  object rgPortSpeed: TRadioGroup
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 190
+    Height = 117
+    Top = 6
+    Width = 173
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Скорость'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 100
+    ClientWidth = 169
+    Columns = 2
+    Items.Strings = (
+      '2400'
+      '4800'
+      '9600'
+      '19200'
+      '38400'
+      '57600'
+      '115200'
+    )
+    TabOrder = 1
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 184
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 133
+    Width = 357
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 2
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object Button1: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 6
+    Height = 27
+    Top = 100
+    Width = 160
+    Anchors = [akLeft, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Проверить - гудок ККМ'
+    OnClick = Button1Click
+    TabOrder = 3
+  end
+end

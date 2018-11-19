@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="sbrf_pc"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="sbrf"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Version Major="1"/>
+    <Files Count="4">
+      <Item1>
+        <Filename Value="sbrf\sbrf_pc_com.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="sbrf_pc_com"/>
+      </Item1>
+      <Item2>
+        <Filename Value="sbrf\sbrf_pc_consts.pas"/>
+        <UnitName Value="sbrf_pc_consts"/>
+      </Item2>
+      <Item3>
+        <Filename Value="sbrf\sbrf_plastic_console.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="sbrf_plastic_console"/>
+      </Item3>
+      <Item4>
+        <Filename Value="sbrf\sprfpaysplashunit.pas"/>
+        <UnitName Value="sprfPaySplashUnit"/>
+      </Item4>
+    </Files>
+    <i18n>
+      <EnableI18N Value="True"/>
+      <OutDir Value="languages"/>
+    </i18n>
+    <RequiredPkgs Count="4">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCLBase"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="alexs_trade_abstract"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="FCL"/>
+      </Item4>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

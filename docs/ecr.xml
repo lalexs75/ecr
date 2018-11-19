@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fpdoc-descriptions>
+  <package name="atol_ecr">
+    <module name="kkm_atol">
+      <element name="TAtollKKM">
+        <short>Драйвер ККМ</short>
+        <descr>
+          <p>Объект представляет собой драйвер ККМ</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.CancelCheck">
+        <short>Отмена текущего чека</short>
+        <descr>
+          <p>Данный метод драйвера выполняет отмену текущего чека.</p>
+          <p>На чеке при этом будет написан текст 
+<b>ЧЕК АННУЛИРОВАН</b>.</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.PrintString">
+        <short>Печать строки</short>
+        <descr>
+          <p>Метод служит для печати текста на чековой и(или) контрольной ленте ККМ.</p>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>Caption</td>
+              <td>Содержит строку для печати</td>
+            </tr>
+          </table>
+        </descr>
+      </element>
+      <element name="TAtollKKM.OpenSession">
+        <short>Открыть смену</short>
+        <descr>
+          <p>Метод открывает новую смену на ККМ.</p>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>TestMode</td>
+              <td>Признак тестовой операции</td>
+            </tr>
+            <tr>
+              <td>Caption</td>
+              <td>Строка заголовка</td>
+            </tr>
+          </table>
+          <remark>В случае указания строки в свойстве <b>Caption</b> данное сообщение будет печататься на кассовой ленте при открытии смены.</remark>
+        </descr>
+      </element>
+      <element name="TAtollKKM.OpenCheck">
+        <short>Открыть чек</short>
+        <descr>
+          <p>Данный метод предназначен для открытия чека на ККМ. Тип чека указан в свойстве <b>CheckType</b>.</p>
+          <p>После успешного вызова данного метода соостояние чека ККМ изменяетс на указанное при открытии. На чековой и контрольной лентах печатается наименовнаие чека.</p>
+          <p>Сумма по чеку остаётся без изменения.</p>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>TestMode</td>
+              <td>Признак тестовой операции</td>
+            </tr>
+            <tr>
+              <td>CheckType </td>
+              <td>Тип чека, который необходимо открыть</td>
+            </tr>
+          </table>
+        </descr>
+      </element>
+      <element name="TAtollKKM.CloseCheck">
+        <short>Закрыть чек</short>
+        <descr>
+          <p>Метод закрытия чека по ККМ.</p>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>TestMode</td>
+              <td>Признак тестовой операции</td>
+            </tr>
+            <tr>
+              <td>Summ</td>
+              <td>Сумма вносимых денег в результате выполнения операции</td>
+            </tr>
+            <tr>
+              <td>TypeClose</td>
+              <td>Тип оплаты, с помощью которого производится закрытие данного чека</td>
+            </tr>
+          </table>
+          <p>Метод работает следующим образом:</p>
+          <p>Если в поле Summ находится 0, то считается что чек закрывается без сдачи. Сумма чека будет равна сумме всех строк внесения.</p>
+          <p>Если в поле Summ находится сумма, отличная от нуля, то будет расчитываться сдача</p>
+        </descr>
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.Registration">
+        <short>Регистрация</short>
+        <descr>
+          <p>Данный метод предназначен для выполнения регистрации продажи.</p>
+          <remark>При выполнении регистрации в полях Price и Quantity должны содерждаться не нулевые положительные значения.</remark>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>TestMode</td>
+              <td>Признак тестовой операции</td>
+            </tr>
+            <tr>
+              <td>Caption</td>
+              <td>Наименование товара.
+    </td>
+            </tr>
+            <tr>
+              <td>Quantity</td>
+              <td>Количество товара - положительное вещественное число</td>
+            </tr>
+            <tr>
+              <td>Price</td>
+              <td>Цена товара - положительное вещественное число</td>
+            </tr>
+            <tr>
+              <td>Department</td>
+              <td>Номер секции, по которой проходит регистрация</td>
+            </tr>
+          </table>
+          <remark>Свойство <b>Caption</b> пока не реализовано в текущей версии драйвера</remark>
+        </descr>
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.Payment">
+        <short>Внесение оплаты</short>
+        <descr>Внесение суммы оплаты по чеку</descr>
+      </element>
+      <element name="TAtollKKM.Storno">
+        <short>Сторно чека</short>
+        <descr>
+          <p>Данный метод предназначен для сторнирования регистрации (продажи, возврата продажи, аннулирования продажи, покупки, возврата покупки)</p>
+          <remark>При выполнении регистрации в полях Price и Quantity должны содерждаться не нулевые положительные значения.</remark>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>TestMode</td>
+              <td>Признак тестовой операции</td>
+            </tr>
+            <tr>
+              <td>Caption</td>
+              <td>Наименование товара.
+    </td>
+            </tr>
+            <tr>
+              <td>Quantity</td>
+              <td>Количество товара - положительное вещественное число</td>
+            </tr>
+            <tr>
+              <td>Price</td>
+              <td>Цена товара - положительное вещественное число</td>
+            </tr>
+            <tr>
+              <td>Department</td>
+              <td>Номер секции, по которой проходит регистрация</td>
+            </tr>
+          </table>
+          <remark>Свойство <b>Caption</b> пока не реализовано в текущей версии драйвера</remark>
+        </descr>
+      </element>
+      <element name="TAtollKKM.Return">
+        <short>Возврат чека</short>
+        <descr>Возврат чека</descr>
+      </element>
+      <element name="TAtollKKM.CashIncome">
+        <short>Внесение суммы</short>
+        <descr>
+          <p>Метод предназначен для регистрации в ККМ внесения наличных денег в кассу.</p>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>TestMode</td>
+              <td>Признак тестовой операции</td>
+            </tr>
+            <tr>
+              <td>Summ</td>
+              <td>Сумма вносимых денег в результате выполнения операции</td>
+            </tr>
+          </table>
+        </descr>
+      </element>
+      <element name="TAtollKKM.CashOutcome">
+        <short>Выдача суммы</short>
+        <descr>
+          <p>Метод предназначен для регистрации в ККМ выдачи наличных денег из кассы.</p>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>TestMode</td>
+              <td>Признак тестовой операции</td>
+            </tr>
+            <tr>
+              <td>Summ</td>
+              <td>Сумма вносимых денег в результате выполнения операции</td>
+            </tr>
+          </table>
+        </descr>
+      </element>
+      <element name="EECRAtol">
+        <short>Исключение драйвера ККМ</short>
+        <descr>Данное исключение возникает в случае обнаружения проблем при работы с ККМ</descr>
+      </element>
+      <element name="EECRAtol.Create">
+        <short>Создать объект исключения</short>
+        <descr>Создать объект исключения</descr>
+      </element>
+      <element name="EECRAtol.CreateDrv">
+        <short>Создать объект исключения</short>
+        <descr>Создать объект исключения</descr>
+      </element>
+      <element name="EECRAtol.MetodName">
+        <short>Наименование метода объекта</short>
+        <descr>Наименование метода объекта при работе которого была обнаружена исключительная ситуация</descr>
+      </element>
+      <element name="EECRAtol.DriverStatus">
+        <short>Статус драйвера</short>
+        <descr>Статус драйвера</descr>
+      </element>
+      <element name="EECRAtol.ECRStatus">
+        <short>Статус аппарата</short>
+        <descr>Статус аппарата</descr>
+      </element>
+      <element name="EECRAtol.ECR">
+        <short>Ссылка на объект</short>
+        <descr>Ссылка на объект</descr>
+      </element>
+      <element name="sENQ">
+        <short>Запрос</short>
+        <descr>Запрос</descr>
+      </element>
+      <short>Модуль содержит объект драйвера ККМ</short>
+      <descr>Модуль содержит объект драйвера ККМ</descr>
+      <element name="TLogProc">
+        <short>Процедурный тип для ведения протоколирования работы драйвера ККМ</short>
+        <descr>
+          <p>Процедурный тип для ведения протоколирования работы драйвера ККМ.</p>
+          <p>Используется при определении типа переменной используемой для протоколлирования операций на дрйавере ККМ.</p>
+        </descr>
+      </element>
+      <element name="FLogProc">
+        <short>Указатель на текущую процедуру протоколирования работы ККМ</short>
+        <descr>Указатель на текущую процедуру протоколирования работы ККМ</descr>
+      </element>
+      <element name="AtolDeviseCount">
+        <short>Количество типов устройств, поддреживаемых драйвером</short>
+        <descr>Количество типов устройств, поддреживаемых драйвером</descr>
+      </element>
+      <element name="AtolDeviseNames">
+        <short>Наименование типов устройств, поддерживаемых драйвером</short>
+        <descr>Наименование типов устройств, поддерживаемых драйвером</descr>
+      </element>
+      <element name="AtolModeCount">
+        <short>Количество режимов работы ККМ</short>
+        <descr>Количество режимов работы ККМ</descr>
+      </element>
+      <element name="AtolModeNames">
+        <short>Наименование режимов работы ККМ</short>
+        <descr>
+          <p>Доступные режимы работы ККМ</p>
+          <table>
+            <th>
+              <td>Код</td>
+              <td>Наименование режима</td>
+            </th>
+            <tr>
+              <td>1</td>
+              <td>Выбор</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Режим регистрации</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Режим отчетов без гашения</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Режим отчетов с гашением</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Режим программирования</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Режим доступа к ФП</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Режим доступа к ЭКЛЗ</td>
+            </tr>
+          </table>
+        </descr>
+      </element>
+      <element name="AtolCheckTypeCount">
+        <short>Кол-во типов чеков</short>
+        <descr>Кол-во типов чеков</descr>
+      </element>
+      <element name="AtolCheckTypeNames">
+        <short>Наименование типов чеков</short>
+        <descr>Наименование типов чеков</descr>
+      </element>
+      <element name="tsdReadData"/>
+      <element name="tsdSendACK"/>
+      <element name="tsdSendENQ"/>
+      <element name="tsdReadENQ"/>
+      <element name="tsdReadEOT"/>
+      <element name="sACK">
+        <short>Подтверждение</short>
+        <descr>Подтверждение</descr>
+      </element>
+      <element name="sSTX">
+        <short>Начало текста</short>
+        <descr>Начало текста</descr>
+      </element>
+      <element name="sETX">
+        <short>Конец текста</short>
+        <descr>Конец текста</descr>
+      </element>
+      <element name="sEOT">
+        <short>Конец передачи</short>
+        <descr>Конец передачи</descr>
+      </element>
+      <element name="sNAK">
+        <short>Отрицание</short>
+        <descr>Отрицание</descr>
+      </element>
+      <element name="sDLE">
+        <short>Экранирование управляющих символов</short>
+        <descr>Экранирование управляющих символов</descr>
+      </element>
+      <element name="TAtollKKM.Create">
+        <short>Конструктор создания экземпляра объекта дроайвера</short>
+        <descr>Данный конструктор создаёт экзмепляр объекта</descr>
+      </element>
+      <element name="TAtollKKM.Destroy"/>
+      <element name="TAtollKKM.LoadParams">
+        <short>Считать параметры конфигурации драйвера</short>
+        <descr>Считать параметры конфигурации драйвера</descr>
+      </element>
+      <element name="TAtollKKM.StoreParams">
+        <short>Сохранить параметры конфигурации драйвера</short>
+        <descr>Сохранить параметры конфигурации драйвера</descr>
+      </element>
+      <element name="TAtollKKM.ShowProperties">
+        <short>Отобразить окно параметров ККМ</short>
+        <descr>Отобразить окно параметров ККМ</descr>
+      </element>
+      <element name="TAtollKKM.GetRegister">
+        <short>Получить значение регистра по номер</short>
+        <descr>Команда получения регистра по номеру. Метод использует свойство
+RegisterNumber и, в зависимости от его значения, дополнительно использует
+свойства TypeClose и CheckType (в приведенной выше таблице указано при
+каких значениях RegisterNumber дополнительно используются эти свойства).
+Выходные свойства зависят от номера регистра (см. RegisterNumber).
+
+RegisterNumber</descr>
+        <example file="examples/tecr02.pas"/>
+      </element>
+      <element name="TAtollKKM.GetStatus"/>
+      <element name="TAtollKKM.SetMode">
+        <short>Переключить ККМ в указанный режим работы</short>
+        <descr>
+          <p>Данный метод переключает ККМ в указанный режим работы.</p>
+          <p>Доступные режимы:</p>
+          <table>
+            <th>
+              <td>Номер</td>
+              <td>Наименование режима</td>
+            </th>
+            <tr>
+              <td>0</td>
+              <td>Выбор</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Режим регистрации</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Режим отчетов без гашения</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Режим отчетов с гашением</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Режим программирования</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Режим доступа к ФП</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Режим доступа к ЭКЛЗ</td>
+            </tr>
+          </table>
+          <p>Используемые свойства:</p>
+          <table>
+            <th>
+              <td>Свойство</td>
+              <td>Описание</td>
+            </th>
+            <tr>
+              <td>Password</td>
+              <td>Пароль</td>
+            </tr>
+          </table>
+        </descr>
+        <example file="examples/tecr01.pas"/>
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.ResetMode">
+        <short>Выход из текущего режима</short>
+        <descr>
+          <p>Команда предназначена для перевода ККМ из любого режима в режим 0 (ВЫБОР).</p>
+          <remark>
+            <p>1.Нельзя выйти из режима <b>Регистрация</b> при открытом чеке. Для выхода в режим <b>Выбор</b> надо сначала закрыть или отменить чек.
+</p>
+            <p>2. Метод <b>ResetMode</b> необходимо также использовать для выхода из режима <b>Перевод времени на летнее/зимнее время</b>
+            </p>
+          </remark>
+        </descr>
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.BatteryLow">
+        <short>Низкий заряд батареи</short>
+        <descr>
+          <p>Низкий заряд батареии. Сигнализирует о разряде встроенной батареии ККМ.</p>
+          <p>Состояние данного свойства обновляется при вызове метода <var>GetState</var>.</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.Caption">
+        <short>Строка для печати</short>
+        <descr>
+          <p>Данное свойство содержит строку символов, которую необходимо вывести на печать.</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.CheckNumber">
+        <short>Номер чека</short>
+        <descr>
+          <p>Свойство содержит номер чека.</p>
+          <remark>
+            <p>Функция GetState в зависимости от того если чек открыт, то вернёт номер текущего чека.</p>
+            <p>Если чек закрыт, то свойство содержит номер следующего чека.</p>
+          </remark>
+        </descr>
+      </element>
+      <element name="TAtollKKM.CheckState">
+        <short>Состояние чека</short>
+        <descr>
+          <p>Текущее состояние чека.</p>
+          <p>Корректное значение в данном свойстве содержится только при нахождении ККМ в режиме регистрации (MODE = 0). Во всех остальных режимах в данном свойстве содержится 0.</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.CheckType">
+        <short>Тип чека</short>
+        <descr>
+          <p>Данное свойство опеределяет тип чека во время выполнения операции.</p>
+          <p>Допустимые значения:</p>
+          <table>
+            <th>
+              <td>Тип чека</td>
+              <td>Расшифорвка</td>
+            </th>
+            <tr>
+              <td>1</td>
+              <td>продажа</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>возврат продажи</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>аннулирование продажи</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>покупка</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>возврат покупки</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>аннулирование покупки</td>
+            </tr>
+          </table>
+        </descr>
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.Count">
+        <short>Колличество</short>
+        <descr>Унивесальное свойство. Используется для получения количественных показателей. Например - колличество регистраций.</descr>
+      </element>
+      <element name="TAtollKKM.CoverOpened">
+        <short>Крышка открыта</short>
+        <descr>
+          <p>Признак, указывающий на то, что открыта верхняя крышка ККМ.</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.Department">
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.ECRDateTime"/>
+      <element name="TAtollKKM.ErrorCode">
+        <short>Код ошибки</short>
+        <descr>В данном свойстве содержится код ошибки выполения последней команды ККМ</descr>
+        <example file="examples/tecr01.pas"/>
+      </element>
+      <element name="TAtollKKM.ErrorCodeStr">
+        <short>Текст сообщени яоб ошибке</short>
+        <descr>В данном свойстве содержится текст последнего сообщения об ошибке</descr>
+      </element>
+      <element name="TAtollKKM.Mode">
+        <short>Режим работы ККМ</short>
+        <descr>
+          <p>Свойство содержит текущий режим работы ККМ.</p>
+          <p>Доступные режимы:</p>
+          <table>
+            <th>
+              <td>Номер</td>
+              <td>Наименование режима</td>
+            </th>
+            <tr>
+              <td>0</td>
+              <td>Выбор</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Режим регистрации</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Режим отчетов без гашения</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Режим отчетов с гашением</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Режим программирования</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Режим доступа к ФП</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Режим доступа к ЭКЛЗ</td>
+            </tr>
+          </table>
+        </descr>
+      </element>
+      <element name="TAtollKKM.Name"/>
+      <element name="TAtollKKM.OutOfPaper">
+        <short>Нет бумаги</short>
+        <descr>
+          <p>Свойство содержит <i>TRUE</i> в случае, если в ККМ закончилась бумага</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.PaperError">
+        <short>Ошибка бумаги</short>
+        <descr>
+          <p>Ошибка лентопротяжного механизма бумаги. Зажевало бумагу?</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.Password">
+        <short>Пароль работы с ККМ в режимах</short>
+        <descr>
+          <p>Пароль, используемый при переключении ККМ в режимы регистрации и т.д...</p>
+          <p>Пароль - строка цифр длинной до 8 символов.</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.PortName">
+        <short>Название порта, к которому подключен ККМ</short>
+        <descr>
+          <p>Данное свойство содержит название COM порта, к которому подключен ККМ.</p>
+          <p>Список доступных COM-портов на ПК можно получить с помощью функции <b>GetSerialPortNames</b> из модуля <b>synaser</b> пакета <b>Ararat Synapse</b>.</p>
+          <remark>В UNIX-подобных системах имя порта надо подставлять без указания <b>/dev/</b>.</remark>
+        </descr>
+      </element>
+      <element name="TAtollKKM.PortSpeed">
+        <short>Скорость обмена ПК и ККМ</short>
+        <descr>
+          <p>Данное свойство определяет скорость обмена даными между ПК и ККМ</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.Price">
+        <short>Цена товара</short>
+        <descr>
+          <p>Данное свойство используется при регистрации чеков с количеством товара и содержит цену единицы регистрируемого товара.</p>
+          <p>Свойство всегда должно содержать положительное веществнное число.</p>
+        </descr>
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.PrinterCutMechanismError"/>
+      <element name="TAtollKKM.PrinterOverheatError"/>
+      <element name="TAtollKKM.PrintPurpose"/>
+      <element name="TAtollKKM.Quantity">
+        <short>Количество товара</short>
+        <descr>
+          <p>Данное свойство используется при регистрации чеков с количеством товара и содержит количество.</p>
+          <p>Свойство всегда должно содержать положительное веществнное число.</p>
+        </descr>
+        <example file="examples/tecr03.pas"/>
+      </element>
+      <element name="TAtollKKM.RegisterNumber">
+        <short>Номер регистра</short>
+        <descr>
+          <p>В данном свойстве указывается номер регистра, над которым выполняется операция. Например - GetRegister.</p>
+          <p>Номер регистра может находится в диапазоне: 1 ... 36</p>
+        </descr>
+        <example file="examples/tecr02.pas"/>
+      </element>
+      <element name="TAtollKKM.SerialNumber"/>
+      <element name="TAtollKKM.SessionOpened"/>
+      <element name="TAtollKKM.Summ"/>
+      <element name="TAtollKKM.TestMode"/>
+      <element name="TAtollKKM.TypeClose"/>
+      <element name="TAtollKKM.ReportZ">
+        <short>Печать Z отчёта</short>
+        <descr>Печать Z отчёта</descr>
+        <example file="examples/tecr01.pas"/>
+      </element>
+      <element name="TAtollKKM.ReportX">
+        <short>Печать X отчёта</short>
+        <descr>Печать X отчёта</descr>
+      </element>
+      <element name="TAtollKKM.PrintReportSection"/>
+      <element name="TAtollKKM.PrintReportHours"/>
+      <element name="TAtollKKM.PrintReportCounted"/>
+      <element name="TAtollKKM.DemoPrint">
+        <short>Демонстрационная печать</short>
+        <descr>
+          <p>Запуск демонстрационной печати на кассовой ленты ККМ</p>
+        </descr>
+      </element>
+      <element name="TAtollKKM.AccessPassword">
+        <short>Пароль устройства</short>
+        <descr>
+          <p>Пароль доступа к ККМ</p>
+          <p>
+            <b>цифр длиной не более 8.</b>
+          </p>
+          <remark>Данное свойство в дальнейшем будет изменено</remark>
+        </descr>
+      </element>
+    </module>
+    <module name="KKM_AtolPropsUnit">
+      <element name="TkkmAtolPropsForm">
+        <short>Тип формы свойств ККМ</short>
+        <descr>Тип формы свойств ККМ</descr>
+      </element>
+      <element name="kkmAtolPropsForm">
+        <short>Переменная - указатель на форму свойств ККМ</short>
+        <descr>Переменная - указатель на форму свойств ККМ</descr>
+      </element>
+      <short>Модуль содержит форму настройки параметров ККМ</short>
+      <descr>Модуль содержит форму настройки параметров ККМ</descr>
+    </module>
+    <short>Пакет драйвера ККМ АТОЛ</short>
+    <descr>Пакет содержит драйвер ККМ АТОЛ</descr>
+  </package>
+</fpdoc-descriptions>

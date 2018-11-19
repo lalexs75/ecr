@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <Name Value="eg_lib"/>
+    <Type Value="RunAndDesignTime"/>
+    <Author Value="Lagunov A.A."/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="egLib"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Version Minor="6"/>
+    <Files Count="4">
+      <Item1>
+        <Filename Value="egLib/egate_api.pas"/>
+        <UnitName Value="egate_api"/>
+      </Item1>
+      <Item2>
+        <Filename Value="egLib/egate_class.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="egate_class"/>
+      </Item2>
+      <Item3>
+        <Filename Value="egLib/egate_consts.pas"/>
+        <UnitName Value="egate_consts"/>
+      </Item3>
+      <Item4>
+        <Filename Value="egLib/egate_lib.pas"/>
+        <UnitName Value="egate_lib"/>
+      </Item4>
+    </Files>
+    <RequiredPkgs Count="3">
+      <Item1>
+        <PackageName Value="alexs_trade_abstract"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="FCL"/>
+      </Item3>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

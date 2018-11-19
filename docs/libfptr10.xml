@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="atol_ecr"><module name="libfptr10"><element name="libfptr_param.LIBFPTR_PARAM_OPERATOR_ID"><short>Номер кассира</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_LOGICAL_NUMBER"><short>Номер ККТ в магазине</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_DATE_TIME"><short>Дата и время ККТ</short>
+      </element><element name="Tlibfptr_line_feed"><short>Объявление функции метода промотки ленты</short>
+      </element><element name="AtollWideStrToString"><short>Платформено-независимая функция перевода кодировки строки, используемого дравйвером АТОЛ, в кодировку UTF8</short>
+      </element><element name="StringToAtollWideStr"><short>Платформено-независимая функция перевода кодировки строки, из UTF8 в используемую дравйвером АТОЛ</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

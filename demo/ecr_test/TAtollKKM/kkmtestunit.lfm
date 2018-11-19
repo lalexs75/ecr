@@ -1,0 +1,978 @@
+object KKMTestForm: TKKMTestForm
+  Left = 300
+  Height = 725
+  Top = 74
+  Width = 985
+  Caption = 'Тест драйвера ККМ'
+  ClientHeight = 725
+  ClientWidth = 985
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  ShowHint = True
+  LCLVersion = '1.7'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 15
+    Top = 6
+    Width = 83
+    BorderSpacing.Around = 6
+    Caption = 'Выберите порт'
+    ParentColor = False
+  end
+  object PageControl1: TPageControl
+    AnchorSideLeft.Side = asrBottom
+    Left = 544
+    Height = 725
+    Top = 0
+    Width = 441
+    ActivePage = TabSheet1
+    Align = alRight
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Результаты'
+      ClientHeight = 697
+      ClientWidth = 433
+      object Label6: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        Left = 6
+        Height = 15
+        Top = 6
+        Width = 71
+        BorderSpacing.Around = 6
+        Caption = 'Модель ККМ'
+        ParentColor = False
+      end
+      object Edit3: TEdit
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = Label6
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 23
+        Top = 27
+        Width = 109
+        BorderSpacing.Around = 6
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object Edit4: TEdit
+        AnchorSideLeft.Control = Label7
+        AnchorSideTop.Control = Label7
+        AnchorSideTop.Side = asrBottom
+        Left = 133
+        Height = 23
+        Top = 27
+        Width = 109
+        BorderSpacing.Around = 6
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object Label7: TLabel
+        AnchorSideLeft.Control = Edit3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        Left = 127
+        Height = 15
+        Top = 6
+        Width = 66
+        BorderSpacing.Around = 6
+        Caption = 'Режим ККМ'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = Edit3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 15
+        Top = 56
+        Width = 89
+        BorderSpacing.Around = 6
+        Caption = 'Статус команды'
+        ParentColor = False
+      end
+      object Edit1: TEdit
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = Label4
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 12
+        Height = 23
+        Top = 77
+        Width = 415
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object CheckBox1: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = Edit1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 106
+        Width = 83
+        BorderSpacing.Around = 6
+        Caption = 'Нет бумаги'
+        Enabled = False
+        TabOrder = 3
+      end
+      object CheckBox4: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 131
+        Width = 168
+        BorderSpacing.Around = 6
+        Caption = 'Ошибка отрезчика бумаги'
+        Enabled = False
+        TabOrder = 4
+      end
+      object CheckBox5: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = CheckBox4
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 156
+        Width = 262
+        BorderSpacing.Around = 6
+        Caption = 'Востановимая ошибка принтера (перегрев)'
+        Enabled = False
+        TabOrder = 5
+      end
+      object Memo1: TMemo
+        AnchorSideTop.Control = CheckBox5
+        AnchorSideTop.Side = asrBottom
+        Left = 0
+        Height = 516
+        Top = 181
+        Width = 433
+        Align = alBottom
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Lines.Strings = (
+          'Memo1'
+        )
+        TabOrder = 6
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Протокол'
+      ClientHeight = 687
+      ClientWidth = 435
+      object ListBox1: TListBox
+        Left = 0
+        Height = 652
+        Top = 0
+        Width = 431
+        Align = alClient
+        ItemHeight = 0
+        PopupMenu = PopupMenu1
+        ScrollWidth = 429
+        TabOrder = 0
+      end
+    end
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 23
+    Top = 27
+    Width = 164
+    BorderSpacing.Around = 6
+    ItemHeight = 15
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object Label8: TLabel
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 182
+    Height = 15
+    Top = 6
+    Width = 42
+    BorderSpacing.Around = 6
+    Caption = 'Пароль'
+    ParentColor = False
+  end
+  object edtPwd: TEdit
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    Left = 188
+    Height = 23
+    Top = 27
+    Width = 120
+    BorderSpacing.Around = 6
+    TabOrder = 2
+    Text = '30'
+  end
+  object CheckBox6: TCheckBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 19
+    Top = 56
+    Width = 142
+    BorderSpacing.Around = 6
+    Caption = 'Устройство включено'
+    OnChange = CheckBox6Change
+    TabOrder = 3
+  end
+  object ComboBox2: TComboBox
+    AnchorSideLeft.Control = Label9
+    AnchorSideTop.Control = Label9
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = PageControl1
+    Left = 320
+    Height = 23
+    Top = 27
+    Width = 218
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 15
+    Items.Strings = (
+      'Выбор'
+      'Регистрация'
+      'Отчеты без гашения'
+      'Отчеты с гашением'
+      'Программирования'
+      'Доступ к ФП'
+      'Доступ к ЭКЛЗ'
+    )
+    OnChange = ComboBox2Change
+    Style = csDropDownList
+    TabOrder = 4
+  end
+  object Label9: TLabel
+    AnchorSideLeft.Control = edtPwd
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 314
+    Height = 15
+    Top = 6
+    Width = 66
+    BorderSpacing.Around = 6
+    Caption = 'Режим ККМ'
+    ParentColor = False
+  end
+  object PageControl2: TPageControl
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = ComboBox2
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 644
+    Top = 81
+    Width = 538
+    ActivePage = TabSheet3
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 0
+    TabOrder = 5
+    object TabSheet3: TTabSheet
+      Caption = 'Общее'
+      ClientHeight = 616
+      ClientWidth = 530
+      object DividerBevel4: TDividerBevel
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Control = Button7
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 15
+        Top = 160
+        Width = 530
+        Caption = 'Отчёты'
+        Anchors = [akTop, akLeft, akRight]
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object btnZReport: TButton
+        AnchorSideLeft.Control = Button6
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel4
+        AnchorSideTop.Side = asrBottom
+        Left = 384
+        Height = 25
+        Hint = 'Отчёт с гашением'
+        Top = 181
+        Width = 66
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Z отчёт'
+        OnClick = btnZReportClick
+        TabOrder = 0
+      end
+      object ComboBox3: TComboBox
+        AnchorSideTop.Control = DividerBevel4
+        AnchorSideTop.Side = asrBottom
+        Left = 8
+        Height = 23
+        Top = 181
+        Width = 236
+        BorderSpacing.Around = 6
+        ItemHeight = 15
+        Items.Strings = (
+          '1 – суточный отчет (X-отчет)'
+          '2 – отчет по секциям'
+          '3 – отчет по кассирам'
+          '4 – отчет по товарам'
+          '5 – почасовой отчет'
+          '6 – служебный отчет'
+          '7 – отчет количеств'
+          '8 – служебный отчет'
+        )
+        Style = csDropDownList
+        TabOrder = 1
+      end
+      object Button8: TButton
+        AnchorSideLeft.Control = Button7
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel3
+        AnchorSideTop.Side = asrBottom
+        Left = 130
+        Height = 25
+        Top = 129
+        Width = 105
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Печать клише'
+        OnClick = Button8Click
+        TabOrder = 2
+      end
+      object DividerBevel3: TDividerBevel
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Control = Button4
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 15
+        Top = 108
+        Width = 530
+        Caption = 'Запросы'
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 6
+        BorderSpacing.Bottom = 6
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Button7: TButton
+        AnchorSideLeft.Control = Owner
+        AnchorSideTop.Control = DividerBevel3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 129
+        Width = 113
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Состояние ККМ'
+        OnClick = Button7Click
+        TabOrder = 3
+      end
+      object Button6: TButton
+        AnchorSideTop.Control = DividerBevel4
+        AnchorSideTop.Side = asrBottom
+        Left = 248
+        Height = 25
+        Top = 181
+        Width = 130
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Отчёт без гашения'
+        OnClick = Button6Click
+        TabOrder = 4
+      end
+      object DividerBevel2: TDividerBevel
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Control = Edit2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 15
+        Top = 56
+        Width = 530
+        Caption = 'Команды управления'
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 6
+        BorderSpacing.Bottom = 6
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object DividerBevel1: TDividerBevel
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Control = TabSheet3
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 15
+        Top = 6
+        Width = 530
+        Caption = 'Команды печати'
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 6
+        BorderSpacing.Bottom = 6
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 12
+        Height = 15
+        Top = 256
+        Width = 165
+        Caption = 'Функционал разрабатывается'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = Owner
+        AnchorSideBottom.Control = Edit2
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 15
+        Top = 35
+        Width = 102
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Строка для печати'
+        ParentColor = False
+      end
+      object Edit2: TEdit
+        AnchorSideLeft.Control = Label3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Button1
+        Left = 143
+        Height = 23
+        Top = 27
+        Width = 269
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 5
+        Text = '123'
+      end
+      object Button5: TButton
+        AnchorSideLeft.Control = Button3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        Left = 190
+        Height = 25
+        Top = 77
+        Width = 99
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Обрезать чек'
+        OnClick = Button5Click
+        TabOrder = 6
+      end
+      object Button4: TButton
+        AnchorSideLeft.Control = Owner
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 77
+        Width = 57
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Гудок'
+        OnClick = Button4Click
+        TabOrder = 7
+      end
+      object Button3: TButton
+        AnchorSideLeft.Control = Button4
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        Left = 65
+        Height = 25
+        Top = 77
+        Width = 111
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Тип устройства'
+        OnClick = Button3Click
+        TabOrder = 8
+      end
+      object Button1: TButton
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 418
+        Height = 25
+        Top = 27
+        Width = 106
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Печать строки'
+        OnClick = Button1Click
+        TabOrder = 9
+      end
+      object Button15: TButton
+        Left = 8
+        Height = 25
+        Top = 296
+        Width = 174
+        AutoSize = True
+        Caption = 'Демонстрационная печать'
+        OnClick = Button15Click
+        TabOrder = 10
+      end
+      object btnZReport1: TButton
+        AnchorSideLeft.Control = Button6
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = btnZReport
+        AnchorSideTop.Side = asrBottom
+        Left = 384
+        Height = 25
+        Hint = 'Отчёт с гашением'
+        Top = 212
+        Width = 116
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Общее гашение'
+        OnClick = btnZReport1Click
+        TabOrder = 11
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'Регистры'
+      ClientHeight = 616
+      ClientWidth = 530
+      object Button19: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button21
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 285
+        Width = 158
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '10 - Наличность в кассе'
+        OnClick = Button19Click
+        TabOrder = 0
+      end
+      object Button18: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button17
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 161
+        Width = 181
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '6 - Количество регистраций'
+        OnClick = Button18Click
+        TabOrder = 1
+      end
+      object Button17: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button16
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 130
+        Width = 124
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '5 - Сумма выплат'
+        OnClick = Button17Click
+        TabOrder = 2
+      end
+      object Button16: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button9
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 99
+        Width = 136
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '4 - Сумма внесений'
+        OnClick = Button16Click
+        TabOrder = 3
+      end
+      object Button9: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button24
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 68
+        Width = 137
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '3 - Сумма платежей'
+        OnClick = Button9Click
+        TabOrder = 4
+      end
+      object Button20: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button22
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 223
+        Width = 164
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '8 - Количество Внесений'
+        OnClick = Button20Click
+        TabOrder = 5
+      end
+      object Button21: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button20
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 254
+        Width = 152
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '9 - Количество Выплат'
+        OnClick = Button21Click
+        TabOrder = 6
+      end
+      object Button22: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button18
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 192
+        Width = 150
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '7 - Количество сторно'
+        OnClick = Button22Click
+        TabOrder = 7
+      end
+      object Button23: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = TabSheet4
+        Left = 6
+        Height = 25
+        Top = 6
+        Width = 157
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '1 -  Сумма регистраций'
+        OnClick = Button23Click
+        TabOrder = 8
+      end
+      object Button24: TButton
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Button23
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 25
+        Top = 37
+        Width = 123
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = '2 - Сумма сторно'
+        OnClick = Button24Click
+        TabOrder = 9
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'Торговля'
+      ClientHeight = 616
+      ClientWidth = 530
+      object Button10: TButton
+        AnchorSideLeft.Control = TabSheet5
+        AnchorSideTop.Control = CurrencyEdit1
+        AnchorSideTop.Side = asrBottom
+        Left = 5
+        Height = 25
+        Top = 56
+        Width = 110
+        AutoSize = True
+        BorderSpacing.Around = 5
+        Caption = 'Открыть смену'
+        OnClick = Button10Click
+        TabOrder = 0
+      end
+      object Edit5: TEdit
+        Left = 21
+        Height = 23
+        Top = 160
+        Width = 80
+        TabOrder = 1
+        Text = 'Товар № 1'
+      end
+      object Label2: TLabel
+        Left = 8
+        Height = 15
+        Top = 138
+        Width = 83
+        Caption = 'Наименование'
+        ParentColor = False
+        Visible = False
+      end
+      object Button11: TButton
+        Left = 11
+        Height = 25
+        Top = 104
+        Width = 95
+        AutoSize = True
+        Caption = 'Открыть чек'
+        OnClick = Button11Click
+        TabOrder = 2
+      end
+      object Edit7: TEdit
+        Left = 237
+        Height = 23
+        Top = 160
+        Width = 80
+        TabOrder = 3
+        Text = '1'
+      end
+      object Label11: TLabel
+        Left = 229
+        Height = 15
+        Top = 138
+        Width = 39
+        Caption = 'Кол-во'
+        ParentColor = False
+      end
+      object Edit6: TEdit
+        Left = 141
+        Height = 23
+        Top = 160
+        Width = 80
+        TabOrder = 4
+        Text = '186,44'
+      end
+      object Label10: TLabel
+        Left = 133
+        Height = 15
+        Top = 138
+        Width = 28
+        Caption = 'Цена'
+        ParentColor = False
+      end
+      object ComboBox4: TComboBox
+        Left = 157
+        Height = 23
+        Top = 72
+        Width = 208
+        ItemHeight = 15
+        ItemIndex = 0
+        Items.Strings = (
+          'Секция 0'
+          'Секция 1'
+          'Секция 2'
+          'Секция 3'
+        )
+        Style = csDropDownList
+        TabOrder = 5
+        Text = 'Секция 0'
+      end
+      object SpinEdit2: TSpinEdit
+        Left = 13
+        Height = 23
+        Top = 269
+        Width = 122
+        MaxValue = 10
+        MinValue = 1
+        TabOrder = 6
+        Value = 1
+      end
+      object Label13: TLabel
+        Left = 8
+        Height = 15
+        Top = 248
+        Width = 74
+        Caption = 'Кол-во чеков'
+        ParentColor = False
+      end
+      object Button12: TButton
+        Left = 125
+        Height = 25
+        Top = 200
+        Width = 96
+        AutoSize = True
+        Caption = 'Отмена чека'
+        OnClick = Button12Click
+        TabOrder = 7
+      end
+      object Button13: TButton
+        Left = 8
+        Height = 25
+        Top = 200
+        Width = 94
+        AutoSize = True
+        Caption = 'Закрыть чек'
+        OnClick = Button13Click
+        TabOrder = 8
+      end
+      object Button14: TButton
+        Left = 333
+        Height = 25
+        Top = 158
+        Width = 95
+        AutoSize = True
+        Caption = 'Регистрация'
+        OnClick = Button14Click
+        TabOrder = 9
+      end
+      object btnStorno: TButton
+        Left = 317
+        Height = 25
+        Top = 270
+        Width = 95
+        AutoSize = True
+        Caption = 'Сторно чека'
+        OnClick = btnStornoClick
+        TabOrder = 10
+      end
+      object Button2: TButton
+        Left = 149
+        Height = 25
+        Top = 270
+        Width = 132
+        AutoSize = True
+        Caption = 'Сформировать чек'
+        OnClick = Button2Click
+        TabOrder = 11
+      end
+      object Label12: TLabel
+        AnchorSideLeft.Control = TabSheet5
+        AnchorSideTop.Control = TabSheet5
+        Left = 6
+        Height = 15
+        Top = 6
+        Width = 94
+        BorderSpacing.Around = 6
+        Caption = 'Внесение в кассу'
+        ParentColor = False
+      end
+      object CurrencyEdit1: TCurrencyEdit
+        AnchorSideLeft.Control = Label12
+        AnchorSideTop.Control = Label12
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Button25
+        Left = 12
+        Height = 23
+        Top = 27
+        Width = 138
+        Alignment = taRightJustify
+        BorderSpacing.Around = 6
+        Anchors = [akTop, akLeft, akRight]
+        MaxValue = 0
+        MinValue = 0
+        TabOrder = 12
+        Value = 10
+      end
+      object Button25: TButton
+        AnchorSideTop.Control = Label12
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Label15
+        Left = 156
+        Height = 25
+        Top = 27
+        Width = 103
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Внести сумму'
+        OnClick = Button25Click
+        TabOrder = 13
+      end
+      object Button26: TButton
+        AnchorSideTop.Control = Label14
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet5
+        AnchorSideRight.Side = asrBottom
+        Left = 400
+        Height = 25
+        Top = 27
+        Width = 124
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Выплатить сумму'
+        OnClick = Button26Click
+        TabOrder = 14
+      end
+      object Label14: TLabel
+        AnchorSideLeft.Control = Label15
+        AnchorSideTop.Control = TabSheet5
+        Left = 271
+        Height = 15
+        Top = 6
+        Width = 98
+        BorderSpacing.Around = 6
+        Caption = 'Выплата из кассы'
+        ParentColor = False
+      end
+      object CurrencyEdit2: TCurrencyEdit
+        AnchorSideLeft.Control = Label14
+        AnchorSideTop.Control = Label14
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Button26
+        Left = 277
+        Height = 23
+        Top = 27
+        Width = 117
+        Alignment = taRightJustify
+        BorderSpacing.Around = 6
+        Anchors = [akTop, akLeft, akRight]
+        MaxValue = 0
+        MinValue = 0
+        TabOrder = 15
+        Value = 10
+      end
+      object Label15: TLabel
+        AnchorSideLeft.Control = TabSheet5
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = TabSheet5
+        Left = 265
+        Height = 1
+        Top = 0
+        Width = 1
+        ParentColor = False
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 709
+    top = 288
+    object MenuItem1: TMenuItem
+      Caption = 'Очистить'
+      OnClick = MenuItem1Click
+    end
+  end
+  object ECRDriver: TAtollKKM
+    PortSpeed = 6
+    left = 213
+    top = 64
+  end
+end

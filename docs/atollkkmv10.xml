@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="atol_ecr"><module name="AtollKKMv10"><element name="TAtollKKMv10"><short>Объект драйвера ККМ АТОЛ версии 10</short>
+      </element><element name="TAtollLibraryV10"><short>Интерфейс библиотека функций драйвера ККМ АТОЛ версии 10</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

@@ -1,0 +1,27 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: egate_consts.segateinactive
+msgid "Error operation on inactive EGate component"
+msgstr ""
+
+#: egate_consts.segate_answer
+msgid "Answer : \"%s\""
+msgstr ""
+
+#: egate_consts.segate_error
+msgid "Error : %d : %s"
+msgstr ""
+
+#: egate_consts.segate_load_lib_filed
+msgid "Failed to load library %s - %s"
+msgstr ""
+
+#: egate_consts.segate_load_lib_successfully
+msgid "Library %s is successfully loaded"
+msgstr ""
+
+#: egate_consts.segate_load_proc_filed
+msgid "Failed to load function %s from library %s"
+msgstr ""
+

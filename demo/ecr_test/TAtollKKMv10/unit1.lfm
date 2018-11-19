@@ -1,0 +1,1499 @@
+object Form1: TForm1
+  Left = 334
+  Height = 800
+  Top = 130
+  Width = 979
+  Caption = 'Form1'
+  ClientHeight = 800
+  ClientWidth = 979
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '2.1.0.0'
+  object Memo1: TMemo
+    Left = 0
+    Height = 144
+    Top = 656
+    Width = 979
+    Align = alClient
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 0
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 651
+    Top = 0
+    Width = 979
+    ActivePage = TabSheet1
+    Align = alTop
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'TabSheet1'
+      ClientHeight = 617
+      ClientWidth = 969
+      object Button1: TButton
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        Left = 6
+        Height = 36
+        Top = 6
+        Width = 89
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Simple test'
+        OnClick = Button1Click
+        TabOrder = 0
+      end
+      object Button2: TButton
+        AnchorSideLeft.Control = Button1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        Left = 101
+        Height = 36
+        Top = 6
+        Width = 99
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Standart test'
+        OnClick = Button2Click
+        TabOrder = 1
+      end
+      object Button3: TButton
+        AnchorSideLeft.Control = Button2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        Left = 206
+        Height = 36
+        Top = 6
+        Width = 99
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Config dialog'
+        OnClick = Button3Click
+        TabOrder = 2
+      end
+      object Button4: TButton
+        AnchorSideLeft.Control = Button3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        Left = 311
+        Height = 36
+        Top = 6
+        Width = 165
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Тестовый "плохой" чек'
+        OnClick = Button4Click
+        TabOrder = 3
+      end
+      object Button10: TButton
+        Left = 632
+        Height = 25
+        Top = 8
+        Width = 75
+        Caption = 'Button10'
+        OnClick = Button10Click
+        TabOrder = 4
+      end
+      object Button18: TButton
+        Left = 104
+        Height = 36
+        Top = 80
+        Width = 118
+        AutoSize = True
+        Caption = 'С поставщиком'
+        OnClick = Button18Click
+        TabOrder = 5
+      end
+      object SpinEdit1: TSpinEdit
+        Left = 102
+        Height = 37
+        Top = 136
+        Width = 114
+        TabOrder = 6
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Отчёты'
+      ClientHeight = 617
+      ClientWidth = 969
+      object Button5: TButton
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = TabSheet2
+        Left = 6
+        Height = 36
+        Top = 6
+        Width = 66
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'X отчёт'
+        OnClick = Button5Click
+        TabOrder = 0
+      end
+      object Button6: TButton
+        AnchorSideLeft.Control = Button5
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet2
+        Left = 78
+        Height = 36
+        Top = 6
+        Width = 65
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Z отчёт'
+        OnClick = Button6Click
+        TabOrder = 1
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Сервисные параметры'
+      ClientHeight = 617
+      ClientWidth = 969
+      object Button7: TButton
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Control = TabSheet3
+        Left = 6
+        Height = 36
+        Top = 6
+        Width = 148
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Конфигурация ККМ'
+        OnClick = Button7Click
+        TabOrder = 0
+      end
+      object Button9: TButton
+        Left = 480
+        Height = 25
+        Top = 192
+        Width = 75
+        Caption = 'Тип чека'
+        OnClick = Button9Click
+        TabOrder = 1
+      end
+      object Button11: TButton
+        AnchorSideLeft.Control = Button7
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet3
+        Left = 160
+        Height = 36
+        Top = 6
+        Width = 53
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Гудок'
+        OnClick = Button11Click
+        TabOrder = 2
+      end
+      object Button12: TButton
+        AnchorSideLeft.Control = Button11
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet3
+        Left = 219
+        Height = 36
+        Top = 6
+        Width = 103
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Отрезка чека'
+        OnClick = Button12Click
+        TabOrder = 3
+      end
+      object Button15: TButton
+        AnchorSideLeft.Control = CurrencyEdit1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Button14
+        AnchorSideTop.Side = asrBottom
+        Left = 230
+        Height = 36
+        Top = 90
+        Width = 130
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Внесение в кассу'
+        OnClick = Button15Click
+        TabOrder = 4
+      end
+      object Button14: TButton
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = Button7
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 36
+        Top = 48
+        Width = 127
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Открытие смены'
+        OnClick = Button14Click
+        TabOrder = 5
+      end
+      object Button16: TButton
+        AnchorSideLeft.Control = CurrencyEdit2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Button15
+        AnchorSideTop.Side = asrBottom
+        Left = 232
+        Height = 36
+        Top = 132
+        Width = 130
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Выплата из кассы'
+        OnClick = Button16Click
+        TabOrder = 6
+      end
+      object Label12: TLabel
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideBottom.Control = CurrencyEdit1
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 107
+        Width = 108
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Сумма внесения'
+        ParentColor = False
+      end
+      object Label13: TLabel
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideBottom.Control = CurrencyEdit2
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 149
+        Width = 102
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Сумма выплаты'
+        ParentColor = False
+      end
+      object CurrencyEdit1: TCurrencyEdit
+        AnchorSideLeft.Control = Label12
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Button14
+        AnchorSideTop.Side = asrBottom
+        Left = 120
+        Height = 37
+        Top = 90
+        Width = 104
+        Alignment = taRightJustify
+        BorderSpacing.Around = 6
+        TabOrder = 7
+        Value = 100.25
+      end
+      object CurrencyEdit2: TCurrencyEdit
+        AnchorSideLeft.Control = Label13
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Button15
+        AnchorSideTop.Side = asrBottom
+        Left = 114
+        Height = 37
+        Top = 132
+        Width = 112
+        Alignment = taRightJustify
+        BorderSpacing.Around = 6
+        TabOrder = 8
+        Value = 112.254
+      end
+      object Button17: TButton
+        AnchorSideLeft.Control = Button12
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet3
+        Left = 328
+        Height = 36
+        Top = 6
+        Width = 100
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Отмена чека'
+        OnClick = Button17Click
+        TabOrder = 9
+      end
+      object Button20: TButton
+        AnchorSideLeft.Control = Button17
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet3
+        Left = 434
+        Height = 36
+        Top = 6
+        Width = 108
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Печать клише'
+        OnClick = Button20Click
+        TabOrder = 10
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'Регистрация'
+      ClientHeight = 617
+      ClientWidth = 969
+      object Button8: TButton
+        AnchorSideRight.Control = TabSheet4
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = TabSheet4
+        AnchorSideBottom.Side = asrBottom
+        Left = 864
+        Height = 36
+        Top = 575
+        Width = 99
+        Anchors = [akRight, akBottom]
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Регистрация'
+        OnClick = Button8Click
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Label14
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 100
+        Width = 76
+        BorderSpacing.Around = 6
+        Caption = 'Контрагент'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = edtContragentName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Label14
+        AnchorSideTop.Side = asrBottom
+        Left = 166
+        Height = 20
+        Top = 100
+        Width = 118
+        BorderSpacing.Around = 6
+        Caption = 'ИНН контрагента'
+        ParentColor = False
+      end
+      object edtContragentName: TEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 37
+        Top = 126
+        Width = 148
+        BorderSpacing.Around = 6
+        TabOrder = 1
+        Text = 'Иванов И.И.'
+      end
+      object edtContragentInn: TEdit
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        Left = 172
+        Height = 37
+        Top = 126
+        Width = 132
+        BorderSpacing.Around = 6
+        TabOrder = 2
+        Text = '1831121013'
+      end
+      object ComboBox1: TComboBox
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 36
+        Top = 32
+        Width = 292
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 3
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = TabSheet4
+        Left = 6
+        Height = 20
+        Top = 6
+        Width = 57
+        BorderSpacing.Around = 6
+        Caption = 'Тип чека'
+        ParentColor = False
+      end
+      object CheckBox1: TCheckBox
+        AnchorSideLeft.Control = Label3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet4
+        Left = 69
+        Height = 24
+        Top = 6
+        Width = 141
+        BorderSpacing.Around = 6
+        Caption = 'Электронный чек'
+        TabOrder = 4
+      end
+      object Label6: TLabel
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = edtContragentName
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 169
+        Width = 116
+        BorderSpacing.Around = 6
+        Caption = 'Номер телефона'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        AnchorSideLeft.Control = edtPhone
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtContragentName
+        AnchorSideTop.Side = asrBottom
+        Left = 166
+        Height = 20
+        Top = 169
+        Width = 34
+        BorderSpacing.Around = 6
+        Caption = 'Email'
+        ParentColor = False
+      end
+      object edtPhone: TEdit
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = Label6
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 37
+        Hint = 'Номер сотового'
+        Top = 195
+        Width = 148
+        BorderSpacing.Around = 6
+        TabOrder = 5
+        Text = '+79161234567'
+      end
+      object edtEmail: TEdit
+        AnchorSideLeft.Control = Label7
+        AnchorSideTop.Control = Label7
+        AnchorSideTop.Side = asrBottom
+        Left = 172
+        Height = 37
+        Top = 195
+        Width = 132
+        BorderSpacing.Around = 6
+        TabOrder = 6
+      end
+      object RxDBGrid1: TRxDBGrid
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Label9
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet4
+        AnchorSideRight.Side = asrBottom
+        Left = 6
+        Height = 194
+        Top = 264
+        Width = 957
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Товар|Код'
+            Width = 70
+            FieldName = 'GOODS_CODE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Товар|Наименование'
+            Width = 150
+            FieldName = 'GOODS_NAME'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Кол-во'
+            Width = 90
+            FieldName = 'AMOUNT'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Цена'
+            Width = 90
+            FieldName = 'PRICE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Color = clMoneyGreen
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Стоимость'
+            Width = 90
+            FieldName = 'SUM'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '#,##0.00'
+            Footer.FieldName = 'SUM'
+            Footer.ValueType = fvtSum
+            Footers = <>
+          end        
+          item
+            PickList.Strings = (
+              '18%'
+              '10%'
+              '100/18%'
+              '100/10%'
+              '0%'
+              'Без НДС'
+            )
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Ставка НДС'
+            Width = 70
+            FieldName = 'TAX_TYPE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+            KeyList.Strings = (
+              '1'
+              '2'
+              '3'
+              '4'
+              '5'
+              '6'
+              '7'
+              '8'
+              '9'
+              '10'
+            )
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Код страна происхождения'
+            Width = 120
+            FieldName = 'COUNTRY_CODE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Номер ГТД'
+            Width = 150
+            FieldName = 'GTD'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Active = True
+        FooterOptions.Color = clYellow
+        FooterOptions.RowCount = 1
+        FooterOptions.Style = tsNative
+        FooterOptions.DrawFullLine = True
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+        FooterColor = clYellow
+        FooterRowCount = 1
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        Color = clWindow
+        DrawFullLine = True
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsGoods
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 7
+        TitleStyle = tsNative
+      end
+      object Label9: TLabel
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = edtPhone
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 238
+        Width = 99
+        BorderSpacing.Around = 6
+        Caption = 'Товарная часть'
+        ParentColor = False
+      end
+      object RxDBGrid2: TRxDBGrid
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = Label10
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Button8
+        AnchorSideBottom.Control = TabSheet4
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 121
+        Top = 490
+        Width = 852
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Вид оплаты'
+            Width = 350
+            FieldName = 'PayTypeName'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Сумма оплаты'
+            Width = 100
+            FieldName = 'PaySum'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '#,##0.00'
+            Footer.FieldName = 'PaySum'
+            Footer.ValueType = fvtSum
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Active = True
+        FooterOptions.Color = clYellow
+        FooterOptions.RowCount = 1
+        FooterOptions.Style = tsNative
+        FooterOptions.DrawFullLine = True
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+        FooterColor = clYellow
+        FooterRowCount = 1
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 6
+        Color = clWindow
+        DrawFullLine = True
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsPays
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
+        TabOrder = 8
+        TitleStyle = tsNative
+      end
+      object Label10: TLabel
+        AnchorSideTop.Control = RxDBGrid1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 464
+        Width = 50
+        Caption = 'Оплаты'
+        ParentColor = False
+      end
+      object CheckBox2: TCheckBox
+        AnchorSideLeft.Control = ComboBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ComboBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 310
+        Height = 24
+        Top = 74
+        Width = 112
+        BorderSpacing.Around = 6
+        Caption = 'Через агента'
+        OnChange = chPayPlaceClick
+        TabOrder = 9
+      end
+      object CheckBox3: TCheckBox
+        AnchorSideLeft.Control = edtContragentInn1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ComboBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 636
+        Height = 24
+        Top = 74
+        Width = 159
+        BorderSpacing.Around = 6
+        Caption = 'Данные поставщика'
+        OnChange = chPayPlaceClick
+        TabOrder = 10
+      end
+      object Label14: TLabel
+        AnchorSideLeft.Control = TabSheet4
+        AnchorSideTop.Control = ComboBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 74
+        Width = 77
+        BorderSpacing.Around = 6
+        Caption = 'Покупатель'
+        ParentColor = False
+      end
+      object edtPhone1: TEdit
+        AnchorSideLeft.Control = Label16
+        AnchorSideTop.Control = Label16
+        AnchorSideTop.Side = asrBottom
+        Left = 322
+        Height = 37
+        Hint = 'Номер сотового'
+        Top = 199
+        Width = 164
+        BorderSpacing.Around = 6
+        TabOrder = 11
+        Text = '+79161234567'
+      end
+      object edtEmail1: TEdit
+        AnchorSideLeft.Control = Label15
+        AnchorSideTop.Control = Label15
+        AnchorSideTop.Side = asrBottom
+        Left = 498
+        Height = 37
+        Top = 199
+        Width = 132
+        BorderSpacing.Around = 6
+        TabOrder = 12
+      end
+      object Label15: TLabel
+        AnchorSideLeft.Control = edtPhone1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtContragentName1
+        AnchorSideTop.Side = asrBottom
+        Left = 492
+        Height = 20
+        Top = 173
+        Width = 85
+        BorderSpacing.Around = 6
+        Caption = 'Email агента '
+        ParentColor = False
+      end
+      object Label16: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Control = edtContragentName1
+        AnchorSideTop.Side = asrBottom
+        Left = 316
+        Height = 20
+        Top = 173
+        Width = 163
+        BorderSpacing.Around = 6
+        Caption = 'Номер телефона агента'
+        ParentColor = False
+      end
+      object edtContragentName1: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = Label18
+        AnchorSideTop.Side = asrBottom
+        Left = 322
+        Height = 37
+        Top = 130
+        Width = 164
+        BorderSpacing.Around = 6
+        TabOrder = 13
+        Text = 'Иванов И.И.'
+      end
+      object edtContragentInn1: TEdit
+        AnchorSideLeft.Control = Label17
+        AnchorSideTop.Control = Label17
+        AnchorSideTop.Side = asrBottom
+        Left = 498
+        Height = 37
+        Top = 130
+        Width = 132
+        BorderSpacing.Around = 6
+        TabOrder = 14
+        Text = '1831121013'
+      end
+      object Label17: TLabel
+        AnchorSideLeft.Control = edtContragentName1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        Left = 492
+        Height = 20
+        Top = 104
+        Width = 80
+        BorderSpacing.Around = 6
+        Caption = 'ИНН агента'
+        ParentColor = False
+      end
+      object Label18: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        Left = 316
+        Height = 20
+        Top = 104
+        Width = 38
+        BorderSpacing.Around = 6
+        Caption = 'Агент'
+        ParentColor = False
+      end
+      object edtSuplierPhone: TEdit
+        AnchorSideLeft.Control = Label20
+        AnchorSideTop.Control = Label20
+        AnchorSideTop.Side = asrBottom
+        Left = 648
+        Height = 37
+        Hint = 'Номер сотового'
+        Top = 199
+        Width = 148
+        BorderSpacing.Around = 6
+        TabOrder = 15
+        Text = '+79161234567'
+      end
+      object edtSuplierEmail: TEdit
+        AnchorSideLeft.Control = Label19
+        AnchorSideTop.Control = Label19
+        AnchorSideTop.Side = asrBottom
+        Left = 808
+        Height = 37
+        Top = 199
+        Width = 132
+        BorderSpacing.Around = 6
+        TabOrder = 16
+      end
+      object Label19: TLabel
+        AnchorSideLeft.Control = edtSuplierPhone
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtSuplierName
+        AnchorSideTop.Side = asrBottom
+        Left = 802
+        Height = 20
+        Top = 173
+        Width = 34
+        BorderSpacing.Around = 6
+        Caption = 'Email'
+        ParentColor = False
+      end
+      object Label20: TLabel
+        AnchorSideLeft.Control = CheckBox3
+        AnchorSideTop.Control = edtSuplierName
+        AnchorSideTop.Side = asrBottom
+        Left = 642
+        Height = 20
+        Top = 173
+        Width = 116
+        BorderSpacing.Around = 6
+        Caption = 'Номер телефона'
+        ParentColor = False
+      end
+      object edtSuplierName: TEdit
+        AnchorSideLeft.Control = Label22
+        AnchorSideTop.Control = Label22
+        AnchorSideTop.Side = asrBottom
+        Left = 648
+        Height = 37
+        Top = 130
+        Width = 148
+        BorderSpacing.Around = 6
+        TabOrder = 17
+        Text = 'ООО "Поставщик"'
+      end
+      object edtSuplierInn: TEdit
+        AnchorSideLeft.Control = Label21
+        AnchorSideTop.Control = Label21
+        AnchorSideTop.Side = asrBottom
+        Left = 808
+        Height = 37
+        Top = 130
+        Width = 132
+        BorderSpacing.Around = 6
+        TabOrder = 18
+        Text = '123456789047'
+      end
+      object Label21: TLabel
+        AnchorSideLeft.Control = edtSuplierName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = CheckBox3
+        AnchorSideTop.Side = asrBottom
+        Left = 802
+        Height = 20
+        Top = 104
+        Width = 115
+        BorderSpacing.Around = 6
+        Caption = 'ИНН поставщика'
+        ParentColor = False
+      end
+      object Label22: TLabel
+        AnchorSideLeft.Control = CheckBox3
+        AnchorSideTop.Control = CheckBox3
+        AnchorSideTop.Side = asrBottom
+        Left = 642
+        Height = 20
+        Top = 104
+        Width = 73
+        BorderSpacing.Around = 6
+        Caption = 'Поставщик'
+        ParentColor = False
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'Параметры организации'
+      ClientHeight = 617
+      ClientWidth = 969
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet5
+        AnchorSideTop.Control = TabSheet5
+        Left = 6
+        Height = 15
+        Top = 6
+        Width = 39
+        BorderSpacing.Around = 6
+        Caption = 'Кассир'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        AnchorSideLeft.Control = Edit3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet5
+        Left = 158
+        Height = 15
+        Top = 6
+        Width = 74
+        BorderSpacing.Around = 6
+        Caption = 'ИНН кассира'
+        ParentColor = False
+      end
+      object Edit3: TEdit
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = Label4
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 23
+        Top = 27
+        Width = 140
+        BorderSpacing.Around = 6
+        TabOrder = 0
+        Text = 'Иванова А.И.'
+      end
+      object Edit4: TEdit
+        AnchorSideLeft.Control = Label5
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        Left = 164
+        Height = 23
+        Top = 27
+        Width = 112
+        BorderSpacing.Around = 6
+        TabOrder = 1
+        Text = '500100732259'
+      end
+      object chPayPlace: TCheckBox
+        AnchorSideLeft.Control = TabSheet5
+        AnchorSideTop.Control = Edit3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 56
+        Width = 101
+        BorderSpacing.Around = 6
+        Caption = 'Место расчёта'
+        OnClick = chPayPlaceClick
+        TabOrder = 2
+      end
+      object edtPayPlace: TEdit
+        AnchorSideLeft.Control = chPayPlace
+        AnchorSideTop.Control = chPayPlace
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Label11
+        Left = 12
+        Height = 23
+        Top = 81
+        Width = 467
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 3
+        Text = 'Расчётно кассовый цент'
+      end
+      object Label11: TLabel
+        AnchorSideLeft.Control = TabSheet5
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = TabSheet5
+        Left = 485
+        Height = 1
+        Top = 0
+        Width = 1
+        ParentColor = False
+      end
+    end
+    object TabSheet6: TTabSheet
+      Caption = 'Прочие функции'
+      ClientHeight = 617
+      ClientWidth = 969
+      object Button13: TButton
+        AnchorSideLeft.Control = TabSheet6
+        AnchorSideTop.Control = TabSheet6
+        Left = 6
+        Height = 36
+        Top = 6
+        Width = 111
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Печать строки'
+        OnClick = Button13Click
+        TabOrder = 0
+      end
+      object Label8: TLabel
+        AnchorSideLeft.Control = Button13
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideBottom.Control = Edit5
+        AnchorSideBottom.Side = asrBottom
+        Left = 123
+        Height = 20
+        Top = 16
+        Width = 113
+        BorderSpacing.Left = 6
+        Caption = 'Текст для печати'
+        ParentColor = False
+      end
+      object Edit5: TEdit
+        AnchorSideLeft.Control = Label8
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideRight.Control = TabSheet6
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Button13
+        AnchorSideBottom.Side = asrBottom
+        Left = 242
+        Height = 37
+        Top = 1
+        Width = 721
+        Anchors = [akLeft, akRight]
+        BorderSpacing.Left = 6
+        BorderSpacing.Right = 6
+        TabOrder = 1
+        Text = 'Строка для печати'
+      end
+      object Button19: TButton
+        AnchorSideLeft.Control = TabSheet6
+        AnchorSideTop.Control = Button13
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 36
+        Top = 48
+        Width = 156
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Дата и время из ККМ'
+        OnClick = Button19Click
+        TabOrder = 2
+      end
+      object Edit1: TEdit
+        AnchorSideLeft.Control = Button19
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Button13
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet6
+        AnchorSideRight.Side = asrBottom
+        Left = 168
+        Height = 37
+        Top = 48
+        Width = 795
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        Enabled = False
+        TabOrder = 3
+      end
+      object Button21: TButton
+        Left = 6
+        Height = 36
+        Top = 96
+        Width = 167
+        AutoSize = True
+        Caption = 'Не обнуляемые суммы'
+        OnClick = Button21Click
+        TabOrder = 4
+      end
+      object Edit2: TEdit
+        Left = 184
+        Height = 37
+        Top = 95
+        Width = 552
+        TabOrder = 5
+      end
+      object Memo2: TMemo
+        Left = 32
+        Height = 266
+        Top = 152
+        Width = 576
+        Lines.Strings = (
+          'Memo2'
+        )
+        TabOrder = 6
+      end
+    end
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 651
+    Width = 979
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object AtollKKM1: TAtollKKM
+    PortSpeed = 6
+    Left = 128
+    Top = 688
+  end
+  object rxGoods: TRxMemoryData
+    FieldDefs = <    
+      item
+        Name = 'GOODS_CODE'
+        DataType = ftString
+        Size = 40
+      end    
+      item
+        Name = 'GOODS_NAME'
+        DataType = ftString
+        Size = 500
+      end    
+      item
+        Name = 'AMOUNT'
+        DataType = ftFloat
+        Precision = 3
+        Size = 15
+      end    
+      item
+        Name = 'PRICE'
+        DataType = ftCurrency
+      end    
+      item
+        Name = 'SUM'
+        DataType = ftCurrency
+      end    
+      item
+        Name = 'COUNTRY_CODE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'GTD'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'TAX_TYPE'
+        DataType = ftInteger
+      end>
+    BeforePost = rxGoodsBeforePost
+    PacketRecords = 0
+    Left = 319
+    Top = 335
+    object rxGoodsGOODS_CODE: TStringField
+      FieldKind = fkData
+      FieldName = 'GOODS_CODE'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object rxGoodsGOODS_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'GOODS_NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 500
+    end
+    object rxGoodsAMOUNT: TFloatField
+      FieldKind = fkData
+      FieldName = 'AMOUNT'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 3
+    end
+    object rxGoodsPRICE: TCurrencyField
+      FieldKind = fkData
+      FieldName = 'PRICE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 2
+    end
+    object rxGoodsSUM: TCurrencyField
+      FieldKind = fkData
+      FieldName = 'SUM'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 2
+    end
+    object rxGoodsCOUNTRY_CODE: TLongintField
+      FieldKind = fkData
+      FieldName = 'COUNTRY_CODE'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxGoodsGTD: TStringField
+      FieldKind = fkData
+      FieldName = 'GTD'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxGoodsTAX_TYPE: TLongintField
+      FieldKind = fkData
+      FieldName = 'TAX_TYPE'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object dsGoods: TDataSource
+    DataSet = rxGoods
+    Left = 280
+    Top = 336
+  end
+  object rxPays: TRxMemoryData
+    FieldDefs = <    
+      item
+        Name = 'PayType'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'PayTypeName'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'PaySum'
+        DataType = ftCurrency
+      end>
+    PacketRecords = 0
+    Left = 264
+    Top = 514
+    object rxPaysPayType: TLongintField
+      FieldKind = fkData
+      FieldName = 'PayType'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxPaysPayTypeName: TStringField
+      FieldKind = fkData
+      FieldName = 'PayTypeName'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxPaysPaySum: TCurrencyField
+      FieldKind = fkData
+      FieldName = 'PaySum'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 2
+    end
+  end
+  object dsPays: TDataSource
+    DataSet = rxPays
+    Left = 232
+    Top = 514
+  end
+end

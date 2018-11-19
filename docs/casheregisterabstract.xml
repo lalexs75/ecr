@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="atol_ecr"><module name="CasheRegisterAbstract"><element name="TCheckType"><short>Тип чека</short>
+      </element><element name="TPaymentType"><short>Тип оплаты</short>
+      </element><element name="TTaxType"><short>Тип налога</short>
+      </element><element name="TCounteragentInfo.Clear"><short>Очистить все поля</short>
+      </element><element name="TCounteragentInfo.Name"><short>Наименование контрагента</short>
+      </element><element name="TCounteragentInfo.Adress"><short>Адрес контрагента</short>
+      </element><element name="TCounteragentInfo.INN"><short>ИНН контрагента</short>
+      </element><element name="TCounteragentInfo.Phone"><short>Телефон контрагента</short>
+      </element><element name="TCounteragentInfo.Email"><short>адрес электронной почты контрагента</short>
+      </element><element name="TCheckInfo"><short>Параметры чека</short>
+      </element><element name="TCheckInfo.Clear"><short>Очистить все поля</short>
+      </element><element name="TCheckInfo.Electronically"><short>Признак электронного чека</short>
+      </element><element name="TGoodsInfo"><short>Данные на позицию товара</short>
+      </element><element name="TGoodsInfo.Clear"><short>Очистить все поля</short>
+      </element><element name="TGoodsInfo.Name"><short>Наименование товара</short>
+      </element><element name="TGoodsInfo.Price"><short>Цена товара</short>
+      </element><element name="TGoodsInfo.Quantity"><short>Кол-во товара</short>
+      </element><element name="TGoodsInfo.TaxType"><short>Тип налога</short>
+      </element><element name="TGoodsInfo.CountryCode"><short>Код страны происхождения</short>
+      </element><element name="TGoodsInfo.DeclarationNumber"><short>Номер ГТД товара</short>
+      </element><element name="TCashRegisterAbstract"><short>Абстрактный класс для работы с ККМ</short>
+      </element><element name="TCashRegisterAbstract.Beep"><short>Гудок аппарата</short>
+      </element><element name="TCashRegisterAbstract.CutCheck"><short>Отрезать чек</short>
+      </element><element name="TCashRegisterAbstract.PrintLine"><short>Напечатать строку</short>
+      </element><element name="TCashRegisterAbstract.PrintClishe"><short>Напечатать клише</short>
+      </element><element name="TCashRegisterAbstract.DemoPrint"><short>Тестовая печать</short>
+      </element><element name="TCashRegisterAbstract.OpenCheck"><short>Открыть чек</short>
+      </element><element name="TCashRegisterAbstract.CloseCheck"><short>Зарегистрировать чек</short>
+      </element><element name="TCashRegisterAbstract.CancelCheck"><short>Отменить чек</short>
+      </element><element name="TCashRegisterAbstract.ShowProperties"><short>Отобразаить окно параметров ККМ</short>
+      </element><element name="TCashRegisterAbstract.Registration"><short>Зарегистрировать строку товара в чеке</short>
+      </element><element name="TCashRegisterAbstract.PaymentPlace"><short>Место расчёта</short>
+      </element><element name="TCashRegisterAbstract.CounteragentInfo"><short>Данные по контрагенту в чеке</short>
+      </element><element name="TCashRegisterAbstract.CheckInfo"><short>Данные чека</short>
+      </element><element name="TCashRegisterAbstract.GoodsInfo"><short>Данные по строке товара</short>
+      </element><element name="TCashRegisterAbstract.Connected"><short>Подключение к аппарату/отключение от аппарата</short>
+      </element><element name="TCashRegisterAbstract.OpenShift"><short>Открыть смену</short>
+      </element><element name="TCashRegisterAbstract.CashIncome"><short>Внесение наличности в кассу</short>
+      </element><element name="TCashRegisterAbstract.CashOutcome"><short>Выплата наличности из кассы</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>
