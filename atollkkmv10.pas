@@ -2098,7 +2098,7 @@ begin
   if Assigned(Flibfptr_line_feed) then
     Result:=Flibfptr_line_feed(Handle)
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_line_feed']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_line_feed']);
 end;
 
 function TAtollLibraryV10.FlashFirmware(Handle: TLibFPtrHandle): Integer;
@@ -2106,7 +2106,7 @@ begin
   if Assigned(Flibfptr_flash_firmware) then
     Result:=Flibfptr_flash_firmware(Handle)
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_flash_firmware']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_flash_firmware']);
 end;
 
 procedure TAtollLibraryV10.SetNonPrintableParamBool(Handle: TLibFPtrHandle;
@@ -2115,7 +2115,7 @@ begin
   if Assigned(Flibfptr_set_non_printable_param_bool) then
     Flibfptr_set_non_printable_param_bool(Handle, ParamId, Ord(Value))
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_non_printable_param_bool']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_non_printable_param_bool']);
 end;
 
 procedure TAtollLibraryV10.SetNonPrintableParamInt(Handle: TLibFPtrHandle;
@@ -2124,7 +2124,7 @@ begin
   if Assigned(Flibfptr_set_non_printable_param_int) then
     Flibfptr_set_non_printable_param_int(Handle, ParamId, Value)
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_non_printable_param_int']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_non_printable_param_int']);
 end;
 
 procedure TAtollLibraryV10.SetNonPrintableParamDouble(Handle: TLibFPtrHandle;
@@ -2133,7 +2133,7 @@ begin
   if Assigned(Flibfptr_set_non_printable_param_double) then
     Flibfptr_set_non_printable_param_double(Handle, ParamId, Value)
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_non_printable_param_double']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_non_printable_param_double']);
 end;
 
 procedure TAtollLibraryV10.SetNonPrintableParamStr(Handle: TLibFPtrHandle;
@@ -2149,7 +2149,7 @@ begin
     Flibfptr_set_non_printable_param_str(Handle, ParamId, @FValueW[aFirstStrChar]);
   end
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_non_printable_param_str']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_non_printable_param_str']);
 end;
 
 procedure TAtollLibraryV10.SetNonPrintableParamDateTime(Handle: TLibFPtrHandle;
@@ -2164,7 +2164,7 @@ begin
     Flibfptr_set_non_printable_param_datetime(Handle, ParamId, Y, M, D, H, N, S);
   end
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_non_printable_param_datetime']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_non_printable_param_datetime']);
 end;
 
 procedure TAtollLibraryV10.SetNonPrintableParamByteArray(
@@ -2173,28 +2173,40 @@ begin
   if Assigned(Flibfptr_set_non_printable_param_bytearray) then
     Flibfptr_set_non_printable_param_bytearray(Handle, ParamId, @Value[0], Length(Value))
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_non_printable_param_bytearray']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_non_printable_param_bytearray']);
 end;
 
 function TAtollLibraryV10.SoftLockInit(Handle: TLibFPtrHandle): Integer;
 begin
-
+  if Assigned(Flibfptr_soft_lock_init) then
+    Flibfptr_soft_lock_init(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_soft_lock_init']);
 end;
 
 function TAtollLibraryV10.SoftLockQuerySessionCode(Handle: TLibFPtrHandle
   ): Integer;
 begin
-
+  if Assigned(Flibfptr_soft_lock_query_session_code) then
+    Flibfptr_soft_lock_query_session_code(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_soft_lock_query_session_code']);
 end;
 
 function TAtollLibraryV10.SoftLockValidate(Handle: TLibFPtrHandle): Integer;
 begin
-
+  if Assigned(Flibfptr_soft_lock_validate) then
+    Flibfptr_soft_lock_validate(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_soft_lock_validate']);
 end;
 
 function TAtollLibraryV10.UtilCalcTax(Handle: TLibFPtrHandle): Integer;
 begin
-
+  if Assigned(Flibfptr_util_calc_tax) then
+    Flibfptr_util_calc_tax(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_util_calc_tax']);
 end;
 
 end.

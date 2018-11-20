@@ -39,6 +39,186 @@
       </element><element name="libfptr_error.LIBFPTR_ERROR_NEED_DATE_ACCEPT"><short>Требуется подтверждение ввода даты</short>
       </element><element name="libfptr_error.LIBFPTR_ERROR_NO_MORE_DATA"><short>Нет больше данных</short>
       </element>
+    <element name="libfptr_error.LIBFPTR_ERROR_NO_ACCEPT_OR_CANCEL"><short>Нет подтверждения или отмены продажи</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_BLOCKED_BY_REPORT_INTERRUPTION"><short>Отчет с гашением прерван. Вход в режим невозможен</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DISABLE_CASH_CONTROL_DENIED"><short>Отключение контроля наличности невозможно (не настроены необходимые типы оплаты)</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_MODE_BLOCKED"><short>Вход в режим заблокирован</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_CHECK_DATE_TIME"><short>Проверьте дату и время</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DATE_TIME_LESS_THAN_FS"><short>Дата и время в ККТ меньше чем в ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_CLOSE_ARCHIVE_DENIED"><short>Невозможно закрыть архив</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_COMMODITY_NOT_FOUND"><short>Товар не найден</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_WEIGHT_BARCODE_WITH_INVALID_QUANTITY"><short>Весовой штрихкод с количеством &lt;&gt; 1.000</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_RECEIPT_BUFFER_OVERFLOW"><short>Переполнение буфера чека</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_QUANTITY_TOO_FEW"><short>Недостаточное количество товара</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_STORNO_TOO_MUCH"><short>Сторнируемое количество больше проданного</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_BLOCKED_COMMODITY_NOT_FOUND"><short>Товар не найден</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NO_PAPER"><short>Нет бумаги</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_COVER_OPENED"><short>Открыта крышка</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_PRINTER_FAULT"><short>Нет связи с принтером чеков</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_MECHANICAL_FAULT"><short>Механическая ошибка печатающего устройства</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_RECEIPT_TYPE"><short>Неверный тип чека</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_UNIT_TYPE"><short>Недопустимое целевое устройство</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NO_MEMORY"><short>Нет места в массиве картинок/штрихкодов</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_PICTURE_NOT_FOUND"><short>Неверный номер картинки/штрихкода (картинка/штрихкод отсутствует)</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NONCACH_PAYMENTS_TOO_MUCH"><short>Сумма не наличных платежей превышает сумму чека</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_RETURN_DENIED"><short>Накопление меньше суммы возврата или аннулирования</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_PAYMENTS_OVERFLOW"><short>Переполнение суммы платежей</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_BUSY"><short>Предыдущая операция незавершена</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_GSM"><short>Ошибка GSM- модуля</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_DISCOUNT"><short>Неверная величина скидки / надбавки</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_OPERATION_AFTER_DISCOUNT_DENIED"><short>Операция после скидки / надбавки невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_DEPARTMENT"><short>Неверная секция</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_PAYMENT_TYPE"><short>Неверный вид оплаты</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_MULTIPLICATION_OVERFLOW"><short>Переполнение при умножении</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_BY_SETTINGS"><short>Операция запрещена в таблице настроек</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_TOTAL_OVERFLOW"><short>Переполнение итога чека</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_ANNULATION_RECEIPT"><short>Открыт чек аннулирования – операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_JOURNAL_OVERFLOW"><short>Переполнение буфера контрольной ленты</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NOT_FULLY_PAID"><short>Чек оплачен не полностью</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_RETURN_RECEIPT"><short>Открыт чек возврата – операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_SHIFT_EXPIRED"><short>Смена превысила 24 часа</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_SELL_RECEIPT"><short>Открыт чек продажи – операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FISCAL_MEMORY_OVERFLOW"><short>Переполнение ФП</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_PASSWORD"><short>Неверный пароль</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_JOURNAL_BUSY"><short>Идет обработка контрольной ленты</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_CLOSED_SHIFT"><short>Смена закрыта - операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_TABLE_NUMBER"><short>Неверный номер таблицы</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_ROW_NUMBER"><short>Неверный номер ряда</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_FIELD_NUMBER"><short>Неверный номер поля</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_DATE_TIME"><short>Неверная дата и/или время</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_STORNO_SUM"><short>Неверная сумма сторно</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_CHANGE_CALCULATION"><short>Подсчет суммы сдачи невозможен</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NO_CASH"><short>В ККТ нет денег для выплаты</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_CLOSED_RECEIPT"><short>Чек закрыт – операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_OPENED_RECEIPT"><short>Чек открыт – операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_OPENED_SHIFT"><short>Смена открыта, операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_SERIAL_NUMBER_ALREADY_ENTERED"><short>Серийный номер / MAC- адрес уже задан</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_TOO_MUCH_REREGISTRATIONS"><short>Исчерпан лимит перерегистраций</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_SHIFT_NUMBER"><short>Неверный номер смены</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_SERIAL_NUMBER"><short>Недопустимый серийный номер ККТ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_RNM_VATIN"><short>Недопустимый РНМ и/или ИНН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FISCAL_PRINTER_NOT_ACTIVATED"><short>ККТ не фискализирована</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_SERIAL_NUMBER_NOT_ENTERED"><short>Не задан серийный номер</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NO_MORE_REPORTS"><short>Нет отчетов</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_MODE_NOT_ACTIVATED"><short>Режим не активизирован</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_RECORD_NOT_FOUND_IN_JOURNAL"><short>Нет указанного чека в КЛ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_LICENSE"><short>Некорректный код или номер кода защиты ККТ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NEED_FULL_RESET"><short>Требуется выполнение общего гашения</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_BY_LICENSE"><short>Команда не разрешена введенными кодами защиты ККТ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DISCOUNT_CANCELLATION_DENIED"><short>Невозможна отмена скидки/надбавки</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_CLOSE_RECEIPT_DENIED"><short>Невозможно закрыть чек данным типом оплаты</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_ROUTE_NUMBER"><short>Неверный номер маршрута</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_START_ZONE_NUMBER"><short>Неверный номер начальной зоны</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_END_ZONE_NUMBER"><short>Неверный номер конечной зоны</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_RATE_TYPE"><short>Неверный тип тарифа</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_RATE"><short>Неверный тариф</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FISCAL_MODULE_EXCHANGE"><short>Ошибка обмена с фискальным модулем</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NEED_TECHNICAL_SUPPORT"><short>Необходимо провести профилактические работы</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_SHIFT_NUMBERS_DID_NOT_MATCH"><short>Неверные номера смен в ККТ и ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DEVICE_NOT_FOUND"><short>Нет устройства, обрабатывающего данную команду</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_EXTERNAL_DEVICE_CONNECTION"><short>Нет связи с внешним устройством</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DISPENSER_INVALID_STATE"><short>Ошибочное состояние ТРК</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_POSITIONS_COUNT"><short>Недопустимое кол- во позиций в чеке</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DISPENSER_INVALID_NUMBER"><short>Ошибочный номер ТРК</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_DIVIDER"><short>Неверный делитель</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_ACTIVATION_DENIED"><short>Активация данного ФН в составе данной ККТ невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_PRINTER_OVERHEAT"><short>Перегрев головки принтера</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_EXCHANGE"><short>Ошибка обмена с ФН на уровне интерфейса I2C</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_INVALID_FORMAT"><short>Ошибка формата передачи ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_INVALID_STATE"><short>Неверное состояние ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_FAULT"><short>Неисправимая ошибка ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_CRYPTO_FAULT"><short>Ошибка КС ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_EXPIRED"><short>Закончен срок эксплуатации ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_OVERFLOW"><short>Архив ФН переполнен</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_INVALID_DATE_TIME"><short>В ФН переданы неверная дата или время</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_NO_MORE_DATA"><short>В ФН нет запрошенных данных</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_TOTAL_OVERFLOW"><short>Переполнение ФН (итог чека / смены)</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_BUFFER_OVERFLOW"><short>Буфер переполнен</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_PRINT_SECOND_COPY_DENIED"><short>Невозможно напечатать вторую фискальную копию</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NEED_RESET_JOURNAL"><short>Требуется гашение ЭЖ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_TAX_SUM_TOO_MUCH"><short>Сумма налога больше суммы регистраций по чеку и/или итога</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_TAX_ON_LAST_OPERATION_DENIED"><short>Начисление налога на последнюю операцию невозможно</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_FN_NUMBER"><short>Неверный номер ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_TAX_CANCEL_DENIED"><short>Сумма сторно налога больше суммы зарегистрированного налога данного типа</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LOW_BATTERY"><short>Операция невозможна, недостаточно питания</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_INVALID_COMMAND"><short>Некорректное значение параметров команды ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_COMMAND_OVERFLOW"><short>Превышение размеров TLV данных ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_NO_TRANSPORT_CONNECTION"><short>Нет транспортного соединения ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_CRYPTO_HAS_EXPIRED"><short>Исчерпан ресурс КС ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FN_RESOURCE_HAS_EXPIRED"><short>Ресурс хранения ФД исчерпан</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_MESSAGE_FROM_OFD"><short>Сообщение от ОФД не может быть принято ФН</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NEGATIVE_MATH_RESULT"><short>Отрицательный результат математической операции</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_FISCAL_PROPERTIES_COMBINATION"><short>Недопустимое сочетание реквизитов</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_OPERATOR_LOGIN"><short>Ошибка регистрации кассира</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_INTERNET_CHANNEL"><short>Данный канал Интернет отсутствует в ККТ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DATETIME_NOT_SYNCRONIZED"><short>Дата и время не синхронизированы</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_JOURNAL"><short>Ошибка электронного журнала</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_OPENED_DOC"><short>Документ открыт - операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DENIED_IN_CLOSED_DOC"><short>Документ закрыт - операция невозможна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LICENSE_MEMORY_OVERFLOW"><short>Нет места для сохранения лицензий</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_NEED_CANCEL_DOCUMENT"><short>Произошла критичная ошибка, документ необходимо отменить</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_REGISTERS_NOT_INITIALIZED"><short>Регистры ККТ еще не инициализированы</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_TOTAL_REQUIRED"><short>Требуется регистрация итога</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_SETTINGS_FAULT"><short>Сбой таблицы настроек</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_COUNTERS_FAULT"><short>Сбой счетчиков и регистров ККТ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_USER_MEMORY_FAULT"><short>Сбой пользовательской памяти</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_SERVICE_COUNTERS_FAULT"><short>Сбой сервисных регистров</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_ATTRIBUTES_FAULT"><short>Сбой реквизитов ККТ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_ALREADY_IN_UPDATE_MODE"><short>ККТ уже в режиме обновления конфигурации</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_FIRMWARE"><short>Конфигурация не прошла проверку</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_CHANNEL"><short>Аппаратный канал отсутствует, выключен или ещё не проинициализирован</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INTERFACE_DOWN"><short>Сетевой интерфейс не подключен, или на нём не получен IP-адрес</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1212_1030"><short>Недопустимое сочетание реквизитов 1212 и 1030</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1214"><short>Некорректный признак способа расчета</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1212"><short>Некорректный признак предмета расчета</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_SYNC_TIME"><short>Ошибка синхронизации времени</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_VAT18_VAT20_IN_RECEIPT"><short>В одном чеке одновременно не может быть позиций с НДС 18% (18/118) и НДС 20% (20/120)</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_RECEIPT_PARSE_ERROR"><short>Ошибка парсинга чека / запроса</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INTERRUPTED_BY_PREVIOUS_ERRORS"><short>Выполнение прервано из-за предыдущих ошибок</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_TEXT"><short>Строка текста</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_TEXT_WRAP"><short>Перенос строки</short><descr>Перенос LIBFPTR_PARAM_TEXT_WRAP может принимать следующие значения:
+
+    LIBFPTR_TW_NONE - не переносить. Текст будет обрезаться по ширине ленты
+    LIBFPTR_TW_WORDS - переносить по словам. Разделителями считаются символы:
+        пробел
+        точка
+        запятая
+        точка с запятой
+        тире
+        знак вопроса
+        восклицательный знак
+        закрывающая скобка
+        закрывающая фигурная скобка
+        закрывающая квадратная скобка
+</descr>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_ALIGNMENT"><short>Выравнивание</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_FONT"><short>Номер шрифта</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_FONT_DOUBLE_WIDTH"><short>Двойная ширина</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_FONT_DOUBLE_HEIGHT"><short>Двойная высота</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_LINESPACING"><short>Межстрочный интервал</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_BRIGHTNESS"><short>Яркость</short>
+      </element><element name="libfptr_gui_parent.LIBFPTR_GUI_PARENT_NATIVE"><short>дескриптора родительского окна</short><descr>Для передачи дескриптора родительского окна типа HWND (WinApi) требуется указать тип окна LIBFPTR_GUI_PARENT_NATIVE. Использование типа окна LIBFPTR_GUI_PARENT_NATIVE на Linux на данный момент не поддерживается.
+</descr>
+      </element><element name="libfptr_gui_parent.LIBFPTR_GUI_PARENT_QT"><short>дескриптора родительского окна типа QWidget (Qt)</short>
+      </element><element name="libfptr_log_level.LIBFPTR_LOG_ERROR"><short>ошибка </short>
+      </element><element name="libfptr_log_level.LIBFPTR_LOG_WARN"><short>предупреждение</short>
+      </element><element name="libfptr_log_level.LIBFPTR_LOG_INFO"><short>информация</short>
+      </element><element name="libfptr_log_level.LIBFPTR_LOG_DEBUG"><short>отладка</short>
+      </element><element name="libfptr_log_level"><short>Уровень сообщения может принимать следующие значения</short>
+      </element><element name="Tlibfptr_log_write"><short>Для записи сообщения в лог драйвера необходимо вызвать метод logWrite() и указать в параметрах:</short><descr>
+    категорию логов (должна быть также указана в конфигурации логирования)
+    уровень сообщения
+    текст сообщения
+
+Уровень сообщения может принимать следующие значения:
+
+    LIBFPTR_LOG_ERROR - ошибка
+    LIBFPTR_LOG_WARN - предупреждение
+    LIBFPTR_LOG_INFO - информация
+    LIBFPTR_LOG_DEBUG - отладка
+
+</descr>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
