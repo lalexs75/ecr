@@ -218,6 +218,21 @@
     LIBFPTR_LOG_DEBUG - отладка
 
 </descr>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_REGISTRATION"><short>Отчет о регистрации</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_OPEN_SHIFT"><short>Отчет об открытии смены</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_RECEIPT"><short>Кассовый чек</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_BSO"><short>Бланк строгой отчетности</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_CLOSE_SHIFT"><short>Отчет о закрытии смены</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_CLOSE_FN"><short>Отчет о закрытии фискального накопителя</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_OPERATOR_CONFIRMATION"><short>Подтверждение оператора</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_REREGISTRATION"><short>Отчет об изменении параметров регистрации</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_EXCHANGE_STATUS"><short>Отчет о текущем состоянии расчетов</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_CORRECTION"><short>Кассовый чек коррекции</short>
+      </element><element name="libfptr_fn_document_type.LIBFPTR_FN_DOC_BSO_CORRECTION"><short>Бланк строгой отчетности коррекции</short>
+      </element><element name="libfptr_nomenclature_type.LIBFPTR_NT_FURS"><short>изделия из меха </short>
+      </element><element name="libfptr_nomenclature_type.LIBFPTR_NT_MEDICINES"><short>лекарственные препараты</short>
+      </element><element name="libfptr_nomenclature_type.LIBFPTR_NT_TOBACCO"><short>табачная продукция</short>
+      </element><element name="libfptr_nomenclature_type"><short>Тип номенклатры товаров</short>
       </element>
     </module>
   </package>
