@@ -668,6 +668,8 @@ begin
   inherited OpenCheck;
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
+    InternalUserLogin;
+
     if CounteragentInfo.Name <> '' then
       SetAttributeStr(1227, CounteragentInfo.Name);
     if CounteragentInfo.Name <> '' then
