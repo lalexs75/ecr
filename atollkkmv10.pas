@@ -274,13 +274,14 @@ type
     procedure InternalOpenKKM;
     procedure InternalCloseKKM;
     function InternalCheckError:Integer;
+    procedure InternalSetCheckType(AValue: TCheckType);
   protected
     function GetConnected: boolean; override;
     procedure SetConnected(AValue: boolean); override;
 
     function GetCheckNumber: integer; override;
-    function GetCheckType: TCheckType; override;
-    procedure SetCheckType(AValue: TCheckType); override;
+    //function GetCheckType: TCheckType; override;
+    //procedure SetCheckType(AValue: TCheckType); override;
   public
     destructor Destroy; override;
 
@@ -457,6 +458,30 @@ begin
     ClearError;
 end;
 
+procedure TAtollKKMv10.InternalSetCheckType(AValue: TCheckType);
+var
+  CT: Tlibfptr_receipt_type;
+  FE: Integer;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+    case AValue of
+      chtSell:CT:=LIBFPTR_RT_SELL;
+      chtSellReturn:CT:=LIBFPTR_RT_SELL_RETURN;
+      chtSellCorrection:CT:=LIBFPTR_RT_SELL_CORRECTION;
+      chtSellReturnCorrection:CT:=LIBFPTR_RT_SELL_RETURN_CORRECTION;
+      chtBuy:CT:=LIBFPTR_RT_BUY;
+      chtBuyReturn:CT:=LIBFPTR_RT_BUY_RETURN;
+      chtBuyCorrection:CT:=LIBFPTR_RT_BUY_CORRECTION;
+      chtBuyReturnCorrection:CT:=LIBFPTR_RT_BUY_RETURN_CORRECTION;
+    else
+      raise EAtollLibrary.Create('Не изестный тип чека');
+    end;
+    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_RECEIPT_TYPE, Ord(CT));
+    InternalCheckError;
+  end;
+end;
+
 function TAtollKKMv10.GetConnected: boolean;
 begin
   Result:=Assigned(FHandle);
@@ -495,7 +520,7 @@ begin
       Result:=FLibrary.GetParamInt(FHandle, Ord(LIBFPTR_PARAM_RECEIPT_NUMBER));
   end;
 end;
-
+(*
 function TAtollKKMv10.GetCheckType: TCheckType;
 var
   FT: Tlibfptr_receipt_type;
@@ -545,8 +570,9 @@ begin
     FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_RECEIPT_TYPE, Ord(CT));
     InternalCheckError;
   end;
+  FCheckType:=AValue;
 end;
-
+*)
 destructor TAtollKKMv10.Destroy;
 begin
   Connected:=false;
@@ -669,6 +695,8 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     InternalUserLogin;
+
+    InternalSetCheckType(CheckType);
 
     if CounteragentInfo.Name <> '' then
       SetAttributeStr(1227, CounteragentInfo.Name);

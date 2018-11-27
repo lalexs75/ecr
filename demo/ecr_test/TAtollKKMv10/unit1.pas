@@ -559,9 +559,9 @@ end;
 
 procedure TForm1.InitKassirData;
 begin
+//  FAtollKKMv10.Password:='30';
   FAtollKKMv10.UserName:=Edit3.Text;
-  FAtollKKMv10.Password:='30';
-//  FAtollKKMv10.KassaUserINN:='500100732259';
+  FAtollKKMv10.KassaUserINN:=Edit4.Text;
 end;
 
 function TForm1.KKMLibraryFileName: string;
@@ -588,7 +588,7 @@ begin
   rxGoods.CloseOpen;
   rxGoods.AppendRecord(['F000-001-25487', 'Чипсы LAYS', 73.99, 5, null,  null,  null, 1]);
   rxGoods.AppendRecord(['000.000.001', 'Насос НШ-14М-3 (НШ-14Г-3) правый (Гидросила)', 739, 1, null,  null, null, 1]);
-  rxGoods.AppendRecord(['6311', 'СМЕСИТЕЛЬ Д/МОЙКИ 1рук. "Oskar" в/гусак Китай', 954.32, 2, null, 547, '10714040/140917/0090376', 2]);
+//  rxGoods.AppendRecord(['6311', 'СМЕСИТЕЛЬ Д/МОЙКИ 1рук. "Oskar" в/гусак Китай', 954.32, 2, null, 547, '10714040/140917/0090376', 2]);
   rxGoods.First;
 
   rxPays.CloseOpen;

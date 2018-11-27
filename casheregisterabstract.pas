@@ -55,7 +55,9 @@ type
      pctOther_7,        //тип оплаты №7
      pctOther_8,        //тип оплаты №8
      pctOther_9,        //тип оплаты №9
-     pctOther_10        //тип оплаты №10
+     pctOther_10       //тип оплаты №10
+
+//     pctNone = 99999
   );
 
   TTaxType = (
@@ -158,6 +160,7 @@ type
     FOnError: TNotifyEvent;
     FPassword: string;
     FPaymentPlace: string;
+    FCheckType: TCheckType;
     FUserName: string;
   protected
     FDeviceState: TDeviceState;
@@ -168,7 +171,7 @@ type
     procedure SetConnected(AValue: boolean); virtual; abstract;
     function GetCheckNumber: integer; virtual; abstract;
     function GetCheckType: TCheckType; virtual; abstract;
-    procedure SetCheckType(AValue: TCheckType); virtual; abstract;
+    procedure SetCheckType(AValue: TCheckType); virtual;
     procedure SetError(AErrorCode:integer; AErrorDescription:string);
     procedure ClearError;
   public
@@ -214,9 +217,8 @@ type
     //
     property CheckNumber:integer read GetCheckNumber;
     //property CheckMode:integer read FCheckMode write FCheckMode;
-    property CheckType:TCheckType read GetCheckType write SetCheckType;
+    property CheckType:TCheckType read FCheckType write SetCheckType;
     property CheckElectronic:boolean read FCheckElectronic write FCheckElectronic;
-
   public
     property Password:string read FPassword write SetPassword;
     property UserName:string read FUserName write SetUserName;
@@ -330,6 +332,11 @@ begin
   FKassaUserINN:=AValue;
 end;
 
+procedure TCashRegisterAbstract.SetCheckType(AValue: TCheckType);
+begin
+  FCheckType:=AValue;
+end;
+
 procedure TCashRegisterAbstract.SetError(AErrorCode: integer;
   AErrorDescription: string);
 begin
@@ -379,6 +386,7 @@ begin
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
   FAgentInfo.Clear;
+  FCheckType:=chtNone;
 end;
 
 function TCashRegisterAbstract.CancelCheck: integer;
@@ -388,6 +396,7 @@ begin
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
   FAgentInfo.Clear;
+  FCheckType:=chtNone;
 end;
 
 function TCashRegisterAbstract.Registration: integer;
