@@ -125,6 +125,7 @@ type
   private
     FCountryCode: Integer;
     FDeclarationNumber: String;
+    FGoodsNomenclatureCode: string;
     FGoodsPayMode: TGoodsPayMode;
     FName: string;
     FPrice: Currency;
@@ -143,6 +144,7 @@ type
     property DeclarationNumber:String read FDeclarationNumber write FDeclarationNumber;
     property SuplierInfo:TCounteragentInfo read FSuplierInfo;
     property GoodsPayMode:TGoodsPayMode read FGoodsPayMode write FGoodsPayMode;
+    property GoodsNomenclatureCode:string read FGoodsNomenclatureCode write FGoodsNomenclatureCode;
   end;
 
   { TCashRegisterAbstract }
@@ -303,6 +305,7 @@ begin
 
   FCountryCode:=0;
   FDeclarationNumber:='';
+  FGoodsNomenclatureCode:='';
   FSuplierInfo.Clear;
 end;
 

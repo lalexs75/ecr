@@ -765,7 +765,10 @@ begin
       SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
     end;
 
-//    FAtollKKMv10.SetAttributeInt(1212, 1);
+    if GoodsInfo.GoodsNomenclatureCode <> '' then
+    begin
+      //SetAttributeStr(1162, GoodsInfo.GoodsNomenclatureCode);
+    end;
 
     case GoodsInfo.GoodsPayMode of
       //gpmFullPay:SetAttributeInt(1214, 0);
