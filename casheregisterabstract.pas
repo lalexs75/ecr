@@ -67,7 +67,9 @@ type
     ttaxVat118,
     ttaxVat110,
     ttaxVat0,
-    ttaxVatNO
+    ttaxVatNO,
+    ttaxVat20,
+    ttaxVat120
   );
 
   TGoodsPayMode =

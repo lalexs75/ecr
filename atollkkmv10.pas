@@ -395,6 +395,8 @@ begin
     ttaxVat110:Result:=LIBFPTR_TAX_VAT110;
     ttaxVat0:Result:=LIBFPTR_TAX_VAT0;
     ttaxVatNO:Result:=LIBFPTR_TAX_NO;
+    ttaxVat20:Result:=LIBFPTR_TAX_VAT20;
+    ttaxVat120:Result:=LIBFPTR_TAX_VAT120;
   else
     raise EAtollLibrary.Create('Не известный тип налога');
   end;
