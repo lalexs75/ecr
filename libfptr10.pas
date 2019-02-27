@@ -299,6 +299,12 @@ extern "C"
     LIBFPTR_ERROR_INVALID_FISCAL_PROPERTY_VALUE_1212,
     LIBFPTR_ERROR_SYNC_TIME,
     LIBFPTR_ERROR_VAT18_VAT20_IN_RECEIPT,
+    LIBFPTR_ERROR_PICTURE_NOT_CLOSED,
+    LIBFPTR_ERROR_INTERFACE_BUSY,
+    LIBFPTR_ERROR_INVALID_PICTURE_NUMBER,
+    LIBFPTR_ERROR_INVALID_CONTAINER,
+    LIBFPTR_ERROR_ARCHIVE_CLOSED,
+    LIBFPTR_ERROR_NEED_REGISTRATION,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
@@ -514,6 +520,16 @@ extern "C"
     LIBFPTR_PARAM_NEW_PLATFORM,
     LIBFPTR_PARAM_UNIT_RELEASE_VERSION,
     LIBFPTR_PARAM_USE_VAT18,
+    LIBFPTR_PARAM_TAG_NAME,
+    LIBFPTR_PARAM_TAG_TYPE,
+    LIBFPTR_PARAM_TAG_IS_COMPLEX,
+    LIBFPTR_PARAM_TAG_IS_REPEATABLE,
+    LIBFPTR_PARAM_SHIFT_AUTO_OPENED,
+    LIBFPTR_PARAM_CONTAINER_FIRMWARE_VERSION,
+    LIBFPTR_PARAM_CONTAINER_CONFIGURATION_VERSION,
+    LIBFPTR_PARAM_CONTAINER_BOOTLOADER_VERSION,
+    LIBFPTR_PARAM_CONTAINER_SCRIPTS_VERSION,
+    LIBFPTR_PARAM_PAPER_NEAR_END,
 
     LIBFPTR_PARAM_LAST
   );
@@ -527,6 +543,7 @@ extern "C"
     LIBFPTR_MODEL_ATOL_20F = 81,
     LIBFPTR_MODEL_ATOL_22F = 63,
     LIBFPTR_MODEL_ATOL_25F = 57,
+    LIBFPTR_MODEL_ATOL_27F = 87,
     LIBFPTR_MODEL_ATOL_30F = 61,
     LIBFPTR_MODEL_ATOL_42FS = 77,
     LIBFPTR_MODEL_ATOL_50F = 80,
@@ -540,7 +557,8 @@ extern "C"
     LIBFPTR_MODEL_ATOL_SIGMA_10 = 86,
     LIBFPTR_MODEL_ATOL_SIGMA_7F = 90,
     LIBFPTR_MODEL_ATOL_SIGMA_8F = 91,
-    LIBFPTR_MODEL_KAZNACHEY_FA = 76
+    LIBFPTR_MODEL_KAZNACHEY_FA = 76,
+    LIBFPTR_MODEL_ATOL_1F = 93
   );
   Tlibfptr_model = libfptr_model;
 
@@ -914,7 +932,8 @@ type
   libfptr_nomenclature_type = (
     LIBFPTR_NT_FURS = 0,
     LIBFPTR_NT_MEDICINES,
-    LIBFPTR_NT_TOBACCO
+    LIBFPTR_NT_TOBACCO,
+    LIBFPTR_NT_SHOES
   );
   Tlibfptr_nomenclature_type = libfptr_nomenclature_type;
 
@@ -963,6 +982,21 @@ type
   );
   Tlibfptr_defer_type = libfptr_defer_type;
 
+  libfptr_tag_type = (
+    LIBFPTR_TAG_TYPE_STLV = 0,
+    LIBFPTR_TAG_TYPE_STRING,
+    LIBFPTR_TAG_TYPE_ARRAY,
+    LIBFPTR_TAG_TYPE_FVLN,
+    LIBFPTR_TAG_TYPE_BITS,
+    LIBFPTR_TAG_TYPE_BYTE,
+    LIBFPTR_TAG_TYPE_VLN,
+    LIBFPTR_TAG_TYPE_UINT_16,
+    LIBFPTR_TAG_TYPE_UINT_32,
+    LIBFPTR_TAG_TYPE_UNIX_TIME,
+    LIBFPTR_TAG_TYPE_BOOL
+  );
+  Tlibfptr_tag_type = libfptr_tag_type;
+
   //Tlibfptr_user_memory_operation = libfptr_user_memory_operation;
 
 
@@ -1007,6 +1041,9 @@ type
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_error_description(libfptr_handle handle, wchar_t *value, int size);
   Tlibfptr_error_description = function(Handle:TLibFPtrHandle; Value:PWchar_t; Size:Integer):integer; cdecl;
+
+  //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_reset_error(libfptr_handle handle);
+  Tlibfptr_reset_error = procedure(Handle:TLibFPtrHandle);cdecl;
 
   //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_param_bool(libfptr_handle handle, int param_id, int value);
   Tlibfptr_set_param_bool = procedure(Handle:TLibFPtrHandle; param_id:Integer; Value:Integer); cdecl;
@@ -1151,6 +1188,9 @@ type
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_upload_picture_from_file(libfptr_handle handle);
   Tlibfptr_upload_picture_from_file = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_download_picture(libfptr_handle handle);
+  Tlibfptr_download_picture = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_clear_pictures(libfptr_handle handle);
   Tlibfptr_clear_pictures = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
@@ -1259,6 +1299,15 @@ type
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_util_calc_tax(libfptr_handle handle);
   Tlibfptr_util_calc_tax = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_util_tag_info(libfptr_handle handle);
+  Tlibfptr_util_tag_info = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_bluetooth_remove_paired_devices(libfptr_handle handle);
+  Tlibfptr_bluetooth_remove_paired_devices = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_util_container_versions(libfptr_handle handle);
+  Tlibfptr_util_container_versions = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;

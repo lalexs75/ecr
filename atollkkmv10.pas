@@ -134,6 +134,12 @@ type
     Flibfptr_soft_lock_validate:Tlibfptr_soft_lock_validate;
     Flibfptr_util_calc_tax:Tlibfptr_util_calc_tax;
 
+    //ver10.4.5.0
+    Flibfptr_reset_error:Tlibfptr_reset_error;
+    Flibfptr_download_picture:Tlibfptr_download_picture;
+    Flibfptr_util_tag_info:Tlibfptr_util_tag_info;
+    Flibfptr_bluetooth_remove_paired_devices:Tlibfptr_bluetooth_remove_paired_devices;
+    Flibfptr_util_container_versions:Tlibfptr_util_container_versions;
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -256,6 +262,13 @@ type
     function SoftLockQuerySessionCode(Handle:TLibFPtrHandle):Integer;
     function SoftLockValidate(Handle:TLibFPtrHandle):Integer;
     function UtilCalcTax(Handle:TLibFPtrHandle):Integer;
+
+    //ver 10.4.5.0
+    procedure ResetError(Handle:TLibFPtrHandle);
+    function DownloadPicture(Handle:TLibFPtrHandle):Integer;
+    function UtilTagInfo(Handle:TLibFPtrHandle):Integer;
+    function BluetoothRemovePairedDevices(Handle:TLibFPtrHandle):Integer;
+    function UtilContainerVersions(Handle:TLibFPtrHandle):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -1143,6 +1156,12 @@ begin
   Flibfptr_soft_lock_validate:=nil;
   Flibfptr_util_calc_tax:=nil;
 
+  //ver10.4.5.0
+  Flibfptr_reset_error:=nil;
+  Flibfptr_download_picture:=nil;
+  Flibfptr_util_tag_info:=nil;
+  Flibfptr_bluetooth_remove_paired_devices:=nil;
+  Flibfptr_util_container_versions:=nil;
   //
   FAtollLib:=NilHandle;
 end;
@@ -1292,6 +1311,12 @@ begin
     Flibfptr_soft_lock_query_session_code:=Tlibfptr_soft_lock_query_session_code(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
     Flibfptr_soft_lock_validate:=Tlibfptr_soft_lock_validate(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
     Flibfptr_util_calc_tax:=Tlibfptr_util_calc_tax(DoGetProcAddress(FAtollLib, 'libfptr_set_non_printable_param_bytearray'));
+    //ver10.4.5.0
+    Flibfptr_reset_error:=Tlibfptr_reset_error(DoGetProcAddress(FAtollLib, 'libfptr_reset_error'));
+    Flibfptr_download_picture:=Tlibfptr_download_picture(DoGetProcAddress(FAtollLib, 'libfptr_download_picture'));
+    Flibfptr_util_tag_info:=Tlibfptr_util_tag_info(DoGetProcAddress(FAtollLib, 'libfptr_util_tag_info'));
+    Flibfptr_bluetooth_remove_paired_devices:=Tlibfptr_bluetooth_remove_paired_devices(DoGetProcAddress(FAtollLib, 'libfptr_bluetooth_remove_paired_devices'));
+    Flibfptr_util_container_versions:=Tlibfptr_util_container_versions(DoGetProcAddress(FAtollLib, 'libfptr_util_container_versions'));
   end;
 end;
 
@@ -2214,7 +2239,7 @@ end;
 function TAtollLibraryV10.SoftLockInit(Handle: TLibFPtrHandle): Integer;
 begin
   if Assigned(Flibfptr_soft_lock_init) then
-    Flibfptr_soft_lock_init(Handle)
+    Result:=Flibfptr_soft_lock_init(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_soft_lock_init']);
 end;
@@ -2223,7 +2248,7 @@ function TAtollLibraryV10.SoftLockQuerySessionCode(Handle: TLibFPtrHandle
   ): Integer;
 begin
   if Assigned(Flibfptr_soft_lock_query_session_code) then
-    Flibfptr_soft_lock_query_session_code(Handle)
+    Result:=Flibfptr_soft_lock_query_session_code(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_soft_lock_query_session_code']);
 end;
@@ -2231,7 +2256,7 @@ end;
 function TAtollLibraryV10.SoftLockValidate(Handle: TLibFPtrHandle): Integer;
 begin
   if Assigned(Flibfptr_soft_lock_validate) then
-    Flibfptr_soft_lock_validate(Handle)
+    Result:=Flibfptr_soft_lock_validate(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_soft_lock_validate']);
 end;
@@ -2239,9 +2264,51 @@ end;
 function TAtollLibraryV10.UtilCalcTax(Handle: TLibFPtrHandle): Integer;
 begin
   if Assigned(Flibfptr_util_calc_tax) then
-    Flibfptr_util_calc_tax(Handle)
+    Result:=Flibfptr_util_calc_tax(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_util_calc_tax']);
+end;
+
+procedure TAtollLibraryV10.ResetError(Handle: TLibFPtrHandle);
+begin
+  if Assigned(Flibfptr_reset_error) then
+    Flibfptr_reset_error(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_reset_error']);
+end;
+
+function TAtollLibraryV10.DownloadPicture(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_download_picture) then
+    Result:=Flibfptr_download_picture(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_download_picture']);
+end;
+
+function TAtollLibraryV10.UtilTagInfo(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_util_tag_info) then
+    Result:=Flibfptr_util_tag_info(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_util_tag_info']);
+end;
+
+function TAtollLibraryV10.BluetoothRemovePairedDevices(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_bluetooth_remove_paired_devices) then
+    Result:=Flibfptr_bluetooth_remove_paired_devices(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_bluetooth_remove_paired_devices']);
+end;
+
+function TAtollLibraryV10.UtilContainerVersions(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_util_container_versions) then
+    Result:=Flibfptr_util_container_versions(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_util_container_versions']);
 end;
 
 end.
