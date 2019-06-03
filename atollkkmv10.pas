@@ -5,7 +5,11 @@ unit AtollKKMv10;
 interface
 
 uses
-  Classes, SysUtils, libfptr10, CasheRegisterAbstract;
+  Classes, SysUtils, libfptr10, CasheRegisterAbstract
+  {$if FPC_FULLVERSION<30006}
+  , dynlibs
+  {$endif}
+  ;
 
 type
 
