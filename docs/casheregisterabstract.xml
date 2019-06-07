@@ -39,6 +39,44 @@
       </element><element name="TCashRegisterAbstract.CashIncome"><short>Внесение наличности в кассу</short>
       </element><element name="TCashRegisterAbstract.CashOutcome"><short>Выплата наличности из кассы</short>
       </element>
+    <element name="TTextParams"><short>Параметры текста при печати строки</short>
+      </element><element name="TCashRegisterAbstract.TextParams"><short>Параметры текста при печати строки</short>
+      </element><element name="TTextParams.Align"><short>Выравнивание текста</short><descr><ul><li><b>etaLeft</b> - Выравнивание по левому краю</li><li><b>etaCenter</b> - Выравнивание по центру</li><li><b>etaRight</b> - Выравнивание по правому краю</li>
+          </ul>
+        </descr>
+      </element><element name="TEcrTextAlign"><short>Параметры выравнивания текста при печати</short><descr><ul><li><b>etaLeft</b> - Выравнивание по левому краю</li><li><b>etaCenter</b> - Выравнивание по центру</li><li><b>etaRight</b> - Выравнивание по правому краю</li>
+          </ul>
+        </descr>
+      </element><element name="TEcrTextAlign.etaLeft"><short>Выравнивание по левому краю</short>
+      </element><element name="TEcrTextAlign.etaCenter"><short>Выравнивание по центру</short>
+      </element><element name="TEcrTextAlign.etaRight"><short>Выравнивание по правому краю</short>
+      </element><element name="TTextParams.WordWrap"><short>Перенос строк</short>
+      </element><element name="TEcrWordWrap"><short>Перенос строк</short><descr><ul><li><b>ewwNone</b> -  не переносить. Текст будет обрезаться по ширине ленты.
+    </li><li><b>ewwWords</b> - переносить по словам.
+    </li><li><b>ewwChars</b> -переносить по символам
+    </li>
+          </ul>
+При переносе по словам разделителями считаются символы:
+<p>- пробел</p><p>- точка</p><p>- запятая</p><p>- точка с запятой</p><p>- тире</p><p>- знак вопроса</p><p>- восклицательный знак</p><p>- закрывающая скобка</p><p>- закрывающая фигурная скобка</p><p>- закрывающая квадратная скобка</p>
+        </descr>
+      </element><element name="TEcrWordWrap.ewwNone"><short><b>ewwNone</b> -  не переносить. Текст будет обрезаться по ширине ленты.</short>
+      </element><element name="TEcrWordWrap.ewwWords"><short><b>ewwWords</b> - переносить по словам.</short><descr>При переносе по словам разделителями считаются символы:
+<p>- пробел</p><p>- точка</p><p>- запятая</p><p>- точка с запятой</p><p>- тире</p><p>- знак вопроса</p><p>- восклицательный знак</p><p>- закрывающая скобка</p><p>- закрывающая фигурная скобка</p><p>- закрывающая квадратная скобка</p>
+        </descr>
+      </element><element name="TEcrWordWrap.ewwChars"><short><b>ewwChars</b> -переносить по символам</short>
+      </element><element name="TTextParams.FontNumber"><short>Номер стандартного шрифта из ККМ</short>
+      </element><element name="TTextParams.DoubleWidth"><short>Двойная ширина</short>
+      </element><element name="TTextParams.DoubleHeight"><short>Двойная высота</short>
+      </element><element name="TTextParams.LineSpacing"><short>Межстрочный интервал</short>
+      </element><element name="TTextParams.Brightness"><short>Яркость</short>
+      </element><element name="TDeviceInfo"><short>Информация о устройстве</short>
+      </element><element name="TDeviceInfo.PaperInfo"><short>Параметры чековой ленты</short>
+      </element><element name="TCashRegisterAbstract.DeviceInfo"><short>Параметры кассового аппарата</short>
+      </element><element name="TCashRegisterAbstract.QueryDeviceParams"><short>Метод заполняет свойство DeviceInfo параметрами кассового аппарата</short>
+      </element><element name="TCheckPaperInfo"><short>Параметры чековой ленты</short>
+      </element><element name="TCheckPaperInfo.LineLength"><short>Ширины ленты в символах</short>
+      </element><element name="TCheckPaperInfo.LineLengthPix"><short>Ширина ленты в точках (пикселах)</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

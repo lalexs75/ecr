@@ -84,6 +84,32 @@ type
     );
   ECashRegisterAbstract = class(Exception);
 
+  TEcrTextAlign = (etaLeft, etaCenter, etaRight);
+  TEcrWordWrap = (ewwNone, ewwWords, ewwChars);
+
+  { TTextParams }
+
+  TTextParams = class
+  private
+    FAlign:TEcrTextAlign;
+    FBrightness: integer;
+    FDoubleHeight: boolean;
+    FDoubleWidth: boolean;
+    FFontNumber: integer;
+    FLineSpacing: integer;
+    FWordWrap: TEcrWordWrap;
+  public
+    constructor Create;
+    procedure Clear;
+    property Align:TEcrTextAlign read FAlign write FAlign default etaLeft;
+    property WordWrap:TEcrWordWrap read FWordWrap write FWordWrap default ewwNone;
+    property FontNumber:integer read FFontNumber write FFontNumber;
+    property DoubleWidth:boolean read FDoubleWidth write FDoubleWidth;
+    property DoubleHeight:boolean read FDoubleHeight write FDoubleHeight;
+    property LineSpacing:integer read FLineSpacing write FLineSpacing;
+    property Brightness:integer read FBrightness write FBrightness;
+  end;
+
   { TCounteragentInfo }
 
   TCounteragentInfo = class
@@ -121,6 +147,35 @@ type
     property DateTime:TDateTime read FDateTime;
   end;
 
+  { TCheckPaperInfo }
+
+  TCheckPaperInfo = class
+  private
+    FLineLength: integer;
+    FLineLengthPix: integer;
+  protected
+    procedure SetLineLength(AValue:Integer);
+    procedure SetLineLengthPix(AValue:Integer);
+  public
+    procedure Clear;
+    property LineLength:integer read FLineLength;
+    property LineLengthPix:integer read FLineLengthPix;
+  end;
+
+  { TDeviceInfo }
+
+  TDeviceInfo = class
+  private
+    FPaperInfo: TCheckPaperInfo;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Clear;
+    property PaperInfo:TCheckPaperInfo read FPaperInfo;
+  end;
+
+
+
   { TGoodsInfo }
 
   TGoodsInfo = class
@@ -157,6 +212,7 @@ type
     FCheckElectronic: boolean;
     FCheckInfo: TCheckInfo;
     FCounteragentInfo: TCounteragentInfo;
+    FDeviceInfo: TDeviceInfo;
     FErrorCode: integer;
     FErrorDescription: string;
     FGoodsInfo: TGoodsInfo;
@@ -165,6 +221,7 @@ type
     FPassword: string;
     FPaymentPlace: string;
     FCheckType: TCheckType;
+    FTextParams: TTextParams;
     FUserName: string;
   protected
     FDeviceState: TDeviceState;
@@ -178,6 +235,7 @@ type
     procedure SetCheckType(AValue: TCheckType); virtual;
     procedure SetError(AErrorCode:integer; AErrorDescription:string);
     procedure ClearError;
+    procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -187,6 +245,7 @@ type
     procedure PrintLine(ALine:string);virtual; abstract;     //Печать строки
     procedure PrintClishe; virtual; abstract;
     procedure DemoPrint; virtual; abstract;
+    procedure QueryDeviceParams;
 
 
     //Отперации со сменой
@@ -231,6 +290,8 @@ type
     property ErrorCode:integer read FErrorCode;
     property ErrorDescription:string read FErrorDescription;
 
+    //Параметры вывода на печать текста
+    property TextParams:TTextParams read FTextParams;
     //Тут будем размещать свойства объектной модели чека
     property CounteragentInfo:TCounteragentInfo read FCounteragentInfo;
     property AgentInfo:TCounteragentInfo read FAgentInfo;
@@ -238,8 +299,9 @@ type
     property GoodsInfo:TGoodsInfo read FGoodsInfo;
     property PaymentPlace:string read FPaymentPlace write FPaymentPlace;
 
-    //Статус
+    //Статус и информация о аппарате
     property DeviceState:TDeviceState read FDeviceState;
+    property DeviceInfo:TDeviceInfo read FDeviceInfo;
     //
     property OnError:TNotifyEvent read FOnError write FOnError;
   end;
@@ -281,6 +343,62 @@ begin
   else
     Result:='Не известный тип оплаты';
   end;
+end;
+
+{ TDeviceInfo }
+
+constructor TDeviceInfo.Create;
+begin
+  inherited Create;
+  FPaperInfo:=TCheckPaperInfo.Create;
+end;
+
+destructor TDeviceInfo.Destroy;
+begin
+  FreeAndNil(FPaperInfo);
+  inherited Destroy;
+end;
+
+procedure TDeviceInfo.Clear;
+begin
+  FPaperInfo.Clear;
+end;
+
+{ TCheckPaperInfo }
+
+procedure TCheckPaperInfo.SetLineLength(AValue: Integer);
+begin
+  FLineLength:=AValue;
+end;
+
+procedure TCheckPaperInfo.SetLineLengthPix(AValue: Integer);
+begin
+  FLineLengthPix:=AValue;
+end;
+
+procedure TCheckPaperInfo.Clear;
+begin
+  FLineLength:=0;
+  FLineLengthPix:=0;
+end;
+
+{ TTextParams }
+
+constructor TTextParams.Create;
+begin
+  inherited Create;
+  FAlign:=etaLeft;
+end;
+
+procedure TTextParams.Clear;
+begin
+  FAlign:=etaLeft;
+  FBrightness:=0;
+  FDoubleHeight:=false;
+  FDoubleWidth:=false;
+  FFontNumber:=0;
+  FLineSpacing:=0;
+  FWordWrap:=ewwNone;
 end;
 
 { TGoodsInfo }
@@ -357,6 +475,12 @@ begin
   FErrorDescription:='';
 end;
 
+procedure TCashRegisterAbstract.InternalGetDeviceInfo(var ALineLength,
+  ALineLengthPix: integer);
+begin
+
+end;
+
 constructor TCashRegisterAbstract.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -364,6 +488,8 @@ begin
   FCheckInfo:=TCheckInfo.Create;
   FGoodsInfo:=TGoodsInfo.Create;
   FAgentInfo:=TCounteragentInfo.Create;
+  FTextParams:=TTextParams.Create;
+  FDeviceInfo:=TDeviceInfo.Create;
 end;
 
 destructor TCashRegisterAbstract.Destroy;
@@ -371,7 +497,19 @@ begin
   FreeAndNil(FCounteragentInfo);
   FreeAndNil(FCheckInfo);
   FreeAndNil(FGoodsInfo);
+  FreeAndNil(FTextParams);
+  FreeAndNil(FDeviceInfo);
   inherited Destroy;
+end;
+
+procedure TCashRegisterAbstract.QueryDeviceParams;
+var
+  FLineLength, FLineLengthPix: integer;
+begin
+  FDeviceInfo.Clear;
+  InternalGetDeviceInfo(FLineLength, FLineLengthPix);
+  FDeviceInfo.FPaperInfo.FLineLength:=FLineLength;
+  FDeviceInfo.FPaperInfo.FLineLengthPix:=FLineLengthPix;
 end;
 
 procedure TCashRegisterAbstract.OpenShift;
@@ -381,6 +519,7 @@ end;
 
 procedure TCashRegisterAbstract.OpenCheck;
 begin
+  FTextParams.Clear;
   FCheckElectronic:=false;
 end;
 
@@ -391,6 +530,7 @@ begin
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
   FAgentInfo.Clear;
+  FTextParams.Clear;
   FCheckType:=chtNone;
 end;
 
@@ -401,12 +541,14 @@ begin
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
   FAgentInfo.Clear;
+  FTextParams.Clear;
   FCheckType:=chtNone;
 end;
 
 function TCashRegisterAbstract.Registration: integer;
 begin
   FGoodsInfo.Clear;
+  FTextParams.Clear;
 end;
 
 procedure TCashRegisterAbstract.SetUserName(AValue: string);

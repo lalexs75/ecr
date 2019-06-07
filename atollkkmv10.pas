@@ -238,7 +238,9 @@ type
     procedure SetSingleSetting(Handle:PLibFPtrHandle; Key, Value:string);
     function  ApplySingleSettings(Handle:PLibFPtrHandle):Integer;
 
-    procedure SetParamBool(Handle: TLibFPtrHandle; ParamId:Integer; Value:Boolean);
+    procedure SetParamBool(Handle: TLibFPtrHandle; ParamId:Tlibfptr_param; Value:Boolean); overload;
+    procedure SetParamBool(Handle: TLibFPtrHandle; ParamId:Integer; Value:Boolean); overload; inline;
+
     procedure SetParamInt(Handle: TLibFPtrHandle; ParamId:Tlibfptr_param; Value:Integer);
     procedure SetParamDouble(Handle: TLibFPtrHandle; ParamId:Integer; Value:Double);
     procedure SetParamStr(Handle: TLibFPtrHandle; ParamId:Integer; Value:string);
@@ -293,6 +295,7 @@ type
     function InternalCheckError:Integer;
     procedure InternalSetCheckType(AValue: TCheckType);
   protected
+    procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); override;
     function GetConnected: boolean; override;
     procedure SetConnected(AValue: boolean); override;
 
@@ -501,6 +504,15 @@ begin
   end;
 end;
 
+procedure TAtollKKMv10.InternalGetDeviceInfo(var ALineLength,
+  ALineLengthPix: integer);
+begin
+  FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_DATA_TYPE, Ord(LIBFPTR_DT_RECEIPT_LINE_LENGTH));
+  FLibrary.QueryData(FHandle);
+  ALineLength:=FLibrary.GetParamInt(FHandle, Ord(LIBFPTR_PARAM_RECEIPT_LINE_LENGTH));
+  ALineLengthPix:=FLibrary.GetParamInt(FHandle, Ord(LIBFPTR_PARAM_RECEIPT_LINE_LENGTH_PIX));
+end;
+
 function TAtollKKMv10.GetConnected: boolean;
 begin
   Result:=Assigned(FHandle);
@@ -650,7 +662,20 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded and Assigned(FHandle) then
   begin
     FLibrary.SetParamStr(FHandle, Ord(LIBFPTR_PARAM_TEXT), ALine);
-    //FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_ALIGNMENT, LIBFPTR_ALIGNMENT_CENTER);
+
+    case TextParams.Align of
+      etaLeft:FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_ALIGNMENT, ord(LIBFPTR_ALIGNMENT_LEFT));
+      etaCenter:FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_ALIGNMENT,ord(LIBFPTR_ALIGNMENT_CENTER));
+      etaRight:FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_ALIGNMENT, ord(LIBFPTR_ALIGNMENT_RIGHT));
+    end;
+
+    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_FONT, TextParams.FontNumber);
+
+    FLibrary.SetParamBool(FHandle, LIBFPTR_PARAM_FONT_DOUBLE_WIDTH, TextParams.DoubleWidth);
+    FLibrary.SetParamBool(FHandle, LIBFPTR_PARAM_FONT_DOUBLE_HEIGHT, TextParams.DoubleHeight);
+    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_LINESPACING, TextParams.LineSpacing);
+    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_BRIGHTNESS, TextParams.Brightness);
+
     FLibrary.PrintText(FHandle);
     InternalCheckError;
   end
@@ -732,7 +757,7 @@ begin
       SetAttributeStr(1187, PaymentPlace);
 
     if CheckInfo.Electronically then
-      FLibrary.SetParamBool(FHandle, Ord(LIBFPTR_PARAM_RECEIPT_ELECTRONICALLY), CheckInfo.Electronically);
+      FLibrary.SetParamBool(FHandle, LIBFPTR_PARAM_RECEIPT_ELECTRONICALLY, CheckInfo.Electronically);
 
     FLibrary.OpenReceipt(FHandle);
     InternalCheckError;
@@ -2036,8 +2061,13 @@ begin
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_apply_single_settings']);
 end;
 
-procedure TAtollLibraryV10.SetParamBool(Handle: TLibFPtrHandle; ParamId: Integer;
-  Value: Boolean);
+procedure TAtollLibraryV10.SetParamBool(Handle: TLibFPtrHandle;
+  ParamId: Tlibfptr_param; Value: Boolean);
+begin
+  SetParamBool(Handle, Ord(ParamId), Value);
+end;
+
+procedure TAtollLibraryV10.SetParamBool(Handle: TLibFPtrHandle; ParamId: Integer; Value: Boolean); inline;
 begin
   if Assigned(Flibfptr_set_param_bool) then
     Flibfptr_set_param_bool(Handle, ParamId, Ord(Value))

@@ -29,6 +29,7 @@ type
     Button2: TButton;
     Button20: TButton;
     Button21: TButton;
+    Button22: TButton;
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
@@ -39,6 +40,8 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
     chPayPlace: TCheckBox;
     ComboBox1: TComboBox;
     CurrencyEdit1: TCurrencyEdit;
@@ -63,6 +66,7 @@ type
     Edit4: TEdit;
     edtPhone1: TEdit;
     edtSuplierPhone: TEdit;
+    GroupBox1: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -78,6 +82,9 @@ type
     Label20: TLabel;
     Label21: TLabel;
     Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -88,6 +95,8 @@ type
     Memo1: TMemo;
     Memo2: TMemo;
     PageControl1: TPageControl;
+    RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
     rxGoodsAMOUNT: TFloatField;
     rxGoodsCOUNTRY_CODE: TLongintField;
     rxGoodsGOODS_CODE: TStringField;
@@ -104,6 +113,9 @@ type
     rxPaysPayType: TLongintField;
     rxPaysPayTypeName: TStringField;
     SpinEdit1: TSpinEdit;
+    SpinEdit2: TSpinEdit;
+    SpinEdit3: TSpinEdit;
+    SpinEdit4: TSpinEdit;
     Splitter1: TSplitter;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -124,6 +136,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button20Click(Sender: TObject);
     procedure Button21Click(Sender: TObject);
+    procedure Button22Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
@@ -243,6 +256,17 @@ begin
   FAtollKKMv10.Connected:=false;
 end;
 
+procedure TForm1.Button22Click(Sender: TObject);
+begin
+  FAtollKKMv10.Connected:=true;
+  FAtollKKMv10.Open;
+  FAtollKKMv10.QueryDeviceParams;
+  WriteLog('LineLength = '+ IntToStr(FAtollKKMv10.DeviceInfo.PaperInfo.LineLength));
+  WriteLog('LineLengthPix = '+ IntToStr(FAtollKKMv10.DeviceInfo.PaperInfo.LineLengthPix));
+  FAtollKKMv10.Close;
+  FAtollKKMv10.Connected:=false;
+end;
+
 procedure TForm1.Button10Click(Sender: TObject);
 var
   S: String;
@@ -326,10 +350,32 @@ begin
 end;
 
 procedure TForm1.Button13Click(Sender: TObject);
+var
+  T: TEcrTextAlign;
 begin
   FAtollKKMv10.Connected:=true;
   FAtollKKMv10.Open;
+
+  case RadioGroup1.ItemIndex of
+    0:FAtollKKMv10.TextParams.Align:=etaLeft;
+    1:FAtollKKMv10.TextParams.Align:=etaCenter;
+    2:FAtollKKMv10.TextParams.Align:=etaRight;
+  end;
+
+  case RadioGroup2.ItemIndex of
+    0:FAtollKKMv10.TextParams.WordWrap:=ewwNone;
+    1:FAtollKKMv10.TextParams.WordWrap:=ewwWords;
+    2:FAtollKKMv10.TextParams.WordWrap:=ewwChars;
+  end;
+
+  FAtollKKMv10.TextParams.FontNumber:=SpinEdit2.Value;
+  FAtollKKMv10.TextParams.DoubleWidth:=CheckBox4.Checked;
+  FAtollKKMv10.TextParams.DoubleHeight:=CheckBox5.Checked;
+  FAtollKKMv10.TextParams.LineSpacing:=SpinEdit3.Value;
+  FAtollKKMv10.TextParams.Brightness:=SpinEdit4.Value;
+
   FAtollKKMv10.PrintLine(Edit5.Text);
+
   FAtollKKMv10.Close;
   FAtollKKMv10.Connected:=false;
 end;
@@ -570,7 +616,7 @@ begin
   Result:=slibFPPtr10FileName;
   {$ENDIF}
   {$IFDEF LINUX}
-  Result:=AppendPathDelim(ExtractFileDir(ParamStr(0))) + AppendPathDelim('dll-so-10.4.2');
+  Result:=AppendPathDelim(ExtractFileDir(ParamStr(0))) + AppendPathDelim('dll-so');
   {$IFDEF cpux86_64}
   Result:=Result + AppendPathDelim('linux-x64');
   {$ENDIF}

@@ -1,0 +1,8 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: atollkkmv10.scantloadproc
+#, object-pascal-format
+msgid "Can't load procedure \"%s\""
+msgstr ""
+
