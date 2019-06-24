@@ -744,7 +744,8 @@ begin
 
     if CounteragentInfo.Name <> '' then
       SetAttributeStr(1227, CounteragentInfo.Name);
-    if CounteragentInfo.Name <> '' then
+      
+    if CounteragentInfo.INN <> '' then
       SetAttributeStr(1228, CounteragentInfo.INN);
 
     if CounteragentInfo.Email <> '' then
