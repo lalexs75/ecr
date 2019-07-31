@@ -305,6 +305,11 @@ extern "C"
     LIBFPTR_ERROR_INVALID_CONTAINER,
     LIBFPTR_ERROR_ARCHIVE_CLOSED,
     LIBFPTR_ERROR_NEED_REGISTRATION,
+    LIBFPTR_ERROR_DENIED_DURING_UPDATE,
+    LIBFPTR_ERROR_INVALID_TOTAL,
+    LIBFPTR_ERROR_MARKING_CODE_CONFLICT,
+    LIBFPTR_ERROR_INVALID_RECORDS_ID,
+    LIBFPTR_ERROR_INVALID_SIGNATURE,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
@@ -530,6 +535,22 @@ extern "C"
     LIBFPTR_PARAM_CONTAINER_BOOTLOADER_VERSION,
     LIBFPTR_PARAM_CONTAINER_SCRIPTS_VERSION,
     LIBFPTR_PARAM_PAPER_NEAR_END,
+    LIBFPTR_PARAM_REPORT_ELECTRONICALLY,
+    LIBFPTR_PARAM_ACTIVATION_METHOD,
+    LIBFPTR_PARAM_KEYS,
+    LIBFPTR_PARAM_UIN,
+    LIBFPTR_PARAM_VERSION,
+    LIBFPTR_PARAM_PUBLIC_KEY_SIGN,
+    LIBFPTR_PARAM_CAP_DISABLE_PRINT_REPORTS,
+    LIBFPTR_PARAM_REGISTRATION_NUMBER,
+    LIBFPTR_PARAM_PIXEL_BUFFER,
+    LIBFPTR_PARAM_REPEAT_NUMBER,
+    LIBFPTR_PARAM_FIELD_TYPE,
+    LIBFPTR_PARAM_MARKING_CODE,
+    LIBFPTR_PARAM_CONTAINER_DIRECT_BOOT_VERSION,
+    LIBFPTR_PARAM_SCRIPT_NAME,
+    LIBFPTR_PARAM_SCRIPT_HASH,
+    LIBFPTR_PARAM_RECORDS_ID,
 
     LIBFPTR_PARAM_LAST
   );
@@ -754,7 +775,8 @@ type
     LIBFPTR_RT_COMMODITIES_BY_TAXATION_TYPES,
     LIBFPTR_RT_COMMODITIES_BY_DEPARTMENTS,
     LIBFPTR_RT_COMMODITIES_BY_SUMS,
-    LIBFPTR_RT_START_SERVICE
+    LIBFPTR_RT_START_SERVICE,
+    LIBFPTR_RT_DISCOUNTS
   );
   Tlibfptr_report_type = libfptr_report_type;
 
@@ -837,7 +859,8 @@ type
     LIBFPTR_DT_LAST_SENT_OFD_DOCUMENT_DATE_TIME,
     LIBFPTR_DT_SHORT_STATUS,
     LIBFPTR_DT_PICTURES_ARRAY_INFO,
-    LIBFPTR_DT_ETHERNET_INFO
+    LIBFPTR_DT_ETHERNET_INFO,
+    LIBFPTR_DT_SCRIPTS_INFO
   );
   Tlibfptr_kkt_data_type = libfptr_kkt_data_type;
 
@@ -855,7 +878,9 @@ type
     LIBFPTR_FNDT_DOCUMENTS_COUNT_IN_SHIFT,
     LIBFPTR_FNDT_ERRORS,
     LIBFPTR_FNDT_TICKET_BY_DOC_NUMBER,
-    LIBFPTR_FNDT_DOCUMENT_BY_NUMBER
+    LIBFPTR_FNDT_DOCUMENT_BY_NUMBER,
+    LIBFPTR_FNDT_REGISTRATION_TLV,
+    LIBFPTR_FNDT_ERROR_DETAIL
   );
   Tlibfptr_fn_data_type = libfptr_fn_data_type;
 
@@ -925,7 +950,10 @@ type
     LIBFPTR_RT_LAST_DOCUMENT_LINES,
     LIBFPTR_RT_FN_DOCUMENT_TLVS,
     LIBFPTR_RT_EXEC_USER_SCRIPT,
-    LIBFPTR_RT_FIRMWARE
+    LIBFPTR_RT_FIRMWARE,
+    LIBFPTR_RT_LICENSES,
+    LIBFPTR_RT_FN_REGISTRATION_TLVS,
+    LIBFPTR_RT_PARSE_COMPLEX_ATTR
   );
   Tlibfptr_records_type = libfptr_records_type;
 
@@ -978,7 +1006,8 @@ type
   libfptr_defer_type = (
     LIBFPTR_DEFER_NONE = 0,
     LIBFPTR_DEFER_PRE,
-    LIBFPTR_DEFER_POST
+    LIBFPTR_DEFER_POST,
+    LIBFPTR_DEFER_OVERLAY
   );
   Tlibfptr_defer_type = libfptr_defer_type;
 
@@ -996,6 +1025,15 @@ type
     LIBFPTR_TAG_TYPE_BOOL
   );
   Tlibfptr_tag_type = libfptr_tag_type;
+
+  libfptr_field_type = (
+    LIBFPTR_FT_BYTE_ARRAY = 0,
+    LIBFPTR_FT_BIN,
+    LIBFPTR_FT_BCD,
+    LIBFPTR_FT_STRING,
+    LIBFPTR_FT_STRING_NULL_TERM
+  );
+  Tlibfptr_field_type = libfptr_field_type;
 
   //Tlibfptr_user_memory_operation = libfptr_user_memory_operation;
 
@@ -1080,6 +1118,20 @@ type
 
   //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_non_printable_param_bytearray(libfptr_handle handle, int param_id, const uchar *value, int size);
   Tlibfptr_set_non_printable_param_bytearray = procedure(Handle:TLibFPtrHandle; param_id:Integer; Value:PChar; Size:Integer); cdecl;
+
+  //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_bool(libfptr_handle handle, int param_id, int value);
+  Tlibfptr_set_user_param_bool = procedure(Handle:TLibFPtrHandle; param_id:Integer; value:Integer);
+(*  +
+  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_int(libfptr_handle handle, int param_id, uint value);
+  +
+  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_double(libfptr_handle handle, int param_id, double value);
+  +
+  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_str(libfptr_handle handle, int param_id, const wchar_t *value);
+  +
+  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_datetime(libfptr_handle handle, int param_id, int year, int month, int day, int hour, int minute, int second);
+  +
+  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_bytearray(libfptr_handle handle, int param_id, const uchar *value, int size);
+*)
 
   Tlibfptr_get_param_bool = function(Handle:TLibFPtrHandle; Param_id:integer):integer; cdecl;
 

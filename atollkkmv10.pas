@@ -144,6 +144,9 @@ type
     Flibfptr_util_tag_info:Tlibfptr_util_tag_info;
     Flibfptr_bluetooth_remove_paired_devices:Tlibfptr_bluetooth_remove_paired_devices;
     Flibfptr_util_container_versions:Tlibfptr_util_container_versions;
+
+    //ver 10.5.0.0
+    Flibfptr_set_user_param_bool:Tlibfptr_set_user_param_bool;
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -275,6 +278,9 @@ type
     function UtilTagInfo(Handle:TLibFPtrHandle):Integer;
     function BluetoothRemovePairedDevices(Handle:TLibFPtrHandle):Integer;
     function UtilContainerVersions(Handle:TLibFPtrHandle):Integer;
+
+    //ver 10.5.0.0
+    procedure SetUserParamBool(Handle:TLibFPtrHandle; param_id:Integer; value:Integer);
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -1191,6 +1197,9 @@ begin
   Flibfptr_util_tag_info:=nil;
   Flibfptr_bluetooth_remove_paired_devices:=nil;
   Flibfptr_util_container_versions:=nil;
+
+  //ver 10.5.0.0
+  Flibfptr_set_user_param_bool:=nil;
   //
   FAtollLib:=NilHandle;
 end;
@@ -1346,6 +1355,9 @@ begin
     Flibfptr_util_tag_info:=Tlibfptr_util_tag_info(DoGetProcAddress(FAtollLib, 'libfptr_util_tag_info'));
     Flibfptr_bluetooth_remove_paired_devices:=Tlibfptr_bluetooth_remove_paired_devices(DoGetProcAddress(FAtollLib, 'libfptr_bluetooth_remove_paired_devices'));
     Flibfptr_util_container_versions:=Tlibfptr_util_container_versions(DoGetProcAddress(FAtollLib, 'libfptr_util_container_versions'));
+
+    //ver 10.5.0.0
+    Flibfptr_set_user_param_bool:=Tlibfptr_set_user_param_bool(DoGetProcAddress(FAtollLib, 'Flibfptr_set_user_param_bool'));
   end;
 end;
 
@@ -2343,6 +2355,15 @@ begin
     Result:=Flibfptr_util_container_versions(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_util_container_versions']);
+end;
+
+procedure TAtollLibraryV10.SetUserParamBool(Handle: TLibFPtrHandle;
+  param_id: Integer; value: Integer);
+begin
+  if Assigned(Flibfptr_set_user_param_bool) then
+    Flibfptr_set_user_param_bool(Handle, param_id, value)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_user_param_bool']);
 end;
 
 end.
