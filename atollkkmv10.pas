@@ -147,6 +147,24 @@ type
 
     //ver 10.5.0.0
     Flibfptr_set_user_param_bool:Tlibfptr_set_user_param_bool;
+    Flibfptr_set_user_param_int:Tlibfptr_set_user_param_int;
+    Flibfptr_set_user_param_double:Tlibfptr_set_user_param_double;
+    Flibfptr_set_user_param_str:Tlibfptr_set_user_param_str;
+    Flibfptr_set_user_param_datetime:Tlibfptr_set_user_param_datetime;
+    Flibfptr_set_user_param_bytearray:Tlibfptr_set_user_param_bytearray;
+
+    Flibfptr_activate_licenses:Tlibfptr_activate_licenses;
+    Flibfptr_remove_licenses:Tlibfptr_remove_licenses;
+    Flibfptr_enter_keys:Tlibfptr_enter_keys;
+    Flibfptr_validate_keys:Tlibfptr_validate_keys;
+    Flibfptr_enter_serial_number:Tlibfptr_enter_serial_number;
+    Flibfptr_get_serial_number_request:Tlibfptr_get_serial_number_request;
+    Flibfptr_upload_pixel_buffer:Tlibfptr_upload_pixel_buffer;
+    Flibfptr_download_pixel_buffer:Tlibfptr_download_pixel_buffer;
+    Flibfptr_print_pixel_buffer:Tlibfptr_print_pixel_buffer;
+    Flibfptr_util_convert_tag_value:Tlibfptr_util_convert_tag_value;
+    Flibfptr_parse_marking_code:Tlibfptr_parse_marking_code;
+
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -280,7 +298,24 @@ type
     function UtilContainerVersions(Handle:TLibFPtrHandle):Integer;
 
     //ver 10.5.0.0
-    procedure SetUserParamBool(Handle:TLibFPtrHandle; param_id:Integer; value:Integer);
+    procedure SetUserParamBool(Handle:TLibFPtrHandle; ParamId:Integer; value:Integer);
+    procedure SetUserParamInt(Handle:TLibFPtrHandle; ParamId:Integer; value:Cardinal);
+    procedure SetUserParamDouble(Handle:TLibFPtrHandle; ParamId:Integer; value:Double);
+    procedure SetUserParamStr(Handle:TLibFPtrHandle; ParamId:Integer; value:String);
+    procedure SetUserParamDateTime(Handle:TLibFPtrHandle; ParamId:Integer; Value:TDateTime);
+    procedure SetUserParamByteArray(Handle:TLibFPtrHandle; ParamId:Integer; Value: TBytes);
+
+    function ActivateLicenses(Handle:TLibFPtrHandle):Integer;
+    function RemoveLicenses(Handle:TLibFPtrHandle):Integer;
+    function EnterKeys(Handle:TLibFPtrHandle):Integer;
+    function ValidateKeys(Handle:TLibFPtrHandle):Integer;
+    function EnterSerialNumber(Handle:TLibFPtrHandle):Integer;
+    function GetSerialNumberRequest(Handle:TLibFPtrHandle):Integer;
+    function UploadPixelBuffer(Handle:TLibFPtrHandle):Integer;
+    function DownloadPixelBuffer(Handle:TLibFPtrHandle):Integer;
+    function PrintPixelBuffer(Handle:TLibFPtrHandle):Integer;
+    function UtilConvertTagValue(Handle:TLibFPtrHandle):Integer;
+    function ParseMarkingCode(Handle:TLibFPtrHandle):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -1200,6 +1235,23 @@ begin
 
   //ver 10.5.0.0
   Flibfptr_set_user_param_bool:=nil;
+  Flibfptr_set_user_param_int:=nil;
+  Flibfptr_set_user_param_double:=nil;
+  Flibfptr_set_user_param_str:=nil;
+  Flibfptr_set_user_param_datetime:=nil;
+  Flibfptr_set_user_param_bytearray:=nil;
+
+  Flibfptr_activate_licenses:=nil;
+  Flibfptr_remove_licenses:=nil;
+  Flibfptr_enter_keys:=nil;
+  Flibfptr_validate_keys:=nil;
+  Flibfptr_enter_serial_number:=nil;
+  Flibfptr_get_serial_number_request:=nil;
+  Flibfptr_upload_pixel_buffer:=nil;
+  Flibfptr_download_pixel_buffer:=nil;
+  Flibfptr_print_pixel_buffer:=nil;
+  Flibfptr_util_convert_tag_value:=nil;
+  Flibfptr_parse_marking_code:=nil;
   //
   FAtollLib:=NilHandle;
 end;
@@ -1357,7 +1409,24 @@ begin
     Flibfptr_util_container_versions:=Tlibfptr_util_container_versions(DoGetProcAddress(FAtollLib, 'libfptr_util_container_versions'));
 
     //ver 10.5.0.0
-    Flibfptr_set_user_param_bool:=Tlibfptr_set_user_param_bool(DoGetProcAddress(FAtollLib, 'Flibfptr_set_user_param_bool'));
+    Flibfptr_set_user_param_bool:=Tlibfptr_set_user_param_bool(DoGetProcAddress(FAtollLib, 'libfptr_set_user_param_bool'));
+    Flibfptr_set_user_param_int:=Tlibfptr_set_user_param_int(DoGetProcAddress(FAtollLib, 'libfptr_set_user_param_int'));
+    Flibfptr_set_user_param_double:=Tlibfptr_set_user_param_double(DoGetProcAddress(FAtollLib, 'libfptr_set_user_param_double'));
+    Flibfptr_set_user_param_str:=Tlibfptr_set_user_param_str(DoGetProcAddress(FAtollLib, 'libfptr_set_user_param_str'));
+    Flibfptr_set_user_param_datetime:=Tlibfptr_set_user_param_datetime(DoGetProcAddress(FAtollLib, 'libfptr_set_user_param_datetime'));
+    Flibfptr_set_user_param_bytearray:=Tlibfptr_set_user_param_bytearray(DoGetProcAddress(FAtollLib, 'libfptr_set_user_param_bytearray'));
+
+    Flibfptr_activate_licenses:=Tlibfptr_activate_licenses(DoGetProcAddress(FAtollLib, 'libfptr_activate_licenses'));
+    Flibfptr_remove_licenses:=Tlibfptr_remove_licenses(DoGetProcAddress(FAtollLib, 'libfptr_remove_licenses'));
+    Flibfptr_enter_keys:=Tlibfptr_enter_keys(DoGetProcAddress(FAtollLib, 'libfptr_enter_keys'));
+    Flibfptr_validate_keys:=Tlibfptr_validate_keys(DoGetProcAddress(FAtollLib, 'libfptr_validate_keys'));
+    Flibfptr_enter_serial_number:=Tlibfptr_enter_serial_number(DoGetProcAddress(FAtollLib, 'libfptr_enter_serial_number'));
+    Flibfptr_get_serial_number_request:=Tlibfptr_get_serial_number_request(DoGetProcAddress(FAtollLib, 'libfptr_get_serial_number_request'));
+    Flibfptr_upload_pixel_buffer:=Tlibfptr_upload_pixel_buffer(DoGetProcAddress(FAtollLib, 'libfptr_upload_pixel_buffer'));
+    Flibfptr_download_pixel_buffer:=Tlibfptr_download_pixel_buffer(DoGetProcAddress(FAtollLib, 'libfptr_download_pixel_buffer'));
+    Flibfptr_print_pixel_buffer:=Tlibfptr_print_pixel_buffer(DoGetProcAddress(FAtollLib, 'libfptr_print_pixel_buffer'));
+    Flibfptr_util_convert_tag_value:=Tlibfptr_util_convert_tag_value(DoGetProcAddress(FAtollLib, 'libfptr_util_convert_tag_value'));
+    Flibfptr_parse_marking_code:=Tlibfptr_parse_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_parse_marking_code'));
   end;
 end;
 
@@ -2358,12 +2427,160 @@ begin
 end;
 
 procedure TAtollLibraryV10.SetUserParamBool(Handle: TLibFPtrHandle;
-  param_id: Integer; value: Integer);
+  ParamId: Integer; value: Integer);
 begin
   if Assigned(Flibfptr_set_user_param_bool) then
-    Flibfptr_set_user_param_bool(Handle, param_id, value)
+    Flibfptr_set_user_param_bool(Handle, ParamId, value)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_set_user_param_bool']);
+end;
+
+procedure TAtollLibraryV10.SetUserParamInt(Handle: TLibFPtrHandle;
+  ParamId: Integer; value: Cardinal);
+begin
+  if Assigned(Flibfptr_set_user_param_int) then
+    Flibfptr_set_user_param_int(Handle, ParamId, value)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_user_param_int']);
+end;
+
+procedure TAtollLibraryV10.SetUserParamDouble(Handle: TLibFPtrHandle;
+  ParamId: Integer; value: Double);
+begin
+  if Assigned(Flibfptr_set_user_param_double) then
+    Flibfptr_set_user_param_double(Handle, ParamId, value)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_user_param_double']);
+end;
+
+procedure TAtollLibraryV10.SetUserParamStr(Handle: TLibFPtrHandle;
+  ParamId: Integer; value: String);
+var
+  FValueW: TAtollWideString;
+begin
+  if Assigned(Flibfptr_set_user_param_str) then
+  begin
+    if Value = '' then
+      Value := ' ';
+    FValueW:=StringToAtollWideStr(Value);
+    Flibfptr_set_user_param_str(Handle, ParamId, @FValueW[aFirstStrChar]);
+  end
+  else
+  raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_user_param_str']);
+
+end;
+
+procedure TAtollLibraryV10.SetUserParamDateTime(Handle: TLibFPtrHandle;
+  ParamId: Integer; Value: TDateTime);
+var
+  Y, M, D, H, N, S, MS: word;
+begin
+  if Assigned(Flibfptr_set_user_param_datetime) then
+  begin
+    DecodeDate(Value, Y, M, D);
+    DecodeTime(Value, H, N, S, MS);
+    Flibfptr_set_user_param_datetime(Handle, ParamId, Y, M, D, H, N, S);
+  end
+  else
+  raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_user_param_datetime']);
+end;
+
+procedure TAtollLibraryV10.SetUserParamByteArray(Handle: TLibFPtrHandle;
+  ParamId: Integer; Value: TBytes);
+begin
+  if Assigned(Flibfptr_set_user_param_bytearray) then
+    Flibfptr_set_user_param_bytearray(Handle, ParamId, @Value[0], Length(Value))
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_user_param_bytearray']);
+end;
+
+function TAtollLibraryV10.ActivateLicenses(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_activate_licenses) then
+    Result:=Flibfptr_activate_licenses(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_activate_licenses']);
+end;
+
+function TAtollLibraryV10.RemoveLicenses(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_remove_licenses) then
+    Result:=Flibfptr_remove_licenses(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_remove_licenses']);
+end;
+
+function TAtollLibraryV10.EnterKeys(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_enter_keys) then
+    Result:=Flibfptr_enter_keys(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_enter_keys']);
+end;
+
+function TAtollLibraryV10.ValidateKeys(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_validate_keys) then
+    Result:=Flibfptr_validate_keys(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_validate_keys']);
+end;
+
+function TAtollLibraryV10.EnterSerialNumber(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_enter_serial_number) then
+    Result:=Flibfptr_enter_serial_number(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_enter_serial_number']);
+end;
+
+function TAtollLibraryV10.GetSerialNumberRequest(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_get_serial_number_request) then
+    Result:=Flibfptr_get_serial_number_request(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_get_serial_number_request']);
+end;
+
+function TAtollLibraryV10.UploadPixelBuffer(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_upload_pixel_buffer) then
+    Result:=Flibfptr_upload_pixel_buffer(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_upload_pixel_buffer']);
+end;
+
+function TAtollLibraryV10.DownloadPixelBuffer(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_download_pixel_buffer) then
+    Result:=Flibfptr_download_pixel_buffer(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_download_pixel_buffer']);
+end;
+
+function TAtollLibraryV10.PrintPixelBuffer(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_print_pixel_buffer) then
+    Result:=Flibfptr_print_pixel_buffer(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_print_pixel_buffer']);
+end;
+
+function TAtollLibraryV10.UtilConvertTagValue(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_util_convert_tag_value) then
+    Result:=Flibfptr_util_convert_tag_value(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_util_convert_tag_value']);
+end;
+
+function TAtollLibraryV10.ParseMarkingCode(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_parse_marking_code) then
+    Result:=Flibfptr_parse_marking_code(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_parse_marking_code']);
 end;
 
 end.

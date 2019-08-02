@@ -1120,18 +1120,22 @@ type
   Tlibfptr_set_non_printable_param_bytearray = procedure(Handle:TLibFPtrHandle; param_id:Integer; Value:PChar; Size:Integer); cdecl;
 
   //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_bool(libfptr_handle handle, int param_id, int value);
-  Tlibfptr_set_user_param_bool = procedure(Handle:TLibFPtrHandle; param_id:Integer; value:Integer);
-(*  +
-  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_int(libfptr_handle handle, int param_id, uint value);
-  +
-  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_double(libfptr_handle handle, int param_id, double value);
-  +
-  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_str(libfptr_handle handle, int param_id, const wchar_t *value);
-  +
-  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_datetime(libfptr_handle handle, int param_id, int year, int month, int day, int hour, int minute, int second);
-  +
-  + DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_bytearray(libfptr_handle handle, int param_id, const uchar *value, int size);
-*)
+  Tlibfptr_set_user_param_bool = procedure(Handle:TLibFPtrHandle; param_id:Integer; value:Integer); cdecl;
+
+  //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_int(libfptr_handle handle, int param_id, uint value);
+  Tlibfptr_set_user_param_int = procedure(Handle:TLibFPtrHandle; param_id:Integer; value:Cardinal); cdecl;
+
+  //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_double(libfptr_handle handle, int param_id, double value);
+  Tlibfptr_set_user_param_double = procedure(Handle:TLibFPtrHandle; param_id:Integer; value:Double); cdecl;
+
+  //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_str(libfptr_handle handle, int param_id, const wchar_t *value);
+  Tlibfptr_set_user_param_str = procedure(Handle:TLibFPtrHandle; param_id:Integer; value:PWchar_t); cdecl;
+
+  //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_datetime(libfptr_handle handle, int param_id, int year, int month, int day, int hour, int minute, int second);
+  Tlibfptr_set_user_param_datetime = procedure(Handle:TLibFPtrHandle; param_id:Integer; year:Integer; month:Integer; day:Integer; hour:Integer; minute:Integer; second:Integer); cdecl;
+
+  //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_set_user_param_bytearray(libfptr_handle handle, int param_id, const uchar *value, int size);
+  Tlibfptr_set_user_param_bytearray = procedure(Handle:TLibFPtrHandle; param_id:Integer; value:PChar; size:Integer); cdecl;
 
   Tlibfptr_get_param_bool = function(Handle:TLibFPtrHandle; Param_id:integer):integer; cdecl;
 
@@ -1360,6 +1364,39 @@ type
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_util_container_versions(libfptr_handle handle);
   Tlibfptr_util_container_versions = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_activate_licenses(libfptr_handle handle);
+  Tlibfptr_activate_licenses = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_remove_licenses(libfptr_handle handle);
+  Tlibfptr_remove_licenses = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_enter_keys(libfptr_handle handle);
+  Tlibfptr_enter_keys = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_validate_keys(libfptr_handle handle);
+  Tlibfptr_validate_keys = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_enter_serial_number(libfptr_handle handle);
+  Tlibfptr_enter_serial_number = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_get_serial_number_request(libfptr_handle handle);
+  Tlibfptr_get_serial_number_request = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_upload_pixel_buffer(libfptr_handle handle);
+  Tlibfptr_upload_pixel_buffer = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_download_pixel_buffer(libfptr_handle handle);
+  Tlibfptr_download_pixel_buffer = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_print_pixel_buffer(libfptr_handle handle);
+  Tlibfptr_print_pixel_buffer = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_util_convert_tag_value(libfptr_handle handle);
+  Tlibfptr_util_convert_tag_value = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_parse_marking_code(libfptr_handle handle);
+  Tlibfptr_parse_marking_code = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;
