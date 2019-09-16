@@ -844,11 +844,15 @@ begin
     SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
     SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(GoodsInfo.TaxType)));
 
-    if (GoodsInfo.DeclarationNumber<> '') and (GoodsInfo.CountryCode > 0) then
+    if (GoodsInfo.CountryCode > 0) then
     begin
-      SetAttributeStr(1230, IntToStr(GoodsInfo.CountryCode));
-      SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
+      //SetAttributeStr(1230, IntToStr(GoodsInfo.CountryCode));
+      SetAttributeStr(1230, Format('%0.3d', [GoodsInfo.CountryCode]));
     end;
+
+
+    if (GoodsInfo.DeclarationNumber<> '') then
+      SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
 
     if GoodsInfo.GoodsNomenclatureCode <> '' then
     begin
