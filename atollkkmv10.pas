@@ -165,6 +165,11 @@ type
     Flibfptr_util_convert_tag_value:Tlibfptr_util_convert_tag_value;
     Flibfptr_parse_marking_code:Tlibfptr_parse_marking_code;
 
+    //ver 10.5.1.3
+    Flibfptr_call_script:Tlibfptr_call_script;
+    Flibfptr_set_header_lines:Tlibfptr_set_header_lines;
+    Flibfptr_set_footer_lines:Tlibfptr_set_header_lines;
+
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -316,6 +321,11 @@ type
     function PrintPixelBuffer(Handle:TLibFPtrHandle):Integer;
     function UtilConvertTagValue(Handle:TLibFPtrHandle):Integer;
     function ParseMarkingCode(Handle:TLibFPtrHandle):Integer;
+
+    //ver 10.5.1.3
+    function CallScript(Handle:TLibFPtrHandle):Integer;
+    function SetHeaderLines(Handle:TLibFPtrHandle):Integer;
+    function SetFooterLines(Handle:TLibFPtrHandle):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -1256,6 +1266,11 @@ begin
   Flibfptr_print_pixel_buffer:=nil;
   Flibfptr_util_convert_tag_value:=nil;
   Flibfptr_parse_marking_code:=nil;
+
+  //ver 10.5.1.3
+  Flibfptr_call_script:=nil;
+  Flibfptr_set_header_lines:=nil;
+  Flibfptr_set_footer_lines:=nil;
   //
   FAtollLib:=NilHandle;
 end;
@@ -1431,6 +1446,11 @@ begin
     Flibfptr_print_pixel_buffer:=Tlibfptr_print_pixel_buffer(DoGetProcAddress(FAtollLib, 'libfptr_print_pixel_buffer'));
     Flibfptr_util_convert_tag_value:=Tlibfptr_util_convert_tag_value(DoGetProcAddress(FAtollLib, 'libfptr_util_convert_tag_value'));
     Flibfptr_parse_marking_code:=Tlibfptr_parse_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_parse_marking_code'));
+
+    //ver 10.5.1.3
+    Flibfptr_call_script:=Tlibfptr_call_script(DoGetProcAddress(FAtollLib, 'libfptr_call_script'));
+    Flibfptr_set_header_lines:=Tlibfptr_set_header_lines(DoGetProcAddress(FAtollLib, 'libfptr_set_header_lines'));
+    Flibfptr_set_footer_lines:=Tlibfptr_set_header_lines(DoGetProcAddress(FAtollLib, 'libfptr_set_footer_lines'));
   end;
 end;
 
@@ -2585,6 +2605,30 @@ begin
     Result:=Flibfptr_parse_marking_code(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_parse_marking_code']);
+end;
+
+function TAtollLibraryV10.CallScript(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_call_script) then
+    Result:=Flibfptr_call_script(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_call_script']);
+end;
+
+function TAtollLibraryV10.SetHeaderLines(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_set_header_lines) then
+    Result:=Flibfptr_set_header_lines(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_header_lines']);
+end;
+
+function TAtollLibraryV10.SetFooterLines(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_set_footer_lines) then
+    Result:=Flibfptr_set_footer_lines(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_footer_lines']);
 end;
 
 end.

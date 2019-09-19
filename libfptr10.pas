@@ -310,10 +310,12 @@ extern "C"
     LIBFPTR_ERROR_MARKING_CODE_CONFLICT,
     LIBFPTR_ERROR_INVALID_RECORDS_ID,
     LIBFPTR_ERROR_INVALID_SIGNATURE,
+    LIBFPTR_ERROR_INVALID_EXCISE_SUM,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
-    LIBFPTR_ERROR_INTERRUPTED_BY_PREVIOUS_ERRORS
+    LIBFPTR_ERROR_INTERRUPTED_BY_PREVIOUS_ERRORS,
+    LIBFPTR_ERROR_DRIVER_SCRIPT_ERROR
   );
 
   TLibFPtr_Error = libfptr_error;
@@ -551,6 +553,12 @@ extern "C"
     LIBFPTR_PARAM_SCRIPT_NAME,
     LIBFPTR_PARAM_SCRIPT_HASH,
     LIBFPTR_PARAM_RECORDS_ID,
+    LIBFPTR_PARAM_USER_SCRIPT_RESULT_1,
+    LIBFPTR_PARAM_USER_SCRIPT_RESULT_2,
+    LIBFPTR_PARAM_USER_SCRIPT_RESULT_3,
+    LIBFPTR_PARAM_USER_SCRIPT_RESULT_4,
+    LIBFPTR_PARAM_USER_SCRIPT_RESULT_5,
+    LIBFPTR_PARAM_IS_USER_SCRIPT,
 
     LIBFPTR_PARAM_LAST
   );
@@ -602,6 +610,7 @@ const
   LIBFPTR_SETTING_USER_PASSWORD      = 'UserPassword';
   LIBFPTR_SETTING_OFD_CHANNEL        = 'OfdChannel';
   LIBFPTR_SETTING_EXISTED_COM_FILES  = 'ExistedComFiles';
+  LIBFPTR_SETTING_SCRIPTS_PATH       = 'ScriptsPath';
 
 type
   libfptr_port = (
@@ -860,7 +869,8 @@ type
     LIBFPTR_DT_SHORT_STATUS,
     LIBFPTR_DT_PICTURES_ARRAY_INFO,
     LIBFPTR_DT_ETHERNET_INFO,
-    LIBFPTR_DT_SCRIPTS_INFO
+    LIBFPTR_DT_SCRIPTS_INFO,
+    LIBFPTR_DT_SHIFT_TOTALS
   );
   Tlibfptr_kkt_data_type = libfptr_kkt_data_type;
 
@@ -1397,6 +1407,13 @@ type
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_parse_marking_code(libfptr_handle handle);
   Tlibfptr_parse_marking_code = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_call_script(libfptr_handle handle);
+  Tlibfptr_call_script = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_set_header_lines(libfptr_handle handle);
+  Tlibfptr_set_header_lines = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_set_footer_lines(libfptr_handle handle);
+  Tlibfptr_set_footer_lines = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;
