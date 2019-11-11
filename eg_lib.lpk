@@ -8,10 +8,11 @@
       <Version Value="11"/>
       <SearchPaths>
         <OtherUnitFiles Value="egLib"/>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib/eglib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Version Minor="6"/>
+    <License Value="LGPL 2"/>
+    <Version Minor="6" Release="1"/>
     <Files Count="4">
       <Item1>
         <Filename Value="egLib/egate_api.pas"/>

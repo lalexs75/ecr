@@ -4,16 +4,21 @@
     <PathDelim Value="\"/>
     <Name Value="alexs_trade_abstract"/>
     <Type Value="RunAndDesignTime"/>
+    <Author Value="Lagunov A.A"/>
     <CompilerOptions>
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <IncludeFiles Value="pca"/>
+        <OtherUnitFiles Value="pca"/>
+        <UnitOutputDirectory Value="lib\pca\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
+    <License Value="LGPL2"/>
+    <Version Minor="1" Release="1" Build="2"/>
     <Files Count="1">
       <Item1>
-        <Filename Value="alexs_plastic_cards_abstract.pas"/>
+        <Filename Value="pca\alexs_plastic_cards_abstract.pas"/>
         <UnitName Value="alexs_plastic_cards_abstract"/>
       </Item1>
     </Files>
