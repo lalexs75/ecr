@@ -337,7 +337,8 @@ begin
   {$ELSE}
   FlibEGate:=LoadLibrary(PChar(ALibName));
   {$ENDIF}
-  if Loaded then
+  Result:=Loaded;
+  if Result then
     LoadEGate
   else
   begin
