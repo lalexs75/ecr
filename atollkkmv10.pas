@@ -1,3 +1,7 @@
+//Интерфейс универсального драйвера к ККМ АТОЛ
+//Версия для FPC - Лагунов А.А. (c) alexs, 2018-2020
+// alexs75@yandex.ru
+
 unit AtollKKMv10;
 
 {$mode objfpc}{$H+}
@@ -170,6 +174,22 @@ type
     Flibfptr_set_header_lines:Tlibfptr_set_header_lines;
     Flibfptr_set_footer_lines:Tlibfptr_set_header_lines;
 
+    //ver 10.6.2.0
+    Flibfptr_upload_picture_cliche:Tlibfptr_upload_picture_cliche;
+    Flibfptr_upload_picture_memory:Tlibfptr_upload_picture_memory;
+    Flibfptr_upload_pixel_buffer_cliche:Tlibfptr_upload_pixel_buffer_cliche;
+    Flibfptr_upload_pixel_buffer_memory:Tlibfptr_upload_pixel_buffer_memory;
+    Flibfptr_exec_driver_script:Tlibfptr_exec_driver_script;
+    Flibfptr_upload_driver_script:Tlibfptr_upload_driver_script;
+    Flibfptr_exec_driver_script_by_id:Tlibfptr_exec_driver_script_by_id;
+    Flibfptr_write_universal_counters_settings:Tlibfptr_write_universal_counters_settings;
+    Flibfptr_read_universal_counters_settings:Tlibfptr_read_universal_counters_settings;
+    Flibfptr_query_universal_counters_state:Tlibfptr_query_universal_counters_state;
+    Flibfptr_reset_universal_counters:Tlibfptr_reset_universal_counters;
+    Flibfptr_cache_universal_counters:Tlibfptr_cache_universal_counters;
+    Flibfptr_read_universal_counter_sum:Tlibfptr_read_universal_counter_sum;
+    Flibfptr_read_universal_counter_quantity:Tlibfptr_read_universal_counter_quantity;
+    Flibfptr_clear_universal_counters_cache:Tlibfptr_clear_universal_counters_cache;
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -178,7 +198,7 @@ type
     destructor Destroy; override;
 
     procedure LoadAtollLibrary;
-    function Unload: Boolean; virtual;
+    procedure Unload; virtual;
     property Loaded:boolean read GetLoaded;
 
     function CreateHandle(var Handle:TLibFPtrHandle):Integer;
@@ -326,6 +346,23 @@ type
     function CallScript(Handle:TLibFPtrHandle):Integer;
     function SetHeaderLines(Handle:TLibFPtrHandle):Integer;
     function SetFooterLines(Handle:TLibFPtrHandle):Integer;
+
+    //ver 10.6.2.0
+    function libfptr_upload_picture_cliche(Handle:TLibFPtrHandle):Integer;
+    function libfptr_upload_picture_memory(Handle:TLibFPtrHandle):Integer;
+    function libfptr_upload_pixel_buffer_cliche(Handle:TLibFPtrHandle):Integer;
+    function libfptr_upload_pixel_buffer_memory(Handle:TLibFPtrHandle):Integer;
+    function libfptr_exec_driver_script(Handle:TLibFPtrHandle):Integer;
+    function libfptr_upload_driver_script(Handle:TLibFPtrHandle):Integer;
+    function libfptr_exec_driver_script_by_id(Handle:TLibFPtrHandle):Integer;
+    function libfptr_write_universal_counters_settings(Handle:TLibFPtrHandle):Integer;
+    function libfptr_read_universal_counters_settings(Handle:TLibFPtrHandle):Integer;
+    function libfptr_query_universal_counters_state(Handle:TLibFPtrHandle):Integer;
+    function libfptr_reset_universal_counters(Handle:TLibFPtrHandle):Integer;
+    function libfptr_cache_universal_counters(Handle:TLibFPtrHandle):Integer;
+    function libfptr_read_universal_counter_sum(Handle:TLibFPtrHandle):Integer;
+    function libfptr_read_universal_counter_quantity(Handle:TLibFPtrHandle):Integer;
+    function libfptr_clear_universal_counters_cache(Handle:TLibFPtrHandle):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -817,7 +854,7 @@ end;
 
 function TAtollKKMv10.Registration: integer;
 var
-  FSupInf: TBytes;
+  FSupInf, mark: TBytes;
 begin
   Result:=0;
   if Assigned(FLibrary) and FLibrary.Loaded then
@@ -867,7 +904,14 @@ begin
     if GoodsInfo.GoodsNomenclatureCode <> '' then
     begin
       //SetAttributeStr(1162, GoodsInfo.GoodsNomenclatureCode);
+      //uchar mark[] = {<массив байтов от сканера>};
+
+      //libfptr_set_param_bytearray(fptr, LIBFPTR_PARAM_MARKING_CODE, &mark[0], sizeof(mark));
+      SetLength(mark, Length(GoodsInfo.GoodsNomenclatureCode));
+      Move(GoodsInfo.GoodsNomenclatureCode[1], mark[1], Length(GoodsInfo.GoodsNomenclatureCode));
+      FLibrary.SetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_MARKING_CODE), mark);
     end;
+
 
     case GoodsInfo.GoodsPayMode of
       //gpmFullPay:SetAttributeInt(1214, 0);
@@ -1271,6 +1315,23 @@ begin
   Flibfptr_call_script:=nil;
   Flibfptr_set_header_lines:=nil;
   Flibfptr_set_footer_lines:=nil;
+
+  //ver 10.6.2.0
+  Flibfptr_upload_picture_cliche:=nil;
+  Flibfptr_upload_picture_memory:=nil;
+  Flibfptr_upload_pixel_buffer_cliche:=nil;
+  Flibfptr_upload_pixel_buffer_memory:=nil;
+  Flibfptr_exec_driver_script:=nil;
+  Flibfptr_upload_driver_script:=nil;
+  Flibfptr_exec_driver_script_by_id:=nil;
+  Flibfptr_write_universal_counters_settings:=nil;
+  Flibfptr_read_universal_counters_settings:=nil;
+  Flibfptr_query_universal_counters_state:=nil;
+  Flibfptr_reset_universal_counters:=nil;
+  Flibfptr_cache_universal_counters:=nil;
+  Flibfptr_read_universal_counter_sum:=nil;
+  Flibfptr_read_universal_counter_quantity:=nil;
+  Flibfptr_clear_universal_counters_cache:=nil;
   //
   FAtollLib:=NilHandle;
 end;
@@ -1282,6 +1343,7 @@ end;
 
 constructor TAtollLibraryV10.Create;
 begin
+  inherited Create;
   InternalClearProcAdress;
   FLibraryName:=slibFPPtr10FileName
 end;
@@ -1451,10 +1513,27 @@ begin
     Flibfptr_call_script:=Tlibfptr_call_script(DoGetProcAddress(FAtollLib, 'libfptr_call_script'));
     Flibfptr_set_header_lines:=Tlibfptr_set_header_lines(DoGetProcAddress(FAtollLib, 'libfptr_set_header_lines'));
     Flibfptr_set_footer_lines:=Tlibfptr_set_header_lines(DoGetProcAddress(FAtollLib, 'libfptr_set_footer_lines'));
+
+    //ver 10.6.2.0
+    Flibfptr_upload_picture_cliche:=Tlibfptr_upload_picture_cliche(DoGetProcAddress(FAtollLib, 'libfptr_upload_picture_cliche'));
+    Flibfptr_upload_picture_memory:=Tlibfptr_upload_picture_memory(DoGetProcAddress(FAtollLib, 'libfptr_upload_picture_memory'));
+    Flibfptr_upload_pixel_buffer_cliche:=Tlibfptr_upload_pixel_buffer_cliche(DoGetProcAddress(FAtollLib, 'libfptr_upload_pixel_buffer_cliche'));
+    Flibfptr_upload_pixel_buffer_memory:=Tlibfptr_upload_pixel_buffer_memory(DoGetProcAddress(FAtollLib, 'libfptr_upload_pixel_buffer_memory'));
+    Flibfptr_exec_driver_script:=Tlibfptr_exec_driver_script(DoGetProcAddress(FAtollLib, 'libfptr_exec_driver_script'));
+    Flibfptr_upload_driver_script:=Tlibfptr_upload_driver_script(DoGetProcAddress(FAtollLib, 'libfptr_upload_driver_script'));
+    Flibfptr_exec_driver_script_by_id:=Tlibfptr_exec_driver_script_by_id(DoGetProcAddress(FAtollLib, 'libfptr_exec_driver_script_by_id'));
+    Flibfptr_write_universal_counters_settings:=Tlibfptr_write_universal_counters_settings(DoGetProcAddress(FAtollLib, 'libfptr_write_universal_counters_settings'));
+    Flibfptr_read_universal_counters_settings:=Tlibfptr_read_universal_counters_settings(DoGetProcAddress(FAtollLib, 'libfptr_read_universal_counters_settings'));
+    Flibfptr_query_universal_counters_state:=Tlibfptr_query_universal_counters_state(DoGetProcAddress(FAtollLib, 'libfptr_query_universal_counters_state'));
+    Flibfptr_reset_universal_counters:=Tlibfptr_reset_universal_counters(DoGetProcAddress(FAtollLib, 'libfptr_reset_universal_counters'));
+    Flibfptr_cache_universal_counters:=Tlibfptr_cache_universal_counters(DoGetProcAddress(FAtollLib, 'libfptr_cache_universal_counters'));
+    Flibfptr_read_universal_counter_sum:=Tlibfptr_read_universal_counter_sum(DoGetProcAddress(FAtollLib, 'libfptr_read_universal_counter_sum'));
+    Flibfptr_read_universal_counter_quantity:=Tlibfptr_read_universal_counter_quantity(DoGetProcAddress(FAtollLib, 'libfptr_read_universal_counter_quantity'));
+    Flibfptr_clear_universal_counters_cache:=Tlibfptr_clear_universal_counters_cache(DoGetProcAddress(FAtollLib, 'libfptr_clear_universal_counters_cache'));
   end;
 end;
 
-function TAtollLibraryV10.Unload: Boolean;
+procedure TAtollLibraryV10.Unload;
 begin
   if Loaded then
   begin
@@ -2629,6 +2708,141 @@ begin
     Result:=Flibfptr_set_footer_lines(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_footer_lines']);
+end;
+
+function TAtollLibraryV10.libfptr_upload_picture_cliche(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_upload_picture_cliche) then
+    Result:=Flibfptr_upload_picture_cliche(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_upload_picture_cliche']);
+end;
+
+function TAtollLibraryV10.libfptr_upload_picture_memory(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_upload_picture_memory) then
+    Result:=Flibfptr_upload_picture_memory(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_upload_picture_memory']);
+end;
+
+function TAtollLibraryV10.libfptr_upload_pixel_buffer_cliche(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_upload_pixel_buffer_cliche) then
+    Result:=Flibfptr_upload_pixel_buffer_cliche(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_upload_pixel_buffer_cliche']);
+end;
+
+function TAtollLibraryV10.libfptr_upload_pixel_buffer_memory(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_upload_pixel_buffer_memory) then
+    Result:=Flibfptr_upload_pixel_buffer_memory(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_upload_pixel_buffer_memory']);
+end;
+
+function TAtollLibraryV10.libfptr_exec_driver_script(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_exec_driver_script) then
+    Result:=Flibfptr_exec_driver_script(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_exec_driver_script']);
+end;
+
+function TAtollLibraryV10.libfptr_upload_driver_script(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_upload_driver_script) then
+    Result:=Flibfptr_upload_driver_script(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_upload_driver_script']);
+end;
+
+function TAtollLibraryV10.libfptr_exec_driver_script_by_id(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_exec_driver_script_by_id) then
+    Result:=Flibfptr_exec_driver_script_by_id(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_exec_driver_script_by_id']);
+end;
+
+function TAtollLibraryV10.libfptr_write_universal_counters_settings(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_write_universal_counters_settings) then
+    Result:=Flibfptr_write_universal_counters_settings(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_write_universal_counters_settings']);
+end;
+
+function TAtollLibraryV10.libfptr_read_universal_counters_settings(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_read_universal_counters_settings) then
+    Result:=Flibfptr_read_universal_counters_settings(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_read_universal_counters_settings']);
+end;
+
+function TAtollLibraryV10.libfptr_query_universal_counters_state(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_query_universal_counters_state) then
+    Result:=Flibfptr_query_universal_counters_state(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_query_universal_counters_state']);
+end;
+
+function TAtollLibraryV10.libfptr_reset_universal_counters(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_reset_universal_counters) then
+    Result:=Flibfptr_reset_universal_counters(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_reset_universal_counters']);
+end;
+
+function TAtollLibraryV10.libfptr_cache_universal_counters(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_cache_universal_counters) then
+    Result:=Flibfptr_cache_universal_counters(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_cache_universal_counters']);
+end;
+
+function TAtollLibraryV10.libfptr_read_universal_counter_sum(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_read_universal_counter_sum) then
+    Result:=Flibfptr_read_universal_counter_sum(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_read_universal_counter_sum']);
+end;
+
+function TAtollLibraryV10.libfptr_read_universal_counter_quantity(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_read_universal_counter_quantity) then
+    Result:=Flibfptr_read_universal_counter_quantity(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_read_universal_counter_quantity']);
+end;
+
+function TAtollLibraryV10.libfptr_clear_universal_counters_cache(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_clear_universal_counters_cache) then
+    Result:=Flibfptr_clear_universal_counters_cache(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_clear_universal_counters_cache']);
 end;
 
 end.

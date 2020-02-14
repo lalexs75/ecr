@@ -1,7 +1,7 @@
 //Интерфейс универсального драйвера к ККМ АТОЛ
-//Версия 10.4.0
+//Версия 10.6.2.0
 //Исходный файл libfptr10.h
-//Версия для FPC - Лагунов А.А. (c) alexs, 2018
+//Версия для FPC - Лагунов А.А. (c) alexs, 2018-2020
 // alexs75@yandex.ru
 
 unit libfptr10;
@@ -22,6 +22,8 @@ const
   slibFPPtr10FileName = 'libfptr10.so';
   aFirstStrChar = 0;
   {$ENDIF}
+
+  atolAPIVersion = '10.6.2.0';
 type
   PWchar_t = Pointer;
   {$IFDEF WINDOWS}
@@ -311,6 +313,19 @@ extern "C"
     LIBFPTR_ERROR_INVALID_RECORDS_ID,
     LIBFPTR_ERROR_INVALID_SIGNATURE,
     LIBFPTR_ERROR_INVALID_EXCISE_SUM,
+    LIBFPTR_ERROR_NO_DOCUMENTS_FOUND_IN_JOURNAL,
+    LIBFPTR_ERROR_INVALID_SCRIPT_TYPE,
+    LIBFPTR_ERROR_INVALID_SCRIPT_NAME,
+    LIBFPTR_ERROR_INVALID_POSITIONS_COUNT_WITH_1162,
+    LIBFPTR_ERROR_INVALID_UC_COUNTER,
+    LIBFPTR_ERROR_INVALID_UC_TAG,
+    LIBFPTR_ERROR_INVALID_UC_IDX,
+    LIBFPTR_ERROR_INVALID_UC_SIZE,
+    LIBFPTR_ERROR_INVALID_UC_CONFIG,
+    LIBFPTR_ERROR_CONNECTION_LOST,
+    LIBFPTR_ERROR_UNIVERSAL_COUNTERS_FAULT,
+    LIBFPTR_ERROR_INVALID_TAX_SUM,
+    LIBFPTR_ERROR_INVALID_MARKING_CODE_TYPE,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
@@ -559,6 +574,62 @@ extern "C"
     LIBFPTR_PARAM_USER_SCRIPT_RESULT_4,
     LIBFPTR_PARAM_USER_SCRIPT_RESULT_5,
     LIBFPTR_PARAM_IS_USER_SCRIPT,
+    LIBFPTR_PARAM_DOCUMENT_NUMBER_END,
+    LIBFPTR_PARAM_SHIFT_NUMBER_END,
+    LIBFPTR_PARAM_SCRIPT_CODE,
+    LIBFPTR_PARAM_SCRIPT_RESULT,
+    LIBFPTR_PARAM_SCRIPT_TYPE,
+    LIBFPTR_PARAM_WIFI_CONFIG_TIMEOUT,
+    LIBFPTR_PARAM_WIFI_DHCP,
+    LIBFPTR_PARAM_WIFI_IP,
+    LIBFPTR_PARAM_WIFI_MASK,
+    LIBFPTR_PARAM_WIFI_GATEWAY,
+    LIBFPTR_PARAM_WIFI_PORT,
+    LIBFPTR_PARAM_UC_VERSION,
+    LIBFPTR_PARAM_UC_AVAILABLE_MEMORY,
+    LIBFPTR_PARAM_UC_USED_MEMORY_BY_SUMS,
+    LIBFPTR_PARAM_UC_USED_MEMORY_BY_QUANTITIES,
+    LIBFPTR_PARAM_UC_LAYER_1,
+    LIBFPTR_PARAM_UC_FLAGS_1,
+    LIBFPTR_PARAM_UC_MASK_1,
+    LIBFPTR_PARAM_UC_LAYER_VALUE_1,
+    LIBFPTR_PARAM_UC_LAYER_2,
+    LIBFPTR_PARAM_UC_FLAGS_2,
+    LIBFPTR_PARAM_UC_MASK_2,
+    LIBFPTR_PARAM_UC_LAYER_VALUE_2,
+    LIBFPTR_PARAM_UC_LAYER_3,
+    LIBFPTR_PARAM_UC_FLAGS_3,
+    LIBFPTR_PARAM_UC_MASK_3,
+    LIBFPTR_PARAM_UC_LAYER_VALUE_3,
+    LIBFPTR_PARAM_UC_LAYER_4,
+    LIBFPTR_PARAM_UC_FLAGS_4,
+    LIBFPTR_PARAM_UC_MASK_4,
+    LIBFPTR_PARAM_UC_LAYER_VALUE_4,
+    LIBFPTR_PARAM_RECEIPTS_COUNT,
+    LIBFPTR_PARAM_PAYMENTS_SUM_CASH,
+    LIBFPTR_PARAM_PAYMENTS_SUM_ELECTRONICALLY,
+    LIBFPTR_PARAM_PAYMENTS_SUM_PREPAID,
+    LIBFPTR_PARAM_PAYMENTS_SUM_CREDIT,
+    LIBFPTR_PARAM_PAYMENTS_SUM_OTHER,
+    LIBFPTR_PARAM_TAXES_SUM_VAT20,
+    LIBFPTR_PARAM_TAXES_SUM_VAT120,
+    LIBFPTR_PARAM_TAXES_SUM_VAT10,
+    LIBFPTR_PARAM_TAXES_SUM_VAT110,
+    LIBFPTR_PARAM_TAXES_SUM_VAT0,
+    LIBFPTR_PARAM_TAXES_SUM_NO,
+    LIBFPTR_PARAM_CORRECTIONS_COUNT,
+    LIBFPTR_PARAM_CORRECTIONS_SUM,
+    LIBFPTR_PARAM_FN_COUNTERS_TYPE,
+    LIBFPTR_PARAM_FN_DAYS_REMAIN,
+    LIBFPTR_PARAM_FREE_MEMORY,
+    LIBFPTR_PARAM_FN_MAX_FFD_VERSION,
+    LIBFPTR_PARAM_RECEIPTS_SUM,
+    LIBFPTR_PARAM_LICENSE_NAME,
+    LIBFPTR_PARAM_UNIVERSAL_COUNTERS_FAULT,
+    LIBFPTR_PARAM_USE_LICENSES,
+    LIBFPTR_PARAM_LICENSE_VALID_FROM,
+    LIBFPTR_PARAM_LICENSE_VALID_UNTIL,
+    LIBFPTR_PARAM_MARKING_CODE_TYPE,
 
     LIBFPTR_PARAM_LAST
   );
@@ -592,25 +663,29 @@ extern "C"
   Tlibfptr_model = libfptr_model;
 
 const
-  LIBFPTR_SETTING_LIBRARY_PATH       = 'LibraryPath';
-  LIBFPTR_SETTING_MODEL              = 'Model';
-  LIBFPTR_SETTING_PORT               = 'Port';
-  LIBFPTR_SETTING_BAUDRATE           = 'BaudRate';
-  LIBFPTR_SETTING_BITS               = 'Bits';
-  LIBFPTR_SETTING_PARITY             = 'Parity';
-  LIBFPTR_SETTING_STOPBITS           = 'StopBits';
-  LIBFPTR_SETTING_IPADDRESS          = 'IPAddress';
-  LIBFPTR_SETTING_IPPORT             = 'IPPort';
-  LIBFPTR_SETTING_MACADDRESS         = 'MACAddress';
-  LIBFPTR_SETTING_COM_FILE           = 'ComFile';
-  LIBFPTR_SETTING_USB_DEVICE_PATH    = 'UsbDevicePath';
-  LIBFPTR_SETTING_BT_AUTOENABLE      = 'AutoEnableBluetooth';
-  LIBFPTR_SETTING_BT_AUTODISABLE     = 'AutoDisableBluetooth';
-  LIBFPTR_SETTING_ACCESS_PASSWORD    = 'AccessPassword';
-  LIBFPTR_SETTING_USER_PASSWORD      = 'UserPassword';
-  LIBFPTR_SETTING_OFD_CHANNEL        = 'OfdChannel';
-  LIBFPTR_SETTING_EXISTED_COM_FILES  = 'ExistedComFiles';
-  LIBFPTR_SETTING_SCRIPTS_PATH       = 'ScriptsPath';
+  LIBFPTR_SETTING_LIBRARY_PATH                = 'LibraryPath';
+  LIBFPTR_SETTING_MODEL                       = 'Model';
+  LIBFPTR_SETTING_PORT                        = 'Port';
+  LIBFPTR_SETTING_BAUDRATE                    = 'BaudRate';
+  LIBFPTR_SETTING_BITS                        = 'Bits';
+  LIBFPTR_SETTING_PARITY                      = 'Parity';
+  LIBFPTR_SETTING_STOPBITS                    = 'StopBits';
+  LIBFPTR_SETTING_IPADDRESS                   = 'IPAddress';
+  LIBFPTR_SETTING_IPPORT                      = 'IPPort';
+  LIBFPTR_SETTING_MACADDRESS                  = 'MACAddress';
+  LIBFPTR_SETTING_COM_FILE                    = 'ComFile';
+  LIBFPTR_SETTING_USB_DEVICE_PATH             = 'UsbDevicePath';
+  LIBFPTR_SETTING_BT_AUTOENABLE               = 'AutoEnableBluetooth';
+  LIBFPTR_SETTING_BT_AUTODISABLE              = 'AutoDisableBluetooth';
+  LIBFPTR_SETTING_ACCESS_PASSWORD             = 'AccessPassword';
+  LIBFPTR_SETTING_USER_PASSWORD               = 'UserPassword';
+  LIBFPTR_SETTING_OFD_CHANNEL                 = 'OfdChannel';
+  LIBFPTR_SETTING_EXISTED_COM_FILES           = 'ExistedComFiles';
+  LIBFPTR_SETTING_SCRIPTS_PATH                = 'ScriptsPath';
+  LIBFPTR_SETTING_DOCUMENTS_JOURNAL_PATH      = 'DocumentsJournalPath';
+  LIBFPTR_SETTING_USE_DOCUMENTS_JOURNAL       = 'UseDocumentsJournal';
+  LIBFPTR_SETTING_AUTO_RECONNECT              = 'AutoReconnect';
+  LIBFPTR_SETTING_INVERT_CASH_DRAWER_STATUS   = 'InvertCashDrawerStatus';
 
 type
   libfptr_port = (
@@ -672,7 +747,8 @@ type
     LIBFPTR_BT_GS1_128,
     LIBFPTR_BT_QR,
     LIBFPTR_BT_PDF417,
-    LIBFPTR_BT_AZTEC
+    LIBFPTR_BT_AZTEC,
+    LIBFPTR_BT_CODE_39_EXTENDED
   );
   Tlibfptr_barcode_type = libfptr_barcode_type;
 
@@ -785,7 +861,9 @@ type
     LIBFPTR_RT_COMMODITIES_BY_DEPARTMENTS,
     LIBFPTR_RT_COMMODITIES_BY_SUMS,
     LIBFPTR_RT_START_SERVICE,
-    LIBFPTR_RT_DISCOUNTS
+    LIBFPTR_RT_DISCOUNTS,
+    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS,
+    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS
   );
   Tlibfptr_report_type = libfptr_report_type;
 
@@ -870,7 +948,8 @@ type
     LIBFPTR_DT_PICTURES_ARRAY_INFO,
     LIBFPTR_DT_ETHERNET_INFO,
     LIBFPTR_DT_SCRIPTS_INFO,
-    LIBFPTR_DT_SHIFT_TOTALS
+    LIBFPTR_DT_SHIFT_TOTALS,
+    LIBFPTR_DT_WIFI_INFO
   );
   Tlibfptr_kkt_data_type = libfptr_kkt_data_type;
 
@@ -890,7 +969,10 @@ type
     LIBFPTR_FNDT_TICKET_BY_DOC_NUMBER,
     LIBFPTR_FNDT_DOCUMENT_BY_NUMBER,
     LIBFPTR_FNDT_REGISTRATION_TLV,
-    LIBFPTR_FNDT_ERROR_DETAIL
+    LIBFPTR_FNDT_ERROR_DETAIL,
+    LIBFPTR_FNDT_VALIDITY_DAYS,
+    LIBFPTR_FNDT_FREE_MEMORY,
+    LIBFPTR_FNDT_TOTALS
   );
   Tlibfptr_fn_data_type = libfptr_fn_data_type;
 
@@ -963,7 +1045,10 @@ type
     LIBFPTR_RT_FIRMWARE,
     LIBFPTR_RT_LICENSES,
     LIBFPTR_RT_FN_REGISTRATION_TLVS,
-    LIBFPTR_RT_PARSE_COMPLEX_ATTR
+    LIBFPTR_RT_PARSE_COMPLEX_ATTR,
+    LIBFPTR_RT_FN_SUM_COUNTERS,
+    LIBFPTR_RT_FN_QUANTITY_COUNTERS,
+    LIBFPTR_RT_FN_UNSENT_DOCS_COUNTERS
   );
   Tlibfptr_records_type = libfptr_records_type;
 
@@ -1045,6 +1130,52 @@ type
   );
   Tlibfptr_field_type = libfptr_field_type;
 
+
+  libfptr_script_type = (
+    LIBFPTR_SCRIPT_EXECUTABLE = 0,
+    LIBFPTR_SCRIPT_JSON
+  );
+  Tlibfptr_script_type = libfptr_script_type;
+
+  libfptr_uc_layer = (
+    LIBFPTR_UCL_UNUSED = 0,
+    LIBFPTR_UCL_RECEIPT_TYPE,
+    LIBFPTR_UCL_TAXATION_TYPE,
+    LIBFPTR_UCL_TAX_TYPE,
+    LIBFPTR_UCL_PRODUCT_TYPE,
+    LIBFPTR_UCL_PAYMENT_METHOD,
+    LIBFPTR_UCL_USER_3,
+    LIBFPTR_UCL_USER_4,
+    LIBFPTR_UCL_USER_5,
+    LIBFPTR_UCL_USER_6
+  );
+  Tlibfptr_uc_layer = libfptr_uc_layer;
+
+  libfptr_uc_flag = (
+    LIBFPTR_UCF_CALC_SUMS = 1,
+    LIBFPTR_UCF_CALC_QUANTITIES = 2,
+    LIBFPTR_UCF_CALC_SUMS_OTHERS = 4,
+    LIBFPTR_UCF_CALC_QUANTITIES_OTHERS = 8
+  );
+  Tlibfptr_uc_flag = libfptr_uc_flag;
+
+  libfptr_fn_counter_type = (
+    LIBFPTR_FNCT_SHIFT = 0,
+    LIBFPTR_FNCT_NON_NULLABLE
+  );
+  Tlibfptr_fn_counter_type = libfptr_fn_counter_type;
+
+  libfptr_marking_code_type = (
+    LIBFPTR_MCT_OTHER = 0,
+    LIBFPTR_MCT_EGAIS_20,
+    LIBFPTR_MCT_EGAIS_30
+  );
+  Tlibfptr_marking_code_type = libfptr_marking_code_type;
+
+const
+  LIBFPTR_UC_OTHERS = 4294967295;
+
+type
   //Tlibfptr_user_memory_operation = libfptr_user_memory_operation;
 
 
@@ -1414,6 +1545,38 @@ type
   Tlibfptr_set_header_lines = function(Handle:TLibFPtrHandle):Integer; cdecl;
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_set_footer_lines(libfptr_handle handle);
   Tlibfptr_set_footer_lines = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_upload_picture_cliche(libfptr_handle handle);
+  Tlibfptr_upload_picture_cliche = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_upload_picture_memory(libfptr_handle handle);
+  Tlibfptr_upload_picture_memory = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_upload_pixel_buffer_cliche(libfptr_handle handle);
+  Tlibfptr_upload_pixel_buffer_cliche = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_upload_pixel_buffer_memory(libfptr_handle handle);
+  Tlibfptr_upload_pixel_buffer_memory = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_exec_driver_script(libfptr_handle handle);
+  Tlibfptr_exec_driver_script = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_upload_driver_script(libfptr_handle handle);
+  Tlibfptr_upload_driver_script = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_exec_driver_script_by_id(libfptr_handle handle);
+  Tlibfptr_exec_driver_script_by_id = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_write_universal_counters_settings(libfptr_handle handle);
+  Tlibfptr_write_universal_counters_settings = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_read_universal_counters_settings(libfptr_handle handle);
+  Tlibfptr_read_universal_counters_settings = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_query_universal_counters_state(libfptr_handle handle);
+  Tlibfptr_query_universal_counters_state = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_reset_universal_counters(libfptr_handle handle);
+  Tlibfptr_reset_universal_counters = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_cache_universal_counters(libfptr_handle handle);
+  Tlibfptr_cache_universal_counters = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_read_universal_counter_sum(libfptr_handle handle);
+  Tlibfptr_read_universal_counter_sum = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_read_universal_counter_quantity(libfptr_handle handle);
+  Tlibfptr_read_universal_counter_quantity = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_clear_universal_counters_cache(libfptr_handle handle);
+  Tlibfptr_clear_universal_counters_cache = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;
