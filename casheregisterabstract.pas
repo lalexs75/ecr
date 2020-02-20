@@ -86,6 +86,23 @@ type
 
   TEcrTextAlign = (etaLeft, etaCenter, etaRight);
   TEcrWordWrap = (ewwNone, ewwWords, ewwChars);
+  TCrpCodeBuffer = array [1..32] of byte;
+
+
+  { TGoodsNomenclatureCode }
+
+  TGoodsNomenclatureCode = class
+  private
+    FGroupCode: word;
+    FGTIN: string;
+    FSerial: string;
+  public
+    procedure Clear;
+    function Make1162Value:TBytes;
+    property GroupCode:word read FGroupCode write FGroupCode;
+    property GTIN:string read FGTIN write FGTIN;
+    property Serial:string read FSerial write FSerial;
+  end;
 
   { TTextParams }
 
@@ -182,7 +199,7 @@ type
   private
     FCountryCode: Integer;
     FDeclarationNumber: String;
-    FGoodsNomenclatureCode: string;
+    FGoodsNomenclatureCode: TGoodsNomenclatureCode;
     FGoodsPayMode: TGoodsPayMode;
     FName: string;
     FPrice: Currency;
@@ -201,7 +218,7 @@ type
     property DeclarationNumber:String read FDeclarationNumber write FDeclarationNumber;
     property SuplierInfo:TCounteragentInfo read FSuplierInfo;
     property GoodsPayMode:TGoodsPayMode read FGoodsPayMode write FGoodsPayMode;
-    property GoodsNomenclatureCode:string read FGoodsNomenclatureCode write FGoodsNomenclatureCode;
+    property GoodsNomenclatureCode:TGoodsNomenclatureCode read FGoodsNomenclatureCode write FGoodsNomenclatureCode;
   end;
 
   { TCashRegisterAbstract }
@@ -308,7 +325,39 @@ type
 
 function CheckTypeStr(ACheckType:TCheckType):string;
 function PaymentTypeStr(APaymentType:TPaymentType):string;
+procedure MakeCRPTCode(APrefix:Word; AGTIN:string; ASerial:string; var R:TCrpCodeBuffer);
+function MakeCRPTCodeStr(APrefix:Word; AGTIN:string; ASerial:string):string;
 implementation
+uses Math;
+
+procedure MakeCRPTCode(APrefix:Word; AGTIN:string; ASerial:string; var R:TCrpCodeBuffer);
+var
+  B:TCrpCodeBuffer;
+  W2: QWord;
+  i: Integer;
+begin
+  FillChar(R, SizeOf(R), 0);
+  W2:=StrToQWord(AGTIN);
+  Move(APrefix, B, 2);
+  for i:=1 to 2 do R[i]:=B[3-i];
+  Move(W2, B, 6);
+  for i:=1 to 6 do R[2+i]:=B[7-i];
+  for i:=1 to Min(Length(ASerial), 24) do R[8 + i]:=Ord(ASerial[i]);
+end;
+
+function MakeCRPTCodeStr(APrefix:Word; AGTIN:string; ASerial:string):string;
+var
+  A: TCrpCodeBuffer;
+  i: Integer;
+begin
+  Result:='';
+  MakeCRPTCode(APrefix, AGTIN, ASerial, A);
+  for i:=1 to Length(ASerial) + 8  do
+  begin
+    if Result<>'' then Result:=Result + ' ';
+    Result:=Result + IntToHex(A[i], 2);
+  end;
+end;
 
 function CheckTypeStr(ACheckType: TCheckType): string;
 begin
@@ -343,6 +392,24 @@ begin
   else
     Result:='Не известный тип оплаты';
   end;
+end;
+
+{ TGoodsNomenclatureCode }
+
+procedure TGoodsNomenclatureCode.Clear;
+begin
+  FGroupCode:=0;
+  FGTIN:='';
+  FSerial:='';
+end;
+
+function TGoodsNomenclatureCode.Make1162Value: TBytes;
+var
+  R: TCrpCodeBuffer;
+begin
+  MakeCRPTCode(FGroupCode, FGTIN, FSerial, R);
+  SetLength(Result, SizeOf(TCrpCodeBuffer));
+  Move(R[1], Result[0], SizeOf(TCrpCodeBuffer));
 end;
 
 { TDeviceInfo }
@@ -407,10 +474,12 @@ constructor TGoodsInfo.Create;
 begin
   inherited Create;
   FSuplierInfo:=TCounteragentInfo.Create;
+  FGoodsNomenclatureCode:=TGoodsNomenclatureCode.Create;
 end;
 
 destructor TGoodsInfo.Destroy;
 begin
+  FreeAndNil(FGoodsNomenclatureCode);
   FreeAndNil(FSuplierInfo);
   inherited Destroy;
 end;
@@ -425,7 +494,7 @@ begin
 
   FCountryCode:=0;
   FDeclarationNumber:='';
-  FGoodsNomenclatureCode:='';
+  FGoodsNomenclatureCode.Clear;
   FSuplierInfo.Clear;
 end;
 

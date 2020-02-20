@@ -380,7 +380,6 @@ type
     procedure InternalInitLibrary;
     procedure InternalOpenKKM;
     procedure InternalCloseKKM;
-    function InternalCheckError:Integer;
     procedure InternalSetCheckType(AValue: TCheckType);
   protected
     procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); override;
@@ -393,6 +392,7 @@ type
   public
     destructor Destroy; override;
 
+    function InternalCheckError:Integer;
     procedure Open;
     procedure Close;
 
@@ -485,6 +485,7 @@ type
     property Handle:TLibFPtrHandle read FHandle;
     property LibraryFileName:string read FLibraryFileName write FLibraryFileName;
     property DeviceDateTime:TDateTime read GetDeviceDateTime;
+    property LibraryAtol:TAtollLibraryV10 read FLibrary;
   end;
 
 resourcestring
@@ -854,7 +855,7 @@ end;
 
 function TAtollKKMv10.Registration: integer;
 var
-  FSupInf, mark: TBytes;
+  FSupInf, FMark: TBytes;
 begin
   Result:=0;
   if Assigned(FLibrary) and FLibrary.Loaded then
@@ -892,25 +893,14 @@ begin
     SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(GoodsInfo.TaxType)));
 
     if (GoodsInfo.CountryCode > 0) then
-    begin
-      //SetAttributeStr(1230, IntToStr(GoodsInfo.CountryCode));
       SetAttributeStr(1230, Format('%0.3d', [GoodsInfo.CountryCode]));
-    end;
 
 
     if (GoodsInfo.DeclarationNumber<> '') then
       SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
 
-    if GoodsInfo.GoodsNomenclatureCode <> '' then
-    begin
-      //SetAttributeStr(1162, GoodsInfo.GoodsNomenclatureCode);
-      //uchar mark[] = {<массив байтов от сканера>};
-
-      //libfptr_set_param_bytearray(fptr, LIBFPTR_PARAM_MARKING_CODE, &mark[0], sizeof(mark));
-      SetLength(mark, Length(GoodsInfo.GoodsNomenclatureCode));
-      Move(GoodsInfo.GoodsNomenclatureCode[1], mark[1], Length(GoodsInfo.GoodsNomenclatureCode));
-      FLibrary.SetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_MARKING_CODE), mark);
-    end;
+    if GoodsInfo.GoodsNomenclatureCode.GroupCode <> 0 then
+      FLibrary.SetParamByteArray(FHandle, 1162, GoodsInfo.GoodsNomenclatureCode.Make1162Value);
 
 
     case GoodsInfo.GoodsPayMode of

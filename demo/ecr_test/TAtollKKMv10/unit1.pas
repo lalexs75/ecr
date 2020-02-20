@@ -30,6 +30,7 @@ type
     Button20: TButton;
     Button21: TButton;
     Button22: TButton;
+    Button23: TButton;
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
@@ -102,6 +103,9 @@ type
     rxGoodsGOODS_CODE: TStringField;
     rxGoodsGOODS_NAME: TStringField;
     rxGoodsGTD: TStringField;
+    rxGoodsMARKS_GROUP: TWordField;
+    rxGoodsMARKS_GTIN: TStringField;
+    rxGoodsMARKS_SERIAL: TStringField;
     rxGoodsPRICE: TCurrencyField;
     rxGoodsSUM: TCurrencyField;
     RxDBGrid1: TRxDBGrid;
@@ -137,6 +141,7 @@ type
     procedure Button20Click(Sender: TObject);
     procedure Button21Click(Sender: TObject);
     procedure Button22Click(Sender: TObject);
+    procedure Button23Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
@@ -175,9 +180,11 @@ var
   Form1: TForm1;
 
 implementation
-uses LazFileUtils;
+uses LazFileUtils, Math;
 
 {$R *.lfm}
+
+
 
 { TForm1 }
 
@@ -263,6 +270,139 @@ begin
   FAtollKKMv10.QueryDeviceParams;
   WriteLog('LineLength = '+ IntToStr(FAtollKKMv10.DeviceInfo.PaperInfo.LineLength));
   WriteLog('LineLengthPix = '+ IntToStr(FAtollKKMv10.DeviceInfo.PaperInfo.LineLengthPix));
+  FAtollKKMv10.Close;
+  FAtollKKMv10.Connected:=false;
+end;
+
+procedure TForm1.Button23Click(Sender: TObject);
+var
+  B: TCrpCodeBuffer;
+  B1:TBytes;
+  S22: String;
+begin
+  WriteLog('Формируем тестовый чек c маркировкой');
+  InitKassirData;
+
+  FAtollKKMv10.Connected:=true;
+  FAtollKKMv10.Open;
+
+  FAtollKKMv10.CheckType:=chtSell;
+
+  FAtollKKMv10.OpenCheck;
+  if FAtollKKMv10.ErrorCode <> 0 then
+  begin
+    ShowMessage(FAtollKKMv10.ErrorDescription);
+    FAtollKKMv10.Close;
+    FAtollKKMv10.Connected:=false;
+    Exit;
+  end;
+
+  WriteLog('CheckNumber = ' + IntToStr(FAtollKKMv10.CheckNumber));
+
+  //Начинаем регистрацию товара к продаже
+
+  FAtollKKMv10.GoodsInfo.Name:='Товар № 1';
+  FAtollKKMv10.GoodsInfo.Price:=10.10;
+  FAtollKKMv10.GoodsInfo.Quantity:=1;
+  FAtollKKMv10.GoodsInfo.TaxType:=ttaxVat120;
+  FAtollKKMv10.GoodsInfo.GoodsPayMode:=gpmFullPay;
+  FAtollKKMv10.GoodsInfo.GoodsNomenclatureCode.GroupCode:=$444D;
+  FAtollKKMv10.GoodsInfo.GoodsNomenclatureCode.GTIN:='02900000475830';
+  FAtollKKMv10.GoodsInfo.GoodsNomenclatureCode.Serial:='MdEfx:Xp6YFd7';
+
+
+  FAtollKKMv10.SetAttributeStr(Ord(LIBFPTR_PARAM_COMMODITY_NAME), 'Товар № 1');
+  FAtollKKMv10.SetAttributeDouble(Ord(LIBFPTR_PARAM_PRICE), 10.10);
+  FAtollKKMv10.SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), 1);
+  FAtollKKMv10.SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(ttaxVat120)));
+
+
+  FAtollKKMv10.Registration;
+
+  // Закрытие чека
+  FAtollKKMv10.CloseCheck;
+
+  if FAtollKKMv10.ErrorCode <> 0 then
+    ShowMessage(FAtollKKMv10.ErrorDescription);
+(*
+
+  SetLength(B1, SizeOF(TCrpCodeBuffer));
+  FillChar(B1[1], SizeOF(TCrpCodeBuffer), 0);
+  B1[0]:=$44;
+  B1[1]:=$4D;
+  B1[2]:=$02;
+  B1[3]:=$A3;
+  B1[4]:=$35;
+  B1[5]:=$7E;
+  B1[6]:=$0A;
+  B1[7]:=$EA;
+  B1[8]:=$36;
+  B1[9]:=$27;
+  B1[10]:=$55;
+  B1[11]:=$42;
+  B1[12]:=$25;
+  B1[13]:=$52;
+  B1[14]:=$78;
+  B1[15]:=$54;
+  B1[16]:=$4C;
+  B1[17]:=$6D;
+  B1[18]:=$68;
+  B1[19]:=$4F;
+  B1[20]:=$50;
+
+  //B1[0]:=68;
+  //B1[1]:=77;
+  //B1[2]:=2;
+  //B1[3]:=163;
+  //B1[4]:=53;
+  //B1[5]:=127;
+  //B1[6]:=138;
+  //B1[7]:=182;
+  //B1[8]:=77;
+  //B1[9]:=100;
+  //B1[10]:=69;
+  //B1[11]:=102;
+  //B1[12]:=120;
+  //B1[13]:=58;
+  //B1[14]:=88;
+  //B1[15]:=112;
+  //B1[16]:=54;
+  //B1[17]:=89;
+  //B1[18]:=70;
+  //B1[19]:=100;
+  //B1[20]:=55;
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_RECEIPT_TYPE, 1);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, libfptr_param(1055), 0);
+  FAtollKKMv10.LibraryAtol.OpenReceipt(FAtollKKMv10.Handle);
+  FAtollKKMv10.LibraryAtol.SetParamStr(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_COMMODITY_NAME), 'Товар');
+  FAtollKKMv10.LibraryAtol.SetParamDouble(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_PRICE), 100);
+  FAtollKKMv10.LibraryAtol.SetParamDouble(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_QUANTITY), 1);
+  FAtollKKMv10.LibraryAtol.SetParamDouble(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_POSITION_SUM), 100);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_TAX_TYPE, 7);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, libfptr_param(1212), 1);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, libfptr_param(1214), 1);
+  FAtollKKMv10.LibraryAtol.SetParamByteArray(FAtollKKMv10.Handle, 1162, B1); //new Uint8Array([68,77,2,163,53,127,138,182,77,100,69,102,120,58,88,112,54,89,70,100,55]));
+  FAtollKKMv10.LibraryAtol.Registration(FAtollKKMv10.Handle);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_PAYMENT_TYPE, 0);
+  FAtollKKMv10.LibraryAtol.CloseReceipt(FAtollKKMv10.Handle);
+*)
+(*
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_RECEIPT_TYPE, 1);
+  FAtollKKMv10.LibraryAtol.OpenReceipt(FAtollKKMv10.Handle);
+  FAtollKKMv10.LibraryAtol.SetParamStr(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_COMMODITY_NAME), 'Товар');
+  FAtollKKMv10.LibraryAtol.SetParamDouble(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_PRICE), 100);
+  FAtollKKMv10.LibraryAtol.SetParamDouble(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_QUANTITY), 1);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_TAX_TYPE, Ord(LIBFPTR_TAX_VAT20));
+  S22:='30 31 30 32 39 30 30 30 30 30 34 37 35 38 33 30 32 31 4D 64 45 66 78 3A 58 70 36 59 46 64 37 1D 39 31 38 30 32 39 1D 39 32 61 51 49 51 6B 49 37 6F 48 58 6D 7A 47 2F 6D 64 4B 78 7A 43 55 43 4B 54 4A 48 58 6F 42 4F 44 64 6D 43 64 4D 35 6B 38 51 6A 37 67 61 5A 56 32 78 62 6E 36 36 78 42 58 47 49 4B 72 74 66 76 71 50 49 4E 41 32 6A 6B 62 6A 79 6A 33 2F 4F 2B 6B 79 36 6F 75 31 4E 41 3D 3D';
+  S22:='30 31 30 32 39 30 30 30 30 30 33 37 37 35 37 38 32 31 36 27 55 42 25 52 78 54 4C 6D 68 4F 50 39 31 30 30 32 41 39 32 62 52 37 57 62 46 38 59 72 4E 69 4A 4B 75 71 51 75 2F 41 71 70 32 6F 4F 41 64 49 48 31 79 6E 51 4F 64 4C 6D 31 45 32 50 62 50 4D 39 63 41 41 62 33 6F 65 75 6D 64 68 78 45 62 4A 69 34 32 54 6D 69 31 74 33 33 72 52 69 2B 75 73 50 45 79 51 63 39 33 69 56 30 51 3D 3D';
+  FAtollKKMv10.LibraryAtol.SetParamStr(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE), S22);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, libfptr_param(1212), 1);
+  FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, libfptr_param(1214), 1);
+
+  FAtollKKMv10.LibraryAtol.Registration(FAtollKKMv10.Handle);
+  FAtollKKMv10.LibraryAtol.CloseReceipt(FAtollKKMv10.Handle);
+*)
+  //44 4D 02 A3 35 7F 8A B6 4D 64 45 66 78 3A 58 70 36 59 46 64 37
   FAtollKKMv10.Close;
   FAtollKKMv10.Connected:=false;
 end;
@@ -632,8 +772,9 @@ var
   PT: TPaymentType;
 begin
   rxGoods.CloseOpen;
-  rxGoods.AppendRecord(['F000-001-25487', 'Чипсы LAYS', 73.99, 5, null,  null,  null, 1]);
-  rxGoods.AppendRecord(['000.000.001', 'Насос НШ-14М-3 (НШ-14Г-3) правый (Гидросила)', 739, 1, null,  null, null, 1]);
+  rxGoods.AppendRecord(['F000-001-25487', 'Чипсы LAYS', 1, 73.99,  null,  null,  null, 1, $444D, '02900000475830', 'MdEfx:Xp6YFd7']);
+
+  rxGoods.AppendRecord(['000.000.001', 'Насос НШ-14М-3 (НШ-14Г-3) правый (Гидросила)', 3, 17.40, null,  null, null, 1]);
 //  rxGoods.AppendRecord(['6311', 'СМЕСИТЕЛЬ Д/МОЙКИ 1рук. "Oskar" в/гусак Китай', 954.32, 2, null, 547, '10714040/140917/0090376', 2]);
   rxGoods.First;
 
@@ -1082,9 +1223,10 @@ begin
     end;
 
     FAtollKKMv10.GoodsInfo.GoodsPayMode:=gpmFullPay;
+    FAtollKKMv10.GoodsInfo.GoodsNomenclatureCode.GroupCode:=rxGoodsMARKS_GROUP.AsInteger;
+    FAtollKKMv10.GoodsInfo.GoodsNomenclatureCode.GTIN:=rxGoodsMARKS_GTIN.AsString;
+    FAtollKKMv10.GoodsInfo.GoodsNomenclatureCode.Serial:=rxGoodsMARKS_SERIAL.AsString;
 
-//    FAtollKKMv10.SetAttributeInt(1212, 1);
-//    FAtollKKMv10.SetAttributeInt(1214, 7);
     FAtollKKMv10.Registration;
     rxGoods.Next;
   end;

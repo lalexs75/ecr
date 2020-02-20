@@ -2,10 +2,10 @@ object Form1: TForm1
   Left = 334
   Height = 800
   Top = 130
-  Width = 979
+  Width = 1460
   Caption = 'Form1'
   ClientHeight = 800
-  ClientWidth = 979
+  ClientWidth = 1460
   OnClose = FormClose
   OnCreate = FormCreate
   LCLVersion = '2.1.0.0'
@@ -13,7 +13,7 @@ object Form1: TForm1
     Left = 0
     Height = 144
     Top = 656
-    Width = 979
+    Width = 1460
     Align = alClient
     Lines.Strings = (
       'Memo1'
@@ -24,15 +24,15 @@ object Form1: TForm1
     Left = 0
     Height = 651
     Top = 0
-    Width = 979
-    ActivePage = TabSheet3
+    Width = 1460
+    ActivePage = TabSheet4
     Align = alTop
-    TabIndex = 2
+    TabIndex = 3
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
       ClientHeight = 620
-      ClientWidth = 969
+      ClientWidth = 1450
       object Button1: TButton
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
@@ -109,16 +109,26 @@ object Form1: TForm1
       end
       object SpinEdit1: TSpinEdit
         Left = 102
-        Height = 34
+        Height = 33
         Top = 136
         Width = 114
         TabOrder = 6
+      end
+      object Button23: TButton
+        Left = 301
+        Height = 33
+        Top = 72
+        Width = 196
+        AutoSize = True
+        Caption = 'Тестовый чек с маркировкой'
+        OnClick = Button23Click
+        TabOrder = 7
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Отчёты'
       ClientHeight = 620
-      ClientWidth = 969
+      ClientWidth = 1450
       object Button5: TButton
         AnchorSideLeft.Control = TabSheet2
         AnchorSideTop.Control = TabSheet2
@@ -150,7 +160,7 @@ object Form1: TForm1
     object TabSheet3: TTabSheet
       Caption = 'Сервисные параметры'
       ClientHeight = 620
-      ClientWidth = 969
+      ClientWidth = 1450
       object Button7: TButton
         AnchorSideLeft.Control = TabSheet3
         AnchorSideTop.Control = TabSheet3
@@ -251,7 +261,7 @@ object Form1: TForm1
         AnchorSideBottom.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 101
+        Top = 100
         Width = 101
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
@@ -264,7 +274,7 @@ object Form1: TForm1
         AnchorSideBottom.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 140
+        Top = 139
         Width = 97
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
@@ -277,7 +287,7 @@ object Form1: TForm1
         AnchorSideTop.Control = Button14
         AnchorSideTop.Side = asrBottom
         Left = 113
-        Height = 34
+        Height = 33
         Top = 84
         Width = 104
         Alignment = taRightJustify
@@ -291,7 +301,7 @@ object Form1: TForm1
         AnchorSideTop.Control = Button15
         AnchorSideTop.Side = asrBottom
         Left = 109
-        Height = 34
+        Height = 33
         Top = 123
         Width = 112
         Alignment = taRightJustify
@@ -345,13 +355,13 @@ object Form1: TForm1
     object TabSheet4: TTabSheet
       Caption = 'Регистрация'
       ClientHeight = 620
-      ClientWidth = 969
+      ClientWidth = 1450
       object Button8: TButton
         AnchorSideRight.Control = TabSheet4
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet4
         AnchorSideBottom.Side = asrBottom
-        Left = 868
+        Left = 1349
         Height = 33
         Top = 581
         Width = 95
@@ -368,7 +378,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 91
+        Top = 90
         Width = 73
         BorderSpacing.Around = 6
         Caption = 'Контрагент'
@@ -381,7 +391,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 166
         Height = 17
-        Top = 91
+        Top = 90
         Width = 111
         BorderSpacing.Around = 6
         Caption = 'ИНН контрагента'
@@ -392,8 +402,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label1
         AnchorSideTop.Side = asrBottom
         Left = 12
-        Height = 34
-        Top = 114
+        Height = 33
+        Top = 113
         Width = 148
         BorderSpacing.Around = 6
         TabOrder = 1
@@ -404,8 +414,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label2
         AnchorSideTop.Side = asrBottom
         Left = 172
-        Height = 34
-        Top = 114
+        Height = 33
+        Top = 113
         Width = 132
         BorderSpacing.Around = 6
         TabOrder = 2
@@ -416,7 +426,7 @@ object Form1: TForm1
         AnchorSideTop.Control = Label3
         AnchorSideTop.Side = asrBottom
         Left = 12
-        Height = 33
+        Height = 32
         Top = 29
         Width = 292
         BorderSpacing.Around = 6
@@ -453,7 +463,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 154
+        Top = 152
         Width = 107
         BorderSpacing.Around = 6
         Caption = 'Номер телефона'
@@ -466,7 +476,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 166
         Height = 17
-        Top = 154
+        Top = 152
         Width = 34
         BorderSpacing.Around = 6
         Caption = 'Email'
@@ -477,9 +487,9 @@ object Form1: TForm1
         AnchorSideTop.Control = Label6
         AnchorSideTop.Side = asrBottom
         Left = 12
-        Height = 34
+        Height = 33
         Hint = 'Номер сотового'
-        Top = 177
+        Top = 175
         Width = 148
         BorderSpacing.Around = 6
         TabOrder = 5
@@ -490,8 +500,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label7
         AnchorSideTop.Side = asrBottom
         Left = 172
-        Height = 34
-        Top = 177
+        Height = 33
+        Top = 175
         Width = 132
         BorderSpacing.Around = 6
         TabOrder = 6
@@ -504,8 +514,8 @@ object Form1: TForm1
         AnchorSideRight.Side = asrBottom
         Left = 6
         Height = 194
-        Top = 240
-        Width = 957
+        Top = 237
+        Width = 1438
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
@@ -655,6 +665,51 @@ object Form1: TForm1
             Filter.EmptyFont.Style = [fsItalic]
             Filter.ItemIndex = -1
             Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Маркировка|Группа'
+            Width = 60
+            FieldName = 'MARKS_GROUP'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Маркировка|GTIN'
+            Width = 150
+            FieldName = 'MARKS_GTIN'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Маркировка|Серия'
+            Width = 150
+            FieldName = 'MARKS_SERIAL'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
           end>
         KeyStrokes = <        
           item
@@ -740,7 +795,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 217
+        Top = 214
         Width = 96
         BorderSpacing.Around = 6
         Caption = 'Товарная часть'
@@ -754,9 +809,9 @@ object Form1: TForm1
         AnchorSideBottom.Control = TabSheet4
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 151
-        Top = 463
-        Width = 856
+        Height = 154
+        Top = 460
+        Width = 1337
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
@@ -879,7 +934,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 440
+        Top = 437
         Width = 48
         Caption = 'Оплаты'
         ParentColor = False
@@ -891,7 +946,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 310
         Height = 23
-        Top = 68
+        Top = 67
         Width = 107
         BorderSpacing.Around = 6
         Caption = 'Через агента'
@@ -905,7 +960,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 636
         Height = 23
-        Top = 68
+        Top = 67
         Width = 153
         BorderSpacing.Around = 6
         Caption = 'Данные поставщика'
@@ -918,7 +973,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 68
+        Top = 67
         Width = 74
         BorderSpacing.Around = 6
         Caption = 'Покупатель'
@@ -929,9 +984,9 @@ object Form1: TForm1
         AnchorSideTop.Control = Label16
         AnchorSideTop.Side = asrBottom
         Left = 322
-        Height = 34
+        Height = 33
         Hint = 'Номер сотового'
-        Top = 183
+        Top = 181
         Width = 164
         BorderSpacing.Around = 6
         TabOrder = 11
@@ -942,8 +997,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label15
         AnchorSideTop.Side = asrBottom
         Left = 498
-        Height = 34
-        Top = 183
+        Height = 33
+        Top = 181
         Width = 132
         BorderSpacing.Around = 6
         TabOrder = 12
@@ -955,7 +1010,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 492
         Height = 17
-        Top = 160
+        Top = 158
         Width = 81
         BorderSpacing.Around = 6
         Caption = 'Email агента '
@@ -967,7 +1022,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 316
         Height = 17
-        Top = 160
+        Top = 158
         Width = 151
         BorderSpacing.Around = 6
         Caption = 'Номер телефона агента'
@@ -978,8 +1033,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label18
         AnchorSideTop.Side = asrBottom
         Left = 322
-        Height = 34
-        Top = 120
+        Height = 33
+        Top = 119
         Width = 164
         BorderSpacing.Around = 6
         TabOrder = 13
@@ -990,8 +1045,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label17
         AnchorSideTop.Side = asrBottom
         Left = 498
-        Height = 34
-        Top = 120
+        Height = 33
+        Top = 119
         Width = 132
         BorderSpacing.Around = 6
         TabOrder = 14
@@ -1004,7 +1059,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 492
         Height = 17
-        Top = 97
+        Top = 96
         Width = 74
         BorderSpacing.Around = 6
         Caption = 'ИНН агента'
@@ -1016,7 +1071,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 316
         Height = 17
-        Top = 97
+        Top = 96
         Width = 36
         BorderSpacing.Around = 6
         Caption = 'Агент'
@@ -1027,9 +1082,9 @@ object Form1: TForm1
         AnchorSideTop.Control = Label20
         AnchorSideTop.Side = asrBottom
         Left = 648
-        Height = 34
+        Height = 33
         Hint = 'Номер сотового'
-        Top = 183
+        Top = 181
         Width = 148
         BorderSpacing.Around = 6
         TabOrder = 15
@@ -1040,8 +1095,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label19
         AnchorSideTop.Side = asrBottom
         Left = 808
-        Height = 34
-        Top = 183
+        Height = 33
+        Top = 181
         Width = 132
         BorderSpacing.Around = 6
         TabOrder = 16
@@ -1053,7 +1108,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 802
         Height = 17
-        Top = 160
+        Top = 158
         Width = 34
         BorderSpacing.Around = 6
         Caption = 'Email'
@@ -1065,7 +1120,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 642
         Height = 17
-        Top = 160
+        Top = 158
         Width = 107
         BorderSpacing.Around = 6
         Caption = 'Номер телефона'
@@ -1076,8 +1131,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label22
         AnchorSideTop.Side = asrBottom
         Left = 648
-        Height = 34
-        Top = 120
+        Height = 33
+        Top = 119
         Width = 148
         BorderSpacing.Around = 6
         TabOrder = 17
@@ -1088,8 +1143,8 @@ object Form1: TForm1
         AnchorSideTop.Control = Label21
         AnchorSideTop.Side = asrBottom
         Left = 808
-        Height = 34
-        Top = 120
+        Height = 33
+        Top = 119
         Width = 132
         BorderSpacing.Around = 6
         TabOrder = 18
@@ -1102,7 +1157,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 802
         Height = 17
-        Top = 97
+        Top = 96
         Width = 108
         BorderSpacing.Around = 6
         Caption = 'ИНН поставщика'
@@ -1114,7 +1169,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 642
         Height = 17
-        Top = 97
+        Top = 96
         Width = 70
         BorderSpacing.Around = 6
         Caption = 'Поставщик'
@@ -1124,7 +1179,7 @@ object Form1: TForm1
     object TabSheet5: TTabSheet
       Caption = 'Параметры организации'
       ClientHeight = 620
-      ClientWidth = 969
+      ClientWidth = 1450
       object Label4: TLabel
         AnchorSideLeft.Control = TabSheet5
         AnchorSideTop.Control = TabSheet5
@@ -1153,7 +1208,7 @@ object Form1: TForm1
         AnchorSideTop.Control = Label4
         AnchorSideTop.Side = asrBottom
         Left = 12
-        Height = 34
+        Height = 33
         Top = 29
         Width = 140
         BorderSpacing.Around = 6
@@ -1165,7 +1220,7 @@ object Form1: TForm1
         AnchorSideTop.Control = Label5
         AnchorSideTop.Side = asrBottom
         Left = 164
-        Height = 34
+        Height = 33
         Top = 29
         Width = 112
         BorderSpacing.Around = 6
@@ -1178,7 +1233,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 23
-        Top = 69
+        Top = 68
         Width = 116
         BorderSpacing.Around = 6
         Caption = 'Место расчёта'
@@ -1191,8 +1246,8 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Label11
         Left = 12
-        Height = 34
-        Top = 98
+        Height = 33
+        Top = 97
         Width = 466
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -1213,7 +1268,7 @@ object Form1: TForm1
     object TabSheet6: TTabSheet
       Caption = 'Прочие функции'
       ClientHeight = 620
-      ClientWidth = 969
+      ClientWidth = 1450
       object Button13: TButton
         AnchorSideLeft.Control = TabSheet6
         AnchorSideTop.Control = TabSheet6
@@ -1249,7 +1304,7 @@ object Form1: TForm1
         AnchorSideBottom.Control = Button13
         AnchorSideBottom.Side = asrBottom
         Left = 230
-        Height = 34
+        Height = 33
         Top = 6
         Width = 733
         Anchors = [akTop, akLeft, akRight]
@@ -1263,7 +1318,7 @@ object Form1: TForm1
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 33
-        Top = 195
+        Top = 192
         Width = 148
         AutoSize = True
         BorderSpacing.Around = 6
@@ -1278,8 +1333,8 @@ object Form1: TForm1
         AnchorSideRight.Control = TabSheet6
         AnchorSideRight.Side = asrBottom
         Left = 160
-        Height = 34
-        Top = 195
+        Height = 33
+        Top = 192
         Width = 803
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 6
@@ -1299,7 +1354,7 @@ object Form1: TForm1
       end
       object Edit2: TEdit
         Left = 179
-        Height = 34
+        Height = 33
         Top = 248
         Width = 552
         TabOrder = 5
@@ -1321,13 +1376,13 @@ object Form1: TForm1
         AnchorSideRight.Control = TabSheet6
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 144
+        Height = 141
         Top = 45
         Width = 969
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
         Caption = 'Параметры текста'
-        ClientHeight = 126
+        ClientHeight = 123
         ClientWidth = 967
         TabOrder = 7
         object RadioGroup1: TRadioGroup
@@ -1418,7 +1473,7 @@ object Form1: TForm1
           AnchorSideBottom.Side = asrBottom
           Left = 360
           Height = 17
-          Top = 23
+          Top = 22
           Width = 96
           Anchors = [akLeft, akBottom]
           Caption = 'Номер шрифта'
@@ -1429,7 +1484,7 @@ object Form1: TForm1
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = GroupBox1
           Left = 517
-          Height = 34
+          Height = 33
           Top = 6
           Width = 80
           BorderSpacing.Around = 6
@@ -1441,8 +1496,8 @@ object Form1: TForm1
           AnchorSideTop.Control = SpinEdit2
           AnchorSideTop.Side = asrBottom
           Left = 517
-          Height = 34
-          Top = 46
+          Height = 33
+          Top = 45
           Width = 80
           BorderSpacing.Left = 6
           BorderSpacing.Top = 6
@@ -1455,7 +1510,7 @@ object Form1: TForm1
           AnchorSideBottom.Side = asrBottom
           Left = 360
           Height = 17
-          Top = 63
+          Top = 61
           Width = 151
           Anchors = [akLeft, akBottom]
           Caption = 'Межстрочный интервал'
@@ -1467,7 +1522,7 @@ object Form1: TForm1
           AnchorSideBottom.Side = asrBottom
           Left = 360
           Height = 17
-          Top = 103
+          Top = 100
           Width = 51
           Anchors = [akLeft, akBottom]
           Caption = 'Яркость'
@@ -1479,8 +1534,8 @@ object Form1: TForm1
           AnchorSideTop.Control = SpinEdit3
           AnchorSideTop.Side = asrBottom
           Left = 517
-          Height = 34
-          Top = 86
+          Height = 33
+          Top = 84
           Width = 80
           BorderSpacing.Around = 6
           TabOrder = 6
@@ -1493,7 +1548,7 @@ object Form1: TForm1
     Left = 0
     Height = 5
     Top = 651
-    Width = 979
+    Width = 1460
     Align = alTop
     ResizeAnchor = akTop
   end
@@ -1540,11 +1595,25 @@ object Form1: TForm1
       item
         Name = 'TAX_TYPE'
         DataType = ftInteger
+      end    
+      item
+        Name = 'MARKS_GROUP'
+        DataType = ftWord
+      end    
+      item
+        Name = 'MARKS_GTIN'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'MARKS_SERIAL'
+        DataType = ftString
+        Size = 100
       end>
     BeforePost = rxGoodsBeforePost
     PacketRecords = 0
-    Left = 319
-    Top = 335
+    Left = 320
+    Top = 336
     object rxGoodsGOODS_CODE: TStringField
       FieldKind = fkData
       FieldName = 'GOODS_CODE'
@@ -1622,6 +1691,35 @@ object Form1: TForm1
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+    end
+    object rxGoodsMARKS_GROUP: TWordField
+      FieldKind = fkData
+      FieldName = 'MARKS_GROUP'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxGoodsMARKS_GTIN: TStringField
+      FieldKind = fkData
+      FieldName = 'MARKS_GTIN'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxGoodsMARKS_SERIAL: TStringField
+      FieldKind = fkData
+      FieldName = 'MARKS_SERIAL'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
     end
   end
   object dsGoods: TDataSource
