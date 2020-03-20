@@ -1,6 +1,32 @@
-//Интерфейс универсального драйвера к ККМ АТОЛ
-//Версия для FPC - Лагунов А.А. (c) alexs, 2018-2020
-// alexs75@yandex.ru
+{ Билиотека для работы с ККМ АТОЛ
+
+  Copyright (C) 2013-2020 Лагунов Алексей alexs75@yandex.ru
+
+  This library is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Library General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at your
+  option) any later version with the following modification:
+
+  As a special exception, the copyright holders of this library give you
+  permission to link this library with independent modules to produce an
+  executable, regardless of the license terms of these independent modules,and
+  to copy and distribute the resulting executable under terms of your choice,
+  provided that you also meet, for each linked independent module, the terms
+  and conditions of the license of that module. An independent module is a
+  module which is not derived from or based on this library. If you modify
+  this library, you may extend this exception to your version of the library,
+  but you are not obligated to do so. If you do not wish to do so, delete this
+  exception statement from your version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public License
+  for more details.
+
+  You should have received a copy of the GNU Library General Public License
+  along with this library; if not, write to the Free Software Foundation,
+  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+}
 
 unit AtollKKMv10;
 
@@ -396,6 +422,7 @@ type
     procedure Open;
     procedure Close;
 
+    function GetVersionString:string;
     procedure Beep; override;
     procedure CutCheck(APartial:boolean); override;
     procedure PrintLine(ALine:string); override;        //Печать строки
@@ -518,12 +545,17 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     FLibrary.SetParamStr(FHandle, 1021, UserName);
+    InternalCheckError;
 {    if Password<>'' then
       FLibrary.SetParamStr(FHandle, 1203, Password);}
 
     if KassaUserINN <> '' then
+    begin
       FLibrary.SetParamStr(FHandle, 1203, KassaUserINN);
+      InternalCheckError;
+    end;
     FLibrary.OperatorLogin(FHandle);
+    InternalCheckError;
     //todo: do check error
   end;
 end;
@@ -552,6 +584,7 @@ end;
 procedure TAtollKKMv10.InternalOpenKKM;
 begin
   FLibrary.Open(FHandle);
+  InternalCheckError;
 end;
 
 procedure TAtollKKMv10.InternalCloseKKM;
@@ -705,11 +738,21 @@ procedure TAtollKKMv10.Open;
 begin
   InternalOpenKKM;
   InternalUserLogin;
+  InternalCheckError;
 end;
 
 procedure TAtollKKMv10.Close;
 begin
   InternalCloseKKM;
+end;
+
+function TAtollKKMv10.GetVersionString: string;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded and Assigned(FHandle) then
+  begin
+    Result:=FLibrary.GetVersionString;
+    InternalCheckError;
+  end;
 end;
 
 procedure TAtollKKMv10.Beep;
@@ -900,7 +943,13 @@ begin
       SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
 
     if GoodsInfo.GoodsNomenclatureCode.GroupCode <> 0 then
-      FLibrary.SetParamByteArray(FHandle, 1162, GoodsInfo.GoodsNomenclatureCode.Make1162Value);
+      FLibrary.SetParamByteArray(FHandle, 1162, GoodsInfo.GoodsNomenclatureCode.Make1162Value)
+    else
+    begin
+      SetLength(FMark, 2);
+      FillByte(FMark[0], 2, 0);
+      FLibrary.SetParamByteArray(FHandle, 1162, FMark)
+    end;
 
 
     case GoodsInfo.GoodsPayMode of

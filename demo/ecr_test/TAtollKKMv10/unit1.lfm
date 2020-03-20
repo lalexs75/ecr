@@ -25,9 +25,9 @@ object Form1: TForm1
     Height = 651
     Top = 0
     Width = 1460
-    ActivePage = TabSheet4
+    ActivePage = TabSheet1
     Align = alTop
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
