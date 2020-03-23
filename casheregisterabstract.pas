@@ -406,10 +406,13 @@ end;
 function TGoodsNomenclatureCode.Make1162Value: TBytes;
 var
   R: TCrpCodeBuffer;
+  L: Integer;
 begin
   MakeCRPTCode(FGroupCode, FGTIN, FSerial, R);
-  SetLength(Result, SizeOf(TCrpCodeBuffer));
-  Move(R[1], Result[0], SizeOf(TCrpCodeBuffer));
+  //L:=SizeOf(TCrpCodeBuffer);
+  L:=21;
+  SetLength(Result, L);
+  Move(R[1], Result[0], L);
 end;
 
 { TDeviceInfo }

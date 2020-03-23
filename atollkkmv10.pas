@@ -2349,9 +2349,12 @@ end;
 
 procedure TAtollLibraryV10.SetParamByteArray(Handle: TLibFPtrHandle;
   ParamId: Integer; const Value: TBytes);
+var
+  L: Integer;
 begin
+  L:=Length(Value);
   if Assigned(Flibfptr_set_param_bytearray) then
-    Flibfptr_set_param_bytearray(Handle, ParamId, @Value[0], Length(Value))
+    Flibfptr_set_param_bytearray(Handle, ParamId, @Value[0], L)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_set_param_bytearray']);
 end;

@@ -51,6 +51,7 @@ type
     dsGoods: TDataSource;
     Edit1: TEdit;
     Edit2: TEdit;
+    Edit6: TEdit;
     edtContragentInn1: TEdit;
     edtSuplierInn: TEdit;
     edtContragentName1: TEdit;
@@ -86,6 +87,7 @@ type
     Label23: TLabel;
     Label24: TLabel;
     Label25: TLabel;
+    Label26: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -154,6 +156,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure rxGoodsBeforePost(DataSet: TDataSet);
+
   private
     FAtollInstance: TAtollLibraryV10;
     KKM_Handle:TLibFPtrHandle;
@@ -172,6 +175,7 @@ type
     function KKMLibraryFileName:string;
     procedure InitGoodsDataSet;
     procedure UpdateCtrlState;
+    function InternalCheckError:Integer;
   public
 
   end;
@@ -180,10 +184,27 @@ var
   Form1: TForm1;
 
 implementation
-uses LazFileUtils, Math;
+uses LazFileUtils, Math, rxlogging;
 
 {$R *.lfm}
 
+type
+  TCrpCodeBuffer = array [1..32] of byte;
+
+function MakeCRPTCode(APrefix:Word; AGTIN:string; ASerial:string):TCrpCodeBuffer;
+var
+  B:TCrpCodeBuffer;
+  W2: QWord;
+  i: Integer;
+begin
+  FillChar(Result, SizeOf(Result), 0);
+  W2:=StrToQWord(AGTIN);
+  Move(APrefix, B, 2);
+  for i:=1 to 2 do Result[i]:=B[3-i];
+  Move(W2, B, 6);
+  for i:=1 to 6 do Result[2+i]:=B[7-i];
+  for i:=1 to Min(Length(ASerial), 24) do Result[8 + i]:=Ord(ASerial[i]);
+end;
 
 
 { TForm1 }
@@ -276,16 +297,18 @@ end;
 
 procedure TForm1.Button23Click(Sender: TObject);
 var
-  B: TCrpCodeBuffer;
+  B, B2: TCrpCodeBuffer;
   B1:TBytes;
-  S22: String;
+  S22, S1, S2: String;
   i: Integer;
 begin
   WriteLog('Формируем тестовый чек c маркировкой');
   InitKassirData;
 
   FAtollKKMv10.Connected:=true;
+  InternalCheckError;
   FAtollKKMv10.Open;
+  InternalCheckError;
 (*
   FAtollKKMv10.CheckType:=chtSell;
 
@@ -398,19 +421,39 @@ begin
   //S22:='30 31 30 32 39 30 30 30 30 30 34 37 35 38 33 30 32 31 4D 64 45 66 78 3A 58 70 36 59 46 64 37 1D 39 31 38 30 32 39 1D 39 32 61 51 49 51 6B 49 37 6F 48 58 6D 7A 47 2F 6D 64 4B 78 7A 43 55 43 4B 54 4A 48 58 6F 42 4F 44 64 6D 43 64 4D 35 6B 38 51 6A 37 67 61 5A 56 32 78 62 6E 36 36 78 42 58 47 49 4B 72 74 66 76 71 50 49 4E 41 32 6A 6B 62 6A 79 6A 33 2F 4F 2B 6B 79 36 6F 75 31 4E 41 3D 3D';
   //S22:='30 31 30 32 39 30 30 30 30 30 33 37 37 35 37 38 32 31 36 27 55 42 25 52 78 54 4C 6D 68 4F 50 39 31 30 30 32 41 39 32 62 52 37 57 62 46 38 59 72 4E 69 4A 4B 75 71 51 75 2F 41 71 70 32 6F 4F 41 64 49 48 31 79 6E 51 4F 64 4C 6D 31 45 32 50 62 50 4D 39 63 41 41 62 33 6F 65 75 6D 64 68 78 45 62 4A 69 34 32 54 6D 69 31 74 33 33 72 52 69 2B 75 73 50 45 79 51 63 39 33 69 56 30 51 3D 3D';
 
-  //S22:='010290000037757821-tmIXrkglsKfZ91002A92V7pdljhutl5ewpDbkwAE+iw1kCwwDu29SwlNZOOnbhUUZtSx7V/M+6rVowswZn0zADvTNpaEHUrG/T4FB4fJDQ==';
+  S22:='010290000037757821-tmIXrkglsKfZ91002A92V7pdljhutl5ewpDbkwAE+iw1kCwwDu29SwlNZOOnbhUUZtSx7V/M+6rVowswZn0zADvTNpaEHUrG/T4FB4fJDQ==';
   //S22:=#$44#$4D'010290000047583021MdEfx:Xp6YFd7GS918029GS92aQIQkI7oHXmzG/mdKxzCUCKTJHXoBODdmCdM5k8Qj7gaZV2xbn66xBXGIKrtfvqPINA2jkbjyj3/O+ky6ou1NA==';
   //S22:=#$44#$4D'010290000047583021MdEfx:Xp6YFd7';
+
+  //S22:=#$44#$4D#$02#$A3#$35#$7F#$8A#$B6#$4D#$64#$45#$66#$78#$3A#$58#$70#$36#$59#$46#$64#$37;
+
+  //S22:=#$44#$4D#$02#$A3#$35#$7E#$0A#$EA#$2D#$74#$6D#$49#$58#$72#$6B#$67#$6C#$73#$4B#$66#$5A;
+(*
   SetLength(B1, Length(S22));
   for i:=1 to Length(S22) do
     B1[i-1]:=Ord(S22[i]);
+*)
+  S22:=Edit6.Text;
 
-  FAtollKKMv10.LibraryAtol.SetParamByteArray(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE), B1);
+  S1:=Copy(S22, 3, 14);
+  S2:=Copy(S22, 18, 13);
+  B2:=MakeCRPTCode($444D, S1, S2);
+  SetLength(B1, SizeOf(B2));
+  Move(B2, B1[0], SizeOf(B2));
+
+
+  //FAtollKKMv10.LibraryAtol.SetParamByteArray(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE), B1);
+  FAtollKKMv10.LibraryAtol.SetParamByteArray(FAtollKKMv10.Handle, 1162, B1);
+  InternalCheckError;
   FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, libfptr_param(1212), 1);
+  InternalCheckError;
   FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, libfptr_param(1214), 1);
+  InternalCheckError;
 
   FAtollKKMv10.LibraryAtol.Registration(FAtollKKMv10.Handle);
+  InternalCheckError;
   FAtollKKMv10.LibraryAtol.CloseReceipt(FAtollKKMv10.Handle);
+  InternalCheckError;
 
   //44 4D 02 A3 35 7F 8A B6 4D 64 45 66 78 3A 58 70 36 59 46 64 37
   FAtollKKMv10.Close;
@@ -818,6 +861,19 @@ begin
   edtSuplierInn.Enabled:=CheckBox3.Checked;
   edtSuplierPhone.Enabled:=CheckBox3.Checked;
   edtSuplierEmail.Enabled:=CheckBox3.Checked;
+end;
+
+function TForm1.InternalCheckError: Integer;
+var
+  S: String;
+begin
+  Result:=FAtollKKMv10.LibraryAtol.ErrorCode(FAtollKKMv10.Handle);
+  if Result <> 0 then
+  begin
+    S:=Format('Error %d - %s', [Result, FAtollKKMv10.LibraryAtol.ErrorDescription(FAtollKKMv10.Handle)]);
+    RxWriteLog(etDebug, S);
+    WriteLog(S);
+  end;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -1309,6 +1365,7 @@ end;
 procedure TForm1.WriteLog(S: string);
 begin
   Memo1.Lines.Add(S);
+  Memo1.CaretPos:=Point(1, Memo1.Lines.Count);
 {  if Assigned(FAtollInstance) and FAtollInstance.Loaded then
     FAtollInstance.LogWrite('TEST', 0, S);}
 end;

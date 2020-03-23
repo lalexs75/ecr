@@ -115,14 +115,29 @@ object Form1: TForm1
         TabOrder = 6
       end
       object Button23: TButton
-        Left = 301
+        Left = 20
         Height = 33
-        Top = 72
+        Top = 248
         Width = 196
         AutoSize = True
         Caption = 'Тестовый чек с маркировкой'
         OnClick = Button23Click
         TabOrder = 7
+      end
+      object Label26: TLabel
+        Left = 20
+        Height = 17
+        Top = 180
+        Width = 175
+        Caption = 'Код маркировки со сканера'
+        ParentColor = False
+      end
+      object Edit6: TEdit
+        Left = 19
+        Height = 33
+        Top = 200
+        Width = 1416
+        TabOrder = 8
       end
     end
     object TabSheet2: TTabSheet
