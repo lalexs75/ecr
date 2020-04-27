@@ -8,12 +8,13 @@ unit alexs_trade_abstract;
 interface
 
 uses
-  alexs_plastic_cards_abstract, LazarusPackageIntf;
+  alexs_plastic_cards_abstract, PlasticCardFictive, LazarusPackageIntf;
 
 implementation
 
 procedure Register;
 begin
+  RegisterUnit('PlasticCardFictive', @PlasticCardFictive.Register);
 end;
 
 initialization

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <PathDelim Value="\"/>
     <Name Value="alexs_trade_abstract"/>
     <Type Value="RunAndDesignTime"/>
@@ -16,11 +16,16 @@
     </CompilerOptions>
     <License Value="LGPL2"/>
     <Version Minor="1" Release="1" Build="2"/>
-    <Files Count="1">
+    <Files Count="2">
       <Item1>
         <Filename Value="pca\alexs_plastic_cards_abstract.pas"/>
         <UnitName Value="alexs_plastic_cards_abstract"/>
       </Item1>
+      <Item2>
+        <Filename Value="plasticcardfictive.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="PlasticCardFictive"/>
+      </Item2>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>
