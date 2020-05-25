@@ -220,6 +220,11 @@ type
     //ver 10.6.3.0
     Flibfptr_disable_ofd_channel:Tlibfptr_disable_ofd_channel;
     Flibfptr_enable_ofd_channel:Tlibfptr_enable_ofd_channel;
+
+    //ver 10.7.0.0
+    Flibfptr_create_with_id:Tlibfptr_create_with_id;
+    Flibfptr_validate_json:Tlibfptr_validate_json;
+    Flibfptr_log_write_ex:Tlibfptr_log_write_ex;
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -393,6 +398,15 @@ type
     function libfptr_read_universal_counter_sum(Handle:TLibFPtrHandle):Integer;
     function libfptr_read_universal_counter_quantity(Handle:TLibFPtrHandle):Integer;
     function libfptr_clear_universal_counters_cache(Handle:TLibFPtrHandle):Integer;
+
+    //ver 10.6.3.0
+    function DisableOfdChannel(Handle:TLibFPtrHandle):Integer;
+    function EnableOfdChannel(Handle:TLibFPtrHandle):Integer;
+
+    //ver 10.7.0.0
+    function CreateWithId(Handle:PLibFPtrHandle; id:string):integer;
+    function ValidateJson(Handle:TLibFPtrHandle):Integer;
+    function LogWriteEx(Handle:TLibFPtrHandle; Tag:string; Level:Integer; Message:string):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -1375,6 +1389,16 @@ begin
   Flibfptr_read_universal_counter_sum:=nil;
   Flibfptr_read_universal_counter_quantity:=nil;
   Flibfptr_clear_universal_counters_cache:=nil;
+
+  //ver 10.6.3.0
+  Flibfptr_disable_ofd_channel:=nil;
+  Flibfptr_enable_ofd_channel:=nil;
+
+  //ver 10.7.0.0
+  Flibfptr_create_with_id:=nil;
+  Flibfptr_validate_json:=nil;
+  Flibfptr_log_write_ex:=nil;
+
   //
   FAtollLib:=NilHandle;
 end;
@@ -1573,6 +1597,15 @@ begin
     Flibfptr_read_universal_counter_sum:=Tlibfptr_read_universal_counter_sum(DoGetProcAddress(FAtollLib, 'libfptr_read_universal_counter_sum'));
     Flibfptr_read_universal_counter_quantity:=Tlibfptr_read_universal_counter_quantity(DoGetProcAddress(FAtollLib, 'libfptr_read_universal_counter_quantity'));
     Flibfptr_clear_universal_counters_cache:=Tlibfptr_clear_universal_counters_cache(DoGetProcAddress(FAtollLib, 'libfptr_clear_universal_counters_cache'));
+
+    //ver 10.6.3.0
+    Flibfptr_disable_ofd_channel:=Tlibfptr_disable_ofd_channel(DoGetProcAddress(FAtollLib, 'libfptr_disable_ofd_channel'));
+    Flibfptr_enable_ofd_channel:=Tlibfptr_enable_ofd_channel(DoGetProcAddress(FAtollLib, 'libfptr_enable_ofd_channel'));
+
+    //ver 10.7.0.0
+    Flibfptr_create_with_id:=Tlibfptr_create_with_id(DoGetProcAddress(FAtollLib, 'libfptr_create_with_id'));
+    Flibfptr_validate_json:=Tlibfptr_validate_json(DoGetProcAddress(FAtollLib, 'libfptr_validate_json'));
+    Flibfptr_log_write_ex:=Tlibfptr_log_write_ex(DoGetProcAddress(FAtollLib, 'libfptr_log_write_ex'));
   end;
 end;
 
@@ -2889,6 +2922,59 @@ begin
     Result:=Flibfptr_clear_universal_counters_cache(Handle)
   else
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_clear_universal_counters_cache']);
+end;
+
+function TAtollLibraryV10.DisableOfdChannel(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_disable_ofd_channel) then
+    Result:=Flibfptr_disable_ofd_channel(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_disable_ofd_channel']);
+end;
+
+function TAtollLibraryV10.EnableOfdChannel(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_enable_ofd_channel) then
+    Result:=Flibfptr_enable_ofd_channel(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_enable_ofd_channel']);
+end;
+
+function TAtollLibraryV10.CreateWithId(Handle: PLibFPtrHandle; id: string
+  ): integer;
+var
+  FId: TAtollWideString;
+begin
+  if Assigned(Flibfptr_create_with_id) then
+  begin
+    FId:=StringToAtollWideStr(Id);
+    Result:=Flibfptr_create_with_id(Handle, @FId[aFirstStrChar])
+  end
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_create_with_id']);
+end;
+
+function TAtollLibraryV10.ValidateJson(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_validate_json) then
+    Result:=Flibfptr_validate_json(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_validate_json']);
+end;
+
+function TAtollLibraryV10.LogWriteEx(Handle: TLibFPtrHandle; Tag: string;
+  Level: Integer; Message: string): Integer;
+var
+  FTag, FMessage: TAtollWideString;
+begin
+  if Assigned(Flibfptr_log_write_ex) then
+  begin
+    FTag:=StringToAtollWideStr(Tag);
+    FMessage:=StringToAtollWideStr(Message);
+    Result:=Flibfptr_log_write_ex(Handle, @FTag[aFirstStrChar], Level, @FMessage[aFirstStrChar])
+  end
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_log_write_ex']);
 end;
 
 end.
