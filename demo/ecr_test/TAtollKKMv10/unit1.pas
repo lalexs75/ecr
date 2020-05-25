@@ -300,7 +300,7 @@ var
   B, B2: TCrpCodeBuffer;
   B1:TBytes;
   S22, S1, S2: String;
-  i: Integer;
+  i, L: Integer;
 begin
   WriteLog('Формируем тестовый чек c маркировкой');
   InitKassirData;
@@ -433,14 +433,22 @@ begin
   for i:=1 to Length(S22) do
     B1[i-1]:=Ord(S22[i]);
 *)
-  S22:=Edit6.Text;
+  //S22:=Edit6.Text;
 
   S1:=Copy(S22, 3, 14);
   S2:=Copy(S22, 18, 13);
   B2:=MakeCRPTCode($444D, S1, S2);
-  SetLength(B1, SizeOf(B2));
-  Move(B2, B1[0], SizeOf(B2));
 
+  //L:=SizeOf(B2);
+  L:=21;
+  SetLength(B1, L);
+  Move(B2, B1[0], L);
+(*
+  B1[0]:=$8A;
+  B1[1]:=$04;
+  B1[2]:=$15;
+  B1[3]:=$00;
+*)
 
   //FAtollKKMv10.LibraryAtol.SetParamByteArray(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE), B1);
   FAtollKKMv10.LibraryAtol.SetParamByteArray(FAtollKKMv10.Handle, 1162, B1);
@@ -453,6 +461,10 @@ begin
   FAtollKKMv10.LibraryAtol.Registration(FAtollKKMv10.Handle);
   InternalCheckError;
   FAtollKKMv10.LibraryAtol.CloseReceipt(FAtollKKMv10.Handle);
+
+  //FAtollKKMv10.LibraryAtol.ParseMarkingCode();
+  //FAtollKKMv10.LibraryAtol.GetParamByteArray();
+
   InternalCheckError;
 
   //44 4D 02 A3 35 7F 8A B6 4D 64 45 66 78 3A 58 70 36 59 46 64 37

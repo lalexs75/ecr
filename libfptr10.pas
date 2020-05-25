@@ -326,6 +326,10 @@ extern "C"
     LIBFPTR_ERROR_UNIVERSAL_COUNTERS_FAULT,
     LIBFPTR_ERROR_INVALID_TAX_SUM,
     LIBFPTR_ERROR_INVALID_MARKING_CODE_TYPE,
+    LIBFPTR_ERROR_LICENSE_HARD_FAULT,
+    LIBFPTR_ERROR_LICENSE_INVALID_SIGN,
+    LIBFPTR_ERROR_LICENSE_INVALID_SERIAL,
+    LIBFPTR_ERROR_LICENSE_INVALID_TIME,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
@@ -630,6 +634,8 @@ extern "C"
     LIBFPTR_PARAM_LICENSE_VALID_FROM,
     LIBFPTR_PARAM_LICENSE_VALID_UNTIL,
     LIBFPTR_PARAM_MARKING_CODE_TYPE,
+    LIBFPTR_PARAM_SETTING_NAME,
+    LIBFPTR_PARAM_SETTING_TYPE,
 
     LIBFPTR_PARAM_LAST
   );
@@ -1048,7 +1054,8 @@ type
     LIBFPTR_RT_PARSE_COMPLEX_ATTR,
     LIBFPTR_RT_FN_SUM_COUNTERS,
     LIBFPTR_RT_FN_QUANTITY_COUNTERS,
-    LIBFPTR_RT_FN_UNSENT_DOCS_COUNTERS
+    LIBFPTR_RT_FN_UNSENT_DOCS_COUNTERS,
+    LIBFPTR_RT_SETTINGS
   );
   Tlibfptr_records_type = libfptr_records_type;
 
@@ -1171,6 +1178,19 @@ type
     LIBFPTR_MCT_EGAIS_30
   );
   Tlibfptr_marking_code_type = libfptr_marking_code_type;
+
+  libfptr_setting_type = (
+    LIBFPTR_ST_NUMBER = 0,
+    LIBFPTR_ST_STRING,
+    LIBFPTR_ST_BOOL
+  );
+  Tlibfptr_setting_type = libfptr_setting_type;
+
+  libfptr_firmware_type = (
+    LIBFPTR_FWT_FIRMWARE = 0,
+    LIBFPTR_FWT_SCRIPTS = 2
+  );
+  Tlibfptr_firmware_type = libfptr_firmware_type;
 
 const
   LIBFPTR_UC_OTHERS = 4294967295;
@@ -1577,6 +1597,12 @@ type
   Tlibfptr_read_universal_counter_quantity = function(Handle:TLibFPtrHandle):Integer; cdecl;
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_clear_universal_counters_cache(libfptr_handle handle);
   Tlibfptr_clear_universal_counters_cache = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_disable_ofd_channel(libfptr_handle handle);
+  Tlibfptr_disable_ofd_channel = function(Handle:TLibFPtrHandle):Integer; cdecl;
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_enable_ofd_channel(libfptr_handle handle);
+  Tlibfptr_enable_ofd_channel = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;

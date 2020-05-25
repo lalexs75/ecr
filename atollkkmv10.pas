@@ -216,6 +216,10 @@ type
     Flibfptr_read_universal_counter_sum:Tlibfptr_read_universal_counter_sum;
     Flibfptr_read_universal_counter_quantity:Tlibfptr_read_universal_counter_quantity;
     Flibfptr_clear_universal_counters_cache:Tlibfptr_clear_universal_counters_cache;
+
+    //ver 10.6.3.0
+    Flibfptr_disable_ofd_channel:Tlibfptr_disable_ofd_channel;
+    Flibfptr_enable_ofd_channel:Tlibfptr_enable_ofd_channel;
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
