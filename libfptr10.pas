@@ -330,11 +330,20 @@ extern "C"
     LIBFPTR_ERROR_LICENSE_INVALID_SIGN,
     LIBFPTR_ERROR_LICENSE_INVALID_SERIAL,
     LIBFPTR_ERROR_LICENSE_INVALID_TIME,
+    LIBFPTR_ERROR_DOCUMENT_CANCELED,
+    LIBFPTR_ERROR_INVALID_SCRIPT_PARAMS,
+    LIBFPTR_ERROR_CLICHE_TOO_LONG,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
     LIBFPTR_ERROR_INTERRUPTED_BY_PREVIOUS_ERRORS,
-    LIBFPTR_ERROR_DRIVER_SCRIPT_ERROR
+    LIBFPTR_ERROR_DRIVER_SCRIPT_ERROR,
+    LIBFPTR_ERROR_VALIDATE_FUNC_NOT_FOUND,
+    LIBFPTR_ERROR_WEB_FAIL,
+    LIBFPTR_ERROR_WEB_END = 599,
+
+    LIBFPTR_ERROR_USERS_SCRIPTS_BASE = 1000,
+    LIBFPTR_ERROR_USERS_SCRIPTS_END = 1999
   );
 
   TLibFPtr_Error = libfptr_error;
@@ -636,6 +645,10 @@ extern "C"
     LIBFPTR_PARAM_MARKING_CODE_TYPE,
     LIBFPTR_PARAM_SETTING_NAME,
     LIBFPTR_PARAM_SETTING_TYPE,
+    LIBFPTR_PARAM_FONT_WIDTH,
+    LIBFPTR_PARAM_REMOTE_CALL,
+    LIBFPTR_PARAM_SCRIPT_PARAMS,
+    LIBFPTR_PARAM_IGNORE_EMPTY,
 
     LIBFPTR_PARAM_LAST
   );
@@ -869,7 +882,8 @@ type
     LIBFPTR_RT_START_SERVICE,
     LIBFPTR_RT_DISCOUNTS,
     LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS,
-    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS
+    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS,
+    LIBFPTR_RT_CLOSE_SHIFT_REPORTS
   );
   Tlibfptr_report_type = libfptr_report_type;
 
@@ -955,7 +969,8 @@ type
     LIBFPTR_DT_ETHERNET_INFO,
     LIBFPTR_DT_SCRIPTS_INFO,
     LIBFPTR_DT_SHIFT_TOTALS,
-    LIBFPTR_DT_WIFI_INFO
+    LIBFPTR_DT_WIFI_INFO,
+    LIBFPTR_DT_FONT_INFO
   );
   Tlibfptr_kkt_data_type = libfptr_kkt_data_type;
 
@@ -1033,7 +1048,8 @@ type
   libfptr_ofd_channel = (
     LIBFPTR_OFD_CHANNEL_NONE = 0,
     LIBFPTR_OFD_CHANNEL_USB,
-    LIBFPTR_OFD_CHANNEL_PROTO
+    LIBFPTR_OFD_CHANNEL_PROTO,
+    LIBFPTR_OFD_CHANNEL_AUTO = LIBFPTR_OFD_CHANNEL_PROTO
   );
   Tlibfptr_ofd_channel = libfptr_ofd_channel;
 
@@ -1140,7 +1156,8 @@ type
 
   libfptr_script_type = (
     LIBFPTR_SCRIPT_EXECUTABLE = 0,
-    LIBFPTR_SCRIPT_JSON
+    LIBFPTR_SCRIPT_JSON,
+    LIBFPTR_SCRIPT_SETTINGS
   );
   Tlibfptr_script_type = libfptr_script_type;
 
@@ -1207,6 +1224,9 @@ type
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_create(libfptr_handle *handle);
   Tlibfptr_create = function(Handle:PLibFPtrHandle):integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_create_with_id(libfptr_handle *handle, const wchar_t *id);
+  Tlibfptr_create_with_id = function(Handle:PLibFPtrHandle; id:PWchar_t):integer; cdecl;
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_set_settings(libfptr_handle handle, const wchar_t *settings);
   Tlibfptr_set_settings = function(Handle:PLibFPtrHandle; Settings:PWchar_t):integer; cdecl;
@@ -1603,6 +1623,13 @@ type
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_enable_ofd_channel(libfptr_handle handle);
   Tlibfptr_enable_ofd_channel = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_validate_json(libfptr_handle handle);
+  Tlibfptr_validate_json = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_log_write_ex(libfptr_handle handle,
+  //                                                             const wchar_t *tag, int level,
+  //                                                             const wchar_t *message);
+  Tlibfptr_log_write_ex = function(Handle:TLibFPtrHandle; Tag:PWchar_t; Level:Integer; Message:PWchar_t):Integer; cdecl;
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;
