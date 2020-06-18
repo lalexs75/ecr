@@ -980,6 +980,9 @@ begin
       gpmKredit:SetAttributeInt(1214, 6);
       gpmKreditPay:SetAttributeInt(1214, 7);
     end;
+
+    if GoodsInfo.GoodsType <> gtNone then
+      SetAttributeInt(1212, Ord(GoodsInfo.GoodsType));
     //Сама регистрация
     Result:=FLibrary.Registration(FHandle);
     InternalCheckError;
@@ -1603,9 +1606,9 @@ begin
     Flibfptr_enable_ofd_channel:=Tlibfptr_enable_ofd_channel(DoGetProcAddress(FAtollLib, 'libfptr_enable_ofd_channel'));
 
     //ver 10.7.0.0
-    Flibfptr_create_with_id:=Tlibfptr_create_with_id(DoGetProcAddress(FAtollLib, 'libfptr_create_with_id'));
-    Flibfptr_validate_json:=Tlibfptr_validate_json(DoGetProcAddress(FAtollLib, 'libfptr_validate_json'));
-    Flibfptr_log_write_ex:=Tlibfptr_log_write_ex(DoGetProcAddress(FAtollLib, 'libfptr_log_write_ex'));
+    //Flibfptr_create_with_id:=Tlibfptr_create_with_id(DoGetProcAddress(FAtollLib, 'libfptr_create_with_id'));
+    //Flibfptr_validate_json:=Tlibfptr_validate_json(DoGetProcAddress(FAtollLib, 'libfptr_validate_json'));
+    //Flibfptr_log_write_ex:=Tlibfptr_log_write_ex(DoGetProcAddress(FAtollLib, 'libfptr_log_write_ex'));
   end;
 end;
 

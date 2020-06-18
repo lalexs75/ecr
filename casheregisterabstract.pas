@@ -82,6 +82,38 @@ type
      gpmKredit,
      gpmKreditPay
     );
+
+  TGoodsType =
+      (gtNone = 0,                            //0 - По умолчанию
+       gtCommodity  = 1,                      //1 - товар
+       gtExcise = 2,                          //2 - подакцизный товар
+       gtJob = 3,                             //3 - работа
+       gtService = 4,                         //4 - услуга
+       gtGamblingBet = 5,                     //5 - ставка азартной игры
+       gtGamblingPrize = 6,                   //6 - выигрыш азартной игры
+       gtLottery = 7,                         //7 - лотерейный билет
+       gtLotteryPrize = 8,                    //8 - выигрыш лотереи
+       gtIntellectualActivity = 9,            //9 - предоставление результатов интерелектуальной деятельности
+       gtPayment = 10,                        //или 10 - платеж
+       gtAgentCommission = 11,                //или 11 - агентское вознаграждение
+       gtComposite = 12,                      //(устаревшее) или pay или 12 - выплата
+       gtAnother = 13,                        //или 13 - иной предмет расчета
+       gtProprietaryLaw = 14,                 //или 14 - имущественное право
+       gtNonOperatingIncome = 15,             //или 15 - внереализационный доход
+       gtOtherContributions = 16,
+       gtInsuranceContributions = 16,         //(устаревшее) или otherContributions или 16 - иные платежи и взносы
+       gtMerchantTax = 17,                    //или 17 - торговый сбор
+       gtResortFee = 18,                      //или 18 - курортный сбор
+       gtDeposit = 19,                        //или 19 - залог
+       gtConsumption = 20,                    //или 20 - расход
+       gtSoleProprietorCPIContributions = 21, //или 21 - взносы на ОПС ИП
+       gtCpiContributions = 22,               //или 22 - взносы на ОПС
+       soleProprietorCMIContributions = 23,   //или 23 - взносы на ОМС ИП
+       gtCmiContributions = 24,               //или 24 - взносы на ОМС
+       gtCsiContributions = 25,               //или 25 - взносы на ОСС
+       gtCasinoPayment = 26                   //или 26 - платеж казино
+      );
+
   ECashRegisterAbstract = class(Exception);
 
   TEcrTextAlign = (etaLeft, etaCenter, etaRight);
@@ -201,6 +233,7 @@ type
     FDeclarationNumber: String;
     FGoodsNomenclatureCode: TGoodsNomenclatureCode;
     FGoodsPayMode: TGoodsPayMode;
+    FGoodsType: TGoodsType;
     FName: string;
     FPrice: Currency;
     FQuantity: Double;
@@ -219,6 +252,7 @@ type
     property SuplierInfo:TCounteragentInfo read FSuplierInfo;
     property GoodsPayMode:TGoodsPayMode read FGoodsPayMode write FGoodsPayMode;
     property GoodsNomenclatureCode:TGoodsNomenclatureCode read FGoodsNomenclatureCode write FGoodsNomenclatureCode;
+    property GoodsType:TGoodsType read FGoodsType write FGoodsType;
   end;
 
   { TCashRegisterAbstract }
@@ -499,6 +533,7 @@ begin
   FDeclarationNumber:='';
   FGoodsNomenclatureCode.Clear;
   FSuplierInfo.Clear;
+  FGoodsType:=gtNone;
 end;
 
 { TCheckInfo }

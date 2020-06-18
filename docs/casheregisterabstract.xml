@@ -77,6 +77,40 @@
       </element><element name="TCheckPaperInfo.LineLength"><short>Ширины ленты в символах</short>
       </element><element name="TCheckPaperInfo.LineLengthPix"><short>Ширина ленты в точках (пикселах)</short>
       </element>
+    <element name="TGoodsType"><short>Тип предемата расчта</short>
+      </element><element name="TGoodsType.gtNone"><short>0 - По умолчанию</short>
+      </element><element name="TGoodsType.gtCommodity"><short>1 - товар</short>
+      </element><element name="TGoodsType.gtExcise"><short>2 - подакцизный товар</short>
+      </element><element name="TGoodsType.gtJob"><short>3 - работа</short>
+      </element><element name="TGoodsType.gtService"><short>4 - услуга</short>
+      </element><element name="TGoodsType.gtGamblingBet"><short>5 - ставка азартной игры</short>
+      </element><element name="TGoodsType.gtGamblingPrize"><short>6 - выигрыш азартной игры</short>
+      </element><element name="TGoodsType.gtLottery"><short>7 - лотерейный билет</short>
+      </element><element name="TGoodsType.gtLotteryPrize"><short>8 - выигрыш лотереи</short>
+      </element><element name="TGoodsType.gtIntellectualActivity"><short>9 - предоставление результатов интерелектуальной деятельности</short>
+      </element><element name="TGoodsType.gtPayment"><short>10 - платеж</short>
+      </element><element name="TGoodsType.gtAgentCommission"><short>11 - агентское вознаграждение</short>
+      </element><element name="TGoodsType.gtComposite"><short>12 - выплата</short><descr>(устаревшее)
+</descr>
+      </element><element name="TGoodsType.gtAnother"><short>13 - иной предмет расчета</short>
+      </element><element name="TGoodsType.gtProprietaryLaw"><short>14 - имущественное право</short>
+      </element><element name="TGoodsType.gtNonOperatingIncome"><short>15 - внереализационный доход</short>
+      </element><element name="TGoodsType.gtOtherContributions"><short>16 - иные платежи и взносы</short><descr>(устаревшее)
+</descr>
+      </element><element name="TGoodsType.gtInsuranceContributions"><short>16 - иные платежи и взносы</short><descr>(устаревшее)
+</descr>
+      </element><element name="TGoodsType.gtMerchantTax"><short>17 - торговый сбор </short>
+      </element><element name="TGoodsType.gtResortFee"><short>18 - курортный сбор</short>
+      </element><element name="TGoodsType.gtDeposit"><short>19 - залог</short>
+      </element><element name="TGoodsType.gtConsumption"><short>20 - расход</short>
+      </element><element name="TGoodsType.gtSoleProprietorCPIContributions"><short>21 - взносы на ОПС ИП</short>
+      </element><element name="TGoodsType.gtCpiContributions"><short>22 - взносы на ОПС</short>
+      </element><element name="TGoodsType.soleProprietorCMIContributions"><short>23 - взносы на ОМС ИП</short>
+      </element><element name="TGoodsType.gtCmiContributions"><short>24 - взносы на ОМС</short>
+      </element><element name="TGoodsType.gtCsiContributions"><short>25 - взносы на ОСС</short>
+      </element><element name="TGoodsType.gtCasinoPayment"><short>26 - платеж казино</short>
+      </element><element name="TGoodsInfo.GoodsType"><short>Тип предмета расчёта</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
