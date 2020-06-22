@@ -563,14 +563,14 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     FLibrary.SetParamStr(FHandle, 1021, UserName);
-    InternalCheckError;
+//    InternalCheckError;
 {    if Password<>'' then
       FLibrary.SetParamStr(FHandle, 1203, Password);}
 
     if KassaUserINN <> '' then
     begin
       FLibrary.SetParamStr(FHandle, 1203, KassaUserINN);
-      InternalCheckError;
+//      InternalCheckError;
     end;
     FLibrary.OperatorLogin(FHandle);
     InternalCheckError;
