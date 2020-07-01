@@ -608,7 +608,7 @@ end;
 procedure TAtollKKMv10.InternalCloseKKM;
 begin
   FLibrary.Close(FHandle);
-  FHandle:=nil;
+  //FHandle:=nil;
 end;
 
 function TAtollKKMv10.InternalCheckError: Integer;
@@ -675,7 +675,10 @@ begin
   begin
     if Assigned(FLibrary) then
       if Assigned(FHandle) then
+      begin
         FLibrary.DestroyHandle(FHandle);
+        FHandle:=nil;
+      end;
   end;
 end;
 
