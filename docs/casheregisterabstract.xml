@@ -111,6 +111,11 @@
       </element><element name="TGoodsType.gtCasinoPayment"><short>26 - платеж казино</short>
       </element><element name="TGoodsInfo.GoodsType"><short>Тип предмета расчёта</short>
       </element>
+    <element name="TGoodsPayMode.gpmPrePay100"><short>предоплата 100% </short>
+      </element><element name="TGoodsPayMode.gpmFullPay"><short>полный расчет</short>
+      </element><element name="TGoodsPayMode.gpmKredit"><short>передача в кредит </short>
+      </element><element name="TGoodsPayMode.gpmKreditPay"><short>оплата кредита </short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
