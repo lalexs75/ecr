@@ -237,6 +237,19 @@
       </element><element name="libfptr_power_source_type.LIBFPTR_PST_RTC_BATTERY"><short>батарея часов</short>
       </element><element name="libfptr_power_source_type.LIBFPTR_PST_BATTERY"><short>встроенные аккумуляторы</short>
       </element>
+    <element name="libfptr_error.LIBFPTR_ERROR_VALIDATE_FUNC_NOT_FOUND"><short>Функция проверки задания не найдена</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DRIVER_SCRIPT_ERROR"><short>Ошибка скрипта драйвера</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_CLICHE_TOO_LONG"><short>Длина клише превышает максимальное значение</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_SCRIPT_PARAMS"><short>Некорректные параметры скрипта</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_DOCUMENT_CANCELED"><short>Документ был отменен</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LICENSE_INVALID_TIME"><short>Срок действия лицензии истёк</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LICENSE_INVALID_SERIAL"><short>Лицензия не подходит для данной ККТ</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LICENSE_INVALID_SIGN"><short>Подпись лицензии некорректна</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_LICENSE_HARD_FAULT"><short>Аппаратная ошибка при сохранении лицензии</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_MARKING_CODE_TYPE"><short>Некорректное значение типа кода маркировки</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_TAX_SUM"><short>Некорректная сумма налога</short>
+      </element><element name="libfptr_error.LIBFPTR_ERROR_UNIVERSAL_COUNTERS_FAULT"><short>Ошибка универсальных счетчиков</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
