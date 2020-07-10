@@ -115,6 +115,7 @@
       </element><element name="TGoodsPayMode.gpmFullPay"><short>полный расчет</short>
       </element><element name="TGoodsPayMode.gpmKredit"><short>передача в кредит </short>
       </element><element name="TGoodsPayMode.gpmKreditPay"><short>оплата кредита </short>
+      </element><element name="TGoodsPayMode.gpmPartialPayAndKredit"><short>частичный расчет и кредит</short>
       </element>
     </module>
   </package>
