@@ -39,7 +39,7 @@ object Form1: TForm1
         Left = 6
         Height = 33
         Top = 6
-        Width = 84
+        Width = 83
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Simple test'
@@ -50,10 +50,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button1
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet1
-        Left = 96
+        Left = 95
         Height = 33
         Top = 6
-        Width = 95
+        Width = 94
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Standart test'
@@ -64,7 +64,7 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button2
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet1
-        Left = 197
+        Left = 195
         Height = 33
         Top = 6
         Width = 98
@@ -78,7 +78,7 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button3
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet1
-        Left = 301
+        Left = 299
         Height = 33
         Top = 6
         Width = 160
@@ -128,7 +128,7 @@ object Form1: TForm1
         Left = 20
         Height = 17
         Top = 180
-        Width = 175
+        Width = 173
         Caption = 'Код маркировки со сканера'
         ParentColor = False
       end

@@ -691,7 +691,9 @@ begin
     FLibrary.QueryData(FHandle);
     InternalCheckError;
     if ErrorCode = 0 then
+    begin
       Result:=FLibrary.GetParamInt(FHandle, Ord(LIBFPTR_PARAM_RECEIPT_NUMBER));
+    end;
   end;
 end;
 (*

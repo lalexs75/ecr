@@ -3,13 +3,13 @@
   <ProjectSession>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="63">
+    <Units Count="66">
       <Unit0>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="14" Y="17"/>
-        <UsageCount Value="168"/>
+        <UsageCount Value="171"/>
       </Unit0>
       <Unit1>
         <Filename Value="unit1.pas"/>
@@ -18,9 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <TopLine Value="396"/>
-        <CursorPos X="5" Y="466"/>
-        <UsageCount Value="168"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="1078"/>
+        <CursorPos Y="1095"/>
+        <UsageCount Value="171"/>
         <Bookmarks Count="2">
           <Item0 X="91" Y="840" ID="2"/>
           <Item1 X="5" Y="883" ID="1"/>
@@ -137,7 +138,7 @@
         <Filename Value="../../../kkm_atol.pas"/>
         <UnitName Value="KKM_Atol"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
@@ -162,20 +163,19 @@
       </Unit20>
       <Unit21>
         <Filename Value="../../../libfptr10.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="15"/>
         <CursorPos X="3" Y="33"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="../../../atollkkmv10.pas"/>
         <UnitName Value="AtollKKMv10"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="206"/>
-        <CursorPos X="14" Y="222"/>
-        <UsageCount Value="27"/>
+        <TopLine Value="763"/>
+        <CursorPos Y="780"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit22>
       <Unit23>
@@ -456,139 +456,168 @@
       </Unit60>
       <Unit61>
         <Filename Value="/home/alexs/work/demos/Test_Trade/Demo_81_Atoll_Native/c-headers/libfptr10--10.7.0.0.h"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="1001"/>
         <CursorPos X="28" Y="1030"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit61>
       <Unit62>
         <Filename Value="/home/alexs/work/demos/Test_Trade/Demo_81_Atoll_Native/c-headers/filedifference--10.6.3.0-10.7.0.0.diff"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="85"/>
         <CursorPos X="64" Y="103"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Diff"/>
       </Unit62>
+      <Unit63>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="546"/>
+        <CursorPos Y="568"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit63>
+      <Unit64>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/dynlib.inc"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="39"/>
+        <CursorPos Y="59"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/unix/dynlibs.inc"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="16"/>
+        <CursorPos Y="39"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit65>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="../../../libfptr10.pas"/>
-        <Caret Line="1240" Column="121" TopLine="1211"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1408" TopLine="1387"/>
       </Position1>
       <Position2>
-        <Filename Value="../../../libfptr10.pas"/>
-        <Caret Line="1241" Column="93" TopLine="1212"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1409" TopLine="1387"/>
       </Position2>
       <Position3>
-        <Filename Value="../../../libfptr10.pas"/>
-        <Caret Line="1243" Column="128" TopLine="1214"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1410" TopLine="1387"/>
       </Position3>
       <Position4>
-        <Filename Value="../../../libfptr10.pas"/>
-        <Caret Line="1244" Column="94" TopLine="1215"/>
+        <Filename Value="../../../atollkkmv10.pas"/>
+        <Caret Line="1438" TopLine="1421"/>
       </Position4>
       <Position5>
-        <Filename Value="../../../libfptr10.pas"/>
-        <Caret Line="1261" Column="100" TopLine="1232"/>
+        <Filename Value="../../../atollkkmv10.pas"/>
+        <Caret Line="1439" TopLine="1421"/>
       </Position5>
       <Position6>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="72" Column="5" TopLine="56"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="552" TopLine="534"/>
       </Position6>
       <Position7>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="243" Column="66" TopLine="214"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="553" TopLine="534"/>
       </Position7>
       <Position8>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="251" Column="30" TopLine="222"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="556" TopLine="546"/>
       </Position8>
       <Position9>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="310" Column="73" TopLine="282"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="557" TopLine="546"/>
       </Position9>
       <Position10>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="315" Column="73" TopLine="287"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="558" TopLine="546"/>
       </Position10>
       <Position11>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="319" Column="72" TopLine="291"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="561" TopLine="546"/>
       </Position11>
       <Position12>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="2311" TopLine="2299"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="565" TopLine="546"/>
       </Position12>
       <Position13>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="407" Column="15" TopLine="387"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="566" TopLine="546"/>
       </Position13>
       <Position14>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="2950" Column="11" TopLine="2922"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="568" TopLine="546"/>
       </Position14>
       <Position15>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="408" Column="58" TopLine="391"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/dynlib.inc"/>
+        <Caret Line="57" TopLine="39"/>
       </Position15>
       <Position16>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="2962" Column="74" TopLine="2930"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/dynlib.inc"/>
+        <Caret Line="58" TopLine="39"/>
       </Position16>
       <Position17>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="409" Column="100" TopLine="392"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/unix/dynlibs.inc"/>
+        <Caret Line="23" TopLine="16"/>
       </Position17>
       <Position18>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="2974" Column="73" TopLine="2940"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/unix/dynlibs.inc"/>
+        <Caret Line="25" TopLine="16"/>
       </Position18>
       <Position19>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="227" Column="14" TopLine="211"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/unix/dynlibs.inc"/>
+        <Caret Line="39" TopLine="16"/>
       </Position19>
       <Position20>
-        <Filename Value="../../../atollkkmv10.pas"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/dynlib.inc"/>
+        <Caret Line="59" TopLine="39"/>
       </Position20>
       <Position21>
         <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="149" Column="22" TopLine="121"/>
+        <Caret Line="1439" Column="40" TopLine="1421"/>
       </Position21>
       <Position22>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="227" Column="23" TopLine="199"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1095" TopLine="1078"/>
       </Position22>
       <Position23>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="1322" Column="21" TopLine="1294"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1097" TopLine="1078"/>
       </Position23>
       <Position24>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="1400" Column="21" TopLine="1372"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1098" TopLine="1078"/>
       </Position24>
       <Position25>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="1530" Column="23" TopLine="1502"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1099" TopLine="1078"/>
       </Position25>
       <Position26>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="1608" Column="23" TopLine="1580"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="1043" Column="38" TopLine="1031"/>
       </Position26>
       <Position27>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="2429" Column="33" TopLine="2397"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="175" Column="15" TopLine="147"/>
       </Position27>
       <Position28>
-        <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="2975" Column="81" TopLine="2942"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="831" Column="86" TopLine="817"/>
       </Position28>
       <Position29>
         <Filename Value="../../../atollkkmv10.pas"/>
-        <Caret Line="2976" Column="81" TopLine="2945"/>
+        <Caret Line="595" TopLine="578"/>
       </Position29>
+      <Position30>
+        <Filename Value="../../../atollkkmv10.pas"/>
+        <Caret Line="780" TopLine="763"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -609,13 +638,6 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../../atollkkmv10.pas"/>
         <Line Value="819"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../../atollkkmv10.pas"/>
-        <Line Value="780"/>
       </Item>
       <Item>
         <Kind Value="bpkSource"/>

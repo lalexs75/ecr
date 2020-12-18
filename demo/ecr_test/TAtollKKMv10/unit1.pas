@@ -828,7 +828,7 @@ begin
   {$IFDEF CPU386}
   Result:=Result + AppendPathDelim('linux-x86');
   {$ENDIF}
-  Result:=Result + slibFPPtr10FileName;
+  Result:={Result} '/home/alexs/install/install/atol/v10/10.7.0.0/10.7.0.0/linux-x64/'+ slibFPPtr10FileName;
   {$ENDIF}
 end;
 
