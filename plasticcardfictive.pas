@@ -46,6 +46,7 @@ type
 procedure Register;
 
 implementation
+uses Math;
 
 procedure Register;
 begin
@@ -77,11 +78,25 @@ end;
 procedure TPlasticCardFictive.Pay(APaySum: Currency; ACheckNum: integer);
 begin
   //Фиктивный метод
+  FSlipInfo:='Фиктивный СЛИП' + LineEnding +
+  'Фиктивный терминал : XXXXXXXXX' +
+  'Адрес организации : XXXXXXXXXX' +
+  '      ОПЛАТА' +
+  'Cумма : ' +FloatToStr(APaySum)+ LineEnding +
+  'Комиссия : ' + FloatToStr(RoundTo(APaySum / 100, -2))+ LineEnding +
+  'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
+  'Фиктивный СЛИП' ;
 end;
 
 procedure TPlasticCardFictive.ReportItog;
 begin
-
+  FSlipInfo:='Фиктивный СЛИП' + LineEnding +
+  'Фиктивный терминал : XXXXXXXXX' +
+  'Адрес организации : XXXXXXXXXX' +
+  '      ОТЧЁТ' +
+  'Итог : ' +FloatToStr(12312)+ LineEnding +
+  'Дата отчёта ' +DateTimeToStr(Now)+ LineEnding +
+  'Фиктивный СЛИП' ;
 end;
 
 procedure TPlasticCardFictive.EchoTest;
@@ -91,13 +106,27 @@ end;
 
 procedure TPlasticCardFictive.Revert(ARevertSum: Currency; ACheckNum: string);
 begin
-
+  FSlipInfo:='Фиктивный СЛИП' + LineEnding +
+  'Фиктивный терминал : XXXXXXXXX' +
+  'Адрес организации : XXXXXXXXXX' +
+  '      ВОЗВРАТ' +
+  'Cумма : ' +FloatToStr(ARevertSum)+ LineEnding +
+  'Комиссия : ' + FloatToStr(RoundTo(ARevertSum / 100, -2))+ LineEnding +
+  'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
+  'Фиктивный СЛИП' ;
 end;
 
 procedure TPlasticCardFictive.Discard(ADiscardSum: Currency; ACheckNum: string;
   ADocID: string);
 begin
-
+  FSlipInfo:='Фиктивный СЛИП' + LineEnding +
+  'Фиктивный терминал : XXXXXXXXX' +
+  'Адрес организации : XXXXXXXXXX' +
+  '      ОТМЕНА' +
+  'Cумма : ' +FloatToStr(ADiscardSum)+ LineEnding +
+  'Комиссия : ' + FloatToStr(RoundTo(ADiscardSum / 100, -2))+ LineEnding +
+  'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
+  'Фиктивный СЛИП' ;
 end;
 
 procedure TPlasticCardFictive.ReportOperList;
