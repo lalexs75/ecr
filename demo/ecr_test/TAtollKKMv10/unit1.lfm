@@ -11,8 +11,8 @@ object Form1: TForm1
   LCLVersion = '2.1.0.0'
   object Memo1: TMemo
     Left = 0
-    Height = 144
-    Top = 656
+    Height = 328
+    Top = 472
     Width = 1460
     Align = alClient
     Lines.Strings = (
@@ -22,7 +22,7 @@ object Form1: TForm1
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 651
+    Height = 467
     Top = 0
     Width = 1460
     ActivePage = TabSheet1
@@ -31,7 +31,7 @@ object Form1: TForm1
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ClientHeight = 620
+      ClientHeight = 436
       ClientWidth = 1450
       object Button1: TButton
         AnchorSideLeft.Control = TabSheet1
@@ -142,7 +142,7 @@ object Form1: TForm1
     end
     object TabSheet2: TTabSheet
       Caption = 'Отчёты'
-      ClientHeight = 620
+      ClientHeight = 436
       ClientWidth = 1450
       object Button5: TButton
         AnchorSideLeft.Control = TabSheet2
@@ -174,7 +174,7 @@ object Form1: TForm1
     end
     object TabSheet3: TTabSheet
       Caption = 'Сервисные параметры'
-      ClientHeight = 620
+      ClientHeight = 436
       ClientWidth = 1450
       object Button7: TButton
         AnchorSideLeft.Control = TabSheet3
@@ -369,7 +369,7 @@ object Form1: TForm1
     end
     object TabSheet4: TTabSheet
       Caption = 'Регистрация'
-      ClientHeight = 620
+      ClientHeight = 436
       ClientWidth = 1450
       object Button8: TButton
         AnchorSideRight.Control = TabSheet4
@@ -1193,7 +1193,7 @@ object Form1: TForm1
     end
     object TabSheet5: TTabSheet
       Caption = 'Параметры организации'
-      ClientHeight = 620
+      ClientHeight = 436
       ClientWidth = 1450
       object Label4: TLabel
         AnchorSideLeft.Control = TabSheet5
@@ -1282,7 +1282,7 @@ object Form1: TForm1
     end
     object TabSheet6: TTabSheet
       Caption = 'Прочие функции'
-      ClientHeight = 620
+      ClientHeight = 436
       ClientWidth = 1450
       object Button13: TButton
         AnchorSideLeft.Control = TabSheet6
@@ -1562,7 +1562,7 @@ object Form1: TForm1
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 651
+    Top = 467
     Width = 1460
     Align = alTop
     ResizeAnchor = akTop

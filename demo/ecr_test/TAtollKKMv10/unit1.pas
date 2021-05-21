@@ -211,8 +211,10 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  R: Integer;
+  R, DocumentNumber: Integer;
   S: UTF8String;
+  S1: String;
+  D1: TDateTime;
 begin
   InitAtollInstance;
 
@@ -225,7 +227,8 @@ begin
     if R = 0 then
     begin
       ShowStatus('CreateHandle');
-
+      FAtollInstance.Open(KKM_Handle);
+(*
       S:=FAtollInstance.GetSettings(KKM_Handle);
       ShowStatus('GetSettings');
       WriteLog('GetSettings = '+S);
@@ -245,7 +248,42 @@ begin
       //LIBFPTR_SETTING_OFD_CHANNEL - канал для обмена с ОФД. По умолчанию - LIBFPTR_OFD_CHANNEL_NONE. Для корректной работы требуется дополнительная настройка ККТ (настройка #276, см. Настройки ККТ). Возможные значения:
       WriteLog('LIBFPTR_SETTING_OFD_CHANNEL = '+FAtollInstance.GetSingleSetting(KKM_Handle, LIBFPTR_SETTING_OFD_CHANNEL));
 
+*)
+      //libfptr_set_param_int(fptr, LIBFPTR_PARAM_FN_DATA_TYPE, LIBFPTR_FNDT_LAST_DOCUMENT);
+      FAtollInstance.SetParamInt(KKM_Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_LAST_DOCUMENT));
+      ///R:=FAtollInstance.ErrorCode(KKM_Handle);
+      //S:=FAtollInstance.ErrorDescription(KKM_Handle);
+      //WriteLog(S);
+      ///libfptr_fn_query_data(fptr);
+      R:=FAtollInstance.fnQueryData(KKM_Handle);
 
+//      FAtollInstance.SetParamInt(KKM_Handle, LIBFPTR_PARAM_DATA_TYPE, Ord(LIBFPTR_FNDT_TAG_VALUE));
+//      R:=FAtollInstance.QueryData(KKM_Handle);
+      R:=FAtollInstance.ErrorCode(KKM_Handle);
+      S:=FAtollInstance.ErrorDescription(KKM_Handle);
+      WriteLog(S);
+      //int documentNumber      = libfptr_get_param_int(fptr, LIBFPTR_PARAM_DOCUMENT_NUMBER);
+      DocumentNumber:=FAtollInstance.GetParamInt(KKM_Handle, Ord(LIBFPTR_PARAM_DOCUMENT_NUMBER));
+      R:=FAtollInstance.ErrorCode(KKM_Handle);
+      S:=FAtollInstance.ErrorDescription(KKM_Handle);
+      WriteLog(S);
+      WriteLog('LIBFPTR_PARAM_DOCUMENT_NUMBER = '+IntToStr(DocumentNumber));
+
+
+      S1:=FAtollInstance.GetParamStr(KKM_Handle, Ord(LIBFPTR_PARAM_FISCAL_SIGN));
+      R:=FAtollInstance.ErrorCode(KKM_Handle);
+      S:=FAtollInstance.ErrorDescription(KKM_Handle);
+      WriteLog(S);
+      WriteLog('LIBFPTR_PARAM_FISCAL_SIGN = '+S1);
+
+      D1:=FAtollInstance.GetParamDateTime(KKM_Handle, Ord(LIBFPTR_PARAM_DATE_TIME));
+      R:=FAtollInstance.ErrorCode(KKM_Handle);
+      S:=FAtollInstance.ErrorDescription(KKM_Handle);
+      WriteLog(S);
+      WriteLog('LIBFPTR_PARAM_FISCAL_SIGN = '+DateTimeToStr(D1));
+
+
+      FAtollInstance.Close(KKM_Handle);
       FAtollInstance.DestroyHandle(KKM_Handle);
       WriteLog('DestroyHandle');
     end
@@ -468,6 +506,7 @@ begin
   InternalCheckError;
 
   //44 4D 02 A3 35 7F 8A B6 4D 64 45 66 78 3A 58 70 36 59 46 64 37
+  WriteLog('FD number = ' + IntToStr(FAtollKKMv10.FDNumber));
   FAtollKKMv10.Close;
   FAtollKKMv10.Connected:=false;
 end;
@@ -828,7 +867,7 @@ begin
   {$IFDEF CPU386}
   Result:=Result + AppendPathDelim('linux-x86');
   {$ENDIF}
-  Result:={Result} '/home/alexs/install/install/atol/v10/10.7.0.0/10.7.0.0/linux-x64/'+ slibFPPtr10FileName;
+  Result:={Result} '/home/alexs/install/install/atol/v10/10.8.1.0/linux-x64/'+ slibFPPtr10FileName;
   {$ENDIF}
 end;
 
