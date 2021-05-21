@@ -333,6 +333,13 @@ extern "C"
     LIBFPTR_ERROR_DOCUMENT_CANCELED,
     LIBFPTR_ERROR_INVALID_SCRIPT_PARAMS,
     LIBFPTR_ERROR_CLICHE_TOO_LONG,
+    LIBFPTR_ERROR_COMMODITIES_TABLE_FAULT,
+    LIBFPTR_ERROR_COMMODITIES_TABLE,
+    LIBFPTR_ERROR_COMMODITIES_TABLE_INVALID_TAG,
+    LIBFPTR_ERROR_COMMODITIES_TABLE_INVALID_TAG_SIZE,
+    LIBFPTR_ERROR_COMMODITIES_TABLE_NO_TAG_DATA,
+    LIBFPTR_ERROR_COMMODITIES_TABLE_NO_FREE_MEMORY,
+    LIBFPTR_ERROR_INVALID_CACHE,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
     LIBFPTR_ERROR_RECEIPT_PARSE_ERROR,
@@ -341,6 +348,12 @@ extern "C"
     LIBFPTR_ERROR_VALIDATE_FUNC_NOT_FOUND,
     LIBFPTR_ERROR_WEB_FAIL,
     LIBFPTR_ERROR_WEB_END = 599,
+
+    LIBFPTR_ERROR_BASE_RPC = 600,
+    LIBFPTR_ERROR_RCP_SERVER_BUSY,
+    LIBFPTR_ERROR_RCP_SERVER_VERSION,
+    LIBFPTR_ERROR_RCP_SERVER_EXCHANGE,
+    LIBFPTR_ERROR_RPC_END = 699,
 
     LIBFPTR_ERROR_USERS_SCRIPTS_BASE = 1000,
     LIBFPTR_ERROR_USERS_SCRIPTS_END = 1999
@@ -649,6 +662,18 @@ extern "C"
     LIBFPTR_PARAM_REMOTE_CALL,
     LIBFPTR_PARAM_SCRIPT_PARAMS,
     LIBFPTR_PARAM_IGNORE_EMPTY,
+    LIBFPTR_PARAM_METHOD_DATA,
+    LIBFPTR_PARAM_METHOD_RESULT,
+    LIBFPTR_PARAM_RPC_SERVER_OS,
+    LIBFPTR_PARAM_RPC_SERVER_VERSION,
+    LIBFPTR_PARAM_RPC_DRIVER_VERSION,
+    LIBFPTR_PARAM_LOCKED,
+    LIBFPTR_PARAM_BOUND,
+    LIBFPTR_PARAM_COMMODITIES_TABLE_FAULT,
+    LIBFPTR_PARAM_HAS_ADDITIONAL_DATA,
+    LIBFPTR_PARAM_FISCAL_SIGN_ARCHIVE,
+    LIBFPTR_PARAM_COMMAND_GROUP,
+    LIBFPTR_PARAM_ERROR_CODE,
 
     LIBFPTR_PARAM_LAST
   );
@@ -677,7 +702,8 @@ extern "C"
     LIBFPTR_MODEL_ATOL_SIGMA_7F = 90,
     LIBFPTR_MODEL_ATOL_SIGMA_8F = 91,
     LIBFPTR_MODEL_KAZNACHEY_FA = 76,
-    LIBFPTR_MODEL_ATOL_1F = 93
+    LIBFPTR_MODEL_ATOL_1F = 93,
+    LIBFPTR_MODEL_ATOL_22v2F = 95
   );
   Tlibfptr_model = libfptr_model;
 
@@ -705,6 +731,8 @@ const
   LIBFPTR_SETTING_USE_DOCUMENTS_JOURNAL       = 'UseDocumentsJournal';
   LIBFPTR_SETTING_AUTO_RECONNECT              = 'AutoReconnect';
   LIBFPTR_SETTING_INVERT_CASH_DRAWER_STATUS   = 'InvertCashDrawerStatus';
+  LIBFPTR_SETTING_REMOTE_SERVER_ADDR          = 'RemoteServerAddr';
+  LIBFPTR_SETTING_REMOTE_SERVER_CONNECTION_TIMEOUT = 'RemoteServerConnectionTimeout';
 
 type
   libfptr_port = (
@@ -910,7 +938,8 @@ type
     LIBFPTR_TAX_VAT0,
     LIBFPTR_TAX_NO,
     LIBFPTR_TAX_VAT20,
-    LIBFPTR_TAX_VAT120
+    LIBFPTR_TAX_VAT120,
+    LIBFPTR_TAX_INVALID
   );
   Tlibfptr_tax_type = libfptr_tax_type;
 
@@ -970,7 +999,8 @@ type
     LIBFPTR_DT_SCRIPTS_INFO,
     LIBFPTR_DT_SHIFT_TOTALS,
     LIBFPTR_DT_WIFI_INFO,
-    LIBFPTR_DT_FONT_INFO
+    LIBFPTR_DT_FONT_INFO,
+    LIBFPTR_DT_SOFTLOCK_STATUS
   );
   Tlibfptr_kkt_data_type = libfptr_kkt_data_type;
 
@@ -1071,7 +1101,8 @@ type
     LIBFPTR_RT_FN_SUM_COUNTERS,
     LIBFPTR_RT_FN_QUANTITY_COUNTERS,
     LIBFPTR_RT_FN_UNSENT_DOCS_COUNTERS,
-    LIBFPTR_RT_SETTINGS
+    LIBFPTR_RT_SETTINGS,
+    LIBFPTR_RT_RUN_COMMAND
   );
   Tlibfptr_records_type = libfptr_records_type;
 
@@ -1630,6 +1661,12 @@ type
   //                                                             const wchar_t *tag, int level,
   //                                                             const wchar_t *message);
   Tlibfptr_log_write_ex = function(Handle:TLibFPtrHandle; Tag:PWchar_t; Level:Integer; Message:PWchar_t):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_reflection_call(libfptr_handle handle);
+  Tlibfptr_reflection_call = function(Handle:TLibFPtrHandle):Integer; cdecl;
+
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_get_remote_server_info(libfptr_handle handle);
+  Tlibfptr_get_remote_server_info = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;

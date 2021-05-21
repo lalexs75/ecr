@@ -431,6 +431,7 @@ type
     procedure SetConnected(AValue: boolean); override;
 
     function GetCheckNumber: integer; override;
+    function GetFDNumber: integer; override;
     //function GetCheckType: TCheckType; override;
     //procedure SetCheckType(AValue: TCheckType); override;
   public
@@ -696,6 +697,23 @@ begin
     end;
   end;
 end;
+
+function TAtollKKMv10.GetFDNumber: integer;
+begin
+  Result:=0;
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+     FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_LAST_DOCUMENT));
+     FLibrary.fnQueryData(FHandle);
+     InternalCheckError;
+     if ErrorCode = 0 then
+     begin
+       Result:=FLibrary.GetParamInt(FHandle, Ord(LIBFPTR_PARAM_DOCUMENT_NUMBER));
+       InternalCheckError;
+     end;
+  end;
+end;
+
 (*
 function TAtollKKMv10.GetCheckType: TCheckType;
 var

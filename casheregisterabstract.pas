@@ -282,6 +282,7 @@ type
     function GetConnected: boolean; virtual; abstract;
     procedure SetConnected(AValue: boolean); virtual; abstract;
     function GetCheckNumber: integer; virtual; abstract;
+    function GetFDNumber: integer; virtual; abstract;
     function GetCheckType: TCheckType; virtual; abstract;
     procedure SetCheckType(AValue: TCheckType); virtual;
     procedure SetError(AErrorCode:integer; AErrorDescription:string);
@@ -330,6 +331,7 @@ type
     procedure PrintReportCounted; virtual; abstract;
     //
     property CheckNumber:integer read GetCheckNumber;
+    property FDNumber:integer read GetFDNumber;
     //property CheckMode:integer read FCheckMode write FCheckMode;
     property CheckType:TCheckType read FCheckType write SetCheckType;
     property CheckElectronic:boolean read FCheckElectronic write FCheckElectronic;
