@@ -469,6 +469,9 @@ type
     procedure SetAttributeBool(AttribNum:Integer; AttribValue:Boolean); override;
     procedure SetAttributeDouble(AttribNum:Integer; AttribValue:Double); override;
 
+    procedure BeginNonfiscalDocument; override;
+    procedure EndNonfiscalDocument; override;
+
 (*
 
 
@@ -1094,6 +1097,24 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     FLibrary.SetParamDouble(FHandle, AttribNum, AttribValue);
+    InternalCheckError;
+  end;
+end;
+
+procedure TAtollKKMv10.BeginNonfiscalDocument;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+    FLibrary.BeginNonfiscalDocument(FHandle);
+    InternalCheckError;
+  end;
+end;
+
+procedure TAtollKKMv10.EndNonfiscalDocument;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+    FLibrary.EndNonfiscalDocument(FHandle);
     InternalCheckError;
   end;
 end;

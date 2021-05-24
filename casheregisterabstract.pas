@@ -329,6 +329,8 @@ type
     procedure PrintReportHours; virtual; abstract;
     procedure PrintReportSection; virtual; abstract;
     procedure PrintReportCounted; virtual; abstract;
+    procedure BeginNonfiscalDocument; virtual; abstract;
+    procedure EndNonfiscalDocument; virtual; abstract;
     //
     property CheckNumber:integer read GetCheckNumber;
     property FDNumber:integer read GetFDNumber;
