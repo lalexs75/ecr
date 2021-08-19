@@ -1501,10 +1501,10 @@ end;
 
 procedure TAtollLibraryV10.LoadAtollLibrary;
 
-function DoGetProcAddress(Lib: TLibHandle; Name: string): Pointer;
+function DoGetProcAddress(Lib: TLibHandle; Name: string; ARaiseException:Boolean = true): Pointer;
 begin
   Result := GetProcedureAddress(Lib, Name);
-  if not Assigned(Result) then
+  if (not Assigned(Result)) and ARaiseException then
     raise EAtollLibrary.CreateFmt(sCantLoadProc, [Name]);
 end;
 begin
@@ -1686,19 +1686,19 @@ begin
     //Flibfptr_log_write_ex:=Tlibfptr_log_write_ex(DoGetProcAddress(FAtollLib, 'libfptr_log_write_ex'));
 
     //ver 10.9.0.0
-    Flibfptr_begin_marking_code_validation:=Tlibfptr_begin_marking_code_validation(DoGetProcAddress(FAtollLib, 'libfptr_begin_marking_code_validation'));
-    Flibfptr_cancel_marking_code_validation:=Tlibfptr_cancel_marking_code_validation(DoGetProcAddress(FAtollLib, 'libfptr_cancel_marking_code_validation'));
-    Flibfptr_get_marking_code_validation_status:=Tlibfptr_get_marking_code_validation_status(DoGetProcAddress(FAtollLib, 'libfptr_get_marking_code_validation_status'));
-    Flibfptr_accept_marking_code:=Tlibfptr_accept_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_accept_marking_code'));
-    Flibfptr_decline_marking_code:=Tlibfptr_decline_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_decline_marking_code'));
-    Flibfptr_update_fnm_keys:=Tlibfptr_update_fnm_keys(DoGetProcAddress(FAtollLib, 'libfptr_update_fnm_keys'));
-    Flibfptr_write_sales_notice:=Tlibfptr_write_sales_notice(DoGetProcAddress(FAtollLib, 'libfptr_write_sales_notice'));
-    Flibfptr_check_marking_code_validations_ready:=Tlibfptr_check_marking_code_validations_ready(DoGetProcAddress(FAtollLib, 'libfptr_check_marking_code_validations_ready'));
-    Flibfptr_clear_marking_code_validation_result:=Tlibfptr_clear_marking_code_validation_result(DoGetProcAddress(FAtollLib, 'libfptr_clear_marking_code_validation_result'));
-    Flibfptr_ping_marking_server:=Tlibfptr_ping_marking_server(DoGetProcAddress(FAtollLib, 'libfptr_ping_marking_server'));
-    Flibfptr_get_marking_server_status:=Tlibfptr_get_marking_server_status(DoGetProcAddress(FAtollLib, 'libfptr_get_marking_server_status'));
-    Flibfptr_is_driver_locked:=Tlibfptr_is_driver_locked(DoGetProcAddress(FAtollLib, 'libfptr_is_driver_locked'));
-    Flibfptr_get_last_document_journal:=Tlibfptr_get_last_document_journal(DoGetProcAddress(FAtollLib, 'libfptr_get_last_document_journal'));
+    Flibfptr_begin_marking_code_validation:=Tlibfptr_begin_marking_code_validation(DoGetProcAddress(FAtollLib, 'libfptr_begin_marking_code_validation', false));
+    Flibfptr_cancel_marking_code_validation:=Tlibfptr_cancel_marking_code_validation(DoGetProcAddress(FAtollLib, 'libfptr_cancel_marking_code_validation', false));
+    Flibfptr_get_marking_code_validation_status:=Tlibfptr_get_marking_code_validation_status(DoGetProcAddress(FAtollLib, 'libfptr_get_marking_code_validation_status', false));
+    Flibfptr_accept_marking_code:=Tlibfptr_accept_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_accept_marking_code', false));
+    Flibfptr_decline_marking_code:=Tlibfptr_decline_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_decline_marking_code', false));
+    Flibfptr_update_fnm_keys:=Tlibfptr_update_fnm_keys(DoGetProcAddress(FAtollLib, 'libfptr_update_fnm_keys', false));
+    Flibfptr_write_sales_notice:=Tlibfptr_write_sales_notice(DoGetProcAddress(FAtollLib, 'libfptr_write_sales_notice', false));
+    Flibfptr_check_marking_code_validations_ready:=Tlibfptr_check_marking_code_validations_ready(DoGetProcAddress(FAtollLib, 'libfptr_check_marking_code_validations_ready', false));
+    Flibfptr_clear_marking_code_validation_result:=Tlibfptr_clear_marking_code_validation_result(DoGetProcAddress(FAtollLib, 'libfptr_clear_marking_code_validation_result', false));
+    Flibfptr_ping_marking_server:=Tlibfptr_ping_marking_server(DoGetProcAddress(FAtollLib, 'libfptr_ping_marking_server', false));
+    Flibfptr_get_marking_server_status:=Tlibfptr_get_marking_server_status(DoGetProcAddress(FAtollLib, 'libfptr_get_marking_server_status', false));
+    Flibfptr_is_driver_locked:=Tlibfptr_is_driver_locked(DoGetProcAddress(FAtollLib, 'libfptr_is_driver_locked', false));
+    Flibfptr_get_last_document_journal:=Tlibfptr_get_last_document_journal(DoGetProcAddress(FAtollLib, 'libfptr_get_last_document_journal', false));
   end;
 end;
 
