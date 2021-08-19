@@ -225,6 +225,22 @@ type
     Flibfptr_create_with_id:Tlibfptr_create_with_id;
     Flibfptr_validate_json:Tlibfptr_validate_json;
     Flibfptr_log_write_ex:Tlibfptr_log_write_ex;
+
+    //10.9.0.0
+    Flibfptr_begin_marking_code_validation:Tlibfptr_begin_marking_code_validation;
+    Flibfptr_cancel_marking_code_validation:Tlibfptr_cancel_marking_code_validation;
+    Flibfptr_get_marking_code_validation_status:Tlibfptr_get_marking_code_validation_status;
+    Flibfptr_accept_marking_code:Tlibfptr_accept_marking_code;
+    Flibfptr_decline_marking_code:Tlibfptr_decline_marking_code;
+    Flibfptr_update_fnm_keys:Tlibfptr_update_fnm_keys;
+    Flibfptr_write_sales_notice:Tlibfptr_write_sales_notice;
+    Flibfptr_check_marking_code_validations_ready:Tlibfptr_check_marking_code_validations_ready;
+    Flibfptr_clear_marking_code_validation_result:Tlibfptr_clear_marking_code_validation_result;
+    Flibfptr_ping_marking_server:Tlibfptr_ping_marking_server;
+    Flibfptr_get_marking_server_status:Tlibfptr_get_marking_server_status;
+    Flibfptr_is_driver_locked:Tlibfptr_is_driver_locked;
+    Flibfptr_get_last_document_journal:Tlibfptr_get_last_document_journal;
+
     function GetLoaded: boolean;
     function IsLibraryNameStored: Boolean;
     procedure InternalClearProcAdress;
@@ -407,6 +423,21 @@ type
     function CreateWithId(Handle:PLibFPtrHandle; id:string):integer;
     function ValidateJson(Handle:TLibFPtrHandle):Integer;
     function LogWriteEx(Handle:TLibFPtrHandle; Tag:string; Level:Integer; Message:string):Integer;
+
+    //ver 10.9.0.0
+    function BeginMarkingCodeValidation(Handle:TLibFPtrHandle):Integer;
+    function CancelMarkingCodeValidation(Handle:TLibFPtrHandle):Integer;
+    function GetMarkingCodeValidationStatus(Handle:TLibFPtrHandle):Integer;
+    function AcceptMarkingCode(Handle:TLibFPtrHandle):Integer;
+    function DeclineMarkingCode(Handle:TLibFPtrHandle):Integer;
+    function UpdateFnmKeys(Handle:TLibFPtrHandle):Integer;
+    function WriteSalesNotice(Handle:TLibFPtrHandle):Integer;
+    function CheckMarkingCodeValidationsReady(Handle:TLibFPtrHandle):Integer;
+    function ClearMarkingCode_validationResult(Handle:TLibFPtrHandle):Integer;
+    function PingMarkingServer(Handle:TLibFPtrHandle):Integer;
+    function GetMarkingServerStatus(Handle:TLibFPtrHandle):Integer;
+    function IsDriverLocked(Handle:TLibFPtrHandle):Integer;
+    function GetLastDocumentJournal(Handle:TLibFPtrHandle):Integer;
   published
     property LibraryName:string read FLibraryName write FLibraryName stored IsLibraryNameStored;
   end;
@@ -1653,6 +1684,21 @@ begin
     //Flibfptr_create_with_id:=Tlibfptr_create_with_id(DoGetProcAddress(FAtollLib, 'libfptr_create_with_id'));
     //Flibfptr_validate_json:=Tlibfptr_validate_json(DoGetProcAddress(FAtollLib, 'libfptr_validate_json'));
     //Flibfptr_log_write_ex:=Tlibfptr_log_write_ex(DoGetProcAddress(FAtollLib, 'libfptr_log_write_ex'));
+
+    //ver 10.9.0.0
+    Flibfptr_begin_marking_code_validation:=Tlibfptr_begin_marking_code_validation(DoGetProcAddress(FAtollLib, 'libfptr_begin_marking_code_validation'));
+    Flibfptr_cancel_marking_code_validation:=Tlibfptr_cancel_marking_code_validation(DoGetProcAddress(FAtollLib, 'libfptr_cancel_marking_code_validation'));
+    Flibfptr_get_marking_code_validation_status:=Tlibfptr_get_marking_code_validation_status(DoGetProcAddress(FAtollLib, 'libfptr_get_marking_code_validation_status'));
+    Flibfptr_accept_marking_code:=Tlibfptr_accept_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_accept_marking_code'));
+    Flibfptr_decline_marking_code:=Tlibfptr_decline_marking_code(DoGetProcAddress(FAtollLib, 'libfptr_decline_marking_code'));
+    Flibfptr_update_fnm_keys:=Tlibfptr_update_fnm_keys(DoGetProcAddress(FAtollLib, 'libfptr_update_fnm_keys'));
+    Flibfptr_write_sales_notice:=Tlibfptr_write_sales_notice(DoGetProcAddress(FAtollLib, 'libfptr_write_sales_notice'));
+    Flibfptr_check_marking_code_validations_ready:=Tlibfptr_check_marking_code_validations_ready(DoGetProcAddress(FAtollLib, 'libfptr_check_marking_code_validations_ready'));
+    Flibfptr_clear_marking_code_validation_result:=Tlibfptr_clear_marking_code_validation_result(DoGetProcAddress(FAtollLib, 'libfptr_clear_marking_code_validation_result'));
+    Flibfptr_ping_marking_server:=Tlibfptr_ping_marking_server(DoGetProcAddress(FAtollLib, 'libfptr_ping_marking_server'));
+    Flibfptr_get_marking_server_status:=Tlibfptr_get_marking_server_status(DoGetProcAddress(FAtollLib, 'libfptr_get_marking_server_status'));
+    Flibfptr_is_driver_locked:=Tlibfptr_is_driver_locked(DoGetProcAddress(FAtollLib, 'libfptr_is_driver_locked'));
+    Flibfptr_get_last_document_journal:=Tlibfptr_get_last_document_journal(DoGetProcAddress(FAtollLib, 'libfptr_get_last_document_journal'));
   end;
 end;
 
@@ -3021,7 +3067,118 @@ begin
     Result:=Flibfptr_log_write_ex(Handle, @FTag[aFirstStrChar], Level, @FMessage[aFirstStrChar])
   end
   else
-    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['Flibfptr_log_write_ex']);
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_log_write_ex']);
+end;
+
+function TAtollLibraryV10.BeginMarkingCodeValidation(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_begin_marking_code_validation) then
+    Result:=Flibfptr_begin_marking_code_validation(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_begin_marking_code_validation']);
+end;
+
+function TAtollLibraryV10.CancelMarkingCodeValidation(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_cancel_marking_code_validation) then
+    Result:=Flibfptr_cancel_marking_code_validation(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_cancel_marking_code_validation']);
+end;
+
+function TAtollLibraryV10.GetMarkingCodeValidationStatus(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_get_marking_code_validation_status) then
+    Result:=Flibfptr_get_marking_code_validation_status(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_get_marking_code_validation_status']);
+end;
+
+function TAtollLibraryV10.AcceptMarkingCode(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_accept_marking_code) then
+    Result:=Flibfptr_accept_marking_code(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_accept_marking_code']);
+end;
+
+function TAtollLibraryV10.DeclineMarkingCode(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_decline_marking_code) then
+    Result:=Flibfptr_decline_marking_code(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_decline_marking_code']);
+end;
+
+function TAtollLibraryV10.UpdateFnmKeys(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_update_fnm_keys) then
+    Result:=Flibfptr_update_fnm_keys(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_update_fnm_keys']);
+end;
+
+function TAtollLibraryV10.WriteSalesNotice(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_write_sales_notice) then
+    Result:=Flibfptr_write_sales_notice(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_write_sales_notice']);
+end;
+
+function TAtollLibraryV10.CheckMarkingCodeValidationsReady(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_check_marking_code_validations_ready) then
+    Result:=Flibfptr_check_marking_code_validations_ready(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_check_marking_code_validations_ready']);
+end;
+
+function TAtollLibraryV10.ClearMarkingCode_validationResult(
+  Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_clear_marking_code_validation_result) then
+    Result:=Flibfptr_clear_marking_code_validation_result(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_clear_marking_code_validation_result']);
+end;
+
+function TAtollLibraryV10.PingMarkingServer(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_ping_marking_server) then
+    Result:=Flibfptr_ping_marking_server(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_ping_marking_server']);
+end;
+
+function TAtollLibraryV10.GetMarkingServerStatus(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_get_marking_server_status) then
+    Result:=Flibfptr_get_marking_server_status(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_get_marking_server_status']);
+end;
+
+function TAtollLibraryV10.IsDriverLocked(Handle: TLibFPtrHandle): Integer;
+begin
+  if Assigned(Flibfptr_is_driver_locked) then
+    Result:=Flibfptr_is_driver_locked(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_is_driver_locked']);
+end;
+
+function TAtollLibraryV10.GetLastDocumentJournal(Handle: TLibFPtrHandle
+  ): Integer;
+begin
+  if Assigned(Flibfptr_get_last_document_journal) then
+    Result:=Flibfptr_get_last_document_journal(Handle)
+  else
+    raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_get_last_document_journal']);
 end;
 
 end.
