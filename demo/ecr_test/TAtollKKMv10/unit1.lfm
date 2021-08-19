@@ -8,7 +8,7 @@ object Form1: TForm1
   ClientWidth = 1460
   OnClose = FormClose
   OnCreate = FormCreate
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '2.3.0.0'
   object Memo1: TMemo
     Left = 0
     Height = 328
@@ -25,9 +25,9 @@ object Form1: TForm1
     Height = 467
     Top = 0
     Width = 1460
-    ActivePage = TabSheet1
+    ActivePage = TabSheet7
     Align = alTop
-    TabIndex = 0
+    TabIndex = 6
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
@@ -130,7 +130,6 @@ object Form1: TForm1
         Top = 180
         Width = 173
         Caption = 'Код маркировки со сканера'
-        ParentColor = False
       end
       object Edit6: TEdit
         Left = 19
@@ -164,7 +163,7 @@ object Form1: TForm1
         Left = 73
         Height = 33
         Top = 6
-        Width = 62
+        Width = 61
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Z отчёт'
@@ -182,7 +181,7 @@ object Form1: TForm1
         Left = 6
         Height = 33
         Top = 6
-        Width = 143
+        Width = 138
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Конфигурация ККМ'
@@ -202,10 +201,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button7
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
-        Left = 155
+        Left = 150
         Height = 33
         Top = 6
-        Width = 52
+        Width = 51
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Гудок'
@@ -216,7 +215,7 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button11
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
-        Left = 213
+        Left = 207
         Height = 33
         Top = 6
         Width = 98
@@ -234,7 +233,7 @@ object Form1: TForm1
         Left = 223
         Height = 33
         Top = 84
-        Width = 121
+        Width = 120
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Внесение в кассу'
@@ -263,7 +262,7 @@ object Form1: TForm1
         Left = 227
         Height = 33
         Top = 123
-        Width = 125
+        Width = 124
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Выплата из кассы'
@@ -281,7 +280,6 @@ object Form1: TForm1
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Сумма внесения'
-        ParentColor = False
       end
       object Label13: TLabel
         AnchorSideLeft.Control = TabSheet3
@@ -294,7 +292,6 @@ object Form1: TForm1
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Сумма выплаты'
-        ParentColor = False
       end
       object CurrencyEdit1: TCurrencyEdit
         AnchorSideLeft.Control = Label12
@@ -328,7 +325,7 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button12
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
-        Left = 317
+        Left = 311
         Height = 33
         Top = 6
         Width = 94
@@ -342,10 +339,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button17
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
-        Left = 417
+        Left = 411
         Height = 33
         Top = 6
-        Width = 104
+        Width = 103
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Печать клише'
@@ -356,10 +353,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = Button20
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
-        Left = 527
+        Left = 520
         Height = 33
         Top = 6
-        Width = 120
+        Width = 116
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Параметры ККМ'
@@ -376,10 +373,10 @@ object Form1: TForm1
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet4
         AnchorSideBottom.Side = asrBottom
-        Left = 1349
+        Left = 1350
         Height = 33
-        Top = 581
-        Width = 95
+        Top = 397
+        Width = 94
         Anchors = [akRight, akBottom]
         AutoSize = True
         BorderSpacing.Around = 6
@@ -394,10 +391,9 @@ object Form1: TForm1
         Left = 6
         Height = 17
         Top = 90
-        Width = 73
+        Width = 72
         BorderSpacing.Around = 6
         Caption = 'Контрагент'
-        ParentColor = False
       end
       object Label2: TLabel
         AnchorSideLeft.Control = edtContragentName
@@ -410,7 +406,6 @@ object Form1: TForm1
         Width = 111
         BorderSpacing.Around = 6
         Caption = 'ИНН контрагента'
-        ParentColor = False
       end
       object edtContragentName: TEdit
         AnchorSideLeft.Control = Label1
@@ -458,7 +453,6 @@ object Form1: TForm1
         Width = 55
         BorderSpacing.Around = 6
         Caption = 'Тип чека'
-        ParentColor = False
       end
       object CheckBox1: TCheckBox
         AnchorSideLeft.Control = Label3
@@ -482,7 +476,6 @@ object Form1: TForm1
         Width = 107
         BorderSpacing.Around = 6
         Caption = 'Номер телефона'
-        ParentColor = False
       end
       object Label7: TLabel
         AnchorSideLeft.Control = edtPhone
@@ -495,7 +488,6 @@ object Form1: TForm1
         Width = 34
         BorderSpacing.Around = 6
         Caption = 'Email'
-        ParentColor = False
       end
       object edtPhone: TEdit
         AnchorSideLeft.Control = Label6
@@ -798,7 +790,6 @@ object Form1: TForm1
         DrawFullLine = True
         FocusColor = clRed
         SelectedColor = clHighlight
-        GridLineStyle = psSolid
         DataSource = dsGoods
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 7
@@ -814,7 +805,6 @@ object Form1: TForm1
         Width = 96
         BorderSpacing.Around = 6
         Caption = 'Товарная часть'
-        ParentColor = False
       end
       object RxDBGrid2: TRxDBGrid
         AnchorSideLeft.Control = TabSheet4
@@ -824,9 +814,9 @@ object Form1: TForm1
         AnchorSideBottom.Control = TabSheet4
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 154
+        Height = 1
         Top = 460
-        Width = 1337
+        Width = 1338
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
@@ -938,7 +928,6 @@ object Form1: TForm1
         DrawFullLine = True
         FocusColor = clRed
         SelectedColor = clHighlight
-        GridLineStyle = psSolid
         DataSource = dsPays
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
         TabOrder = 8
@@ -952,7 +941,6 @@ object Form1: TForm1
         Top = 437
         Width = 48
         Caption = 'Оплаты'
-        ParentColor = False
       end
       object CheckBox2: TCheckBox
         AnchorSideLeft.Control = ComboBox1
@@ -962,7 +950,7 @@ object Form1: TForm1
         Left = 310
         Height = 23
         Top = 67
-        Width = 107
+        Width = 106
         BorderSpacing.Around = 6
         Caption = 'Через агента'
         OnChange = chPayPlaceClick
@@ -989,10 +977,9 @@ object Form1: TForm1
         Left = 6
         Height = 17
         Top = 67
-        Width = 74
+        Width = 73
         BorderSpacing.Around = 6
         Caption = 'Покупатель'
-        ParentColor = False
       end
       object edtPhone1: TEdit
         AnchorSideLeft.Control = Label16
@@ -1029,7 +1016,6 @@ object Form1: TForm1
         Width = 81
         BorderSpacing.Around = 6
         Caption = 'Email агента '
-        ParentColor = False
       end
       object Label16: TLabel
         AnchorSideLeft.Control = CheckBox2
@@ -1041,7 +1027,6 @@ object Form1: TForm1
         Width = 151
         BorderSpacing.Around = 6
         Caption = 'Номер телефона агента'
-        ParentColor = False
       end
       object edtContragentName1: TEdit
         AnchorSideLeft.Control = Label18
@@ -1078,7 +1063,6 @@ object Form1: TForm1
         Width = 74
         BorderSpacing.Around = 6
         Caption = 'ИНН агента'
-        ParentColor = False
       end
       object Label18: TLabel
         AnchorSideLeft.Control = CheckBox2
@@ -1087,10 +1071,9 @@ object Form1: TForm1
         Left = 316
         Height = 17
         Top = 96
-        Width = 36
+        Width = 35
         BorderSpacing.Around = 6
         Caption = 'Агент'
-        ParentColor = False
       end
       object edtSuplierPhone: TEdit
         AnchorSideLeft.Control = Label20
@@ -1127,7 +1110,6 @@ object Form1: TForm1
         Width = 34
         BorderSpacing.Around = 6
         Caption = 'Email'
-        ParentColor = False
       end
       object Label20: TLabel
         AnchorSideLeft.Control = CheckBox3
@@ -1139,7 +1121,6 @@ object Form1: TForm1
         Width = 107
         BorderSpacing.Around = 6
         Caption = 'Номер телефона'
-        ParentColor = False
       end
       object edtSuplierName: TEdit
         AnchorSideLeft.Control = Label22
@@ -1176,7 +1157,6 @@ object Form1: TForm1
         Width = 108
         BorderSpacing.Around = 6
         Caption = 'ИНН поставщика'
-        ParentColor = False
       end
       object Label22: TLabel
         AnchorSideLeft.Control = CheckBox3
@@ -1185,10 +1165,9 @@ object Form1: TForm1
         Left = 642
         Height = 17
         Top = 96
-        Width = 70
+        Width = 69
         BorderSpacing.Around = 6
         Caption = 'Поставщик'
-        ParentColor = False
       end
     end
     object TabSheet5: TTabSheet
@@ -1201,10 +1180,9 @@ object Form1: TForm1
         Left = 6
         Height = 17
         Top = 6
-        Width = 44
+        Width = 43
         BorderSpacing.Around = 6
         Caption = 'Кассир'
-        ParentColor = False
       end
       object Label5: TLabel
         AnchorSideLeft.Control = Edit3
@@ -1216,7 +1194,6 @@ object Form1: TForm1
         Width = 82
         BorderSpacing.Around = 6
         Caption = 'ИНН кассира'
-        ParentColor = False
       end
       object Edit3: TEdit
         AnchorSideLeft.Control = Label4
@@ -1249,7 +1226,7 @@ object Form1: TForm1
         Left = 6
         Height = 23
         Top = 68
-        Width = 116
+        Width = 115
         BorderSpacing.Around = 6
         Caption = 'Место расчёта'
         OnClick = chPayPlaceClick
@@ -1263,7 +1240,7 @@ object Form1: TForm1
         Left = 12
         Height = 33
         Top = 97
-        Width = 466
+        Width = 707
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         TabOrder = 3
@@ -1273,11 +1250,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = TabSheet5
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = TabSheet5
-        Left = 484
+        Left = 725
         Height = 1
         Top = 0
         Width = 1
-        ParentColor = False
       end
     end
     object TabSheet6: TTabSheet
@@ -1290,7 +1266,7 @@ object Form1: TForm1
         Left = 6
         Height = 33
         Top = 6
-        Width = 106
+        Width = 105
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Печать строки'
@@ -1302,13 +1278,12 @@ object Form1: TForm1
         AnchorSideLeft.Side = asrBottom
         AnchorSideBottom.Control = Edit5
         AnchorSideBottom.Side = asrBottom
-        Left = 118
+        Left = 117
         Height = 17
         Top = 16
-        Width = 106
+        Width = 105
         BorderSpacing.Left = 6
         Caption = 'Текст для печати'
-        ParentColor = False
       end
       object Edit5: TEdit
         AnchorSideLeft.Control = Label8
@@ -1318,10 +1293,10 @@ object Form1: TForm1
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Button13
         AnchorSideBottom.Side = asrBottom
-        Left = 230
+        Left = 228
         Height = 33
         Top = 6
-        Width = 733
+        Width = 1216
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         TabOrder = 1
@@ -1334,7 +1309,7 @@ object Form1: TForm1
         Left = 6
         Height = 33
         Top = 192
-        Width = 148
+        Width = 145
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Дата и время из ККМ'
@@ -1347,10 +1322,10 @@ object Form1: TForm1
         AnchorSideTop.Control = Button19
         AnchorSideRight.Control = TabSheet6
         AnchorSideRight.Side = asrBottom
-        Left = 160
+        Left = 157
         Height = 33
         Top = 192
-        Width = 803
+        Width = 1287
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 6
         BorderSpacing.Right = 6
@@ -1393,12 +1368,12 @@ object Form1: TForm1
         Left = 0
         Height = 141
         Top = 45
-        Width = 969
+        Width = 1450
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
         Caption = 'Параметры текста'
         ClientHeight = 123
-        ClientWidth = 967
+        ClientWidth = 1448
         TabOrder = 7
         object RadioGroup1: TRadioGroup
           AnchorSideLeft.Control = GroupBox1
@@ -1406,7 +1381,7 @@ object Form1: TForm1
           Left = 6
           Height = 87
           Top = 6
-          Width = 101
+          Width = 102
           AutoFill = True
           AutoSize = True
           BorderSpacing.Around = 6
@@ -1419,7 +1394,7 @@ object Form1: TForm1
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 69
-          ClientWidth = 99
+          ClientWidth = 100
           ItemIndex = 0
           Items.Strings = (
             'Влево'
@@ -1432,10 +1407,10 @@ object Form1: TForm1
           AnchorSideLeft.Control = RadioGroup1
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = GroupBox1
-          Left = 113
+          Left = 114
           Height = 87
           Top = 6
-          Width = 124
+          Width = 123
           AutoFill = True
           AutoSize = True
           BorderSpacing.Around = 6
@@ -1448,7 +1423,7 @@ object Form1: TForm1
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 69
-          ClientWidth = 122
+          ClientWidth = 121
           ItemIndex = 0
           Items.Strings = (
             'Без переноса'
@@ -1464,7 +1439,7 @@ object Form1: TForm1
           Left = 243
           Height = 23
           Top = 6
-          Width = 108
+          Width = 106
           BorderSpacing.Around = 6
           Caption = 'DoubleWidth'
           TabOrder = 2
@@ -1477,7 +1452,7 @@ object Form1: TForm1
           Left = 243
           Height = 23
           Top = 35
-          Width = 111
+          Width = 110
           BorderSpacing.Around = 6
           Caption = 'DoubleHeight'
           TabOrder = 3
@@ -1486,19 +1461,18 @@ object Form1: TForm1
           AnchorSideLeft.Control = Label24
           AnchorSideBottom.Control = SpinEdit2
           AnchorSideBottom.Side = asrBottom
-          Left = 360
+          Left = 359
           Height = 17
           Top = 22
           Width = 96
           Anchors = [akLeft, akBottom]
           Caption = 'Номер шрифта'
-          ParentColor = False
         end
         object SpinEdit2: TSpinEdit
           AnchorSideLeft.Control = Label24
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = GroupBox1
-          Left = 517
+          Left = 515
           Height = 33
           Top = 6
           Width = 80
@@ -1510,7 +1484,7 @@ object Form1: TForm1
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = SpinEdit2
           AnchorSideTop.Side = asrBottom
-          Left = 517
+          Left = 515
           Height = 33
           Top = 45
           Width = 80
@@ -1523,38 +1497,68 @@ object Form1: TForm1
           AnchorSideLeft.Side = asrBottom
           AnchorSideBottom.Control = SpinEdit3
           AnchorSideBottom.Side = asrBottom
-          Left = 360
+          Left = 359
           Height = 17
           Top = 61
-          Width = 151
+          Width = 150
           Anchors = [akLeft, akBottom]
           Caption = 'Межстрочный интервал'
-          ParentColor = False
         end
         object Label25: TLabel
           AnchorSideLeft.Control = Label24
           AnchorSideBottom.Control = SpinEdit4
           AnchorSideBottom.Side = asrBottom
-          Left = 360
+          Left = 359
           Height = 17
           Top = 100
-          Width = 51
+          Width = 50
           Anchors = [akLeft, akBottom]
           Caption = 'Яркость'
-          ParentColor = False
         end
         object SpinEdit4: TSpinEdit
           AnchorSideLeft.Control = Label24
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = SpinEdit3
           AnchorSideTop.Side = asrBottom
-          Left = 517
+          Left = 515
           Height = 33
           Top = 84
           Width = 80
           BorderSpacing.Around = 6
           TabOrder = 6
         end
+      end
+    end
+    object TabSheet7: TTabSheet
+      Caption = 'Взаимодействие с ЦРПТ'
+      ClientHeight = 436
+      ClientWidth = 1450
+      object Button24: TButton
+        Left = 24
+        Height = 33
+        Top = 24
+        Width = 119
+        AutoSize = True
+        Caption = 'Ping server ЦРПТ'
+        OnClick = Button24Click
+        TabOrder = 0
+      end
+      object Label27: TLabel
+        Left = 160
+        Height = 17
+        Top = 36
+        Width = 47
+        Caption = 'Label27'
+      end
+      object Button25: TButton
+        Left = 25
+        Height = 33
+        Top = 88
+        Width = 82
+        AutoSize = True
+        Caption = 'Sale KM 1.2'
+        OnClick = Button25Click
+        TabOrder = 1
       end
     end
   end

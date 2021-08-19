@@ -31,6 +31,8 @@ type
     Button21: TButton;
     Button22: TButton;
     Button23: TButton;
+    Button24: TButton;
+    Button25: TButton;
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
@@ -88,6 +90,7 @@ type
     Label24: TLabel;
     Label25: TLabel;
     Label26: TLabel;
+    Label27: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -129,6 +132,7 @@ type
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     TabSheet6: TTabSheet;
+    TabSheet7: TTabSheet;
     procedure Button10Click(Sender: TObject);
     procedure Button11Click(Sender: TObject);
     procedure Button12Click(Sender: TObject);
@@ -144,6 +148,8 @@ type
     procedure Button21Click(Sender: TObject);
     procedure Button22Click(Sender: TObject);
     procedure Button23Click(Sender: TObject);
+    procedure Button24Click(Sender: TObject);
+    procedure Button25Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
@@ -511,6 +517,114 @@ begin
   FAtollKKMv10.Connected:=false;
 end;
 
+procedure TForm1.Button24Click(Sender: TObject);
+var
+  errorDescription: String;
+  responseTime, EC: Integer;
+begin
+  FAtollKKMv10.Connected:=true;
+  if FAtollKKMv10.LibraryAtol.Loaded then
+  begin
+    // Начать проверку связи с сервером ИСМ
+    FAtollKKMv10.LibraryAtol.PingMarkingServer(FAtollKKMv10.Handle);
+
+    // Ожидание результатов проверки связи с сервером ИСМ
+    while True do
+    begin
+        FAtollKKMv10.LibraryAtol.getMarkingServerStatus(FAtollKKMv10.Handle);
+        if FAtollKKMv10.LibraryAtol.getParamBool(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_CHECK_MARKING_SERVER_READY)) then
+            break;
+    end;
+
+    EC := FAtollKKMv10.LibraryAtol.getParamInt(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_SERVER_ERROR_CODE));
+    errorDescription := FAtollKKMv10.LibraryAtol.GetParamStr(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_SERVER_ERROR_DESCRIPTION));
+    responseTime := FAtollKKMv10.LibraryAtol.getParamInt(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_SERVER_RESPONSE_TIME));
+    Label27.Caption:=Format('Error code : %d, Error msg : %s', [EC, errorDescription]);
+  end
+  else
+    Label27.Caption:='Ошибка';
+  FAtollKKMv10.Connected:=false;
+end;
+
+procedure TForm1.Button25Click(Sender: TObject);
+var
+    mark: String;
+    status: Integer;
+    validationResult, CS: Integer;
+begin
+  FAtollKKMv10.Connected:=true;
+  if FAtollKKMv10.LibraryAtol.Loaded then
+  begin
+
+    mark := '014494550435306821QXYXSALGLMYQQ\u001D91EE06\u001D92YWCXbmK6SN8vvwoxZFk7WAY8WoJNMGGr6Cgtiuja04c=';
+    status := 2;
+
+    // Запускаем проверку КМ
+    FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_MARKING_CODE_TYPE, Ord(LIBFPTR_MCT12_AUTO));
+    FAtollKKMv10.LibraryAtol.SetParamStr(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE), mark);
+    FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_MARKING_CODE_STATUS, status);
+    FAtollKKMv10.LibraryAtol.SetParamDouble(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_QUANTITY), 1.000);
+    FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_MEASUREMENT_UNIT, 0);
+    FAtollKKMv10.LibraryAtol.SetParamBool(FAtollKKMv10.Handle, LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT, True);
+    FAtollKKMv10.LibraryAtol.SetParamInt(FAtollKKMv10.Handle, LIBFPTR_PARAM_MARKING_PROCESSING_MODE, 0);
+    FAtollKKMv10.LibraryAtol.SetParamStr(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY), '1/2');
+    FAtollKKMv10.LibraryAtol.beginMarkingCodeValidation(FAtollKKMv10.Handle);
+
+    // Дожидаемся окончания проверки и запоминаем результат
+    while True do
+    begin
+       CS:=FAtollKKMv10.LibraryAtol.getMarkingCodeValidationStatus(FAtollKKMv10.Handle);
+        if FAtollKKMv10.LibraryAtol.getParamBool(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY)) then
+            break;
+    end;
+    validationResult := FAtollKKMv10.LibraryAtol.getParamInt(FAtollKKMv10.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+(*
+    // Подтверждаем реализацию товара с указанным КМ
+    fptr.acceptMarkingCode();
+
+    // ... Проверяем остальные КМ
+
+    // Формируем чек
+    fptr.setParam(fptr.LIBFPTR_PARAM_RECEIPT_TYPE, fptr.LIBFPTR_RT_SELL);
+    fptr.openReceipt();
+
+    fptr.setParam(fptr.LIBFPTR_PARAM_COMMODITY_NAME, 'Молоко');
+    fptr.setParam(fptr.LIBFPTR_PARAM_PRICE, 80);
+    fptr.setParam(fptr.LIBFPTR_PARAM_QUANTITY, 1.000);
+    fptr.setParam(fptr.LIBFPTR_PARAM_MEASUREMENT_UNIT, 0);
+    fptr.setParam(fptr.LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY, '1/2');
+    fptr.setParam(fptr.LIBFPTR_PARAM_TAX_TYPE, fptr.LIBFPTR_TAX_VAT10);
+    fptr.setParam(1212, 1);
+    fptr.setParam(1214, 7);
+    fptr.setParam(fptr.LIBFPTR_PARAM_MARKING_CODE, mark);
+    fptr.setParam(fptr.LIBFPTR_PARAM_MARKING_CODE_STATUS, status);
+    fptr.setParam(fptr.LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT, validationResult);
+    fptr.setParam(fptr.LIBFPTR_PARAM_MARKING_PROCESSING_MODE, 0);
+    fptr.registration();
+
+    // ... Регистрируем остальные позиции
+
+    fptr.setParam(fptr.LIBFPTR_PARAM_SUM, 120);
+    fptr.receiptTotal();
+
+    fptr.setParam(fptr.LIBFPTR_PARAM_PAYMENT_TYPE, fptr.LIBFPTR_PT_CASH);
+    fptr.setParam(fptr.LIBFPTR_PARAM_PAYMENT_SUM, 1000);
+    fptr.payment();
+
+    // Перед закрытием проверяем, что все КМ отправились (на случай, если были проверки КМ без ожидания результата
+    while True do
+    begin
+        fptr.checkMarkingCodeValidationsReady();
+        if fptr.getParamBool(fptr.LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY) then
+            break;
+    end;
+
+    fptr.closeReceipt();
+*)
+  end;
+  FAtollKKMv10.Connected:=false;
+end;
+
 procedure TForm1.Button10Click(Sender: TObject);
 var
   S: String;
@@ -867,6 +981,7 @@ begin
   {$IFDEF CPU386}
   Result:=Result + AppendPathDelim('linux-x86');
   {$ENDIF}
+  //Result:={Result} '/home/alexs/install/install/atol/v10/10.9.0.0/10.9.0.0/linux-x64/'+ slibFPPtr10FileName;
   Result:={Result} '/home/alexs/install/install/atol/v10/10.8.1.0/linux-x64/'+ slibFPPtr10FileName;
   {$ENDIF}
 end;
