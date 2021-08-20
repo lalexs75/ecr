@@ -1,0 +1,194 @@
+inherited v10ServiceFrame: Tv10ServiceFrame
+  Height = 412
+  Width = 826
+  ClientHeight = 412
+  ClientWidth = 826
+  object Button7: TButton[0]
+    Left = 6
+    Height = 33
+    Top = 6
+    Width = 138
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Конфигурация ККМ'
+    OnClick = Button7Click
+    TabOrder = 0
+  end
+  object Button9: TButton[1]
+    Left = 422
+    Height = 25
+    Top = 192
+    Width = 75
+    Caption = 'Тип чека'
+    OnClick = Button9Click
+    TabOrder = 1
+  end
+  object Button11: TButton[2]
+    AnchorSideLeft.Control = Button7
+    AnchorSideLeft.Side = asrBottom
+    Left = 150
+    Height = 33
+    Top = 6
+    Width = 51
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Гудок'
+    OnClick = Button11Click
+    TabOrder = 2
+  end
+  object Button12: TButton[3]
+    AnchorSideLeft.Control = Button11
+    AnchorSideLeft.Side = asrBottom
+    Left = 207
+    Height = 33
+    Top = 6
+    Width = 98
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Отрезка чека'
+    OnClick = Button12Click
+    TabOrder = 3
+  end
+  object Button15: TButton[4]
+    AnchorSideLeft.Control = CurrencyEdit1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Button14
+    AnchorSideTop.Side = asrBottom
+    Left = 223
+    Height = 33
+    Top = 84
+    Width = 120
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Внесение в кассу'
+    OnClick = Button15Click
+    TabOrder = 4
+  end
+  object Button14: TButton[5]
+    AnchorSideTop.Control = Button7
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 33
+    Top = 45
+    Width = 119
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Открытие смены'
+    OnClick = Button14Click
+    TabOrder = 5
+  end
+  object Button16: TButton[6]
+    AnchorSideLeft.Control = CurrencyEdit2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Button15
+    AnchorSideTop.Side = asrBottom
+    Left = 227
+    Height = 33
+    Top = 123
+    Width = 124
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Выплата из кассы'
+    OnClick = Button16Click
+    TabOrder = 6
+  end
+  object Label12: TLabel[7]
+    AnchorSideBottom.Control = CurrencyEdit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 100
+    Width = 101
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Сумма внесения'
+  end
+  object Label13: TLabel[8]
+    AnchorSideBottom.Control = CurrencyEdit2
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 139
+    Width = 97
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Сумма выплаты'
+  end
+  object CurrencyEdit1: TCurrencyEdit[9]
+    AnchorSideLeft.Control = Label12
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Button14
+    AnchorSideTop.Side = asrBottom
+    Left = 113
+    Height = 33
+    Top = 84
+    Width = 104
+    Alignment = taRightJustify
+    BorderSpacing.Around = 6
+    TabOrder = 7
+    Value = 100.25
+  end
+  object CurrencyEdit2: TCurrencyEdit[10]
+    AnchorSideLeft.Control = Label13
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Button15
+    AnchorSideTop.Side = asrBottom
+    Left = 109
+    Height = 33
+    Top = 123
+    Width = 112
+    Alignment = taRightJustify
+    BorderSpacing.Around = 6
+    TabOrder = 8
+    Value = 112.254
+  end
+  object Button17: TButton[11]
+    AnchorSideLeft.Control = Button12
+    AnchorSideLeft.Side = asrBottom
+    Left = 311
+    Height = 33
+    Top = 6
+    Width = 94
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Отмена чека'
+    OnClick = Button17Click
+    TabOrder = 9
+  end
+  object Button20: TButton[12]
+    AnchorSideLeft.Control = Button17
+    AnchorSideLeft.Side = asrBottom
+    Left = 411
+    Height = 33
+    Top = 6
+    Width = 103
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Печать клише'
+    OnClick = Button20Click
+    TabOrder = 10
+  end
+  object Button22: TButton[13]
+    AnchorSideLeft.Control = Button20
+    AnchorSideLeft.Side = asrBottom
+    Left = 520
+    Height = 33
+    Top = 6
+    Width = 116
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Параметры ККМ'
+    OnClick = Button22Click
+    TabOrder = 11
+  end
+  object Button26: TButton[14]
+    Left = 680
+    Height = 33
+    Top = 32
+    Width = 84
+    AutoSize = True
+    Caption = 'Версия ФН'
+    OnClick = Button26Click
+    TabOrder = 12
+  end
+end

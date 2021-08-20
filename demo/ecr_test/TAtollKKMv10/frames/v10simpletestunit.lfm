@@ -1,0 +1,106 @@
+inherited v10SimpleTestFrame: Tv10SimpleTestFrame
+  Height = 543
+  Width = 1035
+  ClientHeight = 543
+  ClientWidth = 1035
+  object Button1: TButton[0]
+    Left = 6
+    Height = 33
+    Top = 6
+    Width = 83
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Simple test'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Button2: TButton[1]
+    AnchorSideLeft.Control = Button1
+    AnchorSideLeft.Side = asrBottom
+    Left = 95
+    Height = 33
+    Top = 6
+    Width = 94
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Standart test'
+    OnClick = Button2Click
+    TabOrder = 1
+  end
+  object Button3: TButton[2]
+    AnchorSideLeft.Control = Button2
+    AnchorSideLeft.Side = asrBottom
+    Left = 195
+    Height = 33
+    Top = 6
+    Width = 98
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Config dialog'
+    OnClick = Button3Click
+    TabOrder = 2
+  end
+  object Button4: TButton[3]
+    AnchorSideLeft.Control = Button3
+    AnchorSideLeft.Side = asrBottom
+    Left = 299
+    Height = 33
+    Top = 6
+    Width = 160
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Тестовый "плохой" чек'
+    OnClick = Button4Click
+    TabOrder = 3
+  end
+  object Button10: TButton[4]
+    Left = 504
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Button10'
+    OnClick = Button10Click
+    TabOrder = 4
+  end
+  object Button18: TButton[5]
+    Left = 104
+    Height = 33
+    Top = 80
+    Width = 113
+    AutoSize = True
+    Caption = 'С поставщиком'
+    OnClick = Button18Click
+    TabOrder = 5
+  end
+  object SpinEdit1: TSpinEdit[6]
+    Left = 102
+    Height = 33
+    Top = 136
+    Width = 114
+    TabOrder = 6
+  end
+  object Button23: TButton[7]
+    Left = 20
+    Height = 33
+    Top = 248
+    Width = 196
+    AutoSize = True
+    Caption = 'Тестовый чек с маркировкой'
+    OnClick = Button23Click
+    TabOrder = 7
+  end
+  object Label26: TLabel[8]
+    Left = 20
+    Height = 17
+    Top = 180
+    Width = 173
+    Caption = 'Код маркировки со сканера'
+  end
+  object Edit6: TEdit[9]
+    Left = 0
+    Height = 33
+    Top = 200
+    Width = 1416
+    TabOrder = 8
+  end
+end

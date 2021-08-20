@@ -1,0 +1,62 @@
+object MainForm: TMainForm
+  Left = 344
+  Height = 810
+  Top = 88
+  Width = 1460
+  Caption = 'Тесты 10 версии ATOL'
+  ClientHeight = 810
+  ClientWidth = 1460
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '2.3.0.0'
+  object Memo1: TMemo
+    Left = 0
+    Height = 186
+    Top = 624
+    Width = 1460
+    Align = alBottom
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 0
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 0
+    Width = 1460
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object TreeView1: TTreeView
+    Left = 0
+    Height = 619
+    Top = 5
+    Width = 121
+    Align = alLeft
+    TabOrder = 2
+    OnClick = TreeView1Click
+  end
+  object Panel1: TPanel
+    Left = 121
+    Height = 619
+    Top = 5
+    Width = 1169
+    Align = alClient
+    TabOrder = 3
+  end
+  object Panel2: TPanel
+    Left = 1290
+    Height = 619
+    Top = 5
+    Width = 170
+    Align = alRight
+    TabOrder = 4
+  end
+  object AtollKKM1: TAtollKKM
+    PortSpeed = 6
+    Left = 128
+    Top = 688
+  end
+end

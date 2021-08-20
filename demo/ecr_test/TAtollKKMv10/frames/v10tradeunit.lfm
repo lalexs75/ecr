@@ -1,0 +1,1017 @@
+inherited v10TradeFrame: Tv10TradeFrame
+  Height = 553
+  Width = 894
+  ClientHeight = 553
+  ClientWidth = 894
+  object Button8: TButton[0]
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 800
+    Height = 33
+    Top = 520
+    Width = 94
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Регистрация'
+    OnClick = Button8Click
+    TabOrder = 0
+  end
+  object Label1: TLabel[1]
+    AnchorSideTop.Control = Label14
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 90
+    Width = 72
+    BorderSpacing.Around = 6
+    Caption = 'Контрагент'
+  end
+  object Label2: TLabel[2]
+    AnchorSideLeft.Control = edtContragentName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label14
+    AnchorSideTop.Side = asrBottom
+    Left = 166
+    Height = 17
+    Top = 90
+    Width = 111
+    BorderSpacing.Around = 6
+    Caption = 'ИНН контрагента'
+  end
+  object edtContragentName: TEdit[3]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 113
+    Width = 148
+    BorderSpacing.Around = 6
+    TabOrder = 1
+    Text = 'Иванов И.И.'
+  end
+  object edtContragentInn: TEdit[4]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    Left = 172
+    Height = 33
+    Top = 113
+    Width = 132
+    BorderSpacing.Around = 6
+    TabOrder = 2
+    Text = '1831121013'
+  end
+  object ComboBox1: TComboBox[5]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 32
+    Top = 29
+    Width = 292
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 3
+  end
+  object Label3: TLabel[6]
+    Left = 6
+    Height = 17
+    Top = 6
+    Width = 55
+    BorderSpacing.Around = 6
+    Caption = 'Тип чека'
+  end
+  object CheckBox1: TCheckBox[7]
+    AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
+    Left = 67
+    Height = 23
+    Top = 6
+    Width = 136
+    BorderSpacing.Around = 6
+    Caption = 'Электронный чек'
+    TabOrder = 4
+  end
+  object Label6: TLabel[8]
+    AnchorSideTop.Control = edtContragentName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 152
+    Width = 107
+    BorderSpacing.Around = 6
+    Caption = 'Номер телефона'
+  end
+  object Label7: TLabel[9]
+    AnchorSideLeft.Control = edtPhone
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtContragentName
+    AnchorSideTop.Side = asrBottom
+    Left = 166
+    Height = 17
+    Top = 152
+    Width = 34
+    BorderSpacing.Around = 6
+    Caption = 'Email'
+  end
+  object edtPhone: TEdit[10]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 33
+    Hint = 'Номер сотового'
+    Top = 175
+    Width = 148
+    BorderSpacing.Around = 6
+    TabOrder = 5
+    Text = '+79161234567'
+  end
+  object edtEmail: TEdit[11]
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    Left = 172
+    Height = 33
+    Top = 175
+    Width = 132
+    BorderSpacing.Around = 6
+    TabOrder = 6
+  end
+  object RxDBGrid1: TRxDBGrid[12]
+    AnchorSideTop.Control = Label9
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 194
+    Top = 237
+    Width = 1438
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Товар|Код'
+        Width = 70
+        FieldName = 'GOODS_CODE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Товар|Наименование'
+        Width = 150
+        FieldName = 'GOODS_NAME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Кол-во'
+        Width = 90
+        FieldName = 'AMOUNT'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Цена'
+        Width = 90
+        FieldName = 'PRICE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Color = clMoneyGreen
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Стоимость'
+        Width = 90
+        FieldName = 'SUM'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footer.Alignment = taRightJustify
+        Footer.DisplayFormat = '#,##0.00'
+        Footer.FieldName = 'SUM'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end    
+      item
+        PickList.Strings = (
+          '18%'
+          '10%'
+          '100/18%'
+          '100/10%'
+          '0%'
+          'Без НДС'
+          '20%'
+          '100/20%'
+        )
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Ставка НДС'
+        Width = 70
+        FieldName = 'TAX_TYPE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+        KeyList.Strings = (
+          '1'
+          '2'
+          '3'
+          '4'
+          '5'
+          '6'
+          '7'
+          '8'
+          '9'
+          '10'
+        )
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Код страна происхождения'
+        Width = 120
+        FieldName = 'COUNTRY_CODE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Номер ГТД'
+        Width = 150
+        FieldName = 'GTD'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Маркировка|Группа'
+        Width = 60
+        FieldName = 'MARKS_GROUP'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Маркировка|GTIN'
+        Width = 150
+        FieldName = 'MARKS_GTIN'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Маркировка|Серия'
+        Width = 150
+        FieldName = 'MARKS_SERIAL'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Active = True
+    FooterOptions.Color = clYellow
+    FooterOptions.RowCount = 1
+    FooterOptions.Style = tsNative
+    FooterOptions.DrawFullLine = True
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+    FooterColor = clYellow
+    FooterRowCount = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    Color = clWindow
+    DrawFullLine = True
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    DataSource = dsGoods
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 7
+    TitleStyle = tsNative
+  end
+  object Label9: TLabel[13]
+    AnchorSideTop.Control = edtPhone
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 214
+    Width = 96
+    BorderSpacing.Around = 6
+    Caption = 'Товарная часть'
+  end
+  object RxDBGrid2: TRxDBGrid[14]
+    AnchorSideTop.Control = Label10
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button8
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 93
+    Top = 460
+    Width = 794
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Вид оплаты'
+        Width = 350
+        FieldName = 'PayTypeName'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Сумма оплаты'
+        Width = 100
+        FieldName = 'PaySum'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footer.Alignment = taRightJustify
+        Footer.DisplayFormat = '#,##0.00'
+        Footer.FieldName = 'PaySum'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Active = True
+    FooterOptions.Color = clYellow
+    FooterOptions.RowCount = 1
+    FooterOptions.Style = tsNative
+    FooterOptions.DrawFullLine = True
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+    FooterColor = clYellow
+    FooterRowCount = 1
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    Color = clWindow
+    DrawFullLine = True
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    DataSource = dsPays
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
+    TabOrder = 8
+    TitleStyle = tsNative
+  end
+  object Label10: TLabel[15]
+    AnchorSideTop.Control = RxDBGrid1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 437
+    Width = 48
+    Caption = 'Оплаты'
+  end
+  object CheckBox2: TCheckBox[16]
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 310
+    Height = 23
+    Top = 67
+    Width = 106
+    BorderSpacing.Around = 6
+    Caption = 'Через агента'
+    TabOrder = 9
+  end
+  object CheckBox3: TCheckBox[17]
+    AnchorSideLeft.Control = edtContragentInn1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 636
+    Height = 23
+    Top = 67
+    Width = 153
+    BorderSpacing.Around = 6
+    Caption = 'Данные поставщика'
+    TabOrder = 10
+  end
+  object Label14: TLabel[18]
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 67
+    Width = 73
+    BorderSpacing.Around = 6
+    Caption = 'Покупатель'
+  end
+  object edtPhone1: TEdit[19]
+    AnchorSideLeft.Control = Label16
+    AnchorSideTop.Control = Label16
+    AnchorSideTop.Side = asrBottom
+    Left = 322
+    Height = 33
+    Hint = 'Номер сотового'
+    Top = 181
+    Width = 164
+    BorderSpacing.Around = 6
+    TabOrder = 11
+    Text = '+79161234567'
+  end
+  object edtEmail1: TEdit[20]
+    AnchorSideLeft.Control = Label15
+    AnchorSideTop.Control = Label15
+    AnchorSideTop.Side = asrBottom
+    Left = 498
+    Height = 33
+    Top = 181
+    Width = 132
+    BorderSpacing.Around = 6
+    TabOrder = 12
+  end
+  object Label15: TLabel[21]
+    AnchorSideLeft.Control = edtPhone1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtContragentName1
+    AnchorSideTop.Side = asrBottom
+    Left = 492
+    Height = 17
+    Top = 158
+    Width = 81
+    BorderSpacing.Around = 6
+    Caption = 'Email агента '
+  end
+  object Label16: TLabel[22]
+    AnchorSideLeft.Control = CheckBox2
+    AnchorSideTop.Control = edtContragentName1
+    AnchorSideTop.Side = asrBottom
+    Left = 316
+    Height = 17
+    Top = 158
+    Width = 151
+    BorderSpacing.Around = 6
+    Caption = 'Номер телефона агента'
+  end
+  object edtContragentName1: TEdit[23]
+    AnchorSideLeft.Control = Label18
+    AnchorSideTop.Control = Label18
+    AnchorSideTop.Side = asrBottom
+    Left = 322
+    Height = 33
+    Top = 119
+    Width = 164
+    BorderSpacing.Around = 6
+    TabOrder = 13
+    Text = 'Иванов И.И.'
+  end
+  object edtContragentInn1: TEdit[24]
+    AnchorSideLeft.Control = Label17
+    AnchorSideTop.Control = Label17
+    AnchorSideTop.Side = asrBottom
+    Left = 498
+    Height = 33
+    Top = 119
+    Width = 132
+    BorderSpacing.Around = 6
+    TabOrder = 14
+    Text = '1831121013'
+  end
+  object Label17: TLabel[25]
+    AnchorSideLeft.Control = edtContragentName1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 492
+    Height = 17
+    Top = 96
+    Width = 74
+    BorderSpacing.Around = 6
+    Caption = 'ИНН агента'
+  end
+  object Label18: TLabel[26]
+    AnchorSideLeft.Control = CheckBox2
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 316
+    Height = 17
+    Top = 96
+    Width = 35
+    BorderSpacing.Around = 6
+    Caption = 'Агент'
+  end
+  object edtSuplierPhone: TEdit[27]
+    AnchorSideLeft.Control = Label20
+    AnchorSideTop.Control = Label20
+    AnchorSideTop.Side = asrBottom
+    Left = 648
+    Height = 33
+    Hint = 'Номер сотового'
+    Top = 181
+    Width = 148
+    BorderSpacing.Around = 6
+    TabOrder = 15
+    Text = '+79161234567'
+  end
+  object edtSuplierEmail: TEdit[28]
+    AnchorSideLeft.Control = Label19
+    AnchorSideTop.Control = Label19
+    AnchorSideTop.Side = asrBottom
+    Left = 808
+    Height = 33
+    Top = 181
+    Width = 132
+    BorderSpacing.Around = 6
+    TabOrder = 16
+  end
+  object Label19: TLabel[29]
+    AnchorSideLeft.Control = edtSuplierPhone
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtSuplierName
+    AnchorSideTop.Side = asrBottom
+    Left = 802
+    Height = 17
+    Top = 158
+    Width = 34
+    BorderSpacing.Around = 6
+    Caption = 'Email'
+  end
+  object Label20: TLabel[30]
+    AnchorSideLeft.Control = CheckBox3
+    AnchorSideTop.Control = edtSuplierName
+    AnchorSideTop.Side = asrBottom
+    Left = 642
+    Height = 17
+    Top = 158
+    Width = 107
+    BorderSpacing.Around = 6
+    Caption = 'Номер телефона'
+  end
+  object edtSuplierName: TEdit[31]
+    AnchorSideLeft.Control = Label22
+    AnchorSideTop.Control = Label22
+    AnchorSideTop.Side = asrBottom
+    Left = 648
+    Height = 33
+    Top = 119
+    Width = 148
+    BorderSpacing.Around = 6
+    TabOrder = 17
+    Text = 'ООО "Поставщик"'
+  end
+  object edtSuplierInn: TEdit[32]
+    AnchorSideLeft.Control = Label21
+    AnchorSideTop.Control = Label21
+    AnchorSideTop.Side = asrBottom
+    Left = 808
+    Height = 33
+    Top = 119
+    Width = 132
+    BorderSpacing.Around = 6
+    TabOrder = 18
+    Text = '123456789047'
+  end
+  object Label21: TLabel[33]
+    AnchorSideLeft.Control = edtSuplierName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 802
+    Height = 17
+    Top = 96
+    Width = 108
+    BorderSpacing.Around = 6
+    Caption = 'ИНН поставщика'
+  end
+  object Label22: TLabel[34]
+    AnchorSideLeft.Control = CheckBox3
+    AnchorSideTop.Control = CheckBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 642
+    Height = 17
+    Top = 96
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'Поставщик'
+  end
+  object dsGoods: TDataSource[35]
+    DataSet = rxGoods
+    Left = 152
+    Top = 40
+  end
+  object dsPays: TDataSource[36]
+    DataSet = rxPays
+    Left = 152
+    Top = 80
+  end
+  object rxPays: TRxMemoryData[37]
+    FieldDefs = <    
+      item
+        Name = 'PayType'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'PayTypeName'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'PaySum'
+        DataType = ftCurrency
+      end>
+    PacketRecords = 0
+    Left = 184
+    Top = 80
+    object rxPaysPayType: TLongintField
+      FieldKind = fkData
+      FieldName = 'PayType'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxPaysPayTypeName: TStringField
+      FieldKind = fkData
+      FieldName = 'PayTypeName'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxPaysPaySum: TCurrencyField
+      FieldKind = fkData
+      FieldName = 'PaySum'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 2
+    end
+  end
+  object rxGoods: TRxMemoryData[38]
+    FieldDefs = <    
+      item
+        Name = 'GOODS_CODE'
+        DataType = ftString
+        Size = 40
+      end    
+      item
+        Name = 'GOODS_NAME'
+        DataType = ftString
+        Size = 500
+      end    
+      item
+        Name = 'AMOUNT'
+        DataType = ftFloat
+        Precision = 3
+        Size = 15
+      end    
+      item
+        Name = 'PRICE'
+        DataType = ftCurrency
+      end    
+      item
+        Name = 'SUM'
+        DataType = ftCurrency
+      end    
+      item
+        Name = 'COUNTRY_CODE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'GTD'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'TAX_TYPE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'MARKS_GROUP'
+        DataType = ftWord
+      end    
+      item
+        Name = 'MARKS_GTIN'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'MARKS_SERIAL'
+        DataType = ftString
+        Size = 100
+      end>
+    BeforePost = rxGoodsBeforePost
+    PacketRecords = 0
+    Left = 192
+    Top = 40
+    object rxGoodsGOODS_CODE: TStringField
+      FieldKind = fkData
+      FieldName = 'GOODS_CODE'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object rxGoodsGOODS_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'GOODS_NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 500
+    end
+    object rxGoodsAMOUNT: TFloatField
+      FieldKind = fkData
+      FieldName = 'AMOUNT'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 3
+    end
+    object rxGoodsPRICE: TCurrencyField
+      FieldKind = fkData
+      FieldName = 'PRICE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 2
+    end
+    object rxGoodsSUM: TCurrencyField
+      FieldKind = fkData
+      FieldName = 'SUM'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 2
+    end
+    object rxGoodsCOUNTRY_CODE: TLongintField
+      FieldKind = fkData
+      FieldName = 'COUNTRY_CODE'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxGoodsGTD: TStringField
+      FieldKind = fkData
+      FieldName = 'GTD'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxGoodsTAX_TYPE: TLongintField
+      FieldKind = fkData
+      FieldName = 'TAX_TYPE'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxGoodsMARKS_GROUP: TWordField
+      FieldKind = fkData
+      FieldName = 'MARKS_GROUP'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxGoodsMARKS_GTIN: TStringField
+      FieldKind = fkData
+      FieldName = 'MARKS_GTIN'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxGoodsMARKS_SERIAL: TStringField
+      FieldKind = fkData
+      FieldName = 'MARKS_SERIAL'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+  end
+end

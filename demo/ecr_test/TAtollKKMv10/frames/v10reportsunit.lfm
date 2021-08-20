@@ -1,0 +1,26 @@
+inherited v10ReportsFrame: Tv10ReportsFrame
+  object Button5: TButton[0]
+    Left = 6
+    Height = 33
+    Top = 6
+    Width = 61
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'X отчёт'
+    OnClick = Button5Click
+    TabOrder = 0
+  end
+  object Button6: TButton[1]
+    AnchorSideLeft.Control = Button5
+    AnchorSideLeft.Side = asrBottom
+    Left = 73
+    Height = 33
+    Top = 6
+    Width = 61
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Z отчёт'
+    OnClick = Button6Click
+    TabOrder = 1
+  end
+end

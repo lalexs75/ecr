@@ -1,0 +1,76 @@
+inherited v10OrgParamsFrame: Tv10OrgParamsFrame
+  object Label4: TLabel[0]
+    Left = 6
+    Height = 17
+    Top = 6
+    Width = 43
+    BorderSpacing.Around = 6
+    Caption = 'Кассир'
+  end
+  object Edit3: TEdit[1]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 29
+    Width = 140
+    BorderSpacing.Around = 6
+    TabOrder = 0
+    Text = 'Иванова А.И.'
+  end
+  object chPayPlace: TCheckBox[2]
+    AnchorSideTop.Control = Edit3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 68
+    Width = 115
+    BorderSpacing.Around = 6
+    Caption = 'Место расчёта'
+    TabOrder = 1
+  end
+  object edtPayPlace: TEdit[3]
+    AnchorSideLeft.Control = chPayPlace
+    AnchorSideTop.Control = chPayPlace
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label11
+    Left = 12
+    Height = 33
+    Top = 97
+    Width = 478
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+    Text = 'Расчётно кассовый цент'
+  end
+  object Label5: TLabel[4]
+    AnchorSideLeft.Control = Edit3
+    AnchorSideLeft.Side = asrBottom
+    Left = 158
+    Height = 17
+    Top = 6
+    Width = 82
+    BorderSpacing.Around = 6
+    Caption = 'ИНН кассира'
+  end
+  object Edit4: TEdit[5]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    Left = 164
+    Height = 33
+    Top = 29
+    Width = 112
+    BorderSpacing.Around = 6
+    TabOrder = 3
+    Text = '500100732259'
+  end
+  object Label11: TLabel[6]
+    AnchorSideLeft.Side = asrCenter
+    Left = 496
+    Height = 1
+    Top = 0
+    Width = 1
+  end
+end

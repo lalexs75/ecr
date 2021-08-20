@@ -1,0 +1,29 @@
+inherited v10CRPTFrame: Tv10CRPTFrame
+  object Button24: TButton[0]
+    Left = 24
+    Height = 33
+    Top = 24
+    Width = 119
+    AutoSize = True
+    Caption = 'Ping server ЦРПТ'
+    OnClick = Button24Click
+    TabOrder = 0
+  end
+  object Button25: TButton[1]
+    Left = 25
+    Height = 33
+    Top = 88
+    Width = 82
+    AutoSize = True
+    Caption = 'Sale KM 1.2'
+    OnClick = Button25Click
+    TabOrder = 1
+  end
+  object Label27: TLabel[2]
+    Left = 160
+    Height = 17
+    Top = 36
+    Width = 47
+    Caption = 'Label27'
+  end
+end
