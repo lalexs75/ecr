@@ -9,7 +9,17 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms,
   rxlogging,
-  Unit1;
+
+  v10MainUnit,
+  tv10globalunit,
+  v10systemparamsunit,
+  v10tradeunit,
+  v10CRPTUnit,
+  v10SimpleTestUnit,
+  v10ReportsUnit,
+  v10ServiceUnit,
+  v10OtherUnit,
+  v10OrgParamsUnit;
 
 {$R *.res}
 
@@ -18,7 +28,7 @@ begin
   RequireDerivedFormResource:=True;
   Application.Scaled:=True;
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TMainForm, MainForm);
   Application.Run;
 end.
 
