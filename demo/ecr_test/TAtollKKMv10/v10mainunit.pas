@@ -56,7 +56,8 @@ procedure DoDefaultWriteLog( ALogType:TEventType; const ALogMessage:string);
 implementation
 uses LazFileUtils, Math, rxlogging, v10tradeunit, v10CRPTUnit,
   v10SimpleTestUnit, v10ReportsUnit, v10ServiceUnit, v10OtherUnit,
-  v10OrgParamsUnit, v10MarkingUnit;
+  v10OrgParamsUnit, v10MarkingUnit, v10RegisterCheckFFD1_2Unit,
+  v10RegisterCheckCmpUnit;
 
 {$R *.lfm}
 
@@ -217,11 +218,14 @@ begin
   R:=AddFrame('Чек', 'Стандарные', Tv10SimpleTestFrame.Create(Self));
   R:=AddFrame('Чек', 'Регистрация чека', Tv10TradeFrame.Create(Self));
   R:=AddFrame('Чек', 'Маркировка', Tv10MarkingFrame.Create(Self));
+  R:=AddFrame('Чек', 'Регистрация позиции с маркировкой ФФД 1.2', Tv10RegisterCheckFFD1_2Frame.Create(Self));
 
   R:=AddFrame('ЦРПТ', 'Взаимодействие с ЦРПТ', Tv10CRPTFrame.Create(Self));
   R:=AddFrame('Сервис', 'Стандарные', Tv10ServiceFrame.Create(Self));
   R:=AddFrame('Прочее', 'Прочее', Tv10OtherFrame.Create(Self));
   R:=AddFrame('Прочее', 'Параметры организации', Tv10OrgParamsFrame.Create(Self));
+
+  R:=AddFrame('Компонента', 'Регистрация чека', Tv10RegisterCheckCmpFrame.Create(Self));
 
   UpdateCtrlState;
 end;

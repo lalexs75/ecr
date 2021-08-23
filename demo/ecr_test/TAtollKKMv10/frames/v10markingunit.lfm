@@ -1,10 +1,10 @@
 inherited v10MarkingFrame: Tv10MarkingFrame
-  Height = 708
+  Height = 746
   Width = 687
-  ClientHeight = 708
+  ClientHeight = 746
   ClientWidth = 687
-  DesignLeft = 554
-  DesignTop = 256
+  DesignLeft = 782
+  DesignTop = 205
   object Label1: TLabel[0]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Memo1

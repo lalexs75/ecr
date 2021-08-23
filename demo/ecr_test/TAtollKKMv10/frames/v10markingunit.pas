@@ -87,42 +87,8 @@ begin
     FKMType:=LIBFPTR_MCT12_AUTO;
   end;
 
-  case ComboBox2.ItemIndex of
-    0:FStatus:=LIBFPTR_MES_PIECE_SOLD;
-    1:FStatus:=LIBFPTR_MES_DRY_FOR_SALE;
-    2:FStatus:=LIBFPTR_MES_PIECE_RETURN;
-    3:FStatus:=LIBFPTR_MES_DRY_RETURN;
-  else
-    FStatus:=LIBFPTR_MES_UNCHANGED;
-  end;
-
-  case ComboBox3.ItemIndex of
-    0:FItemUnits:=LIBFPTR_IU_PIECE;
-    10:FItemUnits:=LIBFPTR_IU_GRAM;
-    11:FItemUnits:=LIBFPTR_IU_KILOGRAM;
-    12:FItemUnits:=LIBFPTR_IU_TON;
-    20:FItemUnits:=LIBFPTR_IU_CENTIMETER;
-    21:FItemUnits:=LIBFPTR_IU_DECIMETER;
-    22:FItemUnits:=LIBFPTR_IU_METER;
-    30:FItemUnits:=LIBFPTR_IU_SQUARE_CENTIMETER;
-    31:FItemUnits:=LIBFPTR_IU_SQUARE_DECIMETER;
-    32:FItemUnits:=LIBFPTR_IU_SQUARE_METER;
-    40:FItemUnits:=LIBFPTR_IU_MILLILITER;
-    41:FItemUnits:=LIBFPTR_IU_LITER;
-    42:FItemUnits:=LIBFPTR_IU_CUBIC_METER;
-    50:FItemUnits:=LIBFPTR_IU_KILOWATT_HOUR;
-    51:FItemUnits:=LIBFPTR_IU_GKAL;
-    52:FItemUnits:=LIBFPTR_IU_DAY;
-    53:FItemUnits:=LIBFPTR_IU_HOUR;
-    54:FItemUnits:=LIBFPTR_IU_MINUTE;
-    55:FItemUnits:=LIBFPTR_IU_SECOND;
-    80:FItemUnits:=LIBFPTR_IU_KILOBYTE;
-    81:FItemUnits:=LIBFPTR_IU_MEGABYTE;
-    82:FItemUnits:=LIBFPTR_IU_GIGABYTE;
-    83:FItemUnits:=LIBFPTR_IU_TERABYTE;
-  else
-    FItemUnits:=LIBFPTR_IU_OTHER;
-  end;
+  FStatus:=IndToKMStatus(ComboBox2.ItemIndex);
+  FItemUnits:=IndToItemUnits(ComboBox3.ItemIndex);
 
   FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_MARKING_CODE_TYPE, Ord(FKMType));
   FKKM.LibraryAtol.SetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE), Mark);

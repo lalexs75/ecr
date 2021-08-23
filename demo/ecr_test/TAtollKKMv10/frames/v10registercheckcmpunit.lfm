@@ -1,0 +1,128 @@
+inherited v10RegisterCheckCmpFrame: Tv10RegisterCheckCmpFrame
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Edit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 22
+    Width = 94
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Наименование'
+  end
+  object Label2: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Edit2
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 61
+    Width = 31
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Цена'
+  end
+  object Edit1: TEdit[2]
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 115
+    Height = 33
+    Top = 6
+    Width = 376
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+    Text = 'Шина цитрусовая'
+  end
+  object Edit2: TEdit[3]
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 115
+    Height = 33
+    Top = 45
+    Width = 376
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+    Text = '100'
+  end
+  object Edit3: TEdit[4]
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 115
+    Height = 33
+    Top = 84
+    Width = 376
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+    Text = '1'
+  end
+  object Button1: TButton[5]
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 397
+    Height = 33
+    Top = 285
+    Width = 94
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Регистрация'
+    OnClick = Button1Click
+    TabOrder = 3
+  end
+  object Label3: TLabel[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Edit3
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 100
+    Width = 45
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Кол-во'
+  end
+  object Label4: TLabel[7]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Edit4
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 139
+    Width = 103
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Код маркировки'
+  end
+  object Edit4: TEdit[8]
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 115
+    Height = 33
+    Top = 123
+    Width = 376
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+end
