@@ -433,7 +433,7 @@ type
     function UpdateFnmKeys(Handle:TLibFPtrHandle):Integer;
     function WriteSalesNotice(Handle:TLibFPtrHandle):Integer;
     function CheckMarkingCodeValidationsReady(Handle:TLibFPtrHandle):Integer;
-    function ClearMarkingCode_validationResult(Handle:TLibFPtrHandle):Integer;
+    function ClearMarkingCodeValidationResult(Handle:TLibFPtrHandle):Integer;
     function PingMarkingServer(Handle:TLibFPtrHandle):Integer;
     function GetMarkingServerStatus(Handle:TLibFPtrHandle):Integer;
     function IsDriverLocked(Handle:TLibFPtrHandle):Integer;
@@ -447,6 +447,7 @@ type
 
   TAtollKKMv10 = class(TCashRegisterAbstract)
   private
+    FFFD1_2: Boolean;
     FLibrary:TAtollLibraryV10;
     FHandle:TLibFPtrHandle;
     FLibraryFileName: string;
@@ -466,6 +467,7 @@ type
     //function GetCheckType: TCheckType; override;
     //procedure SetCheckType(AValue: TCheckType); override;
   public
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
     function InternalCheckError:Integer;
@@ -566,6 +568,7 @@ type
     property LibraryFileName:string read FLibraryFileName write FLibraryFileName;
     property DeviceDateTime:TDateTime read GetDeviceDateTime;
     property LibraryAtol:TAtollLibraryV10 read FLibrary;
+    property FFD1_2:Boolean read FFFD1_2 write FFFD1_2;
   end;
 
 resourcestring
@@ -746,6 +749,12 @@ begin
        InternalCheckError;
      end;
   end;
+end;
+
+constructor TAtollKKMv10.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FFFD1_2:=false;
 end;
 
 (*
@@ -3138,7 +3147,7 @@ begin
     raise EAtollLibrary.CreateFmt(sCantLoadProc, ['libfptr_check_marking_code_validations_ready']);
 end;
 
-function TAtollLibraryV10.ClearMarkingCode_validationResult(
+function TAtollLibraryV10.ClearMarkingCodeValidationResult(
   Handle: TLibFPtrHandle): Integer;
 begin
   if Assigned(Flibfptr_clear_marking_code_validation_result) then
