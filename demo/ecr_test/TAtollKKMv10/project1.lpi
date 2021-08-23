@@ -40,7 +40,7 @@
         <PackageName Value="LCL"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="11">
+    <Units Count="13">
       <Unit0>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -122,6 +122,22 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="v10OrgParamsUnit"/>
       </Unit10>
+      <Unit11>
+        <Filename Value="frames/v10markingunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="v10MarkingFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="v10MarkingUnit"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="frames/v10registercheckffd1_2unit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="v10RegisterCheckFFD1_2Frame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="v10RegisterCheckFFD1_2Unit"/>
+      </Unit12>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

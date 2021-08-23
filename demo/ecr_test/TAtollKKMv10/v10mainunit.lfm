@@ -1,12 +1,11 @@
 object MainForm: TMainForm
-  Left = 344
+  Left = 382
   Height = 810
-  Top = 88
+  Top = 118
   Width = 1460
   Caption = 'Тесты 10 версии ATOL'
   ClientHeight = 810
   ClientWidth = 1460
-  OnClose = FormClose
   OnCreate = FormCreate
   LCLVersion = '2.3.0.0'
   object Memo1: TMemo
@@ -31,7 +30,7 @@ object MainForm: TMainForm
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 619
+    Height = 614
     Top = 5
     Width = 121
     Align = alLeft
@@ -39,24 +38,62 @@ object MainForm: TMainForm
     OnClick = TreeView1Click
   end
   object Panel1: TPanel
-    Left = 121
-    Height = 619
+    Left = 126
+    Height = 614
     Top = 5
-    Width = 1169
+    Width = 1159
     Align = alClient
     TabOrder = 3
   end
   object Panel2: TPanel
     Left = 1290
-    Height = 619
+    Height = 614
     Top = 5
     Width = 170
     Align = alRight
+    ClientHeight = 614
+    ClientWidth = 170
     TabOrder = 4
+    object Button1: TButton
+      Left = 0
+      Height = 25
+      Top = 40
+      Width = 75
+      Caption = 'Свойства'
+      OnClick = Button1Click
+      TabOrder = 0
+    end
+    object CheckBox1: TCheckBox
+      Left = 0
+      Height = 23
+      Top = 8
+      Width = 89
+      Caption = 'Включено'
+      OnChange = CheckBox1Change
+      TabOrder = 1
+    end
   end
-  object AtollKKM1: TAtollKKM
-    PortSpeed = 6
-    Left = 128
-    Top = 688
+  object Splitter2: TSplitter
+    Left = 121
+    Height = 614
+    Top = 5
+    Width = 5
+  end
+  object Splitter3: TSplitter
+    Left = 1285
+    Height = 614
+    Top = 5
+    Width = 5
+    Align = alRight
+    ResizeAnchor = akRight
+  end
+  object Splitter4: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 619
+    Width = 1460
+    Align = alBottom
+    ResizeAnchor = akBottom
   end
 end

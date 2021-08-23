@@ -19,12 +19,12 @@ uses
   v10ReportsUnit,
   v10ServiceUnit,
   v10OtherUnit,
-  v10OrgParamsUnit;
+  v10OrgParamsUnit, v10MarkingUnit, v10RegisterCheckFFD1_2Unit;
 
 {$R *.res}
 
 begin
-  InitRxLogs;
+  OnRxLoggerEvent:=@DoDefaultWriteLog;
   RequireDerivedFormResource:=True;
   Application.Scaled:=True;
   Application.Initialize;

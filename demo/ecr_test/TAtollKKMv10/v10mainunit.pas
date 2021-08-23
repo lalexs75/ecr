@@ -14,26 +14,26 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
-    AtollKKM1: TAtollKKM;
+    Button1: TButton;
+    CheckBox1: TCheckBox;
     Memo1: TMemo;
     Panel1: TPanel;
     Panel2: TPanel;
     Splitter1: TSplitter;
+    Splitter2: TSplitter;
+    Splitter3: TSplitter;
+    Splitter4: TSplitter;
     TreeView1: TTreeView;
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TreeView1Click(Sender: TObject);
   private
     OldFrame:TFrame;
 
-    //FAtollInstance: TAtollLibraryV10;
     KKM_Handle:TLibFPtrHandle;
 
     FAtollKKMv10:TAtollKKMv10;
-    procedure WriteLog(S:string);
-//    procedure ShowStatus(ACaption:string);
-//    procedure InitAtollInstance;
-//    procedure DoneAtollInstance;
     procedure FAtollKKMv10Error(Sender: TObject);
 
 //    procedure QueryCheckData;
@@ -52,10 +52,11 @@ type
 var
   MainForm: TMainForm;
 
+procedure DoDefaultWriteLog( ALogType:TEventType; const ALogMessage:string);
 implementation
 uses LazFileUtils, Math, rxlogging, v10tradeunit, v10CRPTUnit,
   v10SimpleTestUnit, v10ReportsUnit, v10ServiceUnit, v10OtherUnit,
-  v10OrgParamsUnit;
+  v10OrgParamsUnit, v10MarkingUnit;
 
 {$R *.lfm}
 
@@ -77,17 +78,25 @@ begin
   for i:=1 to Min(Length(ASerial), 24) do Result[8 + i]:=Ord(ASerial[i]);
 end;
 
+procedure DoDefaultWriteLog(ALogType: TEventType; const ALogMessage: string);
+begin
+  RxDefaultWriteLog( ALogType, ALogMessage);
+  if Assigned(MainForm) then
+  begin
+    MainForm.Memo1.Lines.Add(ALogMessage);
+    MainForm.Memo1.CaretPos:=Point(1, MainForm.Memo1.Lines.Count);
+  end;
+end;
+
 
 { TMainForm }
 
 procedure TMainForm.FAtollKKMv10Error(Sender: TObject);
 var
   FCR: TCashRegisterAbstract;
-  S: String;
 begin
   FCR:=Sender as TCashRegisterAbstract;
-  S:=Format('%d - %s', [FCR.ErrorCode, FCR.ErrorDescription]);
-  Memo1.Lines.Add(S);
+  RxWriteLog(etInfo, '%d - %s', [FCR.ErrorCode, FCR.ErrorDescription]);
 end;
 (*
 procedure TMainForm.QueryCheckData;
@@ -141,7 +150,14 @@ end;
 
 
 procedure TMainForm.UpdateCtrlState;
+var
+  N: TTreeNode;
 begin
+  for N in TreeView1.Items do
+  begin
+    if Assigned(N.Data) then
+      TConfigFrame(N.Data).UpdateCtrlState;
+  end;
 end;
 
 function TMainForm.InternalCheckError: Integer;
@@ -150,11 +166,7 @@ var
 begin
   Result:=FAtollKKMv10.LibraryAtol.ErrorCode(FAtollKKMv10.Handle);
   if Result <> 0 then
-  begin
-    S:=Format('Error %d - %s', [Result, FAtollKKMv10.LibraryAtol.ErrorDescription(FAtollKKMv10.Handle)]);
-    RxWriteLog(etDebug, S);
-    WriteLog(S);
-  end;
+    RxWriteLog(etDebug, 'Error %d - %s', [Result, FAtollKKMv10.LibraryAtol.ErrorDescription(FAtollKKMv10.Handle)]);
 end;
 
 function TMainForm.AddFrame(const ARootNodeName, APageName: string;
@@ -189,17 +201,11 @@ begin
   RN.Expanded:=true;
 end;
 
-procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-//  DoneAtollInstance;
-end;
-
 procedure TMainForm.FormCreate(Sender: TObject);
 var
-  C: TCheckType;
   R: TConfigFrame;
 begin
-
+  Memo1.Lines.Clear;
 
   FAtollKKMv10:=TAtollKKMv10.Create(Self);
   FAtollKKMv10.LibraryFileName:=KKMLibraryFileName;
@@ -207,8 +213,11 @@ begin
   InitKassirData;
 
   R:=AddFrame('Отчёты', 'Стандарные', Tv10ReportsFrame.Create(Self));
+
   R:=AddFrame('Чек', 'Стандарные', Tv10SimpleTestFrame.Create(Self));
   R:=AddFrame('Чек', 'Регистрация чека', Tv10TradeFrame.Create(Self));
+  R:=AddFrame('Чек', 'Маркировка', Tv10MarkingFrame.Create(Self));
+
   R:=AddFrame('ЦРПТ', 'Взаимодействие с ЦРПТ', Tv10CRPTFrame.Create(Self));
   R:=AddFrame('Сервис', 'Стандарные', Tv10ServiceFrame.Create(Self));
   R:=AddFrame('Прочее', 'Прочее', Tv10OtherFrame.Create(Self));
@@ -217,12 +226,32 @@ begin
   UpdateCtrlState;
 end;
 
+procedure TMainForm.CheckBox1Change(Sender: TObject);
+begin
+  if CheckBox1.Checked then
+  begin
+    FAtollKKMv10.Connected:=true;
+    FAtollKKMv10.Open;
+  end
+  else
+  begin
+    FAtollKKMv10.Close;
+    FAtollKKMv10.Connected:=true;
+  end;
+
+  UpdateCtrlState;
+end;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+begin
+  FAtollKKMv10.ShowProperties;
+end;
+
 procedure TMainForm.TreeView1Click(Sender: TObject);
 procedure DoSelectFrame(Cfg: TConfigFrame);
 begin
   if Assigned(OldFrame) then
     OldFrame.Visible:=false;
-  //OldFrame:=Cfg.GetFrame(Self);
   OldFrame:=Cfg;
   OldFrame.BringToFront;
   OldFrame.Visible:=true;
@@ -241,48 +270,5 @@ begin
   end;
 end;
 
-procedure TMainForm.WriteLog(S: string);
-begin
-  Memo1.Lines.Add(S);
-  Memo1.CaretPos:=Point(1, Memo1.Lines.Count);
-{  if Assigned(FAtollInstance) and FAtollInstance.Loaded then
-    FAtollInstance.LogWrite('TEST', 0, S);}
-end;
-(*
-procedure TMainForm.ShowStatus(ACaption: string);
-var
-  C: Integer;
-  S: String;
-begin
-  if ACaption <> '' then
-    WriteLog('----  '+ACaption+'  ----');
-  C:=FAtollInstance.ErrorCode(KKM_Handle);
-  S:=FAtollInstance.ErrorDescription(KKM_Handle);
-  if C<>0 then
-  begin
-    WriteLog('Code = '+IntToStr(C));
-    WriteLog('ErrorDescription = '+S);
-  end;
-end;
-
-procedure TMainForm.InitAtollInstance;
-var
-  S: String;
-begin
-  Memo1.Lines.Clear;
-  if not Assigned(FAtollInstance) then
-  begin
-    FAtollInstance:=TAtollLibraryV10.Create;
-    FAtollInstance.LibraryName:=KKMLibraryFileName;
-    FAtollInstance.LoadAtollLibrary;
-  end;
-end;
-
-procedure TMainForm.DoneAtollInstance;
-begin
-  if Assigned(FAtollInstance) then
-    FreeAndNil(FAtollInstance);
-end;
-*)
 end.
 

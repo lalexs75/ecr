@@ -1,0 +1,384 @@
+inherited v10MarkingFrame: Tv10MarkingFrame
+  Height = 708
+  Width = 687
+  ClientHeight = 708
+  ClientWidth = 687
+  DesignLeft = 554
+  DesignTop = 256
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Memo1
+    Left = 6
+    Height = 17
+    Top = 6
+    Width = 19
+    BorderSpacing.Left = 6
+    Caption = 'КМ'
+  end
+  object Memo1: TMemo[1]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 113
+    Top = 6
+    Width = 330
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object Button1: TButton[2]
+    AnchorSideLeft.Control = Button4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 33
+    Top = 8
+    Width = 202
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    Caption = 'Начать проверку КМ'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Button2: TButton[3]
+    AnchorSideLeft.Control = Button4
+    AnchorSideTop.Control = Button1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 33
+    Top = 47
+    Width = 202
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    Caption = 'Прервать проверку'
+    OnClick = Button2Click
+    TabOrder = 2
+  end
+  object Button3: TButton[4]
+    AnchorSideLeft.Control = Button4
+    AnchorSideTop.Control = Button2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 33
+    Top = 86
+    Width = 202
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    Caption = 'Статус проверки'
+    OnClick = Button3Click
+    TabOrder = 3
+  end
+  object Button4: TButton[5]
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 33
+    Top = 234
+    Width = 202
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Очистить буфер проверки КМ'
+    OnClick = Button4Click
+    TabOrder = 4
+  end
+  object Button5: TButton[6]
+    AnchorSideLeft.Control = Button4
+    AnchorSideTop.Control = Button4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 33
+    Top = 273
+    Width = 202
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    Caption = 'Подтвердить выбытие'
+    OnClick = Button5Click
+    TabOrder = 5
+  end
+  object Button6: TButton[7]
+    AnchorSideLeft.Control = Button4
+    AnchorSideTop.Control = Button5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 33
+    Top = 312
+    Width = 202
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    Caption = 'Отказаться от выбытия'
+    OnClick = Button6Click
+    TabOrder = 6
+  end
+  object Button7: TButton[8]
+    AnchorSideLeft.Control = Button4
+    AnchorSideTop.Control = Button6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 33
+    Top = 351
+    Width = 202
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    Caption = 'Состояние очереди отправки'
+    OnClick = Button7Click
+    TabOrder = 7
+  end
+  object Label2: TLabel[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ComboBox1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 137
+    Width = 46
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Тип КМ'
+  end
+  object ComboBox1: TComboBox[10]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Memo1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 29
+    Top = 125
+    Width = 330
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      '256 - Определить автоматически'
+      '0 - Неопознаяный КМ'
+      '1 - Короткий КМ'
+      '2 - КМ со значением кода проверки 88 символов, подлежащих проверки к ФН'
+      '3 - КМ со значением кода проверки 44 символов, не подлежащих проверки к ФН'
+      '4 - КМ со значением кода проверки 44 символов, подлежащих проверки к ФН'
+      '5 - КМ со значением кода проверки 4 символов, не подлежащих проверки к ФН'
+    )
+    Style = csDropDownList
+    TabOrder = 8
+    Text = '256 - Определить автоматически'
+  end
+  object Label3: TLabel[11]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ComboBox2
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 172
+    Width = 62
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Статус КМ'
+  end
+  object ComboBox2: TComboBox[12]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 29
+    Top = 160
+    Width = 330
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      '1 - штучный товар, реализован'
+      '2 - мерный товар, в стадии реализации'
+      '3 - штучный товар, возвращен'
+      '4 - часть товара, возвращена'
+      '255 - статус товара не изменился'
+    )
+    Style = csDropDownList
+    TabOrder = 9
+    Text = '1 - штучный товар, реализован'
+  end
+  object Label4: TLabel[13]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Edit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 211
+    Width = 111
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Режим обработки'
+  end
+  object Edit1: TEdit[14]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 33
+    Top = 195
+    Width = 330
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 10
+    Text = '0'
+  end
+  object Label5: TLabel[15]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = CurrencyEdit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 250
+    Width = 73
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Количество'
+  end
+  object Label6: TLabel[16]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ComboBox3
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 285
+    Width = 126
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Единицы измерения'
+  end
+  object ComboBox3: TComboBox[17]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CurrencyEdit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 29
+    Top = 273
+    Width = 330
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      '0 - штуки, единицы'
+      '10 - грамм'
+      '11 - килограмм'
+      '12 - тонна'
+      '20 - сантиметр'
+      '21 - дециметр'
+      '22 - метр'
+      '30 - квадратный сантиметр'
+      '31 - квадратный дециметр'
+      '32 - квадратный метр'
+      '40 - миллилитр'
+      '41 - литр'
+      '42 - кубический метр'
+      '50 - киловатт час'
+      '51 - гигакалория'
+      '70 - сутки (день)'
+      '71 - час'
+      '72 - минута'
+      '73 - секунда'
+      '80 - килобайт'
+      '81 - мегабайт'
+      '82 - гигабайт'
+      '83 - терабайт'
+      '255 - иные единицы измерения'
+    )
+    Style = csDropDownList
+    TabOrder = 11
+    Text = '0 - штуки, единицы'
+  end
+  object Label7: TLabel[18]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Edit3
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 324
+    Width = 131
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Дробное количество'
+  end
+  object Edit3: TEdit[19]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 33
+    Top = 308
+    Width = 330
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 12
+    TextHint = 'Числитель/знаменатель'
+  end
+  object CheckBox1: TCheckBox[20]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 23
+    Top = 347
+    Width = 330
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    Caption = 'Ждать ответа от сервера'
+    TabOrder = 13
+  end
+  object CurrencyEdit1: TCurrencyEdit[21]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button4
+    Left = 143
+    Height = 33
+    Top = 234
+    Width = 330
+    Alignment = taRightJustify
+    BorderSpacing.Around = 6
+    DecimalPlaces = 3
+    DisplayFormat = '#,##0.###'
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 14
+  end
+end
