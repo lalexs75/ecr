@@ -457,6 +457,8 @@ type
     procedure InternalOpenKKM;
     procedure InternalCloseKKM;
     procedure InternalSetCheckType(AValue: TCheckType);
+    function InternalRegistration1_05:integer;
+    function InternalRegistration1_2:integer;
   protected
     procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); override;
     function GetConnected: boolean; override;
@@ -464,8 +466,6 @@ type
 
     function GetCheckNumber: integer; override;
     function GetFDNumber: integer; override;
-    //function GetCheckType: TCheckType; override;
-    //procedure SetCheckType(AValue: TCheckType); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -680,6 +680,174 @@ begin
     FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_RECEIPT_TYPE, Ord(CT));
     InternalCheckError;
   end;
+end;
+
+function TAtollKKMv10.InternalRegistration1_05: integer;
+var
+  FSupInf, FMark: TBytes;
+begin
+  //Обработаем данные поставщика
+  if (GoodsInfo.SuplierInfo.Name <> '') and (GoodsInfo.SuplierInfo.INN<>'') then
+  begin
+    if GoodsInfo.SuplierInfo.Phone <>'' then
+      SetAttributeStr(1171, GoodsInfo.SuplierInfo.Phone); //libfptr_set_param_str(fptr, 1171, L"+79113456789");
+
+    SetAttributeStr(1225, GoodsInfo.SuplierInfo.Name); //libfptr_set_param_str(fptr, 1225, L"ООО Поставщик");
+    FLibrary.UtilFormTLV(FHandle);
+
+(*      std::vector<uchar> suplierInfo;
+    int size = libfptr_get_param_bytearray(fptr, LIBFPTR_PARAM_TAG_VALUE,
+                                           &suplierInfo[0], suplierInfo.size());
+    if (size > suplierInfo.size())
+    {
+        suplierInfo.resize(size);
+        libfptr_get_param_bytearray(fptr, LIBFPTR_PARAM_TAG_VALUE,
+                                    &suplierInfo[0], suplierInfo.size());
+    }
+    suplierInfo.resize(size); *)
+    FSupInf:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
+
+    SetAttributeStr(1226, GoodsInfo.SuplierInfo.INN);
+    //libfptr_set_param_bytearray(fptr, 1224, &suplierInfo[0]. suplierInfo.size());
+    FLibrary.SetParamByteArray(FHandle, 1224, FSupInf);
+  end;
+
+  //Регистрируем строку товара
+  SetAttributeStr(Ord(LIBFPTR_PARAM_COMMODITY_NAME), GoodsInfo.Name);
+  SetAttributeDouble(Ord(LIBFPTR_PARAM_PRICE), GoodsInfo.Price);
+  SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
+  SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(GoodsInfo.TaxType)));
+
+  if (GoodsInfo.CountryCode > 0) then
+    SetAttributeStr(1230, Format('%0.3d', [GoodsInfo.CountryCode]));
+
+
+  if (GoodsInfo.DeclarationNumber<> '') then
+    SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
+
+  if GoodsInfo.GoodsNomenclatureCode.GroupCode <> 0 then
+    FLibrary.SetParamByteArray(FHandle, 1162, GoodsInfo.GoodsNomenclatureCode.Make1162Value)
+  else
+  begin
+    SetLength(FMark, 2);
+    FillByte(FMark[0], 2, 0);
+    FLibrary.SetParamByteArray(FHandle, 1162, FMark)
+  end;
+
+
+  case GoodsInfo.GoodsPayMode of
+    //gpmFullPay:SetAttributeInt(1214, 0);
+    gpmPrePay100:SetAttributeInt(1214, 1);
+    gpmPrePay:SetAttributeInt(1214, 2);
+    gpmAvance:SetAttributeInt(1214, 3);
+    gpmFullPay2:SetAttributeInt(1214, 4);
+    gpmPartialPayAndKredit:SetAttributeInt(1214, 5);
+    gpmKredit:SetAttributeInt(1214, 6);
+    gpmKreditPay:SetAttributeInt(1214, 7);
+  end;
+
+  if GoodsInfo.GoodsType <> gtNone then
+    SetAttributeInt(1212, Ord(GoodsInfo.GoodsType));
+  //Сама регистрация
+  Result:=FLibrary.Registration(FHandle);
+end;
+
+function TAtollKKMv10.InternalRegistration1_2: integer;
+var
+  FSupInf, FMark: TBytes;
+  FValidationResult, FOfflineValidationErrors,
+    FKMOnlineValidationResult: Integer;
+  FValidationReady: Boolean;
+begin
+  if GoodsInfo.GoodsNomenclatureCode.KM <> '' then
+  begin
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
+    SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), GoodsInfo.GoodsNomenclatureCode.KM);
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(LIBFPTR_MES_PIECE_SOLD)); //TODO:Добавить продажи/возврат
+    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
+    SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), false);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
+
+    //TODO:Реализовать дробное кол-во товара
+    //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY), Edit3.Text);
+
+    FLibrary.BeginMarkingCodeValidation(Handle);
+    InternalCheckError;
+    repeat
+      FLibrary.GetMarkingCodeValidationStatus(Handle);
+      FValidationReady:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY));
+    until FValidationReady;
+
+    FLibrary.AcceptMarkingCode(Handle);
+    GoodsInfo.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+    InternalCheckError;
+  end;
+
+  //Обработаем данные поставщика
+  if (GoodsInfo.SuplierInfo.Name <> '') and (GoodsInfo.SuplierInfo.INN<>'') then
+  begin
+    if GoodsInfo.SuplierInfo.Phone <>'' then
+      SetAttributeStr(1171, GoodsInfo.SuplierInfo.Phone); //libfptr_set_param_str(fptr, 1171, L"+79113456789");
+
+    SetAttributeStr(1225, GoodsInfo.SuplierInfo.Name); //libfptr_set_param_str(fptr, 1225, L"ООО Поставщик");
+    FLibrary.UtilFormTLV(FHandle);
+
+    FSupInf:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
+
+    SetAttributeStr(1226, GoodsInfo.SuplierInfo.INN);
+    //libfptr_set_param_bytearray(fptr, 1224, &suplierInfo[0]. suplierInfo.size());
+    FLibrary.SetParamByteArray(FHandle, 1224, FSupInf);
+  end;
+
+  //Регистрируем строку товара
+  SetAttributeStr(Ord(LIBFPTR_PARAM_COMMODITY_NAME), GoodsInfo.Name);
+  SetAttributeDouble(Ord(LIBFPTR_PARAM_PRICE), GoodsInfo.Price);
+  SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
+  SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(GoodsInfo.TaxType)));
+
+  if (GoodsInfo.CountryCode > 0) then
+    SetAttributeStr(1230, Format('%0.3d', [GoodsInfo.CountryCode]));
+
+
+  if (GoodsInfo.DeclarationNumber<> '') then
+    SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
+(*
+  if GoodsInfo.GoodsNomenclatureCode.GroupCode <> 0 then
+    FLibrary.SetParamByteArray(FHandle, 1162, GoodsInfo.GoodsNomenclatureCode.Make1162Value)
+  else
+  begin
+    SetLength(FMark, 2);
+    FillByte(FMark[0], 2, 0);
+    FLibrary.SetParamByteArray(FHandle, 1162, FMark)
+  end;
+*)
+  if GoodsInfo.GoodsNomenclatureCode.KM <> '' then
+  begin
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
+    //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY, L"1/2");
+    SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), GoodsInfo.GoodsNomenclatureCode.KM);
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(LIBFPTR_MES_PIECE_SOLD)); //TODO:Добавить продажи/возврат
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT), GoodsInfo.GoodsNomenclatureCode.State);
+  end;
+
+
+  case GoodsInfo.GoodsPayMode of
+    //gpmFullPay:SetAttributeInt(1214, 0);
+    gpmPrePay100:SetAttributeInt(1214, 1);
+    gpmPrePay:SetAttributeInt(1214, 2);
+    gpmAvance:SetAttributeInt(1214, 3);
+    gpmFullPay2:SetAttributeInt(1214, 4);
+    gpmPartialPayAndKredit:SetAttributeInt(1214, 5);
+    gpmKredit:SetAttributeInt(1214, 6);
+    gpmKreditPay:SetAttributeInt(1214, 7);
+  end;
+
+  if GoodsInfo.GoodsType <> gtNone then
+    SetAttributeInt(1212, Ord(GoodsInfo.GoodsType));
+  //Сама регистрация
+  Result:=FLibrary.Registration(FHandle);
 end;
 
 procedure TAtollKKMv10.InternalGetDeviceInfo(var ALineLength,
@@ -981,76 +1149,14 @@ begin
 end;
 
 function TAtollKKMv10.Registration: integer;
-var
-  FSupInf, FMark: TBytes;
 begin
   Result:=0;
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
-    //Обработаем данные поставщика
-    if (GoodsInfo.SuplierInfo.Name <> '') and (GoodsInfo.SuplierInfo.INN<>'') then
-    begin
-      if GoodsInfo.SuplierInfo.Phone <>'' then
-        SetAttributeStr(1171, GoodsInfo.SuplierInfo.Phone); //libfptr_set_param_str(fptr, 1171, L"+79113456789");
-
-      SetAttributeStr(1225, GoodsInfo.SuplierInfo.Name); //libfptr_set_param_str(fptr, 1225, L"ООО Поставщик");
-      FLibrary.UtilFormTLV(FHandle);
-
-(*      std::vector<uchar> suplierInfo;
-      int size = libfptr_get_param_bytearray(fptr, LIBFPTR_PARAM_TAG_VALUE,
-                                             &suplierInfo[0], suplierInfo.size());
-      if (size > suplierInfo.size())
-      {
-          suplierInfo.resize(size);
-          libfptr_get_param_bytearray(fptr, LIBFPTR_PARAM_TAG_VALUE,
-                                      &suplierInfo[0], suplierInfo.size());
-      }
-      suplierInfo.resize(size); *)
-      FSupInf:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
-
-      SetAttributeStr(1226, GoodsInfo.SuplierInfo.INN);
-      //libfptr_set_param_bytearray(fptr, 1224, &suplierInfo[0]. suplierInfo.size());
-      FLibrary.SetParamByteArray(FHandle, 1224, FSupInf);
-    end;
-
-    //Регистрируем строку товара
-    SetAttributeStr(Ord(LIBFPTR_PARAM_COMMODITY_NAME), GoodsInfo.Name);
-    SetAttributeDouble(Ord(LIBFPTR_PARAM_PRICE), GoodsInfo.Price);
-    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
-    SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(GoodsInfo.TaxType)));
-
-    if (GoodsInfo.CountryCode > 0) then
-      SetAttributeStr(1230, Format('%0.3d', [GoodsInfo.CountryCode]));
-
-
-    if (GoodsInfo.DeclarationNumber<> '') then
-      SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
-
-    if GoodsInfo.GoodsNomenclatureCode.GroupCode <> 0 then
-      FLibrary.SetParamByteArray(FHandle, 1162, GoodsInfo.GoodsNomenclatureCode.Make1162Value)
+    if FFD1_2 then
+      Result:=InternalRegistration1_2
     else
-    begin
-      SetLength(FMark, 2);
-      FillByte(FMark[0], 2, 0);
-      FLibrary.SetParamByteArray(FHandle, 1162, FMark)
-    end;
-
-
-    case GoodsInfo.GoodsPayMode of
-      //gpmFullPay:SetAttributeInt(1214, 0);
-      gpmPrePay100:SetAttributeInt(1214, 1);
-      gpmPrePay:SetAttributeInt(1214, 2);
-      gpmAvance:SetAttributeInt(1214, 3);
-      gpmFullPay2:SetAttributeInt(1214, 4);
-      gpmPartialPayAndKredit:SetAttributeInt(1214, 5);
-      gpmKredit:SetAttributeInt(1214, 6);
-      gpmKreditPay:SetAttributeInt(1214, 7);
-    end;
-
-    if GoodsInfo.GoodsType <> gtNone then
-      SetAttributeInt(1212, Ord(GoodsInfo.GoodsType));
-    //Сама регистрация
-    Result:=FLibrary.Registration(FHandle);
+      Result:=InternalRegistration1_05;
     InternalCheckError;
   end;
   inherited Registration;

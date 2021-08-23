@@ -19,7 +19,8 @@ uses
   v10ReportsUnit,
   v10ServiceUnit,
   v10OtherUnit,
-  v10OrgParamsUnit, v10MarkingUnit, v10RegisterCheckFFD1_2Unit;
+  v10OrgParamsUnit, v10MarkingUnit, v10RegisterCheckFFD1_2Unit, 
+v10RegisterCheckCmpUnit;
 
 {$R *.res}
 

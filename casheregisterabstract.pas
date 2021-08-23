@@ -127,13 +127,17 @@ type
   private
     FGroupCode: word;
     FGTIN: string;
+    FKM: String;
     FSerial: string;
+    FState: Integer;
   public
     procedure Clear;
     function Make1162Value:TBytes;
     property GroupCode:word read FGroupCode write FGroupCode;
     property GTIN:string read FGTIN write FGTIN;
     property Serial:string read FSerial write FSerial;
+    property KM:String read FKM write FKM;
+    property State:Integer read FState write FState;
   end;
 
   { TTextParams }
@@ -439,6 +443,8 @@ begin
   FGroupCode:=0;
   FGTIN:='';
   FSerial:='';
+  KM:='';
+  State:=0;
 end;
 
 function TGoodsNomenclatureCode.Make1162Value: TBytes;
