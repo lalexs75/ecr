@@ -758,14 +758,50 @@ var
   FValidationResult, FOfflineValidationErrors,
     FKMOnlineValidationResult: Integer;
   FValidationReady: Boolean;
+  FMeasurementUnit: Tlibfptr_item_units;
+  FMarkingEstimatedStatus: libfptr_marking_estimated_status;
 begin
   if GoodsInfo.GoodsNomenclatureCode.KM <> '' then
   begin
+    if CheckType = chtSell then
+      FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_SOLD
+    else
+      FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_RETURN; //chtSellReturn
+
+    case GoodsInfo.GoodsMeasurementUnit of
+      796:FMeasurementUnit:=LIBFPTR_IU_PIECE; //шт
+      163:FMeasurementUnit:=LIBFPTR_IU_GRAM; //Грамм
+      166:FMeasurementUnit:=LIBFPTR_IU_KILOGRAM; //Килограмм
+      168:FMeasurementUnit:=LIBFPTR_IU_TON; //Тонна
+      004:FMeasurementUnit:=LIBFPTR_IU_CENTIMETER; //Сантиметр
+      005:FMeasurementUnit:=LIBFPTR_IU_DECIMETER; // Дециметр
+      006:FMeasurementUnit:=LIBFPTR_IU_METER; // Метр
+      051:FMeasurementUnit:=LIBFPTR_IU_SQUARE_CENTIMETER; // Квадратный сантиметр
+      053:FMeasurementUnit:=LIBFPTR_IU_SQUARE_DECIMETER;//Квадратный дециметр
+      055:FMeasurementUnit:=LIBFPTR_IU_SQUARE_METER; //Квадратный метр
+      111:FMeasurementUnit:=LIBFPTR_IU_MILLILITER; // Кубический сантиметр; миллилитр
+      112:FMeasurementUnit:=LIBFPTR_IU_LITER; // Литр; кубический дециметр
+      113:FMeasurementUnit:=LIBFPTR_IU_CUBIC_METER;//Кубический метр
+      245:FMeasurementUnit:=LIBFPTR_IU_KILOWATT_HOUR;//Киловатт-час
+      233:FMeasurementUnit:=LIBFPTR_IU_GKAL; // Гигакалория
+      359:FMeasurementUnit:=LIBFPTR_IU_DAY;//Сутки
+      356:FMeasurementUnit:=LIBFPTR_IU_HOUR;//Час
+      355:FMeasurementUnit:=LIBFPTR_IU_MINUTE;//Минута
+      354:FMeasurementUnit:=LIBFPTR_IU_SECOND;//Секунда
+      256:FMeasurementUnit:=LIBFPTR_IU_KILOBYTE;//Килобайт
+      257:FMeasurementUnit:=LIBFPTR_IU_MEGABYTE;//Мегабайт
+      2553:FMeasurementUnit:=LIBFPTR_IU_GIGABYTE;//Гигабайт
+      2554:FMeasurementUnit:=LIBFPTR_IU_TERABYTE;//Терабайт
+    else
+      //LIBFPTR_IU_OTHER = 255
+      FMeasurementUnit:=LIBFPTR_IU_PIECE;
+    end;
+
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
     SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), GoodsInfo.GoodsNomenclatureCode.KM);
-    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(LIBFPTR_MES_PIECE_SOLD)); //TODO:Добавить продажи/возврат
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
     SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
-    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
     SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), false);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 

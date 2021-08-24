@@ -235,6 +235,7 @@ type
   private
     FCountryCode: Integer;
     FDeclarationNumber: String;
+    FGoodsMeasurementUnit: Integer;
     FGoodsNomenclatureCode: TGoodsNomenclatureCode;
     FGoodsPayMode: TGoodsPayMode;
     FGoodsType: TGoodsType;
