@@ -257,6 +257,7 @@ type
     property GoodsPayMode:TGoodsPayMode read FGoodsPayMode write FGoodsPayMode;
     property GoodsNomenclatureCode:TGoodsNomenclatureCode read FGoodsNomenclatureCode write FGoodsNomenclatureCode;
     property GoodsType:TGoodsType read FGoodsType write FGoodsType;
+    property GoodsMeasurementUnit:Integer read FGoodsMeasurementUnit write FGoodsMeasurementUnit;
   end;
 
   { TCashRegisterAbstract }

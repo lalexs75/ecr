@@ -117,6 +117,9 @@
       </element><element name="TGoodsPayMode.gpmKreditPay"><short>оплата кредита </short>
       </element><element name="TGoodsPayMode.gpmPartialPayAndKredit"><short>частичный расчет и кредит</short>
       </element>
+    <element name="TGoodsInfo.GoodsMeasurementUnit"><short>Код единицы измерения товара</short><descr>Согласно ОКЕИ
+</descr>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
