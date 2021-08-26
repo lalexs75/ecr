@@ -800,8 +800,8 @@ begin
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
     SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), GoodsInfo.GoodsNomenclatureCode.KM);
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
-    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
-    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
+//    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
+//    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
     SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), false);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 
