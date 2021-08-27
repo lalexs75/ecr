@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms,
-  rxlogging,
+  rxlogging, lazcontrols,
 
   v10MainUnit,
   tv10globalunit,

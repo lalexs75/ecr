@@ -5,7 +5,7 @@ unit v10ReportsUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, DividerBevel,
   tv10globalunit;
 
 type
@@ -13,17 +13,28 @@ type
   { Tv10ReportsFrame }
 
   Tv10ReportsFrame = class(TConfigFrame)
-    Button5: TButton;
-    Button6: TButton;
+    Button1: TButton;
     CheckBox1: TCheckBox;
     ComboBox1: TComboBox;
+    DividerBevel1: TDividerBevel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
     Label1: TLabel;
-    procedure Button5Click(Sender: TObject);
-    procedure Button6Click(Sender: TObject);
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    CLabel: TLabel;
+    procedure Button1Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
   private
 
   public
-
+    procedure UpdateCtrlState; override;
   end;
 
 implementation
@@ -32,26 +43,25 @@ implementation
 
 { Tv10ReportsFrame }
 
-procedure Tv10ReportsFrame.Button5Click(Sender: TObject);
-var
-  R: Integer;
+procedure Tv10ReportsFrame.Button1Click(Sender: TObject);
 begin
-  FKKM.Connected:=true;
-  FKKM.Open;
-  FKKM.ReportX(2);
-  FKKM.Close;
-  FKKM.Connected:=false;
+{  case ComboBox1.ItemIndex of
+
+  end;}
+  FKKM.LibraryAtol.SetParamInt(FKKM.FHandle, LIBFPTR_PARAM_REPORT_TYPE, ComboBox1.ItemIndex);
+  FKKM.LibraryAtol.Report(FKKM.Handle);
+  InternalCheckError;
 end;
 
-procedure Tv10ReportsFrame.Button6Click(Sender: TObject);
-var
-  R: Integer;
+procedure Tv10ReportsFrame.ComboBox1Change(Sender: TObject);
 begin
-  FKKM.Connected:=true;
-  FKKM.Open;
-  FKKM.ReportZ;
-  FKKM.Close;
-  FKKM.Connected:=false;
+  Edit1.Enabled:=ComboBox1.ItemIndex = 7;
+end;
+
+procedure Tv10ReportsFrame.UpdateCtrlState;
+begin
+  inherited;
+  Button1.Enabled:=FKKM.Connected;
 end;
 
 end.

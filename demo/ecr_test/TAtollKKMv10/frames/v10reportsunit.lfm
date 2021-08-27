@@ -1,76 +1,199 @@
 inherited v10ReportsFrame: Tv10ReportsFrame
-  object Button5: TButton[0]
+  Width = 575
+  ClientWidth = 575
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
     Left = 6
-    Height = 33
-    Top = 6
-    Width = 61
-    AutoSize = True
-    BorderSpacing.Around = 6
-    Caption = 'X отчёт'
-    OnClick = Button5Click
-    TabOrder = 0
-  end
-  object Button6: TButton[1]
-    AnchorSideLeft.Control = Button5
-    AnchorSideLeft.Side = asrBottom
-    Left = 73
-    Height = 33
-    Top = 6
-    Width = 61
-    AutoSize = True
-    BorderSpacing.Around = 6
-    Caption = 'Z отчёт'
-    OnClick = Button6Click
-    TabOrder = 1
-  end
-  object Label1: TLabel[2]
-    Left = 8
     Height = 17
-    Top = 56
+    Top = 6
     Width = 45
+    BorderSpacing.Around = 6
     Caption = 'Отчёты'
   end
-  object ComboBox1: TComboBox[3]
-    Left = 16
+  object ComboBox1: TComboBox[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button1
+    Left = 12
     Height = 29
-    Top = 80
-    Width = 100
+    Top = 29
+    Width = 402
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
     ItemHeight = 0
+    ItemIndex = 0
     Items.Strings = (
-      '    LIBFPTR_RT_CLOSE_SHIFT = 0,'
-      '    LIBFPTR_RT_X,'
-      '    LIBFPTR_RT_LAST_DOCUMENT,'
-      '    LIBFPTR_RT_OFD_EXCHANGE_STATUS,'
-      '    LIBFPTR_RT_KKT_DEMO,'
-      '    LIBFPTR_RT_KKT_INFO,'
-      '    LIBFPTR_RT_OFD_TEST,'
-      '    LIBFPTR_RT_FN_DOC_BY_NUMBER,'
-      '    LIBFPTR_RT_QUANTITY,'
-      '    LIBFPTR_RT_DEPARTMENTS,'
-      '    LIBFPTR_RT_OPERATORS,'
-      '    LIBFPTR_RT_HOURS,'
-      '    LIBFPTR_RT_FN_REGISTRATIONS,'
-      '    LIBFPTR_RT_FN_SHIFT_TOTAL_COUNTERS,'
-      '    LIBFPTR_RT_FN_TOTAL_COUNTERS,'
-      '    LIBFPTR_RT_FN_NOT_SENT_DOCUMENTS_COUNTERS,'
-      '    LIBFPTR_RT_COMMODITIES_BY_TAXATION_TYPES,'
-      '    LIBFPTR_RT_COMMODITIES_BY_DEPARTMENTS,'
-      '    LIBFPTR_RT_COMMODITIES_BY_SUMS,'
-      '    LIBFPTR_RT_START_SERVICE,'
-      '    LIBFPTR_RT_DISCOUNTS,'
-      '    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS,'
-      '    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS,'
-      '    LIBFPTR_RT_CLOSE_SHIFT_REPORTS '
+      '0 - закрытие смены (Z отчёт) - LIBFPTR_RT_CLOSE_SHIFT'
+      '1 - Отчёт без закрытия смены (X отчёт) - LIBFPTR_RT_X'
+      '2 - Копия последнего документа - LIBFPTR_RT_LAST_DOCUMENT'
+      '3 - Отчет о состоянии расчетов -LIBFPTR_RT_OFD_EXCHANGE_STATUS'
+      '4 - Демо-печать - LIBFPTR_RT_KKT_DEMO'
+      '5 - Печать информации о ККТ -LIBFPTR_RT_KKT_INFO'
+      '6 - Диагностика соединения с ОФД - LIBFPTR_RT_OFD_TEST'
+      '7 - Печать документа из ФН - LIBFPTR_RT_FN_DOC_BY_NUMBER'
+      '8 - Отчет количеств - LIBFPTR_RT_QUANTITY'
+      '9 - Отчет по секциям - LIBFPTR_RT_DEPARTMENTS'
+      '10 - Отчет по кассирам - LIBFPTR_RT_OPERATORS'
+      '11 - Отчет по часам - LIBFPTR_RT_HOURS'
+      '12 - Печать итогов регистрации / перерегистрации - LIBFPTR_RT_FN_REGISTRATIONS'
+      '13 - Счетчики итогов смены - LIBFPTR_RT_FN_SHIFT_TOTAL_COUNTERS'
+      '14 - Счетчики итогов ФН - LIBFPTR_RT_FN_TOTAL_COUNTERS'
+      '15 - Счетчики по непереданным документам - LIBFPTR_RT_FN_NOT_SENT_DOCUMENTS_COUNTERS'
+      '16 - Отчет по товарам по СНО - LIBFPTR_RT_COMMODITIES_BY_TAXATION_TYPES,'
+      '17 - Отчет по товарам по отделам - LIBFPTR_RT_COMMODITIES_BY_DEPARTMENTS'
+      '18 - Отчет по товарам по суммам - LIBFPTR_RT_COMMODITIES_BY_SUMS'
+      '19 - Начать служебный отчет - LIBFPTR_RT_START_SERVICE'
+      '20 - Отчет по скидкам - LIBFPTR_RT_DISCOUNTS'
+      '21 - Печать документов из БД - LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS'
+      '22 - Печать документов из БД по диапазону номеров смен - LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS'
+      '23 - Печать нераспечатанных отчетов о закрытии смены - LIBFPTR_RT_CLOSE_SHIFT_REPORTS'
     )
+    OnChange = ComboBox1Change
     Style = csDropDownList
+    TabOrder = 0
+    Text = '0 - закрытие смены (Z отчёт) - LIBFPTR_RT_CLOSE_SHIFT'
+  end
+  object CheckBox1: TCheckBox[2]
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 468
+    Height = 23
+    Top = 6
+    Width = 101
+    Anchors = [akTop, akRight]
+    BorderSpacing.Around = 6
+    Caption = 'Не печатать'
+    TabOrder = 1
+  end
+  object Button1: TButton[3]
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 420
+    Height = 33
+    Top = 35
+    Width = 149
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Сформировать отчёт'
+    OnClick = Button1Click
     TabOrder = 2
   end
-  object CheckBox1: TCheckBox[4]
-    Left = 369
-    Height = 23
-    Top = 69
-    Width = 101
-    Caption = 'Не печатать'
+  object Label2: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Edit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 113
+    Width = 151
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Номер документа из ФН'
+  end
+  object Edit1: TEdit[5]
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = DividerBevel1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = CLabel
+    Left = 163
+    Height = 33
+    Top = 97
+    Width = 118
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
     TabOrder = 3
+  end
+  object Label3: TLabel[6]
+    Left = 16
+    Height = 17
+    Top = 149
+    Width = 40
+    Caption = 'Label3'
+  end
+  object Label4: TLabel[7]
+    AnchorSideLeft.Control = CLabel
+    Left = 287
+    Height = 17
+    Top = 149
+    Width = 41
+    Caption = 'Label4'
+  end
+  object Label5: TLabel[8]
+    Left = 16
+    Height = 17
+    Top = 200
+    Width = 40
+    Caption = 'Label5'
+  end
+  object Label6: TLabel[9]
+    AnchorSideLeft.Control = CLabel
+    Left = 287
+    Height = 17
+    Top = 207
+    Width = 41
+    Caption = 'Label6'
+  end
+  object DividerBevel1: TDividerBevel[10]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Button1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 17
+    Top = 74
+    Width = 575
+    Caption = 'Параметры отчёта'
+    Anchors = [akTop, akLeft, akRight]
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object CLabel: TLabel[11]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 287
+    Height = 1
+    Top = 0
+    Width = 1
+  end
+  object Edit2: TEdit[12]
+    Left = 170
+    Height = 33
+    Top = 154
+    Width = 80
+    TabOrder = 4
+    Text = 'Edit2'
+  end
+  object Edit3: TEdit[13]
+    Left = 365
+    Height = 33
+    Top = 146
+    Width = 80
+    TabOrder = 5
+    Text = 'Edit3'
+  end
+  object Edit4: TEdit[14]
+    Left = 170
+    Height = 33
+    Top = 219
+    Width = 80
+    TabOrder = 6
+    Text = 'Edit4'
+  end
+  object Edit5: TEdit[15]
+    Left = 387
+    Height = 33
+    Top = 217
+    Width = 80
+    TabOrder = 7
+    Text = 'Edit5'
   end
 end

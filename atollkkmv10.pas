@@ -459,6 +459,7 @@ type
     procedure InternalSetCheckType(AValue: TCheckType);
     function InternalRegistration1_05:integer;
     function InternalRegistration1_2:integer;
+    function InternalRegisterBuyer1_2:integer;
   protected
     procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); override;
     function GetConnected: boolean; override;
@@ -886,6 +887,23 @@ begin
   Result:=FLibrary.Registration(FHandle);
 end;
 
+function TAtollKKMv10.InternalRegisterBuyer1_2: integer;
+var
+  FBuyerInf: TBytes;
+begin
+  if (CounteragentInfo.Name = '') and (CounteragentInfo.INN = '') then Exit;
+
+  if CounteragentInfo.Name <> '' then
+    SetAttributeStr(1227, CounteragentInfo.Name);
+  if CounteragentInfo.INN<>'' then
+    SetAttributeStr(1228, CounteragentInfo.INN);
+
+  FLibrary.UtilFormTLV(FHandle);
+  FBuyerInf:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
+
+  FLibrary.SetParamByteArray(FHandle, 1256, FBuyerInf);
+end;
+
 procedure TAtollKKMv10.InternalGetDeviceInfo(var ALineLength,
   ALineLengthPix: integer);
 begin
@@ -1160,12 +1178,21 @@ begin
   begin
     InternalUserLogin;
 
-    InternalSetCheckType(CheckType);
+    if FFD1_2 then
+    begin
+      InternalRegisterBuyer1_2;
+      InternalSetCheckType(CheckType);
+    end
+    else
+    begin
+      InternalSetCheckType(CheckType);
 
-    if CounteragentInfo.Name <> '' then
-      SetAttributeStr(1227, CounteragentInfo.Name);
-    if CounteragentInfo.Name <> '' then
-      SetAttributeStr(1228, CounteragentInfo.INN);
+      if CounteragentInfo.Name <> '' then
+        SetAttributeStr(1227, CounteragentInfo.Name);
+      if CounteragentInfo.Name <> '' then
+        SetAttributeStr(1228, CounteragentInfo.INN);
+    end;
+
 
     if CounteragentInfo.Email <> '' then
       SetAttributeStr(1008, CounteragentInfo.Email)
