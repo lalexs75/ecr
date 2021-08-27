@@ -15,6 +15,9 @@ type
   Tv10ReportsFrame = class(TConfigFrame)
     Button5: TButton;
     Button6: TButton;
+    CheckBox1: TCheckBox;
+    ComboBox1: TComboBox;
+    Label1: TLabel;
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
   private

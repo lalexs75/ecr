@@ -23,4 +23,54 @@ inherited v10ReportsFrame: Tv10ReportsFrame
     OnClick = Button6Click
     TabOrder = 1
   end
+  object Label1: TLabel[2]
+    Left = 8
+    Height = 17
+    Top = 56
+    Width = 45
+    Caption = 'Отчёты'
+  end
+  object ComboBox1: TComboBox[3]
+    Left = 16
+    Height = 29
+    Top = 80
+    Width = 100
+    ItemHeight = 0
+    Items.Strings = (
+      '    LIBFPTR_RT_CLOSE_SHIFT = 0,'
+      '    LIBFPTR_RT_X,'
+      '    LIBFPTR_RT_LAST_DOCUMENT,'
+      '    LIBFPTR_RT_OFD_EXCHANGE_STATUS,'
+      '    LIBFPTR_RT_KKT_DEMO,'
+      '    LIBFPTR_RT_KKT_INFO,'
+      '    LIBFPTR_RT_OFD_TEST,'
+      '    LIBFPTR_RT_FN_DOC_BY_NUMBER,'
+      '    LIBFPTR_RT_QUANTITY,'
+      '    LIBFPTR_RT_DEPARTMENTS,'
+      '    LIBFPTR_RT_OPERATORS,'
+      '    LIBFPTR_RT_HOURS,'
+      '    LIBFPTR_RT_FN_REGISTRATIONS,'
+      '    LIBFPTR_RT_FN_SHIFT_TOTAL_COUNTERS,'
+      '    LIBFPTR_RT_FN_TOTAL_COUNTERS,'
+      '    LIBFPTR_RT_FN_NOT_SENT_DOCUMENTS_COUNTERS,'
+      '    LIBFPTR_RT_COMMODITIES_BY_TAXATION_TYPES,'
+      '    LIBFPTR_RT_COMMODITIES_BY_DEPARTMENTS,'
+      '    LIBFPTR_RT_COMMODITIES_BY_SUMS,'
+      '    LIBFPTR_RT_START_SERVICE,'
+      '    LIBFPTR_RT_DISCOUNTS,'
+      '    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS,'
+      '    LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS,'
+      '    LIBFPTR_RT_CLOSE_SHIFT_REPORTS '
+    )
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object CheckBox1: TCheckBox[4]
+    Left = 369
+    Height = 23
+    Top = 69
+    Width = 101
+    Caption = 'Не печатать'
+    TabOrder = 3
+  end
 end
