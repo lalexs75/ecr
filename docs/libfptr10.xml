@@ -250,6 +250,33 @@
       </element><element name="libfptr_error.LIBFPTR_ERROR_INVALID_TAX_SUM"><short>Некорректная сумма налога</short>
       </element><element name="libfptr_error.LIBFPTR_ERROR_UNIVERSAL_COUNTERS_FAULT"><short>Ошибка универсальных счетчиков</short>
       </element>
+    <element name="libfptr_report_type.LIBFPTR_RT_CLOSE_SHIFT"><short>Отчет о закрытии смены</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_X"><short>X-отчёт - отчет без закрытия смены</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_LAST_DOCUMENT"><short>Печать копии последнего документа</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_OFD_EXCHANGE_STATUS"><short>Отчет о состоянии расчетов</short>
+      </element><element name="libfptr_report_type"><short>Типы отчётов, формируемых на ККМ</short>
+      </element><element name="Tlibfptr_report_type"><short>Типы отчётов, формируемых на ККМ</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_KKT_DEMO"><short>Демо-печать</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_OFD_TEST"><short>Диагностика соединения с ОФД</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_KKT_INFO"><short>Печать информации о ККТ</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_FN_DOC_BY_NUMBER"><short>Печать документа из ФН</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_QUANTITY"><short>Отчет количеств</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_DEPARTMENTS"><short>Отчет по секциям</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_OPERATORS"><short>Отчет по кассирам</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_HOURS"><short>Отчет по часам</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_FN_REGISTRATIONS"><short>Печать итогов регистрации / перерегистрации</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_FN_SHIFT_TOTAL_COUNTERS"><short>Счетчики итогов смены</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_FN_TOTAL_COUNTERS"><short>Счетчики итогов ФН</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_FN_NOT_SENT_DOCUMENTS_COUNTERS"><short>Счетчики по непереданным документам</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_COMMODITIES_BY_TAXATION_TYPES"><short>Отчет по товарам по СНО</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_COMMODITIES_BY_DEPARTMENTS"><short>Отчет по товарам по отделам</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_COMMODITIES_BY_SUMS"><short>Отчет по товарам по суммам</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_START_SERVICE"><short>Начать служебный отчет</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_DISCOUNTS"><short>Отчет по скидкам</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_CLOSE_SHIFT_REPORTS"><short>Печать нераспечатанных отчетов о закрытии смены</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS"><short>Отчёт распечатывает документы из БД по диапазонам номеров ФД и номеров смен</short>
+      </element><element name="libfptr_report_type.LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS"><short>Печат документов из БД по диапазону номеров смен </short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
