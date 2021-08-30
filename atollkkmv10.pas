@@ -451,6 +451,7 @@ type
     FLibrary:TAtollLibraryV10;
     FHandle:TLibFPtrHandle;
     FLibraryFileName: string;
+    FWaitForMarkingValidationResult: Boolean;
     function GetDeviceDateTime: TDateTime;
     procedure InternalUserLogin;
     procedure InternalInitLibrary;
@@ -570,6 +571,7 @@ type
     property DeviceDateTime:TDateTime read GetDeviceDateTime;
     property LibraryAtol:TAtollLibraryV10 read FLibrary;
     property FFD1_2:Boolean read FFFD1_2 write FFFD1_2;
+    property WaitForMarkingValidationResult:Boolean read FWaitForMarkingValidationResult write FWaitForMarkingValidationResult;
   end;
 
 resourcestring
@@ -803,7 +805,7 @@ begin
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
 //    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
 //    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
-    SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), false);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
+    SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), FWaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 
     //TODO:Реализовать дробное кол-во товара
@@ -977,6 +979,7 @@ constructor TAtollKKMv10.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FFFD1_2:=false;
+  WaitForMarkingValidationResult:=false;
 end;
 
 (*
