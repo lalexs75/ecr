@@ -37,8 +37,35 @@ interface
 uses
   Classes, SysUtils;
 
+const
+  //Символьные константы для единиц измерения согласно ОКЕИ
+  muPIECE = 796;             //шт
+  muGRAM = 163;              //Грамм
+  muKILOGRAM = 166;          //Килограмм
+  muTON = 168;               //Тонна
+  muCENTIMETER = 004;        //Сантиметр
+  muDECIMETER = 005;         //Дециметр
+  muMETER = 006;             //Метр
+  muSQUARE_CENTIMETER = 051; //Квадратный сантиметр
+  muSQUARE_DECIMETER = 053;  //Квадратный дециметр
+  muSQUARE_METER = 055;      //Квадратный метр
+  muMILLILITER = 111;        //Кубический сантиметр; миллилитр
+  muLITER = 112;             //Литр; кубический дециметр
+  muCUBIC_METER = 113;       //Кубический метр
+  muKILOWATT_HOUR = 245;     //Киловатт-час
+  muGKAL = 233;              //Гигакалория
+  muDAY = 359;               //Сутки
+  muHOUR = 356;              //Час
+  muMINUTE = 355;            //Минута
+  muSECOND = 354;            //Секунда
+  muKILOBYTE = 256;          //Килобайт
+  muMEGABYTE = 257;          //Мегабайт
+  muGIGABYTE = 2553;         //Гигабайт
+  muTERABYTE = 2554;         //Терабайт
+
 type
   TCashRegisterAbstract = class;
+  TGoodsListEnumerator = class;
 
   TCheckType =
     (chtNone,
@@ -120,7 +147,6 @@ type
   TEcrWordWrap = (ewwNone, ewwWords, ewwChars);
   TCrpCodeBuffer = array [1..32] of byte;
 
-
   { TGoodsNomenclatureCode }
 
   TGoodsNomenclatureCode = class
@@ -129,7 +155,7 @@ type
     FGTIN: string;
     FKM: String;
     FSerial: string;
-    FState: Integer;
+    FState: DWord;
   public
     procedure Clear;
     function Make1162Value:TBytes;
@@ -137,7 +163,7 @@ type
     property GTIN:string read FGTIN write FGTIN;
     property Serial:string read FSerial write FSerial;
     property KM:String read FKM write FKM;
-    property State:Integer read FState write FState;
+    property State:DWord read FState write FState;
   end;
 
   { TTextParams }
@@ -261,6 +287,37 @@ type
     property GoodsMeasurementUnit:Integer read FGoodsMeasurementUnit write FGoodsMeasurementUnit;
   end;
 
+  { TGoodsList }
+
+  TGoodsList = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItems(AIndex: integer): TGoodsInfo;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Clear;
+    function Add:TGoodsInfo;
+    function GetEnumerator: TGoodsListEnumerator;
+
+    property Count:integer read GetCount;
+    property Items[AIndex:integer]:TGoodsInfo read GetItems; default;
+  end;
+
+  { TGoodsListEnumerator }
+
+  TGoodsListEnumerator = class
+  private
+    FList: TGoodsList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TGoodsList);
+    function GetCurrent: TGoodsInfo;
+    function MoveNext: Boolean;
+    property Current: TGoodsInfo read GetCurrent;
+  end;
+
   { TCashRegisterAbstract }
 
   TCashRegisterAbstract = class(TComponent)
@@ -273,6 +330,7 @@ type
     FErrorCode: integer;
     FErrorDescription: string;
     FGoodsInfo: TGoodsInfo;
+    FGoodsList: TGoodsList;
     FKassaUserINN: string;
     FOnError: TNotifyEvent;
     FPassword: string;
@@ -310,6 +368,7 @@ type
     procedure OpenShift; virtual;                            //Открыть смену
 
     //Операции с чеком
+    procedure BeginCheck; virtual;                            //Открыть чек
     procedure OpenCheck; virtual;                            //Открыть чек
     function CloseCheck:Integer; virtual;                    //Закрыть чек (со сдачей)
     function CancelCheck:integer; virtual;                   //Аннулирование всего чека
@@ -319,10 +378,12 @@ type
     function CashIncome(APaymentSum:Currency):integer; virtual; abstract;          //Внесение денег
     function CashOutcome(APaymentSum:Currency):integer; virtual; abstract;         //Выплата денег
 
-    function Registration:integer;virtual;
+    function Registration:integer;virtual; deprecated;
     function ReceiptTotal:integer;virtual; abstract;
     function Payment:integer; virtual; abstract;
     procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); virtual; abstract;
+    function RegisterGoods:Integer; virtual; abstract;
+    function ValidateGoodsKM:Boolean; virtual; abstract;
 
     procedure SetAttributeInt(AttribNum, AttribValue:Integer); virtual; abstract;
     procedure SetAttributeStr(AttribNum:Integer; AttribValue:string); virtual; abstract;
@@ -357,7 +418,8 @@ type
     property CounteragentInfo:TCounteragentInfo read FCounteragentInfo;
     property AgentInfo:TCounteragentInfo read FAgentInfo;
     property CheckInfo:TCheckInfo read FCheckInfo;
-    property GoodsInfo:TGoodsInfo read FGoodsInfo;
+    property GoodsInfo:TGoodsInfo read FGoodsInfo; deprecated;
+    property GoodsList:TGoodsList read FGoodsList;
     property PaymentPlace:string read FPaymentPlace write FPaymentPlace;
 
     //Статус и информация о аппарате
@@ -436,6 +498,70 @@ begin
   else
     Result:='Не известный тип оплаты';
   end;
+end;
+
+{ TGoodsListEnumerator }
+
+constructor TGoodsListEnumerator.Create(AList: TGoodsList);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TGoodsListEnumerator.GetCurrent: TGoodsInfo;
+begin
+  Result := FList[FPosition];
+end;
+
+function TGoodsListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TGoodsList }
+
+function TGoodsList.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TGoodsList.GetItems(AIndex: integer): TGoodsInfo;
+begin
+  Result:=TGoodsInfo(FList[AIndex]);
+end;
+
+constructor TGoodsList.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TGoodsList.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TGoodsList.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count - 1 do
+    TGoodsInfo(FList[i]).Free;
+  FList.Clear;
+end;
+
+function TGoodsList.Add: TGoodsInfo;
+begin
+  Result:=TGoodsInfo.Create;
+  FList.Add(Result);
+end;
+
+function TGoodsList.GetEnumerator: TGoodsListEnumerator;
+begin
+  Result:=TGoodsListEnumerator.Create(Self);
 end;
 
 { TGoodsNomenclatureCode }
@@ -609,6 +735,7 @@ begin
   FAgentInfo:=TCounteragentInfo.Create;
   FTextParams:=TTextParams.Create;
   FDeviceInfo:=TDeviceInfo.Create;
+  FGoodsList:=TGoodsList.Create;
 end;
 
 destructor TCashRegisterAbstract.Destroy;
@@ -618,6 +745,7 @@ begin
   FreeAndNil(FGoodsInfo);
   FreeAndNil(FTextParams);
   FreeAndNil(FDeviceInfo);
+  FreeAndNil(FGoodsList);
   inherited Destroy;
 end;
 
@@ -636,6 +764,11 @@ begin
   //
 end;
 
+procedure TCashRegisterAbstract.BeginCheck;
+begin
+  FGoodsList.Clear;
+end;
+
 procedure TCashRegisterAbstract.OpenCheck;
 begin
   FTextParams.Clear;
@@ -650,6 +783,7 @@ begin
   FGoodsInfo.Clear;
   FAgentInfo.Clear;
   FTextParams.Clear;
+  FGoodsList.Clear;
   FCheckType:=chtNone;
 end;
 
@@ -661,6 +795,7 @@ begin
   FGoodsInfo.Clear;
   FAgentInfo.Clear;
   FTextParams.Clear;
+  FGoodsList.Clear;
   FCheckType:=chtNone;
 end;
 

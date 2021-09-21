@@ -165,9 +165,9 @@ inherited v10ReportsFrame: Tv10ReportsFrame
     Width = 1
   end
   object Edit2: TEdit[12]
-    Left = 170
+    Left = 163
     Height = 33
-    Top = 154
+    Top = 144
     Width = 80
     TabOrder = 4
     Text = 'Edit2'

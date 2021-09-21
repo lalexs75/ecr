@@ -21,7 +21,7 @@ type
   private
 
   public
-
+    procedure UpdateCtrlState; override;
   end;
 
 implementation
@@ -34,35 +34,38 @@ uses libfptr10, rxlogging, CasheRegisterAbstract;
 procedure Tv10CRPTFrame.Button25Click(Sender: TObject);
 var
     mark: String;
-    status: Integer;
     validationResult, CS: Integer;
+    FStatus: libfptr_marking_estimated_status;
+    FValidationReady: Boolean;
 begin
-  FKKM.Connected:=true;
-  if FKKM.LibraryAtol.Loaded then
-  begin
+  FKKM.LibraryAtol.CancelMarkingCodeValidation(FKKM.Handle);
 
-    mark := '014494550435306821QXYXSALGLMYQQ\u001D91EE06\u001D92YWCXbmK6SN8vvwoxZFk7WAY8WoJNMGGr6Cgtiuja04c=';
-    status := 2;
+    mark := '010463003022541621Yu7t_HclAYqqD'#$1D'91006A'#$1D'92lYF//jixJXUlaO7WTSPELeZj20OiWEYGcF2HCN8/cUN6f+atR6qDTy2Rw6q6ZSC9TFScVroPNfCL8N8gjgKH1g==';
+
+    FStatus := LIBFPTR_MES_PIECE_SOLD;
 
     // Запускаем проверку КМ
     FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_MARKING_CODE_TYPE, Ord(LIBFPTR_MCT12_AUTO));
     FKKM.LibraryAtol.SetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE), mark);
-    FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_MARKING_CODE_STATUS, status);
-    FKKM.LibraryAtol.SetParamDouble(FKKM.Handle, Ord(LIBFPTR_PARAM_QUANTITY), 1.000);
-    FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_MEASUREMENT_UNIT, 0);
+    FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_MARKING_CODE_STATUS, Ord(FStatus));
+    //FKKM.LibraryAtol.SetParamDouble(FKKM.Handle, Ord(LIBFPTR_PARAM_QUANTITY), 1.000);
+    //FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_MEASUREMENT_UNIT, 0);
     FKKM.LibraryAtol.SetParamBool(FKKM.Handle, LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT, True);
     FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_MARKING_PROCESSING_MODE, 0);
-    FKKM.LibraryAtol.SetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY), '1/2');
-    FKKM.LibraryAtol.beginMarkingCodeValidation(FKKM.Handle);
+    //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY), '1/2');
 
+    FKKM.LibraryAtol.beginMarkingCodeValidation(FKKM.Handle);
+    FKKM.InternalCheckError;
     // Дожидаемся окончания проверки и запоминаем результат
-    while True do
-    begin
+    repeat
        CS:=FKKM.LibraryAtol.getMarkingCodeValidationStatus(FKKM.Handle);
-        if FKKM.LibraryAtol.getParamBool(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY)) then
-            break;
-    end;
+       FKKM.InternalCheckError;
+       FValidationReady:=FKKM.LibraryAtol.GetParamBool(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY));
+    until FValidationReady;
     validationResult := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+    FKKM.InternalCheckError;
+    RxWriteLog(etInfo, 'ValidationResult = %d', [validationResult]);
+
 (*
     // Подтверждаем реализацию товара с указанным КМ
     fptr.acceptMarkingCode();
@@ -106,8 +109,13 @@ begin
 
     fptr.closeReceipt();
 *)
-  end;
-  FKKM.Connected:=false;
+end;
+
+procedure Tv10CRPTFrame.UpdateCtrlState;
+begin
+  inherited UpdateCtrlState;
+  Button24.Enabled:=FKKM.Connected;
+  Button25.Enabled:=FKKM.Connected;
 end;
 
 procedure Tv10CRPTFrame.Button24Click(Sender: TObject);
@@ -123,15 +131,15 @@ begin
     FKKM.LibraryAtol.PingMarkingServer(FKKM.Handle);
 
     // Ожидание результатов проверки связи с сервером ИСМ
-{    while True do
+    while True do
     begin
         FKKM.LibraryAtol.getMarkingServerStatus(FKKM.Handle);
         if FKKM.LibraryAtol.getParamBool(FKKM.Handle, Ord(LIBFPTR_PARAM_CHECK_MARKING_SERVER_READY)) then
             break;
-    end; }
+    end;
 
-    EC:=FKKM.LibraryAtol.getMarkingServerStatus(FKKM.Handle);
-    B:=FKKM.LibraryAtol.getParamBool(FKKM.Handle, Ord(LIBFPTR_PARAM_CHECK_MARKING_SERVER_READY));
+    //EC:=FKKM.LibraryAtol.getMarkingServerStatus(FKKM.Handle);
+    //B:=FKKM.LibraryAtol.getParamBool(FKKM.Handle, Ord(LIBFPTR_PARAM_CHECK_MARKING_SERVER_READY));
 
     EC := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_SERVER_ERROR_CODE));
     errorDescription := FKKM.LibraryAtol.GetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_SERVER_ERROR_DESCRIPTION));

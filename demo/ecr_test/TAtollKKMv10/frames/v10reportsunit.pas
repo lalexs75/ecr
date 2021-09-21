@@ -38,7 +38,7 @@ type
   end;
 
 implementation
-
+uses libfptr10;
 {$R *.lfm}
 
 { Tv10ReportsFrame }
@@ -48,9 +48,9 @@ begin
 {  case ComboBox1.ItemIndex of
 
   end;}
-  FKKM.LibraryAtol.SetParamInt(FKKM.FHandle, LIBFPTR_PARAM_REPORT_TYPE, ComboBox1.ItemIndex);
+  FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_REPORT_TYPE, ComboBox1.ItemIndex);
   FKKM.LibraryAtol.Report(FKKM.Handle);
-  InternalCheckError;
+  FKKM.InternalCheckError;
 end;
 
 procedure Tv10ReportsFrame.ComboBox1Change(Sender: TObject);

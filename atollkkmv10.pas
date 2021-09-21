@@ -459,7 +459,7 @@ type
     procedure InternalCloseKKM;
     procedure InternalSetCheckType(AValue: TCheckType);
     function InternalRegistration1_05:integer;
-    function InternalRegistration1_2:integer;
+    function InternalRegistration1_2(AGI:TGoodsInfo):integer;
     function InternalRegisterBuyer1_2:integer;
   protected
     procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); override;
@@ -496,6 +496,8 @@ type
     function Registration:integer; override;
     function ReceiptTotal:integer; override;
     function Payment:integer; override;
+    function RegisterGoods:Integer; override;
+    function ValidateGoodsKM:Boolean; override;
 
     procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
 
@@ -578,7 +580,40 @@ resourcestring
   sCantLoadProc = 'Can''t load procedure "%s"';
 
 function TaxTypeToAtollTT(AValue:TTaxType):Tlibfptr_tax_type;
+function muOKEItoAtol(muCode:Integer):Tlibfptr_item_units;
 implementation
+
+function muOKEItoAtol(muCode:Integer):Tlibfptr_item_units;
+begin
+  case muCode of
+    muPIECE:Result:=LIBFPTR_IU_PIECE; //шт
+    muGRAM:Result:=LIBFPTR_IU_GRAM; //Грамм
+    muKILOGRAM:Result:=LIBFPTR_IU_KILOGRAM; //Килограмм
+    muTON:Result:=LIBFPTR_IU_TON; //Тонна
+    muCENTIMETER:Result:=LIBFPTR_IU_CENTIMETER; //Сантиметр
+    muDECIMETER:Result:=LIBFPTR_IU_DECIMETER; // Дециметр
+    muMETER:Result:=LIBFPTR_IU_METER; // Метр
+    muSQUARE_CENTIMETER:Result:=LIBFPTR_IU_SQUARE_CENTIMETER; // Квадратный сантиметр
+    muSQUARE_DECIMETER:Result:=LIBFPTR_IU_SQUARE_DECIMETER;//Квадратный дециметр
+    muSQUARE_METER:Result:=LIBFPTR_IU_SQUARE_METER; //Квадратный метр
+    muMILLILITER:Result:=LIBFPTR_IU_MILLILITER; // Кубический сантиметр; миллилитр
+    muLITER:Result:=LIBFPTR_IU_LITER; // Литр; кубический дециметр
+    muCUBIC_METER:Result:=LIBFPTR_IU_CUBIC_METER;//Кубический метр
+    muKILOWATT_HOUR:Result:=LIBFPTR_IU_KILOWATT_HOUR;//Киловатт-час
+    muGKAL:Result:=LIBFPTR_IU_GKAL; // Гигакалория
+    muDAY:Result:=LIBFPTR_IU_DAY;//Сутки
+    muHOUR:Result:=LIBFPTR_IU_HOUR;//Час
+    muMINUTE:Result:=LIBFPTR_IU_MINUTE;//Минута
+    muSECOND:Result:=LIBFPTR_IU_SECOND;//Секунда
+    muKILOBYTE:Result:=LIBFPTR_IU_KILOBYTE;//Килобайт
+    muMEGABYTE:Result:=LIBFPTR_IU_MEGABYTE;//Мегабайт
+    muGIGABYTE:Result:=LIBFPTR_IU_GIGABYTE;//Гигабайт
+    muTERABYTE:Result:=LIBFPTR_IU_TERABYTE;//Терабайт
+  else
+    //LIBFPTR_IU_OTHER = 255
+    Result:=LIBFPTR_IU_PIECE;
+  end;
+end;
 
 function TaxTypeToAtollTT(AValue: TTaxType): Tlibfptr_tax_type;
 begin
@@ -755,7 +790,7 @@ begin
   Result:=FLibrary.Registration(FHandle);
 end;
 
-function TAtollKKMv10.InternalRegistration1_2: integer;
+function TAtollKKMv10.InternalRegistration1_2(AGI: TGoodsInfo): integer;
 var
   FSupInf, FMark: TBytes;
   FValidationResult, FOfflineValidationErrors,
@@ -764,14 +799,14 @@ var
   FMeasurementUnit: Tlibfptr_item_units;
   FMarkingEstimatedStatus: libfptr_marking_estimated_status;
 begin
-  if GoodsInfo.GoodsNomenclatureCode.KM <> '' then
+  if (AGI.GoodsNomenclatureCode.KM <> '') and (AGI.GoodsNomenclatureCode.State = 0) then
   begin
     if CheckType = chtSell then
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_SOLD
     else
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_RETURN; //chtSellReturn
 
-    case GoodsInfo.GoodsMeasurementUnit of
+{    case AGI.GoodsMeasurementUnit of
       796:FMeasurementUnit:=LIBFPTR_IU_PIECE; //шт
       163:FMeasurementUnit:=LIBFPTR_IU_GRAM; //Грамм
       166:FMeasurementUnit:=LIBFPTR_IU_KILOGRAM; //Килограмм
@@ -798,12 +833,13 @@ begin
     else
       //LIBFPTR_IU_OTHER = 255
       FMeasurementUnit:=LIBFPTR_IU_PIECE;
-    end;
+    end;}
+    FMeasurementUnit:=muOKEItoAtol(AGI.GoodsMeasurementUnit);
 
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
-    SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), GoodsInfo.GoodsNomenclatureCode.KM);
+    SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), AGI.GoodsNomenclatureCode.KM);
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
-//    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
+//    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), AGI.Quantity);
 //    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
     SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), FWaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
@@ -819,41 +855,41 @@ begin
     until FValidationReady;
 
     FLibrary.AcceptMarkingCode(Handle);
-    GoodsInfo.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+    AGI.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
     InternalCheckError;
   end;
 
   //Обработаем данные поставщика
-  if (GoodsInfo.SuplierInfo.Name <> '') and (GoodsInfo.SuplierInfo.INN<>'') then
+  if (AGI.SuplierInfo.Name <> '') and (AGI.SuplierInfo.INN<>'') then
   begin
-    if GoodsInfo.SuplierInfo.Phone <>'' then
-      SetAttributeStr(1171, GoodsInfo.SuplierInfo.Phone); //libfptr_set_param_str(fptr, 1171, L"+79113456789");
+    if AGI.SuplierInfo.Phone <>'' then
+      SetAttributeStr(1171, AGI.SuplierInfo.Phone); //libfptr_set_param_str(fptr, 1171, L"+79113456789");
 
-    SetAttributeStr(1225, GoodsInfo.SuplierInfo.Name); //libfptr_set_param_str(fptr, 1225, L"ООО Поставщик");
+    SetAttributeStr(1225, AGI.SuplierInfo.Name); //libfptr_set_param_str(fptr, 1225, L"ООО Поставщик");
     FLibrary.UtilFormTLV(FHandle);
 
     FSupInf:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
 
-    SetAttributeStr(1226, GoodsInfo.SuplierInfo.INN);
+    SetAttributeStr(1226, AGI.SuplierInfo.INN);
     //libfptr_set_param_bytearray(fptr, 1224, &suplierInfo[0]. suplierInfo.size());
     FLibrary.SetParamByteArray(FHandle, 1224, FSupInf);
   end;
 
   //Регистрируем строку товара
-  SetAttributeStr(Ord(LIBFPTR_PARAM_COMMODITY_NAME), GoodsInfo.Name);
-  SetAttributeDouble(Ord(LIBFPTR_PARAM_PRICE), GoodsInfo.Price);
-  SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
-  SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(GoodsInfo.TaxType)));
+  SetAttributeStr(Ord(LIBFPTR_PARAM_COMMODITY_NAME), AGI.Name);
+  SetAttributeDouble(Ord(LIBFPTR_PARAM_PRICE), AGI.Price);
+  SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), AGI.Quantity);
+  SetAttributeInt(Ord(LIBFPTR_PARAM_TAX_TYPE), Ord(TaxTypeToAtollTT(AGI.TaxType)));
 
-  if (GoodsInfo.CountryCode > 0) then
-    SetAttributeStr(1230, Format('%0.3d', [GoodsInfo.CountryCode]));
+  if (AGI.CountryCode > 0) then
+    SetAttributeStr(1230, Format('%0.3d', [AGI.CountryCode]));
 
 
-  if (GoodsInfo.DeclarationNumber<> '') then
-    SetAttributeStr(1231, GoodsInfo.DeclarationNumber);
+  if (AGI.DeclarationNumber<> '') then
+    SetAttributeStr(1231, AGI.DeclarationNumber);
 (*
-  if GoodsInfo.GoodsNomenclatureCode.GroupCode <> 0 then
-    FLibrary.SetParamByteArray(FHandle, 1162, GoodsInfo.GoodsNomenclatureCode.Make1162Value)
+  if AGI.GoodsNomenclatureCode.GroupCode <> 0 then
+    FLibrary.SetParamByteArray(FHandle, 1162, AGI.GoodsNomenclatureCode.Make1162Value)
   else
   begin
     SetLength(FMark, 2);
@@ -861,18 +897,18 @@ begin
     FLibrary.SetParamByteArray(FHandle, 1162, FMark)
   end;
 *)
-  if GoodsInfo.GoodsNomenclatureCode.KM <> '' then
+  if AGI.GoodsNomenclatureCode.KM <> '' then
   begin
     SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
     //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY, L"1/2");
-    SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), GoodsInfo.GoodsNomenclatureCode.KM);
+    SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), AGI.GoodsNomenclatureCode.KM);
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(LIBFPTR_MES_PIECE_SOLD)); //TODO:Добавить продажи/возврат
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
-    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT), GoodsInfo.GoodsNomenclatureCode.State);
+    SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT), AGI.GoodsNomenclatureCode.State);
   end;
 
 
-  case GoodsInfo.GoodsPayMode of
+  case AGI.GoodsPayMode of
     //gpmFullPay:SetAttributeInt(1214, 0);
     gpmPrePay100:SetAttributeInt(1214, 1);
     gpmPrePay:SetAttributeInt(1214, 2);
@@ -883,8 +919,8 @@ begin
     gpmKreditPay:SetAttributeInt(1214, 7);
   end;
 
-  if GoodsInfo.GoodsType <> gtNone then
-    SetAttributeInt(1212, Ord(GoodsInfo.GoodsType));
+  if AGI.GoodsType <> gtNone then
+    SetAttributeInt(1212, Ord(AGI.GoodsType));
   //Сама регистрация
   Result:=FLibrary.Registration(FHandle);
 end;
@@ -1220,7 +1256,7 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     if FFD1_2 then
-      Result:=InternalRegistration1_2
+      Result:=InternalRegistration1_2(GoodsInfo)
     else
       Result:=InternalRegistration1_05;
     InternalCheckError;
@@ -1244,6 +1280,76 @@ begin
   begin
     FLibrary.Payment(FHandle);
     InternalCheckError;
+  end;
+end;
+
+function TAtollKKMv10.RegisterGoods: Integer;
+var
+  GI: TGoodsInfo;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+    for GI in GoodsList do
+    begin;
+      Result:=InternalRegistration1_2(GI);
+      InternalCheckError;
+      if ErrorCode <> 0 then
+        Exit;
+    end;
+  end;
+end;
+
+function TAtollKKMv10.ValidateGoodsKM: Boolean;
+var
+  GI: TGoodsInfo;
+  FMarkingEstimatedStatus: libfptr_marking_estimated_status;
+  FMeasurementUnit: Tlibfptr_item_units;
+  FValidationReady: Boolean;
+begin
+  if CheckType = chtSell then
+    FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_SOLD
+  else
+    FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_RETURN; //chtSellReturn
+  Result:=True;
+  for GI in GoodsList do
+  begin
+    GI.GoodsNomenclatureCode.State:=0;
+    if GI.GoodsNomenclatureCode.KM <> '' then
+    begin
+      FMeasurementUnit:=muOKEItoAtol(GoodsInfo.GoodsMeasurementUnit);
+
+      SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
+      SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), GI.GoodsNomenclatureCode.KM);
+      SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
+  //    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
+  //    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
+      SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), FWaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
+      SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
+
+      //TODO:Реализовать дробное кол-во товара
+      //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY), Edit3.Text);
+
+      FLibrary.BeginMarkingCodeValidation(Handle);
+      InternalCheckError;
+
+      if ErrorCode <> 0 then
+      begin
+        FLibrary.CancelMarkingCodeValidation(Handle);
+        Exit(false);
+      end;
+
+      repeat
+        FLibrary.GetMarkingCodeValidationStatus(Handle);
+        InternalCheckError;
+        FValidationReady:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY));
+      until FValidationReady;
+
+      FLibrary.AcceptMarkingCode(Handle);
+      GI.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+      if GI.GoodsNomenclatureCode.State <> %00001111 then
+        Result:=false;
+      InternalCheckError;
+    end;
   end;
 end;
 

@@ -42,7 +42,7 @@ type
   private
 
   public
-
+    procedure UpdateCtrlState; override;
   end;
 
 implementation
@@ -63,19 +63,24 @@ procedure Tv10ServiceFrame.Button9Click(Sender: TObject);
 var
   CT: TCheckType;
 begin
-  FKKM.Connected:=true;
   CT:=FKKM.CheckType;
   rxWriteLog(etDebug, 'Тип чека - ' + CheckTypeStr(CT));
-  FKKM.Connected:=false;
+end;
+
+procedure Tv10ServiceFrame.UpdateCtrlState;
+begin
+  inherited UpdateCtrlState;
+  Button26.Enabled:=FKKM.Connected;
+  Button11.Enabled:=FKKM.Connected;
+  Button17.Enabled:=FKKM.Connected;
+  Button20.Enabled:=FKKM.Connected;
+  Button14.Enabled:=FKKM.Connected;
+  Button9.Enabled:=FKKM.Connected;
 end;
 
 procedure Tv10ServiceFrame.Button11Click(Sender: TObject);
 begin
-  FKKM.Connected:=true;
-  FKKM.Open;
   FKKM.Beep;
-  FKKM.Close;
-  FKKM.Connected:=false;
 end;
 
 procedure Tv10ServiceFrame.Button12Click(Sender: TObject);
@@ -89,11 +94,7 @@ end;
 
 procedure Tv10ServiceFrame.Button14Click(Sender: TObject);
 begin
-  FKKM.Connected:=true;
-  FKKM.Open;
   FKKM.OpenShift;
-  FKKM.Close;
-  FKKM.Connected:=false;
 end;
 
 procedure Tv10ServiceFrame.Button15Click(Sender: TObject);
@@ -116,20 +117,12 @@ end;
 
 procedure Tv10ServiceFrame.Button17Click(Sender: TObject);
 begin
-  FKKM.Connected:=true;
-  FKKM.Open;
   FKKM.CancelCheck;
-  FKKM.Close;
-  FKKM.Connected:=false;
 end;
 
 procedure Tv10ServiceFrame.Button20Click(Sender: TObject);
 begin
-  FKKM.Connected:=true;
-  FKKM.Open;
   FKKM.PrintClishe;
-  FKKM.Close;
-  FKKM.Connected:=false;
 end;
 
 procedure Tv10ServiceFrame.Button22Click(Sender: TObject);
@@ -148,35 +141,29 @@ var
   versionKKT, minFfdVersion, maxFfdVersion, ffdVersion,
     deviceFfdVersion, fnFfdVersion, maxFnFfdVersion: Integer;
 begin
-  FKKM.Connected:=true;
-  if FKKM.Connected then
-  begin
-    FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_FFD_VERSIONS));
-    FKKM.LibraryAtol.fnQueryData(FKKM.Handle);
+  FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_FFD_VERSIONS));
+  FKKM.LibraryAtol.fnQueryData(FKKM.Handle);
 
-    deviceFfdVersion := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_DEVICE_FFD_VERSION));
-    fnFfdVersion     := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_FN_FFD_VERSION));
-    maxFnFfdVersion  := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_FN_MAX_FFD_VERSION));
-    ffdVersion       := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_FFD_VERSION));
-    maxFfdVersion    := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_DEVICE_MAX_FFD_VERSION));
-    minFfdVersion    := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_DEVICE_MIN_FFD_VERSION));
-    versionKKT       := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_VERSION));
+  deviceFfdVersion := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_DEVICE_FFD_VERSION));
+  fnFfdVersion     := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_FN_FFD_VERSION));
+  maxFnFfdVersion  := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_FN_MAX_FFD_VERSION));
+  ffdVersion       := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_FFD_VERSION));
+  maxFfdVersion    := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_DEVICE_MAX_FFD_VERSION));
+  minFfdVersion    := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_DEVICE_MIN_FFD_VERSION));
+  versionKKT       := FKKM.LibraryAtol.getParamInt(FKKM.Handle, Ord(LIBFPTR_PARAM_VERSION));
 
-    rxWriteLog(etDebug, 'deviceFfdVersion = %d', [deviceFfdVersion]);
-    rxWriteLog(etDebug, 'fnFfdVersion     = %d', [fnFfdVersion]);
-    rxWriteLog(etDebug, 'maxFnFfdVersion  = %d', [maxFnFfdVersion]);
-    rxWriteLog(etDebug, 'ffdVersion       = %d', [ffdVersion]);
-    rxWriteLog(etDebug, 'maxFfdVersion    = %d', [maxFfdVersion]);
-    rxWriteLog(etDebug, 'minFfdVersion    = %d', [minFfdVersion]);
-    rxWriteLog(etDebug, 'versionKKT       = %d', [versionKKT]);
+  rxWriteLog(etDebug, 'deviceFfdVersion = %d', [deviceFfdVersion]);
+  rxWriteLog(etDebug, 'fnFfdVersion     = %d', [fnFfdVersion]);
+  rxWriteLog(etDebug, 'maxFnFfdVersion  = %d', [maxFnFfdVersion]);
+  rxWriteLog(etDebug, 'ffdVersion       = %d', [ffdVersion]);
+  rxWriteLog(etDebug, 'maxFfdVersion    = %d', [maxFfdVersion]);
+  rxWriteLog(etDebug, 'minFfdVersion    = %d', [minFfdVersion]);
+  rxWriteLog(etDebug, 'versionKKT       = %d', [versionKKT]);
 
-    FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_REG_INFO));
-    FKKM.LibraryAtol.fnQueryData(FKKM.Handle);
-    ffdVersion     :=FKKM.LibraryAtol.GetParamInt(FKKM.Handle, 1209);//    Результат 110, Т.е. ФФД 1.1
-    rxWriteLog(etDebug, 'ffdVersion       = %d', [ffdVersion]);
-
-  end;
-  FKKM.Connected:=false;
+  FKKM.LibraryAtol.SetParamInt(FKKM.Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_REG_INFO));
+  FKKM.LibraryAtol.fnQueryData(FKKM.Handle);
+  ffdVersion     :=FKKM.LibraryAtol.GetParamInt(FKKM.Handle, 1209);//    Результат 110, Т.е. ФФД 1.1
+  rxWriteLog(etDebug, 'ffdVersion       = %d', [ffdVersion]);
 end;
 
 end.

@@ -8,7 +8,10 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms,
-  rxlogging, lazcontrols,
+  rxlogging,
+  lazcontrols,
+  ssl_openssl,
+  ssl_openssl_lib,
 
   v10MainUnit,
   tv10globalunit,
@@ -19,8 +22,10 @@ uses
   v10ReportsUnit,
   v10ServiceUnit,
   v10OtherUnit,
-  v10OrgParamsUnit, v10MarkingUnit, v10RegisterCheckFFD1_2Unit, 
-v10RegisterCheckCmpUnit;
+  v10OrgParamsUnit,
+  v10MarkingUnit,
+  v10RegisterCheckFFD1_2Unit,
+  v10RegisterCheckCmpUnit;
 
 {$R *.res}
 
