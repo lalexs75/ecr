@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <Name Value="atol_ecr"/>
     <Type Value="RunAndDesignTime"/>
     <Author Value="Лагунов А.А."/>
@@ -74,6 +74,7 @@
         <UnitName Value="Atollv10_JSON"/>
       </Item7>
     </Files>
+    <CompatibilityMode Value="True"/>
     <LazDoc Paths="docs"/>
     <RequiredPkgs Count="5">
       <Item1>

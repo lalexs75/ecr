@@ -46,9 +46,9 @@ type
     FSplashForm:TForm;
     FCmdProcess : TProcessUTF8;
     FCmdLine:string;
-    FCommandName: string;
+    //FCommandName: string;
     FShowSplashWindow: boolean;
-    function IsCommandNameStored: Boolean;
+    //function IsCommandNameStored: Boolean;
     function IsErrorFileStored: Boolean;
     function IsSlipFileStored: Boolean;
     procedure MakeCommand(ACmd:string);
@@ -80,7 +80,7 @@ type
 
     procedure GetWorkKey; override;
   published
-    property CommandName:string read FCommandName write FCommandName stored IsCommandNameStored;
+    //property CommandName:string read FCommandName write FCommandName stored IsCommandNameStored;
     property ShowSplashWindow:boolean read FShowSplashWindow write FShowSplashWindow default false;
     property SlipFile:string read FSlipFile write FSlipFile stored IsSlipFileStored;
     property ErrorFile:string read FErrorFile write FErrorFile stored IsErrorFileStored;
@@ -97,12 +97,12 @@ begin
 end;
 
 { TSBPlasticCardConsole }
-
+(*
 function TSBPlasticCardConsole.IsCommandNameStored: Boolean;
 begin
   Result:=FCommandName <> sCommandName;
 end;
-
+*)
 function TSBPlasticCardConsole.IsErrorFileStored: Boolean;
 begin
   Result:=FErrorFile <> sErrorFile;
@@ -166,7 +166,8 @@ begin
   Result:='';
   if ExtractFileDir(AFileName) = '' then
   begin
-    S:=ExtractFileDir(FCommandName);
+    S:=ExtractFileDir(LibFileName);
+//    S:=ExtractFileDir(FCommandName);
     if S<>'' then
       Result:=AppendPathDelim(S);
     Result:=Result + AFileName;
@@ -215,8 +216,10 @@ var
 begin
   FCmdProcess.Parameters.Clear;
   //S1:=ExtractFileDir(FCommandName);
-  FCmdProcess.CurrentDirectory:= ExtractFileDir(FCommandName);
-  FCmdProcess.CommandLine:=FCommandName + ' ' + FCmdLine;
+  //FCmdProcess.CurrentDirectory:= ExtractFileDir(FCommandName);
+  //FCmdProcess.CommandLine:=FCommandName + ' ' + FCmdLine;
+  FCmdProcess.CurrentDirectory:= ExtractFileDir(LibFileName);
+  FCmdProcess.CommandLine:=LibFileName + ' ' + FCmdLine;
 //  FCmdProcess.Parameters.Add(FCmdLine);
   FCmdProcess.Options:=FCmdProcess.Options + [poUsePipes, poWaitOnExit];
   FCmdProcess.Execute;
@@ -318,7 +321,8 @@ end;
 constructor TSBPlasticCardConsole.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FCommandName:=sCommandName;
+  //FCommandName:=sCommandName;
+  LibFileName:=sCommandName;
   FSlipFile:=sSlipFile;
   FErrorFile:=sErrorFile;
   FStatusInfo:=TStringList.Create;
@@ -426,4 +430,6 @@ begin
   Clear;
 end;
 
+initialization
+  RegisterPlasticCardType(TSBPlasticCardConsole, 'Сберегательный банк РФ - внешний запуск');
 end.
