@@ -450,18 +450,18 @@ type
     FFFD1_2: Boolean;
     FLibrary:TAtollLibraryV10;
     FHandle:TLibFPtrHandle;
-    FLibraryFileName: string;
-    FWaitForMarkingValidationResult: Boolean;
-    function GetDeviceDateTime: TDateTime;
-    procedure InternalUserLogin;
     procedure InternalInitLibrary;
-    procedure InternalOpenKKM;
-    procedure InternalCloseKKM;
     procedure InternalSetCheckType(AValue: TCheckType);
     function InternalRegistration1_05:integer;
     function InternalRegistration1_2(AGI:TGoodsInfo):integer;
     function InternalRegisterBuyer1_2:integer;
   protected
+    procedure InternalUserLogin; override;
+    procedure InternalOpenKKM; override;
+    procedure InternalCloseKKM; override;
+    function InternalCheckError:Integer; override;
+
+    function GetDeviceDateTime: TDateTime; override;
     procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); override;
     function GetConnected: boolean; override;
     procedure SetConnected(AValue: boolean); override;
@@ -472,11 +472,8 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
-    function InternalCheckError:Integer;
-    procedure Open;
-    procedure Close;
 
-    function GetVersionString:string;
+    function GetVersionString:string; override;
     procedure Beep; override;
     procedure CutCheck(APartial:boolean); override;
     procedure PrintLine(ALine:string); override;        //Печать строки
@@ -560,7 +557,7 @@ type
     procedure PrintReportCounted; override;             //Отчет количеств
     procedure DemoPrint; override;                      //Демо-печать
 
-    function NonNullableSum:Currency;                   //Не обнуляемая сумма - приход - наличка
+    function NonNullableSum:Currency; override;                  //Не обнуляемая сумма - приход - наличка
     function NonNullableSum(AChekType:Tlibfptr_receipt_type; APaymentType:Tlibfptr_payment_type):Currency;
 
     function ShowProperties:boolean; override;          //Отобразить окно параметров ККМ
@@ -569,11 +566,8 @@ type
     procedure OpenDrawer;
   public
     property Handle:TLibFPtrHandle read FHandle;
-    property LibraryFileName:string read FLibraryFileName write FLibraryFileName;
-    property DeviceDateTime:TDateTime read GetDeviceDateTime;
     property LibraryAtol:TAtollLibraryV10 read FLibrary;
     property FFD1_2:Boolean read FFFD1_2 write FFFD1_2;
-    property WaitForMarkingValidationResult:Boolean read FWaitForMarkingValidationResult write FWaitForMarkingValidationResult;
   end;
 
 resourcestring
@@ -841,7 +835,7 @@ begin
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
 //    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), AGI.Quantity);
 //    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
-    SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), FWaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
+    SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), WaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 
     //TODO:Реализовать дробное кол-во товара
@@ -1079,17 +1073,6 @@ begin
   inherited Destroy;
 end;
 
-procedure TAtollKKMv10.Open;
-begin
-  InternalOpenKKM;
-  InternalUserLogin;
-  InternalCheckError;
-end;
-
-procedure TAtollKKMv10.Close;
-begin
-  InternalCloseKKM;
-end;
 
 function TAtollKKMv10.GetVersionString: string;
 begin
@@ -1323,7 +1306,7 @@ begin
       SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
   //    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
   //    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
-      SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), FWaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
+      SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), WaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
       SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 
       //TODO:Реализовать дробное кол-во товара

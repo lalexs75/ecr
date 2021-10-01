@@ -338,8 +338,10 @@ type
     FCheckType: TCheckType;
     FTextParams: TTextParams;
     FUserName: string;
+    FWaitForMarkingValidationResult: Boolean;
   protected
     FDeviceState: TDeviceState;
+    FLibraryFileName: string;
     procedure SetUserName(AValue: string); virtual;
     procedure SetPassword(AValue: string); virtual;
     procedure SetKassaUserINN(AValue: string); virtual;
@@ -352,6 +354,11 @@ type
     procedure SetError(AErrorCode:integer; AErrorDescription:string);
     procedure ClearError;
     procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); virtual;
+    function GetDeviceDateTime: TDateTime; virtual; abstract;
+    procedure InternalUserLogin; virtual; abstract;
+    procedure InternalOpenKKM; virtual; abstract;
+    procedure InternalCloseKKM; virtual; abstract;
+    function InternalCheckError:Integer; virtual; abstract;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -362,6 +369,10 @@ type
     procedure PrintClishe; virtual; abstract;
     procedure DemoPrint; virtual; abstract;
     procedure QueryDeviceParams;
+    procedure Open;
+    procedure Close;
+    function GetVersionString:string; virtual;
+    function NonNullableSum:Currency; virtual;                  //Не обнуляемая сумма - приход - наличка
 
 
     //Отперации со сменой
@@ -405,6 +416,7 @@ type
     property CheckType:TCheckType read FCheckType write SetCheckType;
     property CheckElectronic:boolean read FCheckElectronic write FCheckElectronic;
   public
+    property LibraryFileName:string read FLibraryFileName write FLibraryFileName;
     property Password:string read FPassword write SetPassword;
     property UserName:string read FUserName write SetUserName;
     property KassaUserINN:string read FKassaUserINN write SetKassaUserINN;
@@ -425,6 +437,8 @@ type
     //Статус и информация о аппарате
     property DeviceState:TDeviceState read FDeviceState;
     property DeviceInfo:TDeviceInfo read FDeviceInfo;
+    property DeviceDateTime:TDateTime read GetDeviceDateTime;
+    property WaitForMarkingValidationResult:Boolean read FWaitForMarkingValidationResult write FWaitForMarkingValidationResult;
     //
     property OnError:TNotifyEvent read FOnError write FOnError;
   end;
@@ -757,6 +771,28 @@ begin
   InternalGetDeviceInfo(FLineLength, FLineLengthPix);
   FDeviceInfo.FPaperInfo.FLineLength:=FLineLength;
   FDeviceInfo.FPaperInfo.FLineLengthPix:=FLineLengthPix;
+end;
+
+procedure TCashRegisterAbstract.Open;
+begin
+  InternalOpenKKM;
+  InternalUserLogin;
+  InternalCheckError;
+end;
+
+procedure TCashRegisterAbstract.Close;
+begin
+  InternalCloseKKM;
+end;
+
+function TCashRegisterAbstract.GetVersionString: string;
+begin
+  Result:='';
+end;
+
+function TCashRegisterAbstract.NonNullableSum: Currency;
+begin
+  Result:=0;
 end;
 
 procedure TCashRegisterAbstract.OpenShift;
