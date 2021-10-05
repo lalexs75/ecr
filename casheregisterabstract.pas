@@ -358,11 +358,11 @@ type
     procedure InternalUserLogin; virtual; abstract;
     procedure InternalOpenKKM; virtual; abstract;
     procedure InternalCloseKKM; virtual; abstract;
-    function InternalCheckError:Integer; virtual; abstract;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
+    function InternalCheckError:Integer; virtual; abstract;
     procedure Beep; virtual; abstract;
     procedure CutCheck(APartial:boolean); virtual; abstract;
     procedure PrintLine(ALine:string);virtual; abstract;     //Печать строки

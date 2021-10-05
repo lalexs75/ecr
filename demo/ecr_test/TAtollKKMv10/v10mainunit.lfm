@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 382
   Height = 810
-  Top = 118
+  Top = 154
   Width = 1460
   Caption = 'Тесты 10 версии ATOL'
   ClientHeight = 810
@@ -59,9 +59,9 @@ object MainForm: TMainForm
       AnchorSideTop.Control = CheckBox1
       AnchorSideTop.Side = asrBottom
       Left = 7
-      Height = 33
+      Height = 29
       Top = 36
-      Width = 74
+      Width = 70
       AutoSize = True
       BorderSpacing.Around = 6
       Caption = 'Свойства'

@@ -810,6 +810,8 @@ const
   LIBFPTR_SETTING_REMOTE_SERVER_ADDR          = 'RemoteServerAddr';
   LIBFPTR_SETTING_REMOTE_SERVER_CONNECTION_TIMEOUT = 'RemoteServerConnectionTimeout';
   LIBFPTR_SETTING_VALIDATE_MARK_WITH_FNM_ONLY = 'ValidateMarksWithFnmOnly';
+  LIBFPTR_SETTING_AUTO_MEASUREMENT_UNIT       = 'AutoMeasurementUnit';
+
 
 type
   libfptr_port = (

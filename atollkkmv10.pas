@@ -459,7 +459,6 @@ type
     procedure InternalUserLogin; override;
     procedure InternalOpenKKM; override;
     procedure InternalCloseKKM; override;
-    function InternalCheckError:Integer; override;
 
     function GetDeviceDateTime: TDateTime; override;
     procedure InternalGetDeviceInfo(var ALineLength, ALineLengthPix: integer); override;
@@ -473,6 +472,7 @@ type
     destructor Destroy; override;
 
 
+    function InternalCheckError:Integer; override;
     function GetVersionString:string; override;
     procedure Beep; override;
     procedure CutCheck(APartial:boolean); override;
