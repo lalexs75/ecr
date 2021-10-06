@@ -117,8 +117,7 @@ end;
 
 procedure Tv10RegisterCheckFFD1_2Frame.Button4Click(Sender: TObject);
 begin
-  FKKM.LibraryAtol.CancelReceipt(FKKM.LibraryAtol);
-  FKKM.InternalCheckError;
+  FKKM.CancelCheck;
 end;
 
 procedure Tv10RegisterCheckFFD1_2Frame.Button6Click(Sender: TObject);

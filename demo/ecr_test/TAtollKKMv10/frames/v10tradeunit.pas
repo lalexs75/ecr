@@ -67,6 +67,7 @@ type
     rxPaysPayType: TLongintField;
     rxPaysPayTypeName: TStringField;
     procedure Button8Click(Sender: TObject);
+    procedure CheckBox2Change(Sender: TObject);
     procedure rxGoodsBeforePost(DataSet: TDataSet);
   private
     procedure InitGoodsDataSet;
@@ -83,13 +84,11 @@ uses rxlogging, CasheRegisterAbstract;
 { Tv10TradeFrame }
 
 procedure Tv10TradeFrame.Button8Click(Sender: TObject);
+var
+  GI: TGoodsInfo;
+  PayInfo: TPaymentInfo;
 begin
   RxWriteLog(etDebug, 'Формируем тестовый чек');
-  //InitKassirData;
-
-  FKKM.Connected:=true;
-
-  FKKM.Open;
 
   if FKKM.CheckType <> chtNone then
   begin
@@ -97,6 +96,7 @@ begin
     FKKM.CancelCheck;
   end;
 
+  FKKM.BeginCheck;
   FKKM.CheckType:=TCheckType(ComboBox1.ItemIndex+1); //chtSell;
   //Определим параметры покупателя
   FKKM.CounteragentInfo.Name:=edtContragentName.Text;
@@ -104,55 +104,46 @@ begin
   FKKM.CounteragentInfo.Phone:=edtPhone.Text;
   FKKM.CounteragentInfo.Email:=edtEmail.Text;
   FKKM.CheckInfo.Electronically:=CheckBox1.Checked;
-(*
-  if chPayPlace.Checked then
-    FKKM.PaymentPlace:=edtPayPlace.Text
-  else
-    FKKM.PaymentPlace:='';
-*)
+  FKKM.PaymentPlace:='Место расчёта 1';
 
   FKKM.OpenCheck;
   if FKKM.ErrorCode <> 0 then
   begin
     ShowMessage(FKKM.ErrorDescription);
-    FKKM.Close;
-    FKKM.Connected:=false;
     Exit;
   end;
 
-  rxWriteLog(etDebug, 'CheckNumber = ' + IntToStr(FKKM.CheckNumber));
+//  rxWriteLog(etDebug, 'CheckNumber = ' + IntToStr(FKKM.CheckNumber));
 
   //Начинаем регистрацию товара к продаже
   rxGoods.First;
   while not rxGoods.EOF do
   begin
+    GI:=FKKM.GoodsList.Add;
+    GI.GoodsType:=gtCommodity;
     if CheckBox3.Checked then
     begin
       //Укажем данные поставщика
-      FKKM.GoodsInfo.SuplierInfo.Name:=edtSuplierName.Text;
-      FKKM.GoodsInfo.SuplierInfo.INN:=edtSuplierInn.Text;
-      FKKM.GoodsInfo.SuplierInfo.Phone:=edtSuplierPhone.Text;
-      FKKM.GoodsInfo.SuplierInfo.Email:=edtSuplierEmail.Text;
+      GI.SuplierInfo.Name:=edtSuplierName.Text;
+      GI.SuplierInfo.INN:=edtSuplierInn.Text;
+      GI.SuplierInfo.Phone:=edtSuplierPhone.Text;
+      GI.SuplierInfo.Email:=edtSuplierEmail.Text;
     end;
 
 
-    FKKM.GoodsInfo.Name:=rxGoodsGOODS_NAME.AsString;
-    FKKM.GoodsInfo.Price:=rxGoodsPRICE.AsFloat;
-    FKKM.GoodsInfo.Quantity:=rxGoodsAMOUNT.AsFloat;
-    FKKM.GoodsInfo.TaxType:=TTaxType(rxGoodsTAX_TYPE.AsInteger);
+    GI.Name:=rxGoodsGOODS_NAME.AsString;
+    GI.Price:=rxGoodsPRICE.AsFloat;
+    GI.Quantity:=rxGoodsAMOUNT.AsFloat;
+    GI.TaxType:=TTaxType(rxGoodsTAX_TYPE.AsInteger);
 
     if (rxGoodsGTD.AsString <> '') and (rxGoodsCOUNTRY_CODE.AsInteger <> 0) then
     begin
-      FKKM.GoodsInfo.CountryCode:=rxGoodsCOUNTRY_CODE.AsInteger;
-      FKKM.GoodsInfo.DeclarationNumber:=rxGoodsGTD.AsString;
+      GI.CountryCode:=rxGoodsCOUNTRY_CODE.AsInteger;
+      GI.DeclarationNumber:=rxGoodsGTD.AsString;
     end;
 
-    FKKM.GoodsInfo.GoodsPayMode:=gpmFullPay;
-    FKKM.GoodsInfo.GoodsNomenclatureCode.GroupCode:=rxGoodsMARKS_GROUP.AsInteger;
-    FKKM.GoodsInfo.GoodsNomenclatureCode.GTIN:=rxGoodsMARKS_GTIN.AsString;
-    FKKM.GoodsInfo.GoodsNomenclatureCode.Serial:=rxGoodsMARKS_SERIAL.AsString;
+    GI.GoodsPayMode:=gpmFullPay;
 
-    FKKM.Registration;
     rxGoods.Next;
   end;
 
@@ -160,9 +151,17 @@ begin
   while not rxPays.EOF do
   begin
     if rxPaysPaySum.AsCurrency > 0 then
-      FKKM.RegisterPayment(TPaymentType(rxPaysPayType.AsInteger) , rxPaysPaySum.AsCurrency);
+    begin
+      PayInfo:=FKKM.PaymentsList.Add;
+      PayInfo.PaymentType:=TPaymentType(rxPaysPayType.AsInteger);
+      PayInfo.PaymentSum:=rxPaysPaySum.AsCurrency;
+    end;
     rxPays.Next;
   end;
+
+  FKKM.RegisterGoods;
+  FKKM.RegisterPayments;
+
 
   // Закрытие чека
   FKKM.CloseCheck;
@@ -170,11 +169,13 @@ begin
   if FKKM.ErrorCode <> 0 then
     ShowMessage(FKKM.ErrorDescription);
 
-  FKKM.Close;
-  FKKM.Connected:=false;
-
   rxGoods.First;
   rxPays.First;
+end;
+
+procedure Tv10TradeFrame.CheckBox2Change(Sender: TObject);
+begin
+  UpdateCtrlState;
 end;
 
 procedure Tv10TradeFrame.rxGoodsBeforePost(DataSet: TDataSet);
@@ -203,13 +204,15 @@ begin
 end;
 
 procedure Tv10TradeFrame.InitData(AKKM: TAtollKKMv10);
+var
+  C: TCheckType;
 begin
   inherited InitData(AKKM);
-(*
+
   ComboBox1.Items.Clear;
   for C:=chtSell to High(TCheckType) do
     ComboBox1.Items.Add(CheckTypeStr(C));
-  ComboBox1.ItemIndex:=0; *)
+  ComboBox1.ItemIndex:=0;
   InitGoodsDataSet;
 end;
 
@@ -217,24 +220,36 @@ procedure Tv10TradeFrame.UpdateCtrlState;
 begin
   inherited UpdateCtrlState;
 //  edtPayPlace.Enabled:=chPayPlace.Checked;
+  Label14.Enabled:=FKKM.Connected;
+  Label1.Enabled:=FKKM.Connected;
+  Label2.Enabled:=FKKM.Connected;
+  Label6.Enabled:=FKKM.Connected;
+  Label7.Enabled:=FKKM.Connected;
 
-  Label15.Enabled:=CheckBox2.Checked;
-  Label16.Enabled:=CheckBox2.Checked;
-  Label17.Enabled:=CheckBox2.Checked;
-  Label18.Enabled:=CheckBox2.Checked;
-  edtContragentName1.Enabled:=CheckBox2.Checked;
-  edtContragentInn1.Enabled:=CheckBox2.Checked;
-  edtPhone1.Enabled:=CheckBox2.Checked;
-  edtEmail1.Enabled:=CheckBox2.Checked;
+  edtContragentName.Enabled:=FKKM.Connected;
+  edtContragentInn.Enabled:=FKKM.Connected;
+  edtPhone.Enabled:=FKKM.Connected;
+  edtEmail.Enabled:=FKKM.Connected;
 
-  Label19.Enabled:=CheckBox3.Checked;
-  Label20.Enabled:=CheckBox3.Checked;
-  Label21.Enabled:=CheckBox3.Checked;
-  Label22.Enabled:=CheckBox3.Checked;
-  edtSuplierName.Enabled:=CheckBox3.Checked;
-  edtSuplierInn.Enabled:=CheckBox3.Checked;
-  edtSuplierPhone.Enabled:=CheckBox3.Checked;
-  edtSuplierEmail.Enabled:=CheckBox3.Checked;
+
+  Button8.Enabled:=FKKM.Connected;
+  Label15.Enabled:=CheckBox2.Checked and FKKM.Connected;
+  Label16.Enabled:=CheckBox2.Checked and FKKM.Connected;
+  Label17.Enabled:=CheckBox2.Checked and FKKM.Connected;
+  Label18.Enabled:=CheckBox2.Checked and FKKM.Connected;
+  edtContragentName1.Enabled:=CheckBox2.Checked and FKKM.Connected;
+  edtContragentInn1.Enabled:=CheckBox2.Checked and FKKM.Connected;
+  edtPhone1.Enabled:=CheckBox2.Checked and FKKM.Connected;
+  edtEmail1.Enabled:=CheckBox2.Checked and FKKM.Connected;
+
+  Label19.Enabled:=CheckBox3.Checked and FKKM.Connected;
+  Label20.Enabled:=CheckBox3.Checked and FKKM.Connected;
+  Label21.Enabled:=CheckBox3.Checked and FKKM.Connected;
+  Label22.Enabled:=CheckBox3.Checked and FKKM.Connected;
+  edtSuplierName.Enabled:=CheckBox3.Checked and FKKM.Connected;
+  edtSuplierInn.Enabled:=CheckBox3.Checked and FKKM.Connected;
+  edtSuplierPhone.Enabled:=CheckBox3.Checked and FKKM.Connected;
+  edtSuplierEmail.Enabled:=CheckBox3.Checked and FKKM.Connected;
 end;
 
 end.

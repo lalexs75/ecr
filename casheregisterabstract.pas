@@ -66,6 +66,7 @@ const
 type
   TCashRegisterAbstract = class;
   TGoodsListEnumerator = class;
+  TPaymentsListEnumerator = class;
 
   TCheckType =
     (chtNone,
@@ -318,6 +319,53 @@ type
     property Current: TGoodsInfo read GetCurrent;
   end;
 
+
+  { TPaymentInfo }
+
+  TPaymentInfo = class
+  private
+    FPaymentSum: Currency;
+    FPaymentType: TPaymentType;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Clear;
+    property PaymentType:TPaymentType read FPaymentType write FPaymentType;
+    property PaymentSum: Currency read FPaymentSum write FPaymentSum;
+  end;
+
+  { TPaymentsList }
+
+  TPaymentsList = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItems(AIndex: integer): TPaymentInfo;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Clear;
+    function Add:TPaymentInfo;
+    function GetEnumerator: TPaymentsListEnumerator;
+
+    property Count:integer read GetCount;
+    property Items[AIndex:integer]:TPaymentInfo read GetItems; default;
+  end;
+
+  { TPaymentsListEnumerator }
+
+  TPaymentsListEnumerator = class
+  private
+    FList: TPaymentsList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPaymentsList);
+    function GetCurrent: TPaymentInfo;
+    function MoveNext: Boolean;
+    property Current: TPaymentInfo read GetCurrent;
+  end;
+
+
   { TCashRegisterAbstract }
 
   TCashRegisterAbstract = class(TComponent)
@@ -336,6 +384,7 @@ type
     FPassword: string;
     FPaymentPlace: string;
     FCheckType: TCheckType;
+    FPaymentsList: TPaymentsList;
     FTextParams: TTextParams;
     FUserName: string;
     FWaitForMarkingValidationResult: Boolean;
@@ -392,8 +441,9 @@ type
     function Registration:integer;virtual; deprecated;
     function ReceiptTotal:integer;virtual; abstract;
     function Payment:integer; virtual; abstract;
-    procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); virtual; abstract;
+    procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); virtual; abstract; deprecated;
     function RegisterGoods:Integer; virtual; abstract;
+    function RegisterPayments:Integer; virtual; abstract;
     function ValidateGoodsKM:Boolean; virtual; abstract;
 
     procedure SetAttributeInt(AttribNum, AttribValue:Integer); virtual; abstract;
@@ -432,6 +482,7 @@ type
     property CheckInfo:TCheckInfo read FCheckInfo;
     property GoodsInfo:TGoodsInfo read FGoodsInfo; deprecated;
     property GoodsList:TGoodsList read FGoodsList;
+    property PaymentsList:TPaymentsList read FPaymentsList;
     property PaymentPlace:string read FPaymentPlace write FPaymentPlace;
 
     //Статус и информация о аппарате
@@ -512,6 +563,88 @@ begin
   else
     Result:='Не известный тип оплаты';
   end;
+end;
+
+{ TPaymentsListEnumerator }
+
+constructor TPaymentsListEnumerator.Create(AList: TPaymentsList);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPaymentsListEnumerator.GetCurrent: TPaymentInfo;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPaymentsListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TPaymentsList }
+
+function TPaymentsList.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TPaymentsList.GetItems(AIndex: integer): TPaymentInfo;
+begin
+  Result:=TPaymentInfo(FList[AIndex])
+end;
+
+constructor TPaymentsList.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TPaymentsList.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TPaymentsList.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count - 1 do
+    TPaymentInfo(FList[i]).Free;
+  FList.Clear;
+end;
+
+function TPaymentsList.Add: TPaymentInfo;
+begin
+  Result:=TPaymentInfo.Create;
+  FList.Add(Result);
+end;
+
+function TPaymentsList.GetEnumerator: TPaymentsListEnumerator;
+begin
+  Result:=TPaymentsListEnumerator.Create(Self);
+end;
+
+{ TPaymentInfo }
+
+constructor TPaymentInfo.Create;
+begin
+  inherited Create;
+end;
+
+destructor TPaymentInfo.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TPaymentInfo.Clear;
+begin
+  FPaymentSum:=0;
+  FPaymentType:=pctCash;
 end;
 
 { TGoodsListEnumerator }
@@ -750,6 +883,7 @@ begin
   FTextParams:=TTextParams.Create;
   FDeviceInfo:=TDeviceInfo.Create;
   FGoodsList:=TGoodsList.Create;
+  FPaymentsList:=TPaymentsList.Create;
 end;
 
 destructor TCashRegisterAbstract.Destroy;
@@ -760,6 +894,7 @@ begin
   FreeAndNil(FTextParams);
   FreeAndNil(FDeviceInfo);
   FreeAndNil(FGoodsList);
+  FreeAndNil(FPaymentsList);
   inherited Destroy;
 end;
 
@@ -803,6 +938,7 @@ end;
 procedure TCashRegisterAbstract.BeginCheck;
 begin
   FGoodsList.Clear;
+  FPaymentsList.Clear;
 end;
 
 procedure TCashRegisterAbstract.OpenCheck;

@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 382
   Height = 810
-  Top = 154
+  Top = 190
   Width = 1460
   Caption = 'Тесты 10 версии ATOL'
   ClientHeight = 810

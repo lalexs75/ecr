@@ -494,6 +494,7 @@ type
     function ReceiptTotal:integer; override;
     function Payment:integer; override;
     function RegisterGoods:Integer; override;
+    function RegisterPayments:Integer; override;
     function ValidateGoodsKM:Boolean; override;
 
     procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
@@ -800,34 +801,7 @@ begin
     else
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_RETURN; //chtSellReturn
 
-{    case AGI.GoodsMeasurementUnit of
-      796:FMeasurementUnit:=LIBFPTR_IU_PIECE; //шт
-      163:FMeasurementUnit:=LIBFPTR_IU_GRAM; //Грамм
-      166:FMeasurementUnit:=LIBFPTR_IU_KILOGRAM; //Килограмм
-      168:FMeasurementUnit:=LIBFPTR_IU_TON; //Тонна
-      004:FMeasurementUnit:=LIBFPTR_IU_CENTIMETER; //Сантиметр
-      005:FMeasurementUnit:=LIBFPTR_IU_DECIMETER; // Дециметр
-      006:FMeasurementUnit:=LIBFPTR_IU_METER; // Метр
-      051:FMeasurementUnit:=LIBFPTR_IU_SQUARE_CENTIMETER; // Квадратный сантиметр
-      053:FMeasurementUnit:=LIBFPTR_IU_SQUARE_DECIMETER;//Квадратный дециметр
-      055:FMeasurementUnit:=LIBFPTR_IU_SQUARE_METER; //Квадратный метр
-      111:FMeasurementUnit:=LIBFPTR_IU_MILLILITER; // Кубический сантиметр; миллилитр
-      112:FMeasurementUnit:=LIBFPTR_IU_LITER; // Литр; кубический дециметр
-      113:FMeasurementUnit:=LIBFPTR_IU_CUBIC_METER;//Кубический метр
-      245:FMeasurementUnit:=LIBFPTR_IU_KILOWATT_HOUR;//Киловатт-час
-      233:FMeasurementUnit:=LIBFPTR_IU_GKAL; // Гигакалория
-      359:FMeasurementUnit:=LIBFPTR_IU_DAY;//Сутки
-      356:FMeasurementUnit:=LIBFPTR_IU_HOUR;//Час
-      355:FMeasurementUnit:=LIBFPTR_IU_MINUTE;//Минута
-      354:FMeasurementUnit:=LIBFPTR_IU_SECOND;//Секунда
-      256:FMeasurementUnit:=LIBFPTR_IU_KILOBYTE;//Килобайт
-      257:FMeasurementUnit:=LIBFPTR_IU_MEGABYTE;//Мегабайт
-      2553:FMeasurementUnit:=LIBFPTR_IU_GIGABYTE;//Гигабайт
-      2554:FMeasurementUnit:=LIBFPTR_IU_TERABYTE;//Терабайт
-    else
-      //LIBFPTR_IU_OTHER = 255
-      FMeasurementUnit:=LIBFPTR_IU_PIECE;
-    end;}
+
     FMeasurementUnit:=muOKEItoAtol(AGI.GoodsMeasurementUnit);
 
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
@@ -1276,6 +1250,21 @@ begin
     begin;
       Result:=InternalRegistration1_2(GI);
       InternalCheckError;
+      if ErrorCode <> 0 then
+        Exit;
+    end;
+  end;
+end;
+
+function TAtollKKMv10.RegisterPayments: Integer;
+var
+  FPayInfo: TPaymentInfo;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+    for FPayInfo in PaymentsList do
+    begin
+      RegisterPayment(FPayInfo.PaymentType, FPayInfo.PaymentSum);
       if ErrorCode <> 0 then
         Exit;
     end;

@@ -234,6 +234,7 @@ procedure TMainForm.CheckBox1Change(Sender: TObject);
 begin
   if CheckBox1.Checked then
   begin
+    FAtollKKMv10.FFD1_2:=true;
     FAtollKKMv10.Connected:=true;
     FAtollKKMv10.Open;
   end
