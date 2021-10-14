@@ -262,6 +262,7 @@ type
   private
     FCountryCode: Integer;
     FDeclarationNumber: String;
+    FGoodsArticle: string;
     FGoodsMeasurementUnit: Integer;
     FGoodsNomenclatureCode: TGoodsNomenclatureCode;
     FGoodsPayMode: TGoodsPayMode;
@@ -286,6 +287,7 @@ type
     property GoodsNomenclatureCode:TGoodsNomenclatureCode read FGoodsNomenclatureCode write FGoodsNomenclatureCode;
     property GoodsType:TGoodsType read FGoodsType write FGoodsType;
     property GoodsMeasurementUnit:Integer read FGoodsMeasurementUnit write FGoodsMeasurementUnit;
+    property GoodsArticle:string read FGoodsArticle write FGoodsArticle;
   end;
 
   { TGoodsList }
@@ -498,8 +500,26 @@ function CheckTypeStr(ACheckType:TCheckType):string;
 function PaymentTypeStr(APaymentType:TPaymentType):string;
 procedure MakeCRPTCode(APrefix:Word; AGTIN:string; ASerial:string; var R:TCrpCodeBuffer);
 function MakeCRPTCodeStr(APrefix:Word; AGTIN:string; ASerial:string):string;
+function KMStatusEx(AStatus:DWord):string;
 implementation
 uses Math;
+
+function KMStatusEx(AStatus:DWord):string;
+begin
+  case AStatus of
+    %00000000:Result:='[М] Проверка КП КМ не выполнена, статус товара ОИСМ не проверен';
+    %00000001:Result:='[М-] Проверка КП КМ выполнена в ФН с отрицательным результатом, статус товара ОИСМ не проверен';
+    %00000011:Result:='[М] Проверка КП КМ выполнена с положительным результатом, статус товара ОИСМ не проверен';
+    %00010000:Result:='[М] Проверка КП КМ не выполнена, статус товара ОИСМ не проверен (ККТ функционирует в автономном режиме)';
+    %00010001:Result:='[М-] Проверка КП КМ выполнена в ФН с отрицательным результатом, статус товара ОИСМ не проверен (ККТ функционирует в автономном режиме)';
+    %00010011:Result:='[М] Проверка КП КМ выполнена в ФН с положительным результатом, статус товара ОИСМ не проверен (ККТ функционирует в автономном режиме)';
+    %00000101:Result:='[М-] Проверка КП КМ выполнена с отрицательным результатом, статус товара у ОИСМ некорректен';
+    %00000111:Result:='[М-] Проверка КП КМ выполнена с положительным результатом, статус товара у ОИСМ некорректен';
+    %00001111:Result:='[М+] Проверка КП КМ выполнена с положительным результатом, статус товара у ОИСМ корректен';
+  else
+    Result:=Format( 'Статус не определён: %d', [AStatus]);
+  end;
+end;
 
 procedure MakeCRPTCode(APrefix:Word; AGTIN:string; ASerial:string; var R:TCrpCodeBuffer);
 var
@@ -819,6 +839,7 @@ begin
   FGoodsNomenclatureCode.Clear;
   FSuplierInfo.Clear;
   FGoodsType:=gtNone;
+  FGoodsArticle:='';
 end;
 
 { TCheckInfo }
