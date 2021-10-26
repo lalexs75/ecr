@@ -960,6 +960,11 @@ procedure TCashRegisterAbstract.BeginCheck;
 begin
   FGoodsList.Clear;
   FPaymentsList.Clear;
+  FCounteragentInfo.Clear;
+  FCheckInfo.Clear;
+  FAgentInfo.Clear;
+  FTextParams.Clear;
+  FGoodsInfo.Clear;
 end;
 
 procedure TCashRegisterAbstract.OpenCheck;
