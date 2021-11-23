@@ -474,6 +474,7 @@ type
 
     function InternalCheckError:Integer; override;
     function GetVersionString:string; override;
+    function GetOFDCheckString:string; override;
     procedure Beep; override;
     procedure CutCheck(APartial:boolean); override;
     procedure PrintLine(ALine:string); override;        //Печать строки
@@ -1053,6 +1054,38 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded and Assigned(FHandle) then
   begin
     Result:=FLibrary.GetVersionString;
+    InternalCheckError;
+  end;
+end;
+
+function TAtollKKMv10.GetOFDCheckString: string;
+var
+  FFirstUnsentDate: TDateTime;
+  FOfdMessageRead: Boolean;
+  FFirstUnsentNumber, FUnsentCount, FExchangeStatus: Integer;
+begin
+  Result:='';
+  if Assigned(FLibrary) and FLibrary.Loaded and Assigned(FHandle) then
+  begin
+   { #todo -oalexs : Необходимо переписать в виде нормального метода }
+    //libfptr_set_param_int(fptr, LIBFPTR_PARAM_FN_DATA_TYPE, LIBFPTR_FNDT_OFD_EXCHANGE_STATUS);
+    FLibrary.SetParamInt(Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_OFD_EXCHANGE_STATUS));
+    //libfptr_fn_query_data(fptr);
+    FLibrary.QueryData(FHandle);
+    //int exchangeStatus      = libfptr_get_param_int(fptr, LIBFPTR_PARAM_OFD_EXCHANGE_STATUS);
+    FExchangeStatus:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_OFD_EXCHANGE_STATUS));
+    //int unsentCount         = libfptr_get_param_int(fptr, LIBFPTR_PARAM_DOCUMENTS_COUNT);
+    FUnsentCount:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_DOCUMENTS_COUNT));
+    //int firstUnsentNumber   = libfptr_get_param_int(fptr, LIBFPTR_PARAM_DOCUMENT_NUMBER);
+    FFirstUnsentNumber:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_DOCUMENT_NUMBER));
+    //int ofdMessageRead      = (libfptr_get_param_bool(fptr, LIBFPTR_PARAM_OFD_MESSAGE_READ) != 0);
+    FOfdMessageRead:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_OFD_MESSAGE_READ));
+
+    //int year, month, day, hour, minute, second;
+    //libfptr_get_param_datetime(fptr, LIBFPTR_PARAM_DATE_TIME, &year, &month, &day, &hour, &minute, &second);
+    FFirstUnsentDate:=FLibrary.GetParamDateTime(Handle, Ord(LIBFPTR_PARAM_DATE_TIME));
+    if FUnsentCount>0 then
+      Result:=Format('Не отправлено в ОФД %d', [FUnsentCount]);
     InternalCheckError;
   end;
 end;

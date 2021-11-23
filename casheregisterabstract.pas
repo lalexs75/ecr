@@ -423,6 +423,7 @@ type
     procedure Open;
     procedure Close;
     function GetVersionString:string; virtual;
+    function GetOFDCheckString:string; virtual;
     function NonNullableSum:Currency; virtual;                  //Не обнуляемая сумма - приход - наличка
 
 
@@ -942,6 +943,11 @@ begin
 end;
 
 function TCashRegisterAbstract.GetVersionString: string;
+begin
+  Result:='';
+end;
+
+function TCashRegisterAbstract.GetOFDCheckString: string;
 begin
   Result:='';
 end;
