@@ -1,0 +1,20 @@
+inherited v10OFDFrame: Tv10OFDFrame
+  object Button1: TButton[0]
+    Left = 8
+    Height = 29
+    Top = 8
+    Width = 155
+    AutoSize = True
+    Caption = 'Не отправленные чеки'
+    TabOrder = 0
+  end
+  object Button2: TButton[1]
+    Left = 10
+    Height = 29
+    Top = 48
+    Width = 107
+    AutoSize = True
+    Caption = 'Запрос ключей'
+    TabOrder = 1
+  end
+end
