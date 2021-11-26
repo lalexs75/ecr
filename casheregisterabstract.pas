@@ -142,6 +142,14 @@ type
        gtCasinoPayment = 26                   //или 26 - платеж казино
       );
 
+  TOFDSTatusRecord = record
+    ExchangeStatus:Cardinal;
+    UnsentCount:Integer;
+    FirstUnsentNumber:Integer;
+    OfdMessageRead:Boolean;
+    LastSendDocDate:TDateTime
+  end;
+
   ECashRegisterAbstract = class(Exception);
 
   TEcrTextAlign = (etaLeft, etaCenter, etaRight);
@@ -423,7 +431,7 @@ type
     procedure Open;
     procedure Close;
     function GetVersionString:string; virtual;
-    function GetOFDCheckString:string; virtual;
+    procedure GetOFDStatus(out AStatus:TOFDSTatusRecord); virtual;
     function NonNullableSum:Currency; virtual;                  //Не обнуляемая сумма - приход - наличка
 
 
@@ -462,6 +470,7 @@ type
     procedure PrintReportCounted; virtual; abstract;
     procedure BeginNonfiscalDocument; virtual; abstract;
     procedure EndNonfiscalDocument; virtual; abstract;
+    function UpdateFnmKeys:Integer; virtual; abstract;
     //
     property CheckNumber:integer read GetCheckNumber;
     property FDNumber:integer read GetFDNumber;
@@ -947,9 +956,9 @@ begin
   Result:='';
 end;
 
-function TCashRegisterAbstract.GetOFDCheckString: string;
+procedure TCashRegisterAbstract.GetOFDStatus(out AStatus: TOFDSTatusRecord);
 begin
-  Result:='';
+  FillChar(AStatus, SizeOf(TOFDSTatusRecord), 0);
 end;
 
 function TCashRegisterAbstract.NonNullableSum: Currency;

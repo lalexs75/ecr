@@ -474,7 +474,7 @@ type
 
     function InternalCheckError:Integer; override;
     function GetVersionString:string; override;
-    function GetOFDCheckString:string; override;
+    procedure GetOFDStatus(out AStatus:TOFDSTatusRecord); override;
     procedure Beep; override;
     procedure CutCheck(APartial:boolean); override;
     procedure PrintLine(ALine:string); override;        //Печать строки
@@ -507,6 +507,7 @@ type
 
     procedure BeginNonfiscalDocument; override;
     procedure EndNonfiscalDocument; override;
+    function UpdateFnmKeys:Integer; override;
 
 (*
 
@@ -1060,37 +1061,23 @@ begin
     Result:='';
 end;
 
-function TAtollKKMv10.GetOFDCheckString: string;
+procedure TAtollKKMv10.GetOFDStatus(out AStatus: TOFDSTatusRecord);
 var
   FFirstUnsentDate: TDateTime;
   FOfdMessageRead: Boolean;
-  FFirstUnsentNumber, FUnsentCount, FExchangeStatus: Integer;
+  FFirstUnsentNumber, FUnsentCount, FExchangeStatus, C: Integer;
 begin
-  Result:='';
+  inherited GetOFDStatus(AStatus);
   if Assigned(FLibrary) and FLibrary.Loaded and Assigned(FHandle) then
   begin
-   { #todo -oalexs : Необходимо переписать в виде нормального метода }
-    //libfptr_set_param_int(fptr, LIBFPTR_PARAM_FN_DATA_TYPE, LIBFPTR_FNDT_OFD_EXCHANGE_STATUS);
-    FLibrary.SetParamInt(Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_OFD_EXCHANGE_STATUS));
-    //libfptr_fn_query_data(fptr);
-    FLibrary.QueryData(FHandle);
+    LibraryAtol.SetParamInt(Handle, LIBFPTR_PARAM_FN_DATA_TYPE, Ord(LIBFPTR_FNDT_OFD_EXCHANGE_STATUS));
+    LibraryAtol.fnQueryData(Handle);
     InternalCheckError;
-
-    //int exchangeStatus      = libfptr_get_param_int(fptr, LIBFPTR_PARAM_OFD_EXCHANGE_STATUS);
-    FExchangeStatus:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_OFD_EXCHANGE_STATUS));
-    //int unsentCount         = libfptr_get_param_int(fptr, LIBFPTR_PARAM_DOCUMENTS_COUNT);
-    FUnsentCount:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_DOCUMENTS_COUNT));
-    //int firstUnsentNumber   = libfptr_get_param_int(fptr, LIBFPTR_PARAM_DOCUMENT_NUMBER);
-    FFirstUnsentNumber:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_DOCUMENT_NUMBER));
-    //int ofdMessageRead      = (libfptr_get_param_bool(fptr, LIBFPTR_PARAM_OFD_MESSAGE_READ) != 0);
-    FOfdMessageRead:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_OFD_MESSAGE_READ));
-
-    //int year, month, day, hour, minute, second;
-    //libfptr_get_param_datetime(fptr, LIBFPTR_PARAM_DATE_TIME, &year, &month, &day, &hour, &minute, &second);
-    FFirstUnsentDate:=FLibrary.GetParamDateTime(Handle, Ord(LIBFPTR_PARAM_DATE_TIME));
-    if FUnsentCount>0 then
-      Result:=Format('Не отправлено в ОФД %d', [FUnsentCount]);
-    InternalCheckError;
+    AStatus.ExchangeStatus:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_OFD_EXCHANGE_STATUS));
+    AStatus.UnsentCount:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_DOCUMENTS_COUNT));
+    AStatus.FirstUnsentNumber:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_DOCUMENT_NUMBER));
+    AStatus.OfdMessageRead:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_OFD_MESSAGE_READ));
+    AStatus.LastSendDocDate:=FLibrary.GetParamDateTime(Handle, Ord(LIBFPTR_PARAM_DATE_TIME));
   end;
 end;
 
@@ -1442,6 +1429,15 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     FLibrary.EndNonfiscalDocument(FHandle);
+    InternalCheckError;
+  end;
+end;
+
+function TAtollKKMv10.UpdateFnmKeys: Integer;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+    FLibrary.UpdateFnmKeys(Handle);
     InternalCheckError;
   end;
 end;
