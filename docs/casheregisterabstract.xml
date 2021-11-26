@@ -120,6 +120,16 @@
     <element name="TGoodsInfo.GoodsMeasurementUnit"><short>Код единицы измерения товара</short><descr>Согласно ОКЕИ
 </descr>
       </element>
+    <element name="TOFDSTatusRecord"><short>Статус информационного обмена с ОФД</short>
+      </element><element name="TOFDSTatusRecord.ExchangeStatus"><short>Статус информационного обмена с ОФД</short><descr><ul><li>бит 0 - транспортное соединение установлено</li><li>бит 1 – есть сообщение для передачи в ОФД</li><li>бит 2 – ожидание ответного сообщения (квитанции) от ОФД</li><li>бит 3 – есть команда от ОФД</li><li>бит 4 – изменились настройки соединения с ОФД</li><li>бит 5 – ожидание ответа на команду от ОФД</li>
+          </ul>
+        </descr>
+      </element><element name="TOFDSTatusRecord.UnsentCount"><short>Количество неотправленных документов</short>
+      </element><element name="TOFDSTatusRecord.FirstUnsentNumber"><short>Номер первого неотправленного документа</short>
+      </element><element name="TOFDSTatusRecord.LastSendDocDate"><short>Дата и время первого неотправленного документа</short>
+      </element><element name="TOFDSTatusRecord.OfdMessageRead"><short>Флаг наличия сообщения для ОФД</short>
+      </element><element name="TCashRegisterAbstract.GetOFDStatus"><short>Получить статус обмена данными с ОФД</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
