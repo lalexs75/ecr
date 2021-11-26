@@ -22,7 +22,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 86
+    Top = 87
     Width = 72
     BorderSpacing.Around = 6
     Caption = 'Контрагент'
@@ -34,7 +34,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 166
     Height = 17
-    Top = 86
+    Top = 87
     Width = 111
     BorderSpacing.Around = 6
     Caption = 'ИНН контрагента'
@@ -44,8 +44,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 28
-    Top = 109
+    Height = 29
+    Top = 110
     Width = 148
     BorderSpacing.Around = 6
     TabOrder = 1
@@ -56,8 +56,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     Left = 172
-    Height = 28
-    Top = 109
+    Height = 29
+    Top = 110
     Width = 132
     BorderSpacing.Around = 6
     TabOrder = 2
@@ -68,7 +68,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 28
+    Height = 29
     Top = 29
     Width = 292
     BorderSpacing.Around = 6
@@ -100,7 +100,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 143
+    Top = 145
     Width = 107
     BorderSpacing.Around = 6
     Caption = 'Номер телефона'
@@ -112,7 +112,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 166
     Height = 17
-    Top = 143
+    Top = 145
     Width = 34
     BorderSpacing.Around = 6
     Caption = 'Email'
@@ -122,9 +122,9 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label6
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 28
+    Height = 29
     Hint = 'Номер сотового'
-    Top = 166
+    Top = 168
     Width = 148
     BorderSpacing.Around = 6
     TabOrder = 5
@@ -135,8 +135,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label7
     AnchorSideTop.Side = asrBottom
     Left = 172
-    Height = 28
-    Top = 166
+    Height = 29
+    Top = 168
     Width = 132
     BorderSpacing.Around = 6
     TabOrder = 6
@@ -147,7 +147,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideRight.Side = asrBottom
     Left = 0
     Height = 194
-    Top = 223
+    Top = 226
     Width = 1699
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
@@ -428,7 +428,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 200
+    Top = 203
     Width = 96
     BorderSpacing.Around = 6
     Caption = 'Товарная часть'
@@ -439,8 +439,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideRight.Control = Button8
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 107
-    Top = 446
+    Height = 104
+    Top = 449
     Width = 1059
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
@@ -563,7 +563,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 423
+    Top = 426
     Width = 48
     Caption = 'Оплаты'
   end
@@ -574,7 +574,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 310
     Height = 23
-    Top = 63
+    Top = 64
     Width = 106
     BorderSpacing.Around = 6
     Caption = 'Через агента'
@@ -588,7 +588,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 636
     Height = 23
-    Top = 63
+    Top = 64
     Width = 153
     BorderSpacing.Around = 6
     Caption = 'Данные поставщика'
@@ -600,7 +600,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 63
+    Top = 64
     Width = 73
     BorderSpacing.Around = 6
     Caption = 'Покупатель'
@@ -610,9 +610,9 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label16
     AnchorSideTop.Side = asrBottom
     Left = 322
-    Height = 28
+    Height = 29
     Hint = 'Номер сотового'
-    Top = 172
+    Top = 174
     Width = 164
     BorderSpacing.Around = 6
     TabOrder = 11
@@ -623,8 +623,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label15
     AnchorSideTop.Side = asrBottom
     Left = 498
-    Height = 28
-    Top = 172
+    Height = 29
+    Top = 174
     Width = 132
     BorderSpacing.Around = 6
     TabOrder = 12
@@ -636,7 +636,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 492
     Height = 17
-    Top = 149
+    Top = 151
     Width = 81
     BorderSpacing.Around = 6
     Caption = 'Email агента '
@@ -647,7 +647,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 316
     Height = 17
-    Top = 149
+    Top = 151
     Width = 151
     BorderSpacing.Around = 6
     Caption = 'Номер телефона агента'
@@ -657,8 +657,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label18
     AnchorSideTop.Side = asrBottom
     Left = 322
-    Height = 28
-    Top = 115
+    Height = 29
+    Top = 116
     Width = 164
     BorderSpacing.Around = 6
     TabOrder = 13
@@ -669,8 +669,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label17
     AnchorSideTop.Side = asrBottom
     Left = 498
-    Height = 28
-    Top = 115
+    Height = 29
+    Top = 116
     Width = 132
     BorderSpacing.Around = 6
     TabOrder = 14
@@ -683,7 +683,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 492
     Height = 17
-    Top = 92
+    Top = 93
     Width = 74
     BorderSpacing.Around = 6
     Caption = 'ИНН агента'
@@ -694,7 +694,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 316
     Height = 17
-    Top = 92
+    Top = 93
     Width = 35
     BorderSpacing.Around = 6
     Caption = 'Агент'
@@ -704,9 +704,9 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label20
     AnchorSideTop.Side = asrBottom
     Left = 648
-    Height = 28
+    Height = 29
     Hint = 'Номер сотового'
-    Top = 172
+    Top = 174
     Width = 148
     BorderSpacing.Around = 6
     TabOrder = 15
@@ -717,8 +717,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label19
     AnchorSideTop.Side = asrBottom
     Left = 808
-    Height = 28
-    Top = 172
+    Height = 29
+    Top = 174
     Width = 132
     BorderSpacing.Around = 6
     TabOrder = 16
@@ -730,7 +730,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 802
     Height = 17
-    Top = 149
+    Top = 151
     Width = 34
     BorderSpacing.Around = 6
     Caption = 'Email'
@@ -741,7 +741,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 642
     Height = 17
-    Top = 149
+    Top = 151
     Width = 107
     BorderSpacing.Around = 6
     Caption = 'Номер телефона'
@@ -751,8 +751,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label22
     AnchorSideTop.Side = asrBottom
     Left = 648
-    Height = 28
-    Top = 115
+    Height = 29
+    Top = 116
     Width = 148
     BorderSpacing.Around = 6
     TabOrder = 17
@@ -763,8 +763,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Control = Label21
     AnchorSideTop.Side = asrBottom
     Left = 808
-    Height = 28
-    Top = 115
+    Height = 29
+    Top = 116
     Width = 132
     BorderSpacing.Around = 6
     TabOrder = 18
@@ -777,7 +777,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 802
     Height = 17
-    Top = 92
+    Top = 93
     Width = 108
     BorderSpacing.Around = 6
     Caption = 'ИНН поставщика'
@@ -788,7 +788,7 @@ inherited v10TradeFrame: Tv10TradeFrame
     AnchorSideTop.Side = asrBottom
     Left = 642
     Height = 17
-    Top = 92
+    Top = 93
     Width = 69
     BorderSpacing.Around = 6
     Caption = 'Поставщик'

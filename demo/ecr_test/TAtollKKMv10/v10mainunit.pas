@@ -1,3 +1,21 @@
+{
+  Test application for atoll cashe register
+
+  Copyright (C) 2021 Lagunov Aleksey alexs75@yandex.ru
+
+  This source is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later
+  version.
+
+  This code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+  details.
+
+  A copy of the GNU General Public License is available on the World Wide Web at
+  <http://www.gnu.org/copyleft/gpl.html>. You can also obtain it by writing to the Free Software Foundation, Inc., 51
+  Franklin Street - Fifth Floor, Boston, MA 02110-1335, USA.
+}
+
 unit v10MainUnit;
 
 {$mode objfpc}{$H+}
@@ -57,7 +75,7 @@ implementation
 uses LazFileUtils, Math, rxlogging, v10tradeunit, v10CRPTUnit,
   v10SimpleTestUnit, v10ReportsUnit, v10ServiceUnit, v10OtherUnit,
   v10OrgParamsUnit, v10MarkingUnit, v10RegisterCheckFFD1_2Unit,
-  v10RegisterCheckCmpUnit;
+  v10RegisterCheckCmpUnit, v10OFDUnit;
 
 {$R *.lfm}
 
@@ -220,7 +238,8 @@ begin
   R:=AddFrame('Чек', 'Маркировка', Tv10MarkingFrame.Create(Self));
   R:=AddFrame('Чек', 'Регистрация позиции с маркировкой ФФД 1.2', Tv10RegisterCheckFFD1_2Frame.Create(Self));
 
-  R:=AddFrame('ЦРПТ', 'Взаимодействие с ЦРПТ', Tv10CRPTFrame.Create(Self));
+  R:=AddFrame('Взаимодействие с внешними системами', 'ОФД', Tv10OFDFrame.Create(Self));
+  R:=AddFrame('Взаимодействие с внешними системами', 'ЦРПТ', Tv10CRPTFrame.Create(Self));
   R:=AddFrame('Сервис', 'Стандарные', Tv10ServiceFrame.Create(Self));
   R:=AddFrame('Прочее', 'Прочее', Tv10OtherFrame.Create(Self));
   R:=AddFrame('Прочее', 'Параметры организации', Tv10OrgParamsFrame.Create(Self));
