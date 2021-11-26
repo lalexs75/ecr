@@ -24,7 +24,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  tv10globalunit;
+  tv10globalunit, CasheRegisterAbstract;
 
 type
 
@@ -34,14 +34,18 @@ type
     Button1: TButton;
     Button2: TButton;
     Label1: TLabel;
+    Label2: TLabel;
+    procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
   private
 
   public
-
+    procedure UpdateCtrlState; override;
   end;
 
 implementation
+
+uses libfptr10, rxlogging;
 
 {$R *.lfm}
 
@@ -52,14 +56,37 @@ begin
   FKKM.Open;
   if FKKM.LibraryAtol.Loaded then
   begin
-    // Начать проверку связи с сервером ИСМ
+    // Начать запрос ключей
     FKKM.LibraryAtol.UpdateFnmKeys(FKKM.Handle);
     FKKM.InternalCheckError;
-//    Label27.Caption:=Format('Error code : %d, Error msg : %s', [EC, errorDescription]);
-     Label1.Caption:='Успешный запрос ключей';
+    Label1.Caption:='Успешный запрос ключей';
   end
   else
     Label1.Caption:='Ошибка';
+  FKKM.Close;
+end;
+
+procedure Tv10OFDFrame.UpdateCtrlState;
+begin
+  Button1.Enabled:=FKKM.Connected;
+  Button2.Enabled:=FKKM.Connected;
+end;
+
+procedure Tv10OFDFrame.Button1Click(Sender: TObject);
+var
+  FStatus: TOFDSTatusRecord;
+begin
+  FKKM.Open;
+  if FKKM.LibraryAtol.Loaded then
+  begin
+    // Начать запрос информации по обемену с ОФД
+    FKKM.GetOFDStatus(FStatus);
+    Label2.Caption:=Label2.Caption + LineEnding +
+      Format('ExchangeStatus =%d, UnsentCount = %d, FirstUnsentNumber = %d, OfdMessageRead = %d, LastSendDate=%s',
+      [FStatus.ExchangeStatus, FStatus.UnsentCount, FStatus.FirstUnsentNumber, Ord(FStatus.OfdMessageRead), DateToStr(FStatus.LastSendDocDate)]);
+  end
+  else
+    Label2.Caption:='Ошибка';
   FKKM.Close;
 end;
 
