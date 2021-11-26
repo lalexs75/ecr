@@ -1,20 +1,38 @@
 inherited v10OFDFrame: Tv10OFDFrame
+  DesignLeft = 811
+  DesignTop = 380
   object Button1: TButton[0]
     Left = 8
     Height = 29
-    Top = 8
+    Top = 64
     Width = 155
     AutoSize = True
     Caption = 'Не отправленные чеки'
     TabOrder = 0
   end
   object Button2: TButton[1]
-    Left = 10
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
     Height = 29
-    Top = 48
+    Top = 6
     Width = 107
     AutoSize = True
+    BorderSpacing.Around = 6
     Caption = 'Запрос ключей'
+    OnClick = Button2Click
     TabOrder = 1
+  end
+  object Label1: TLabel[2]
+    AnchorSideLeft.Control = Button2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideBottom.Control = Button2
+    AnchorSideBottom.Side = asrBottom
+    Left = 119
+    Height = 17
+    Top = 18
+    Width = 3
+    Anchors = [akLeft, akBottom]
+    Caption = ' '
   end
 end

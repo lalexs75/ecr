@@ -142,7 +142,7 @@ var
   responseTime, EC: Integer;
   B: Boolean;
 begin
-  FKKM.Connected:=true;
+  FKKM.Open;
   if FKKM.LibraryAtol.Loaded then
   begin
     // Начать проверку связи с сервером ИСМ
@@ -166,7 +166,7 @@ begin
   end
   else
     Label27.Caption:='Ошибка';
-  FKKM.Connected:=false;
+  FKKM.Close;
 end;
 
 end.

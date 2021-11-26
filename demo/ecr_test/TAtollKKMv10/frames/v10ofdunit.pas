@@ -33,6 +33,8 @@ type
   Tv10OFDFrame = class(TConfigFrame)
     Button1: TButton;
     Button2: TButton;
+    Label1: TLabel;
+    procedure Button2Click(Sender: TObject);
   private
 
   public
@@ -42,6 +44,24 @@ type
 implementation
 
 {$R *.lfm}
+
+{ Tv10OFDFrame }
+
+procedure Tv10OFDFrame.Button2Click(Sender: TObject);
+begin
+  FKKM.Open;
+  if FKKM.LibraryAtol.Loaded then
+  begin
+    // Начать проверку связи с сервером ИСМ
+    FKKM.LibraryAtol.UpdateFnmKeys(FKKM.Handle);
+    FKKM.InternalCheckError;
+//    Label27.Caption:=Format('Error code : %d, Error msg : %s', [EC, errorDescription]);
+     Label1.Caption:='Успешный запрос ключей';
+  end
+  else
+    Label1.Caption:='Ошибка';
+  FKKM.Close;
+end;
 
 end.
 
