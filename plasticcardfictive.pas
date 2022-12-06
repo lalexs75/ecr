@@ -28,11 +28,11 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
-    procedure Pay(APaySum:Currency; ACheckNum:integer); override;      //Оплата
+    procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); override;      //Оплата
     procedure ReportItog;override;                                     //Z отчёт
     procedure EchoTest;override;                                       //Проверка
-    procedure Revert(ARevertSum:Currency; ACheckNum:string); override; //Возврат
-    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string); override; //Отмена
+    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer); override; //Возврат
+    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string; APayTypeMethod:Integer); override; //Отмена
     procedure ReportOperList; override;
     procedure ReportOperSmall; override;
     procedure PPLoadConfig; override;
@@ -75,10 +75,12 @@ begin
   inherited Destroy;
 end;
 
-procedure TPlasticCardFictive.Pay(APaySum: Currency; ACheckNum: integer);
+procedure TPlasticCardFictive.Pay(APaySum: Currency; ACheckNum: integer;
+  APayTypeMethod: Integer);
 begin
   //Фиктивный метод
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
+  'Тип оплаты :' + IntToStr(APayTypeMethod) + LineEnding +
   'Фиктивный терминал : XXXXXXXXX' +
   'Адрес организации : XXXXXXXXXX' +
   '      ОПЛАТА' +
@@ -104,10 +106,12 @@ begin
 
 end;
 
-procedure TPlasticCardFictive.Revert(ARevertSum: Currency; ACheckNum: string);
+procedure TPlasticCardFictive.Revert(ARevertSum: Currency; ACheckNum: string;
+  APayTypeMethod: Integer);
 begin
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
   'Фиктивный терминал : XXXXXXXXX' +
+  'Тип оплаты :' + IntToStr(APayTypeMethod) + LineEnding +
   'Адрес организации : XXXXXXXXXX' +
   '      ВОЗВРАТ' +
   'Cумма : ' +FloatToStr(ARevertSum)+ LineEnding +
@@ -117,10 +121,11 @@ begin
 end;
 
 procedure TPlasticCardFictive.Discard(ADiscardSum: Currency; ACheckNum: string;
-  ADocID: string);
+  ADocID: string; APayTypeMethod: Integer);
 begin
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
   'Фиктивный терминал : XXXXXXXXX' +
+  'Тип оплаты :' + IntToStr(APayTypeMethod) + LineEnding +
   'Адрес организации : XXXXXXXXXX' +
   '      ОТМЕНА' +
   'Cумма : ' +FloatToStr(ADiscardSum)+ LineEnding +

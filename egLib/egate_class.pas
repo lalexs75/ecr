@@ -44,9 +44,9 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
-    procedure Pay(APaySum:Currency; ACheckNum:integer); override;     //Операция № 1
-    procedure Revert(ARevertSum:Currency; ACheckNum:string); override;       //Операция № 3
-    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string); override; //Операция № 2
+    procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); override;     //Операция № 1
+    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer); override;       //Операция № 3
+    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string; APayTypeMethod:Integer); override; //Операция № 2
     procedure DiscardLastOper;
     //Отчёты
     procedure ReportOperList;override;                     //Операция № 6
@@ -58,6 +58,7 @@ type
     procedure PPLoadConfig;override;                       //Операция № 35
     procedure PPLoadSoftware;override;                     //Операция № 36
     procedure EchoTest;override;                           //Операция № 24
+    function PayTypeMethodName(APayTypeMethod:Integer):string; override;
 
     property EGHandle:integer read FEGHandle;
 
@@ -246,6 +247,7 @@ begin
   inherited Create(AOwner);
   FProtocolID:=15;
   LibFileName:=libEGateName;
+  FPayTypeMethodCount:=2;
 end;
 
 destructor TEGComponent.Destroy;
@@ -253,12 +255,14 @@ begin
   inherited Destroy;
 end;
 
-procedure TEGComponent.Pay(APaySum: Currency; ACheckNum: integer);
+procedure TEGComponent.Pay(APaySum: Currency; ACheckNum: integer;
+  APayTypeMethod: Integer);
 begin
   DoExecOper('Оплата', Format('%d 1 %d %d', [FKassaID, trunc(APaySum  * 100), ACheckNum]));
 end;
 
-procedure TEGComponent.Revert(ARevertSum: Currency; ACheckNum: string);
+procedure TEGComponent.Revert(ARevertSum: Currency; ACheckNum: string;
+  APayTypeMethod: Integer);
 var
   S:string;
 begin
@@ -266,7 +270,7 @@ begin
 end;
 
 procedure TEGComponent.Discard(ADiscardSum: Currency; ACheckNum: string;
-  ADocID: string);
+  ADocID: string; APayTypeMethod: Integer);
 begin
   DoExecOper('Отмена', Format('%d 2 %d %s %s', [FKassaID, trunc(ADiscardSum  * 100), ACheckNum, ADocID]));
 end;
@@ -314,6 +318,16 @@ end;
 procedure TEGComponent.EchoTest;
 begin
   DoExecOper('Echo test - ЭХО-ТЕСТ', Format('%d 24 1 1', [FKassaID]));
+end;
+
+function TEGComponent.PayTypeMethodName(APayTypeMethod: Integer): string;
+begin
+  case APayTypeMethod of
+    0:Result:=sPayTypeMethodBankCard;
+    1:Result:=sPayTypeMethodQRCode;
+  else
+    Result:=sUnknowPayTypeMethod;
+  end;
 end;
 
 initialization

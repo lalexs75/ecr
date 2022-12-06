@@ -5,6 +5,7 @@
     <Name Value="sbrf_pc"/>
     <Type Value="RunAndDesignTime"/>
     <AddToProjectUsesSection Value="True"/>
+    <Author Value="Lagunov A.A."/>
     <CompilerOptions>
       <Version Value="11"/>
       <PathDelim Value="\"/>
@@ -40,6 +41,7 @@
       </Item4>
     </Files>
     <CompatibilityMode Value="True"/>
+    <LazDoc Paths="docs"/>
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="languages"/>
@@ -53,6 +55,7 @@
       </Item2>
       <Item3>
         <PackageName Value="alexs_trade_abstract"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item3>
       <Item4>
         <PackageName Value="FCL"/>

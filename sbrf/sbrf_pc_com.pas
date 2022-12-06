@@ -111,11 +111,11 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
-    procedure Pay(APaySum:Currency; ACheckNum:integer); override;      //Оплата
+    procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); override;      //Оплата
     procedure ReportItog;override;                                     //Z отчёт
     procedure EchoTest;override;                                       //Проверка
-    procedure Revert(ARevertSum:Currency; ACheckNum:string); override; //Возврат
-    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string); override; //Отмена
+    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer); override; //Возврат
+    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string; APayTypeMethod:Integer); override; //Отмена
     procedure ReportOperList; override;
     procedure ReportOperSmall; override;
     procedure PPLoadConfig; override;
@@ -297,7 +297,8 @@ begin
   {$ENDIF}
 end;
 
-procedure TSBPlasticCard.Pay(APaySum: Currency; ACheckNum: integer);
+procedure TSBPlasticCard.Pay(APaySum: Currency; ACheckNum: integer;
+  APayTypeMethod: Integer);
 var
   R: Int64;
   S:string;
@@ -429,7 +430,8 @@ begin
   DoneTPK;
 end;
 
-procedure TSBPlasticCard.Revert(ARevertSum: Currency; ACheckNum: string);
+procedure TSBPlasticCard.Revert(ARevertSum: Currency; ACheckNum: string;
+  APayTypeMethod: Integer);
 var
   R: Int64;
 begin
@@ -470,7 +472,7 @@ begin
 end;
 
 procedure TSBPlasticCard.Discard(ADiscardSum: Currency; ACheckNum: string;
-  ADocID: string);
+  ADocID: string; APayTypeMethod: Integer);
 var
   R: Int64;
 begin

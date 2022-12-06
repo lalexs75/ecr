@@ -14,6 +14,11 @@ interface
 uses
   Classes, SysUtils;
 
+resourcestring
+  sUnknowPayTypeMethod   = 'Не известный тип оплаты';
+  sPayTypeMethodBankCard = 'Оплата банковской картой';
+  sPayTypeMethodQRCode   = 'Оплата QR кодом';
+
 type
   TPinStatus = (egpsNone,         //Без ввода пина
                  egpsOffLinePin,   //Введён оффлайне пин
@@ -33,6 +38,7 @@ type
     FActive: boolean;
     function IsEGateLibFileNameStored: Boolean;
   protected
+    FPayTypeMethodCount: Integer;
     FErrorCode: integer;
     FErrorMessage: string;
     FResultCode: integer;
@@ -53,9 +59,9 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
-    procedure Pay(APaySum:Currency; ACheckNum:integer); virtual; abstract;
-    procedure Revert(ARevertSum:Currency; ACheckNum:string); virtual; abstract;
-    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string); virtual; abstract;
+    procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); virtual; abstract;
+    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer); virtual; abstract;
+    procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string; APayTypeMethod:Integer); virtual; abstract;
 
     procedure ReportItog; virtual; abstract;
     procedure EchoTest; virtual; abstract;
@@ -64,6 +70,8 @@ type
     procedure ReportOperSmall;virtual; abstract;
     procedure PPLoadConfig;virtual; abstract;
     procedure PPLoadSoftware;virtual; abstract;
+    function PayTypeMethodName(APayTypeMethod:Integer):string; virtual;
+//    function PayTypeMethodName(APayTypeMethod:Integer):string; override;
 
     property ResultCode:integer read FResultCode;
     property ErrorCode:integer read FErrorCode;
@@ -75,6 +83,8 @@ type
     property InvoiceNumber:string read FInvoiceNumber;
     property PinStatus:TPinStatus read FPinStatus;
     property ResultMessage:string read FResultMessage;
+    property PayTypeMethodCount:Integer read FPayTypeMethodCount; //number of document payment method types
+
   published
     property Active:boolean read FActive write SetActive;
     property OnStatus:TPlasticCardOnStatus read FOnStatus write FOnStatus;
@@ -227,11 +237,22 @@ begin
   inherited Create(AOwner);
   FCfgFileName:='';
   FPinStatus:=egpsNone;
+  FPayTypeMethodCount:=1;
 end;
 
 destructor TPlasticCardAbstract.Destroy;
 begin
   inherited Destroy;
+end;
+
+function TPlasticCardAbstract.PayTypeMethodName(APayTypeMethod: Integer
+  ): string;
+begin
+  case APayTypeMethod of
+    0:Result:=sPayTypeMethodBankCard;
+  else
+    Result:=sUnknowPayTypeMethod;
+  end;
 end;
 
 finalization
