@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="alexs_trade_abstract"><module name="alexs_plastic_cards_abstract"><short>Модуль содержит абстрактный класс объекта для взаимодействия с терминалами оплаты пластиковыми картами</short><element name="TPinStatus"><short>Тип подтверждения пользователем оплаты</short><descr><ul><li><b>egpsNone</b> - Без ввода пина</li><li><b>egpsOffLinePin</b> - Введён оффлайне пин</li><li><b>egpsOnlinePin</b> - Введён онлайн пин</li>
+          </ul>
+        </descr>
+      </element><element name="TPlasticCardAbstract"><short>Абстрактный класс для взаимодействия с терминалами оплаты банковскими картами</short>
+      </element><element name="TPlasticCardAbstract.PayTypeMethodCount"><short>Количество методов оплаты</short>
+      </element><element name="TPlasticCardAbstract.PayTypeMethodName"><short>Функция возвращает наименование указанного метода оплаты</short><descr>Нумерация начинается с 0 индекса
+</descr>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

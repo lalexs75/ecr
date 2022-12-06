@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="sbrf_pc"><module name="sbrf_pc_com"><short>Модуль содержит компонент взаимодействия с терминалом оплаты банковской картой Сбербанка через COM- j,]trn</short>
+    </module>
+  </package>
+</fpdoc-descriptions>

@@ -1,0 +1,15 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: alexs_plastic_cards_abstract.spaytypemethodbankcard
+msgid "Оплата банковской картой"
+msgstr ""
+
+#: alexs_plastic_cards_abstract.spaytypemethodqrcode
+msgid "Оплата QR кодом"
+msgstr ""
+
+#: alexs_plastic_cards_abstract.sunknowpaytypemethod
+msgid "Не известный тип оплаты"
+msgstr ""
+
