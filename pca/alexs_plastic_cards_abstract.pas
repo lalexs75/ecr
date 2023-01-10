@@ -100,9 +100,16 @@ function GetPlasticCardObject(APCClassName:string; AOwner:TComponent):TPlasticCa
 
 implementation
 type
+
+  { TPlasticCardRegType }
+
   TPlasticCardRegType = class
+  private
     FClassRef:TPlasticCardAbstractClass;
-    FDesciption:string
+    FCardDrvInstance:TPlasticCardAbstract;
+    FDesciption:string;
+  public
+    destructor Destroy; override;
   end;
 
 var
@@ -114,7 +121,7 @@ begin
     PlasticCardRegTypeList:=TList.Create;
 end;
 
-function GetPlasticCardType(APCClassName: string): TPlasticCardAbstractClass;
+function GetPlasticCardTypeClass(APCClassName: string): TPlasticCardAbstractClass;
 var
   R: TPlasticCardRegType;
   i: Integer;
@@ -153,7 +160,7 @@ var
   R: TPlasticCardRegType;
 begin
   InitCardRegTypeList;
-  if not Assigned(GetPlasticCardType(AClassRef.ClassName)) then
+  if not Assigned(GetPlasticCardTypeClass(AClassRef.ClassName)) then
   begin
     R:=TPlasticCardRegType.Create;
     R.FClassRef:=AClassRef;
@@ -177,12 +184,37 @@ end;
 
 function GetPlasticCardObject(APCClassName: string; AOwner:TComponent): TPlasticCardAbstract;
 var
-  R: TPlasticCardAbstractClass;
+  R: TPlasticCardRegType;
+  i: Integer;
 begin
   Result:=nil;
-  R:=GetPlasticCardType(APCClassName);
+  for i:=0 to PlasticCardRegTypeList.Count-1 do
+  begin
+    R:=TPlasticCardRegType(PlasticCardRegTypeList[i]);
+    if R.FClassRef.ClassName = APCClassName then
+    begin
+      if not Assigned(R.FCardDrvInstance) then
+        R.FCardDrvInstance:=R.FClassRef.Create(AOwner);
+      Result:=R.FCardDrvInstance;
+      Exit;
+    end;
+  end;
+
+  {  R:=GetPlasticCardType(APCClassName);
   if Assigned(R) then
+  begin
+
     Result:=R.Create(AOwner);
+  end;}
+end;
+
+{ TPlasticCardRegType }
+
+destructor TPlasticCardRegType.Destroy;
+begin
+  if Assigned(FCardDrvInstance) then
+    FreeAndNil(FCardDrvInstance);
+  inherited Destroy;
 end;
 
 { TPlasticCardAbstract }

@@ -11,7 +11,9 @@
         <UnitOutputDirectory Value="lib/eglib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <License Value="LGPL 2"/>
+    <License Value="
+LGPL 2
+"/>
     <Version Major="1" Release="1" Build="2"/>
     <Files Count="4">
       <Item1>

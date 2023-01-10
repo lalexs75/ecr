@@ -258,7 +258,12 @@ end;
 procedure TEGComponent.Pay(APaySum: Currency; ACheckNum: integer;
   APayTypeMethod: Integer);
 begin
-  DoExecOper('Оплата', Format('%d 1 %d %d', [FKassaID, trunc(APaySum  * 100), ACheckNum]));
+  case APayTypeMethod of
+    0:DoExecOper('Оплата', Format('%d 1 %d %d', [FKassaID, trunc(APaySum  * 100), ACheckNum]));
+    1:DoExecOper('Оплата', Format('%d 70 %d %d', [FKassaID, trunc(APaySum  * 100), ACheckNum]));
+  else
+    raise Exception.Create('Не известный тип операции');
+  end;
 end;
 
 procedure TEGComponent.Revert(ARevertSum: Currency; ACheckNum: string;
@@ -266,7 +271,12 @@ procedure TEGComponent.Revert(ARevertSum: Currency; ACheckNum: string;
 var
   S:string;
 begin
-  DoExecOper('Возврат', Format('%d 3 %d %s', [FKassaID, trunc(ARevertSum  * 100), ACheckNum]));
+  case APayTypeMethod of
+    0:DoExecOper('Возврат', Format('%d 3 %d %s', [FKassaID, trunc(ARevertSum  * 100), ACheckNum]));
+    1:DoExecOper('Возврат', Format('%d 71 %d %s', [FKassaID, trunc(ARevertSum  * 100), ACheckNum]));
+  else
+    raise Exception.Create('Не известный тип операции');
+  end;
 end;
 
 procedure TEGComponent.Discard(ADiscardSum: Currency; ACheckNum: string;
