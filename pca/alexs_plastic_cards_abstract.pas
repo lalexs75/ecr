@@ -96,7 +96,7 @@ type
 
 procedure RegisterPlasticCardType(AClassRef:TPlasticCardAbstractClass; ADesciption:string);
 procedure FillPlasticCardTypeList(AList:TStrings);
-function GetPlasticCardObject(APCClassName:string; AOwner:TComponent):TPlasticCardAbstract;
+function GetPlasticCardObject(APCClassName:string{; AOwner:TComponent}):TPlasticCardAbstract;
 
 implementation
 type
@@ -182,7 +182,7 @@ begin
   end;
 end;
 
-function GetPlasticCardObject(APCClassName: string; AOwner:TComponent): TPlasticCardAbstract;
+function GetPlasticCardObject(APCClassName: string{; AOwner:TComponent}): TPlasticCardAbstract;
 var
   R: TPlasticCardRegType;
   i: Integer;
@@ -194,7 +194,7 @@ begin
     if R.FClassRef.ClassName = APCClassName then
     begin
       if not Assigned(R.FCardDrvInstance) then
-        R.FCardDrvInstance:=R.FClassRef.Create(AOwner);
+        R.FCardDrvInstance:=R.FClassRef.Create(nil); //AOwner);
       Result:=R.FCardDrvInstance;
       Exit;
     end;

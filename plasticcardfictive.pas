@@ -27,6 +27,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    function PayTypeMethodName(APayTypeMethod:Integer):string; override;
 
     procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); override;      //Оплата
     procedure ReportItog;override;                                     //Z отчёт
@@ -68,11 +69,22 @@ end;
 constructor TPlasticCardFictive.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  FPayTypeMethodCount:=2;
 end;
 
 destructor TPlasticCardFictive.Destroy;
 begin
   inherited Destroy;
+end;
+
+function TPlasticCardFictive.PayTypeMethodName(APayTypeMethod: Integer): string;
+begin
+  case APayTypeMethod of
+    0:Result:=sPayTypeMethodBankCard;
+    1:Result:=sPayTypeMethodQRCode;
+  else
+    Result:=sUnknowPayTypeMethod;
+  end;
 end;
 
 procedure TPlasticCardFictive.Pay(APaySum: Currency; ACheckNum: integer;
