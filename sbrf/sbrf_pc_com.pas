@@ -215,6 +215,7 @@ var
   S:string;
 begin
   FSlipInfo:=FTPK.GParamString('Cheque');
+  FRRN:='';
   FRRN:=FTPK.GParamString('RRN');
     AddToStatusVector('RRN',FRRN);
 
@@ -287,6 +288,7 @@ begin
   CoInitializeEx(nil, COINIT_MULTITHREADED);
 {$ENDIF}
   inherited Create(AOwner);
+  FRRN:='';
 end;
 
 destructor TSBPlasticCard.Destroy;
