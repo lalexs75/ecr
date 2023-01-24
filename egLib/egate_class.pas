@@ -282,7 +282,12 @@ end;
 procedure TEGComponent.Discard(ADiscardSum: Currency; ACheckNum: string;
   ADocID: string; APayTypeMethod: Integer);
 begin
-  DoExecOper('Отмена', Format('%d 2 %d %s %s', [FKassaID, trunc(ADiscardSum  * 100), ACheckNum, ADocID]));
+  case APayTypeMethod of
+    0:DoExecOper('Отмена', Format('%d 2 %d %s %s', [FKassaID, trunc(ADiscardSum  * 100), ACheckNum, ADocID]));
+    1:DoExecOper('Возврат', Format('%d 71 %d %s', [FKassaID, trunc(ADiscardSum  * 100), ACheckNum]));
+  else
+    raise Exception.Create('Не известный тип операции');
+  end;
 end;
 
 procedure TEGComponent.DiscardLastOper;
