@@ -32,7 +32,7 @@ type
     procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); override;      //Оплата
     procedure ReportItog;override;                                     //Z отчёт
     procedure EchoTest;override;                                       //Проверка
-    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer); override; //Возврат
+    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer; ADocID: string); override; //Возврат
     procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string; APayTypeMethod:Integer); override; //Отмена
     procedure ReportOperList; override;
     procedure ReportOperSmall; override;
@@ -119,7 +119,7 @@ begin
 end;
 
 procedure TPlasticCardFictive.Revert(ARevertSum: Currency; ACheckNum: string;
-  APayTypeMethod: Integer);
+  APayTypeMethod: Integer; ADocID: string);
 begin
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
   'Фиктивный терминал : XXXXXXXXX' +

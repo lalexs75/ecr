@@ -60,7 +60,7 @@ type
     destructor Destroy; override;
 
     procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); virtual; abstract;
-    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer); virtual; abstract;
+    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer; ADocID: string); virtual; abstract;
     procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string; APayTypeMethod:Integer); virtual; abstract;
 
     procedure ReportItog; virtual; abstract;

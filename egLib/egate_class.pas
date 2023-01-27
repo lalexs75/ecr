@@ -45,7 +45,8 @@ type
     destructor Destroy; override;
 
     procedure Pay(APaySum:Currency; ACheckNum:integer; APayTypeMethod:Integer); override;     //Операция № 1
-    procedure Revert(ARevertSum:Currency; ACheckNum:string; APayTypeMethod:Integer); override;       //Операция № 3
+    procedure Revert(ARevertSum: Currency; ACheckNum: string;
+      APayTypeMethod: Integer; ADocID: string); override;       //Операция № 3
     procedure Discard(ADiscardSum:Currency; ACheckNum:string; ADocID:string; APayTypeMethod:Integer); override; //Операция № 2
     procedure DiscardLastOper;
     //Отчёты
@@ -267,13 +268,13 @@ begin
 end;
 
 procedure TEGComponent.Revert(ARevertSum: Currency; ACheckNum: string;
-  APayTypeMethod: Integer);
+  APayTypeMethod: Integer; ADocID: string);
 var
   S:string;
 begin
   case APayTypeMethod of
     0:DoExecOper('Возврат', Format('%d 3 %d %s', [FKassaID, trunc(ARevertSum  * 100), ACheckNum]));
-    1:DoExecOper('Возврат', Format('%d 71 %d %s', [FKassaID, trunc(ARevertSum  * 100), ACheckNum]));
+    1:DoExecOper('Возврат', Format('%d 71 %d %s %s', [FKassaID, trunc(ARevertSum  * 100), ACheckNum]));
   else
     raise Exception.Create('Не известный тип операции');
   end;
@@ -284,7 +285,7 @@ procedure TEGComponent.Discard(ADiscardSum: Currency; ACheckNum: string;
 begin
   case APayTypeMethod of
     0:DoExecOper('Отмена', Format('%d 2 %d %s %s', [FKassaID, trunc(ADiscardSum  * 100), ACheckNum, ADocID]));
-    1:DoExecOper('Возврат', Format('%d 71 %d %s', [FKassaID, trunc(ADiscardSum  * 100), ACheckNum]));
+    1:DoExecOper('Возврат', Format('%d 71 %d %s %s', [FKassaID, trunc(ADiscardSum  * 100), ACheckNum, ADocID]));
   else
     raise Exception.Create('Не известный тип операции');
   end;
