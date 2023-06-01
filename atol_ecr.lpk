@@ -7,7 +7,7 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <OtherUnitFiles Value="atoll_v10_json"/>
+        <OtherUnitFiles Value="atoll_v10_json;shtrih_fr"/>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -42,7 +42,7 @@
   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 "/>
     <Version Major="1" Release="1" Build="5"/>
-    <Files Count="7">
+    <Files Count="8">
       <Item1>
         <Filename Value="kkm_atolpropsunit.lfm"/>
         <Type Value="LFM"/>
@@ -73,6 +73,10 @@
         <HasRegisterProc Value="True"/>
         <UnitName Value="Atollv10_JSON"/>
       </Item7>
+      <Item8>
+        <Filename Value="shtrih_fr/kkm_strih_fr.pas"/>
+        <UnitName Value="kkm_strih_fr"/>
+      </Item8>
     </Files>
     <CompatibilityMode Value="True"/>
     <LazDoc Paths="docs"/>

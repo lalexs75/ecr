@@ -9,7 +9,7 @@ interface
 
 uses
   KKM_AtolPropsUnit, KKM_Atol, CasheRegisterAbstract, AtollKKMv10, libfptr10, 
-  Atollv10_JSON, LazarusPackageIntf;
+  Atollv10_JSON, kkm_strih_fr, LazarusPackageIntf;
 
 implementation
 
