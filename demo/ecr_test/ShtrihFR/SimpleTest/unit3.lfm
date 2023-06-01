@@ -1,0 +1,157 @@
+object Form3: TForm3
+  Left = 322
+  Height = 398
+  Top = 87
+  Width = 320
+  Caption = 'Form3'
+  ClientHeight = 398
+  ClientWidth = 320
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  object Button1: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 119
+    Height = 23
+    Top = 120
+    Width = 83
+    Anchors = [akLeft]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Simple test'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Button2: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Button1
+    AnchorSideTop.Side = asrBottom
+    Left = 100
+    Height = 23
+    Top = 149
+    Width = 120
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Test with marking'
+    TabOrder = 1
+  end
+  object btnShowProps: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = btnInitKKM
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 34
+    Width = 98
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Show property'
+    OnClick = btnShowPropsClick
+    TabOrder = 2
+  end
+  object btnBeep: TButton
+    AnchorSideLeft.Control = btnShowProps
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = btnInitKKM
+    AnchorSideTop.Side = asrBottom
+    Left = 110
+    Height = 23
+    Top = 34
+    Width = 53
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Beep'
+    OnClick = btnBeepClick
+    TabOrder = 3
+  end
+  object Button5: TButton
+    Left = 8
+    Height = 25
+    Top = 112
+    Width = 75
+    BorderSpacing.Around = 6
+    Caption = 'Open day'
+    TabOrder = 4
+  end
+  object Button6: TButton
+    Left = 24
+    Height = 25
+    Top = 216
+    Width = 75
+    BorderSpacing.Around = 6
+    Caption = 'Z Report'
+    OnClick = Button6Click
+    TabOrder = 5
+  end
+  object btnInitKKM: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 5
+    Height = 23
+    Top = 5
+    Width = 70
+    AutoSize = True
+    BorderSpacing.Around = 5
+    Caption = 'Init KKM'
+    OnClick = btnInitKKMClick
+    TabOrder = 6
+  end
+  object btnDoneKKM: TButton
+    AnchorSideLeft.Control = btnInitKKM
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 80
+    Height = 23
+    Top = 5
+    Width = 79
+    AutoSize = True
+    BorderSpacing.Around = 5
+    Caption = 'Done KKM'
+    OnClick = btnDoneKKMClick
+    TabOrder = 7
+  end
+  object btnVersion: TButton
+    AnchorSideLeft.Control = btnBeep
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = btnInitKKM
+    AnchorSideTop.Side = asrBottom
+    Left = 169
+    Height = 23
+    Top = 34
+    Width = 65
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Version'
+    OnClick = btnVersionClick
+    TabOrder = 8
+  end
+  object Memo1: TMemo
+    Left = 0
+    Height = 90
+    Top = 288
+    Width = 320
+    Align = alBottom
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 9
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 20
+    Top = 378
+    Width = 320
+    Panels = <>
+  end
+  object CheckBox1: TCheckBox
+    Left = 16
+    Height = 17
+    Top = 73
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'Connect'
+    TabOrder = 11
+  end
+end

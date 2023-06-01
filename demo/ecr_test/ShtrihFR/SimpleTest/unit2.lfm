@@ -1,0 +1,110 @@
+object Form2: TForm2
+  Left = 322
+  Height = 240
+  Top = 87
+  Width = 320
+  Caption = 'Form2'
+  ClientHeight = 240
+  ClientWidth = 320
+  OnClose = FormClose
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.3.0.0'
+  object btnCreateKKM: TButton
+    Left = 16
+    Height = 23
+    Top = 16
+    Width = 124
+    AutoSize = True
+    Caption = 'Create COM object'
+    OnClick = btnCreateKKMClick
+    TabOrder = 0
+  end
+  object Edit1: TEdit
+    Left = 79
+    Height = 21
+    Top = 103
+    Width = 80
+    TabOrder = 1
+    Text = 'Edit1'
+  end
+  object btnFreeKKM: TButton
+    Left = 16
+    Height = 23
+    Top = 56
+    Width = 112
+    AutoSize = True
+    Caption = 'Free COM object'
+    OnClick = btnFreeKKMClick
+    TabOrder = 2
+  end
+  object btnShowProps: TButton
+    Left = 191
+    Height = 23
+    Top = 16
+    Width = 103
+    AutoSize = True
+    Caption = 'Show propertys'
+    OnClick = btnShowPropsClick
+    TabOrder = 3
+  end
+  object btnConnect: TButton
+    Left = 16
+    Height = 25
+    Top = 134
+    Width = 75
+    Caption = 'Connect'
+    OnClick = btnConnectClick
+    TabOrder = 4
+  end
+  object btnDiconect: TButton
+    Left = 16
+    Height = 25
+    Top = 168
+    Width = 75
+    Caption = 'Disconnect'
+    TabOrder = 5
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 20
+    Top = 220
+    Width = 320
+    Panels = <>
+  end
+  object BitBtn1: TBitBtn
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = StatusBar1
+    Left = 225
+    Height = 26
+    Top = 188
+    Width = 89
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    DefaultCaption = True
+    Kind = bkClose
+    ModalResult = 11
+    TabOrder = 7
+  end
+  object btnDriverVers: TButton
+    Left = 191
+    Height = 23
+    Top = 54
+    Width = 80
+    AutoSize = True
+    Caption = 'Driver vers'
+    OnClick = btnDriverVersClick
+    TabOrder = 8
+  end
+  object CheckBox1: TCheckBox
+    Left = 16
+    Height = 17
+    Top = 88
+    Width = 77
+    Caption = 'CheckBox1'
+    OnChange = CheckBox1Change
+    TabOrder = 9
+  end
+end

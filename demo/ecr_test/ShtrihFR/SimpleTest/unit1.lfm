@@ -1,0 +1,45 @@
+object Form1: TForm1
+  Left = 327
+  Height = 240
+  Top = 111
+  Width = 320
+  Caption = 'ШТРИХ-ФР тесты'
+  ClientHeight = 240
+  ClientWidth = 320
+  Position = poScreenCenter
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 20
+    Top = 220
+    Width = 320
+    Panels = <>
+  end
+  object Button1: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 119
+    Height = 23
+    Top = 6
+    Width = 83
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Simple test'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Button2: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Button1
+    AnchorSideTop.Side = asrBottom
+    Left = 123
+    Height = 25
+    Top = 35
+    Width = 75
+    BorderSpacing.Around = 6
+    Caption = 'Standart'
+    OnClick = Button2Click
+    TabOrder = 2
+  end
+end
