@@ -31,6 +31,7 @@
 unit CasheRegisterAbstract;
 
 {$mode objfpc}{$H+}
+{$D+}
 
 interface
 

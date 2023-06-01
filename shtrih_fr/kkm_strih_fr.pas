@@ -32,6 +32,7 @@
 unit kkm_strih_fr;
 
 {$mode objfpc}{$H+}
+{$D+}
 
 interface
 
@@ -62,18 +63,101 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
+
+    function InternalCheckError:Integer; override;
     function GetVersionString:string; override;
     procedure GetOFDStatus(out AStatus:TOFDSTatusRecord); override;
     procedure Beep; override;
-    function InternalCheckError:Integer; override;
-    function ShowProperties:boolean; override;      //Отобразить окно параметров ККМ
+    procedure CutCheck(APartial:boolean); override;
+    //procedure PrintLine(ALine:string); override;        //Печать строки
+    //procedure PrintClishe; override;
 
+    //Отперации со сменой
+    procedure OpenShift; override;                      //Открыть смену
+
+    //Внесения и выплаты
+    function CashIncome(APaymentSum:Currency):integer; override;          //Внесение денег
+    function CashOutcome(APaymentSum:Currency):integer; override;         //Выплата денег
+
+    //Операции с чеком
+    procedure OpenCheck; override;
+    //function CloseCheck:Integer; override;              //Закрыть чек (со сдачей)
+    //function CancelCheck:integer; override;             //Аннулирование всего чека
+    //function Registration:integer; override;
+    //function ReceiptTotal:integer; override;
+    //function Payment:integer; override;
+    //function RegisterGoods:Integer; override;
+    //function RegisterPayments:Integer; override;
+    //function ValidateGoodsKM:Boolean; override;
+    //
+    //procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
+    //
+    //procedure SetAttributeInt(AttribNum, AttribValue:Integer); override;
+    //procedure SetAttributeStr(AttribNum:Integer; AttribValue:string); override;
+    //procedure SetAttributeBool(AttribNum:Integer; AttribValue:Boolean); override;
+    //procedure SetAttributeDouble(AttribNum:Integer; AttribValue:Double); override;
+    //
+    //procedure BeginNonfiscalDocument; override;
+    //procedure EndNonfiscalDocument; override;
+    //function UpdateFnmKeys:Integer; override;
+
+(*
+
+
+    Общая информация
+    Настройки логирования
+    Начало работы с драйвером
+    Обработка ошибок
+    Соединение с ККТ
+    Запрос информации о ККТ
+    Регистрация кассира
+    Операции со сменой
+    Внесения и выплаты
+    Запрос информации из ФН
+    Регистрация ККТ
+    Перерегистрация ККТ
+    Замена ФН
+    Закрытие архива ФН
+    Нефискальная печать
+    Чтение данных
+    Служебные операции
+    Прочие методы
+    Программирование ККТ
+    JSON-задания
+    Приложение
+    Настройки ККТ
+    Android Service
+    Web-сервер*)
+    //Отчёты
+(*
+        Копия последнего документа
+        Отчет о состоянии расчетов
+        Печать информации о ККТ
+        Диагностика соединения с ОФД
+        Печать документа из архива ФН
+        Отчет по кассирам
+        Печать итогов регистрации / перерегистрации
+        Счетчики итогов смены
+        Счетчики итогов ФН
+        Счетчики по непереданным документам
+        Отчет по товарам по СНО
+        Отчет по товарам по отделам
+        Отчет по товарам по суммам
+        Начать служебный отчет
+*)
     procedure ReportX(AReportType: Byte); override;     //X-отчет
     procedure ReportZ; override;
     procedure PrintReportHours; override;               //Отчет по часам
     procedure PrintReportSection; override;             //Отчет по секциям
     procedure PrintReportCounted; override;             //Отчет количеств
     procedure DemoPrint; override;                      //Демо-печать
+
+    //function NonNullableSum:Currency; override;                  //Не обнуляемая сумма - приход - наличка
+
+    function ShowProperties:boolean; override;          //Отобразить окно параметров ККМ
+
+    //Вспомогательное
+    procedure OpenDrawer;
 
   end;
 
@@ -162,7 +246,44 @@ end;
 
 procedure TShtrihFRKKM.Beep;
 begin
+  FShtrihFR.Beep;
   InternalCheckError;
+end;
+
+procedure TShtrihFRKKM.CutCheck(APartial: boolean);
+begin
+  FShtrihFR.Password:=Password;
+  FShtrihFR.CutType:=APartial;
+  FShtrihFR.CutCheck;
+  InternalCheckError;
+end;
+
+procedure TShtrihFRKKM.OpenShift;
+begin
+  FShtrihFR.Password:=Password;
+  FShtrihFR.OpenSession;
+  InternalCheckError;
+end;
+
+function TShtrihFRKKM.CashIncome(APaymentSum: Currency): integer;
+begin
+  FShtrihFR.Password:=Password;
+  FShtrihFR.Summ1:=APaymentSum;
+  FShtrihFR.CashIncome;
+  InternalCheckError;
+end;
+
+function TShtrihFRKKM.CashOutcome(APaymentSum: Currency): integer;
+begin
+  FShtrihFR.Password:=Password;
+  FShtrihFR.Summ1:=APaymentSum;
+  FShtrihFR.CashOutcome;
+  InternalCheckError;
+end;
+
+procedure TShtrihFRKKM.OpenCheck;
+begin
+  inherited OpenCheck;
 end;
 
 function TShtrihFRKKM.InternalCheckError: Integer;
@@ -177,6 +298,13 @@ end;
 function TShtrihFRKKM.ShowProperties: boolean;
 begin
   FShtrihFR.ShowProperties();
+  InternalCheckError;
+end;
+
+procedure TShtrihFRKKM.OpenDrawer;
+begin
+  FShtrihFR.Password:=Password;
+  FShtrihFR.OpenDrawer;
   InternalCheckError;
 end;
 

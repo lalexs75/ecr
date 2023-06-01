@@ -152,6 +152,7 @@ object Form3: TForm3
     Width = 64
     BorderSpacing.Around = 6
     Caption = 'Connect'
+    OnChange = CheckBox1Change
     TabOrder = 11
   end
 end

@@ -32,6 +32,7 @@ type
     procedure btnInitKKMClick(Sender: TObject);
     procedure btnDoneKKMClick(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     FKKM:TShtrihFRKKM;
@@ -308,6 +309,11 @@ end;
 procedure TForm3.Button6Click(Sender: TObject);
 begin
   //
+end;
+
+procedure TForm3.CheckBox1Change(Sender: TObject);
+begin
+  UpdateUICtrlState;
 end;
 
 procedure TForm3.FormCreate(Sender: TObject);

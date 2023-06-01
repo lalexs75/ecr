@@ -49,36 +49,8 @@ end;
 end.
 {
 
-  ' Точная продажа
-  Driver.StringForPrinting = "Тестовая строка"
-  Driver.Price = 100
-  Driver.Quantity = 200
-  Driver.Department = 1
-  Driver.Tax1 = 0
-  Driver.Tax2 = 0
-  Driver.Tax3 = 0
-  Driver.Tax4 = 0
-  Driver.SaleEx()
-  ' Просто продажа
-  Driver.StringForPrinting = "Тестовая строка"
-  Driver.Price = 100
-  Driver.Quantity = 200
-  Driver.Department = 1
-  Driver.Tax1 = 0
-  Driver.Tax2 = 0
-  Driver.Tax3 = 0
-  Driver.Tax4 = 0
-  Driver.Sale() }
-{
-  R:=FShtrihFR.Beep();
-  EC:=FShtrihFR.ResultCode;
-  S:=FShtrihFR.ResultCodeDescription;
+https://infostart.ru/1c/articles/1192569/
+https://docs.google.com/document/d/1m3gHyKvM0gBMPgpzG-1cFsfVDnecouCtzQBJVDooGuM/edit#heading=h.z4tw3du13anc
+https://forum.shtrih-m-partners.ru/index.php?topic=33714.0
 
-  FShtrihFR.OpenCheck();
-  EC:=FShtrihFR.ResultCode;
-  S:=FShtrihFR.ResultCodeDescription;
-  // Обращение к свойству
-//  if R<0 then
-//  FShtrihFR.Clear;
 }
-

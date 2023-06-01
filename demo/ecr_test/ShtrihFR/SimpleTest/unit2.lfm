@@ -1,84 +1,69 @@
 object Form2: TForm2
   Left = 322
-  Height = 240
+  Height = 373
   Top = 87
-  Width = 320
+  Width = 673
   Caption = 'Form2'
-  ClientHeight = 240
-  ClientWidth = 320
+  ClientHeight = 373
+  ClientWidth = 673
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.3.0.0'
   object btnCreateKKM: TButton
-    Left = 16
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
     Height = 23
-    Top = 16
+    Top = 6
     Width = 124
     AutoSize = True
+    BorderSpacing.Around = 6
     Caption = 'Create COM object'
     OnClick = btnCreateKKMClick
     TabOrder = 0
   end
-  object Edit1: TEdit
-    Left = 79
-    Height = 21
-    Top = 103
-    Width = 80
-    TabOrder = 1
-    Text = 'Edit1'
-  end
   object btnFreeKKM: TButton
-    Left = 16
+    AnchorSideLeft.Control = btnCreateKKM
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 136
     Height = 23
-    Top = 56
+    Top = 6
     Width = 112
     AutoSize = True
+    BorderSpacing.Around = 6
     Caption = 'Free COM object'
     OnClick = btnFreeKKMClick
-    TabOrder = 2
+    TabOrder = 1
   end
   object btnShowProps: TButton
-    Left = 191
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = btnDriverVers
+    Left = 478
     Height = 23
-    Top = 16
+    Top = 6
     Width = 103
+    Anchors = [akTop, akRight]
     AutoSize = True
+    BorderSpacing.Around = 6
     Caption = 'Show propertys'
     OnClick = btnShowPropsClick
-    TabOrder = 3
-  end
-  object btnConnect: TButton
-    Left = 16
-    Height = 25
-    Top = 134
-    Width = 75
-    Caption = 'Connect'
-    OnClick = btnConnectClick
-    TabOrder = 4
-  end
-  object btnDiconect: TButton
-    Left = 16
-    Height = 25
-    Top = 168
-    Width = 75
-    Caption = 'Disconnect'
-    TabOrder = 5
+    TabOrder = 2
   end
   object StatusBar1: TStatusBar
     Left = 0
     Height = 20
-    Top = 220
-    Width = 320
+    Top = 353
+    Width = 673
     Panels = <>
   end
   object BitBtn1: TBitBtn
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = StatusBar1
-    Left = 225
+    Left = 578
     Height = 26
-    Top = 188
+    Top = 321
     Width = 89
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -86,25 +71,161 @@ object Form2: TForm2
     DefaultCaption = True
     Kind = bkClose
     ModalResult = 11
-    TabOrder = 7
+    TabOrder = 4
   end
   object btnDriverVers: TButton
-    Left = 191
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 587
     Height = 23
-    Top = 54
+    Top = 6
     Width = 80
+    Anchors = [akTop, akRight]
     AutoSize = True
+    BorderSpacing.Around = 6
     Caption = 'Driver vers'
     OnClick = btnDriverVersClick
+    TabOrder = 5
+  end
+  object cbConnect: TCheckBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = btnCreateKKM
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 35
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'Connect'
+    OnChange = cbConnectChange
+    TabOrder = 6
+  end
+  object btnBeep: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbConnect
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 58
+    Width = 53
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Beep'
+    OnClick = btnBeepClick
+    TabOrder = 7
+  end
+  object btnCutChek: TButton
+    AnchorSideLeft.Control = btnBeep
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cbConnect
+    AnchorSideTop.Side = asrBottom
+    Left = 65
+    Height = 23
+    Top = 58
+    Width = 79
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Cut check'
+    OnClick = btnCutChekClick
     TabOrder = 8
   end
-  object CheckBox1: TCheckBox
-    Left = 16
+  object cbPartialCut: TCheckBox
+    AnchorSideLeft.Control = btnCutChek
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = btnCutChek
+    AnchorSideTop.Side = asrCenter
+    Left = 150
     Height = 17
-    Top = 88
-    Width = 77
-    Caption = 'CheckBox1'
-    OnChange = CheckBox1Change
+    Top = 61
+    Width = 74
+    Caption = 'Partial cut'
+    Checked = True
+    State = cbChecked
     TabOrder = 9
+  end
+  object DividerBevel1: TDividerBevel
+    AnchorSideLeft.Control = cbConnect
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cbConnect
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 76
+    Height = 13
+    Top = 37
+    Width = 597
+    Caption = 'Srvice'
+    Anchors = [akTop, akLeft, akRight]
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object DividerBevel2: TDividerBevel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = btnBeep
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 13
+    Top = 87
+    Width = 673
+    Caption = 'Make check'
+    Anchors = [akTop, akLeft, akRight]
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object btnSimpleCheck: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = DividerBevel2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 106
+    Width = 121
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Простая продажа'
+    OnClick = btnSimpleCheckClick
+    TabOrder = 10
+  end
+  object Button1: TButton
+    Left = 6
+    Height = 23
+    Top = 144
+    Width = 92
+    AutoSize = True
+    Caption = 'Открыть чек'
+    TabOrder = 11
+  end
+  object btnCloseCheck: TButton
+    Left = 8
+    Height = 23
+    Top = 184
+    Width = 92
+    AutoSize = True
+    Caption = 'Закрыть чек'
+    OnClick = btnCloseCheckClick
+    TabOrder = 12
+  end
+  object btnCancelCheck: TButton
+    Left = 112
+    Height = 23
+    Top = 184
+    Width = 97
+    AutoSize = True
+    Caption = 'Отмена чека'
+    OnClick = btnCancelCheckClick
+    TabOrder = 13
+  end
+  object btnReportZ: TButton
+    Left = 8
+    Height = 23
+    Top = 256
+    Width = 66
+    AutoSize = True
+    Caption = 'Z отчёт'
+    OnClick = btnReportZClick
+    TabOrder = 14
   end
 end
