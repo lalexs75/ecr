@@ -402,6 +402,7 @@ type
   protected
     FDeviceState: TDeviceState;
     FLibraryFileName: string;
+    FCheckInfoLines:TStringList;
     procedure SetUserName(AValue: string); virtual;
     procedure SetPassword(AValue: string); virtual;
     procedure SetKassaUserINN(AValue: string); virtual;
@@ -440,8 +441,9 @@ type
     procedure OpenShift; virtual;                            //Открыть смену
 
     //Операции с чеком
-    procedure BeginCheck; virtual;                            //Открыть чек
-    procedure OpenCheck; virtual;                            //Открыть чек
+    procedure BeginCheck; virtual;                           //Подготовить структуры данных для заполнения информацией чека - новый стиль
+
+    procedure OpenCheck; virtual;                            //Открыть чек - для построчной печати
     function CloseCheck:Integer; virtual;                    //Закрыть чек (со сдачей)
     function CancelCheck:integer; virtual;                   //Аннулирование всего чека
     function ShowProperties:boolean; virtual; abstract;      //Отобразить окно параметров ККМ
@@ -454,9 +456,14 @@ type
     function ReceiptTotal:integer;virtual; abstract;
     function Payment:integer; virtual; abstract;
     procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); virtual; abstract; deprecated;
+
+    //Методы для формирования чека по заполненной ранее информации
+    procedure PrintCheckInfoLines;
     function RegisterGoods:Integer; virtual; abstract;
     function RegisterPayments:Integer; virtual; abstract;
     function ValidateGoodsKM:Boolean; virtual; abstract;
+    procedure PrintNonfiscalDocument(ADoc:TStrings; ACutDoc:Boolean; ASkipLine:Integer = 0); virtual;
+    procedure AddCheckInfo(AInfo:string);
 
     procedure SetAttributeInt(AttribNum, AttribValue:Integer); virtual; abstract;
     procedure SetAttributeStr(AttribNum:Integer; AttribValue:string); virtual; abstract;
@@ -908,6 +915,7 @@ end;
 constructor TCashRegisterAbstract.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  FCheckInfoLines:=TStringList.Create;
   FCounteragentInfo:=TCounteragentInfo.Create;
   FCheckInfo:=TCheckInfo.Create;
   FGoodsInfo:=TGoodsInfo.Create;
@@ -927,6 +935,7 @@ begin
   FreeAndNil(FDeviceInfo);
   FreeAndNil(FGoodsList);
   FreeAndNil(FPaymentsList);
+  FreeAndNil(FCheckInfoLines);
   inherited Destroy;
 end;
 
@@ -981,6 +990,7 @@ begin
   FAgentInfo.Clear;
   FTextParams.Clear;
   FGoodsInfo.Clear;
+  FCheckInfoLines.Clear;
 end;
 
 procedure TCashRegisterAbstract.OpenCheck;
@@ -999,6 +1009,7 @@ begin
   FTextParams.Clear;
   FGoodsList.Clear;
   FCheckType:=chtNone;
+  FCheckInfoLines.Clear;
 end;
 
 function TCashRegisterAbstract.CancelCheck: integer;
@@ -1010,6 +1021,7 @@ begin
   FAgentInfo.Clear;
   FTextParams.Clear;
   FGoodsList.Clear;
+  FCheckInfoLines.Clear;
   FCheckType:=chtNone;
 end;
 
@@ -1017,6 +1029,43 @@ function TCashRegisterAbstract.Registration: integer;
 begin
   FGoodsInfo.Clear;
   FTextParams.Clear;
+end;
+
+procedure TCashRegisterAbstract.PrintCheckInfoLines;
+var
+  S: String;
+begin
+  for S in FCheckInfoLines do
+    PrintLine(S);
+end;
+
+procedure TCashRegisterAbstract.PrintNonfiscalDocument(ADoc: TStrings;
+  ACutDoc: Boolean; ASkipLine: Integer);
+var
+  C, i: Integer;
+begin
+  if ACutDoc then
+    BeginNonfiscalDocument;
+
+  for i:=0 to ADoc.Count - 1 do
+  begin
+    PrintLine(ADoc[i]);
+    C:=ErrorCode;
+    if C <> 0 then Break;
+  end;
+  if C = 0 then
+  begin
+    PrintLine('');
+    for i:=0 to ASkipLine-1 do
+      PrintLine('');
+    if ACutDoc then
+      EndNonfiscalDocument;
+  end;
+end;
+
+procedure TCashRegisterAbstract.AddCheckInfo(AInfo: string);
+begin
+  FCheckInfoLines.Add(AInfo);
 end;
 
 procedure TCashRegisterAbstract.SetUserName(AValue: string);

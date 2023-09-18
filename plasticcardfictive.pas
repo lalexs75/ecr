@@ -93,9 +93,9 @@ begin
   //Фиктивный метод
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
   'Тип оплаты :' + IntToStr(APayTypeMethod) + LineEnding +
-  'Фиктивный терминал : XXXXXXXXX' +
-  'Адрес организации : XXXXXXXXXX' +
-  '      ОПЛАТА' +
+  'Фиктивный терминал : XXXXXXXXX' + LineEnding +
+  'Адрес организации : XXXXXXXXXX' + LineEnding +
+  '      ОПЛАТА' + LineEnding +
   'Cумма : ' +FloatToStr(APaySum)+ LineEnding +
   'Комиссия : ' + FloatToStr(RoundTo(APaySum / 100, -2))+ LineEnding +
   'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
@@ -105,9 +105,9 @@ end;
 procedure TPlasticCardFictive.ReportItog;
 begin
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
-  'Фиктивный терминал : XXXXXXXXX' +
-  'Адрес организации : XXXXXXXXXX' +
-  '      ОТЧЁТ' +
+  'Фиктивный терминал : XXXXXXXXX' + LineEnding +
+  'Адрес организации : XXXXXXXXXX' + LineEnding +
+  '      ОТЧЁТ' + LineEnding +
   'Итог : ' +FloatToStr(12312)+ LineEnding +
   'Дата отчёта ' +DateTimeToStr(Now)+ LineEnding +
   'Фиктивный СЛИП' ;
@@ -122,10 +122,10 @@ procedure TPlasticCardFictive.Revert(ARevertSum: Currency; ACheckNum: string;
   APayTypeMethod: Integer; ADocID: string);
 begin
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
-  'Фиктивный терминал : XXXXXXXXX' +
+  'Фиктивный терминал : XXXXXXXXX' + LineEnding +
   'Тип оплаты :' + IntToStr(APayTypeMethod) + LineEnding +
-  'Адрес организации : XXXXXXXXXX' +
-  '      ВОЗВРАТ' +
+  'Адрес организации : XXXXXXXXXX' + LineEnding +
+  '      ВОЗВРАТ' + LineEnding +
   'Cумма : ' +FloatToStr(ARevertSum)+ LineEnding +
   'Комиссия : ' + FloatToStr(RoundTo(ARevertSum / 100, -2))+ LineEnding +
   'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
@@ -136,10 +136,10 @@ procedure TPlasticCardFictive.Discard(ADiscardSum: Currency; ACheckNum: string;
   ADocID: string; APayTypeMethod: Integer);
 begin
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
-  'Фиктивный терминал : XXXXXXXXX' +
+  'Фиктивный терминал : XXXXXXXXX' + LineEnding +
   'Тип оплаты :' + IntToStr(APayTypeMethod) + LineEnding +
-  'Адрес организации : XXXXXXXXXX' +
-  '      ОТМЕНА' +
+  'Адрес организации : XXXXXXXXXX' + LineEnding +
+  '      ОТМЕНА' + LineEnding +
   'Cумма : ' +FloatToStr(ADiscardSum)+ LineEnding +
   'Комиссия : ' + FloatToStr(RoundTo(ADiscardSum / 100, -2))+ LineEnding +
   'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
@@ -148,12 +148,24 @@ end;
 
 procedure TPlasticCardFictive.ReportOperList;
 begin
-
+  FSlipInfo:='Фиктивный СЛИП' + LineEnding +
+  'Фиктивный терминал : XXXXXXXXX' + LineEnding +
+  'Адрес организации : XXXXXXXXXX' + LineEnding +
+  '      ОТЧЁТ ПО ОПЕРАЦИИЯМ' + LineEnding +
+  'Итог : ' +FloatToStr(12312)+ LineEnding +
+  'Дата отчёта ' +DateTimeToStr(Now)+ LineEnding +
+  'Фиктивный СЛИП' ;
 end;
 
 procedure TPlasticCardFictive.ReportOperSmall;
 begin
-
+  FSlipInfo:='Фиктивный СЛИП' + LineEnding +
+  'Фиктивный терминал : XXXXXXXXX' + LineEnding +
+  'Адрес организации : XXXXXXXXXX' + LineEnding +
+  '      ОТЧЁТ ПО ОПЕРАЦИИЯМ КРАТКО' + LineEnding +
+  'Итог : ' +FloatToStr(12312)+ LineEnding +
+  'Дата отчёта ' +DateTimeToStr(Now)+ LineEnding +
+  'Фиктивный СЛИП' ;
 end;
 
 procedure TPlasticCardFictive.PPLoadConfig;

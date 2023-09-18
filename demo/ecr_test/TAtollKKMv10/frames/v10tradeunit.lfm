@@ -3,6 +3,8 @@ inherited v10TradeFrame: Tv10TradeFrame
   Width = 1155
   ClientHeight = 553
   ClientWidth = 1155
+  DesignLeft = 425
+  DesignTop = 307
   object Button8: TButton[0]
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
@@ -14,8 +16,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     AutoSize = True
     BorderSpacing.Around = 6
     Caption = 'Регистрация'
-    OnClick = Button8Click
     TabOrder = 0
+    OnClick = Button8Click
   end
   object Label1: TLabel[1]
     AnchorSideTop.Control = Label14
@@ -578,8 +580,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     Width = 106
     BorderSpacing.Around = 6
     Caption = 'Через агента'
-    OnChange = CheckBox2Change
     TabOrder = 9
+    OnChange = CheckBox2Change
   end
   object CheckBox3: TCheckBox[17]
     AnchorSideLeft.Control = edtContragentInn1
@@ -592,8 +594,8 @@ inherited v10TradeFrame: Tv10TradeFrame
     Width = 153
     BorderSpacing.Around = 6
     Caption = 'Данные поставщика'
-    OnChange = CheckBox2Change
     TabOrder = 10
+    OnChange = CheckBox2Change
   end
   object Label14: TLabel[18]
     AnchorSideTop.Control = ComboBox1

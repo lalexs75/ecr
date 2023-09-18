@@ -130,6 +130,8 @@
       </element><element name="TOFDSTatusRecord.OfdMessageRead"><short>Флаг наличия сообщения для ОФД</short>
       </element><element name="TCashRegisterAbstract.GetOFDStatus"><short>Получить статус обмена данными с ОФД</short>
       </element>
+    <element name="TCashRegisterAbstract.GetVersionString"><short>Версия драйвера ККМ</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
