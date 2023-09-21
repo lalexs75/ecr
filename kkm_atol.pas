@@ -1,6 +1,6 @@
 { Билиотека для работы с ККМ АТОЛ
 
-  Copyright (C) 2013-2020 Лагунов Алексей alexs75@yandex.ru
+  Copyright (C) 2013-2023 Лагунов Алексей alexs75@yandex.ru
 
   This library is free software; you can redistribute it and/or modify it
   under the terms of the GNU Library General Public License as published by
