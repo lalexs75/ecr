@@ -1,0 +1,42 @@
+object kssShowPKSlipForm: TkssShowPKSlipForm
+  Left = 707
+  Height = 385
+  Top = 313
+  Width = 351
+  Caption = 'Данные СЛИП'
+  ClientHeight = 385
+  ClientWidth = 351
+  Position = poScreenCenter
+  LCLVersion = '3.99.0.0'
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 337
+    Width = 339
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 0
+    ShowButtons = [pbClose, pbHelp]
+  end
+  object Memo1: TMemo
+    Left = 0
+    Height = 331
+    Top = 0
+    Width = 351
+    Align = alClient
+    Font.Height = -13
+    Font.Name = 'Liberation Mono'
+    Font.Pitch = fpFixed
+    Lines.Strings = (
+      'Memo1'
+    )
+    ParentFont = False
+    TabOrder = 1
+  end
+end

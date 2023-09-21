@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <Package Version="5">
-    <Name Value="atol_ecr"/>
+    <Name Value="ECR_Fictive"/>
     <Type Value="RunAndDesignTime"/>
+    <AddToProjectUsesSection Value="True"/>
     <Author Value="Лагунов А.А."/>
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <OtherUnitFiles Value="atoll_v10_json;shtrih_fr"/>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+        <OtherUnitFiles Value="ecr_fictive"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
       </SearchPaths>
-      <CodeGeneration>
-        <Optimizations>
-          <OptimizationLevel Value="0"/>
-        </Optimizations>
-      </CodeGeneration>
-      <Linking>
-        <Debugging>
-          <DebugInfoType Value="dsDwarf3"/>
-        </Debugging>
-      </Linking>
+      <Other>
+        <ConfigFile>
+          <WriteConfigFilePath Value=""/>
+        </ConfigFile>
+      </Other>
     </CompilerOptions>
-    <Description Value="Билиотека для работы с ККМ АТОЛ
-
-"/>
+    <Description Value="Билиотека для работы с виртуальным ККМ"/>
     <License Value="Copyright (C) 2013-2023 Лагунов Алексей alexs75@yandex.ru
 
   This library is free software; you can redistribute it and/or modify it
@@ -51,67 +45,32 @@
   along with this library; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 "/>
-    <Version Major="1" Release="1" Build="5"/>
-    <Files Count="8">
-      <Item1>
-        <Filename Value="kkm_atolpropsunit.lfm"/>
-        <Type Value="LFM"/>
-      </Item1>
-      <Item2>
-        <Filename Value="kkm_atolpropsunit.pas"/>
-        <UnitName Value="KKM_AtolPropsUnit"/>
-      </Item2>
-      <Item3>
-        <Filename Value="kkm_atol.pas"/>
+    <Version Build="1"/>
+    <Files>
+      <Item>
+        <Filename Value="ecr_fictive/ecr_cashregisterfictiveunit.pas"/>
         <HasRegisterProc Value="True"/>
-        <UnitName Value="KKM_Atol"/>
-      </Item3>
-      <Item4>
-        <Filename Value="casheregisterabstract.pas"/>
-        <UnitName Value="CasheRegisterAbstract"/>
-      </Item4>
-      <Item5>
-        <Filename Value="atollkkmv10.pas"/>
-        <UnitName Value="AtollKKMv10"/>
-      </Item5>
-      <Item6>
-        <Filename Value="libfptr10.pas"/>
-        <UnitName Value="libfptr10"/>
-      </Item6>
-      <Item7>
-        <Filename Value="atoll_v10_json/atollv10_json.pas"/>
-        <HasRegisterProc Value="True"/>
-        <UnitName Value="Atollv10_JSON"/>
-      </Item7>
-      <Item8>
-        <Filename Value="shtrih_fr/kkm_strih_fr.pas"/>
-        <UnitName Value="kkm_strih_fr"/>
-      </Item8>
+        <UnitName Value="ecr_CashRegisterFictiveUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="ecr_fictive/ecr_showmemoinfounit.pas"/>
+        <UnitName Value="ecr_ShowMemoInfoUnit"/>
+      </Item>
     </Files>
-    <CompatibilityMode Value="True"/>
-    <LazDoc Paths="docs"/>
-    <RequiredPkgs Count="5">
-      <Item1>
-        <PackageName Value="rxnew"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="laz_synapse"/>
-      </Item2>
-      <Item3>
-        <PackageName Value="LCLBase"/>
-      </Item3>
-      <Item4>
-        <PackageName Value="LazUtils"/>
-      </Item4>
-      <Item5>
+    <RequiredPkgs>
+      <Item>
+        <PackageName Value="atol_ecr"/>
+      </Item>
+      <Item>
         <PackageName Value="FCL"/>
-      </Item5>
+      </Item>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>
     </UsageOptions>
     <PublishOptions>
       <Version Value="2"/>
+      <UseFileFilters Value="True"/>
     </PublishOptions>
   </Package>
 </CONFIG>
