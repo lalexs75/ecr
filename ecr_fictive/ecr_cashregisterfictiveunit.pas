@@ -71,8 +71,11 @@ type
     function CancelCheck:integer; override;                   //Аннулирование всего чека
     function ValidateGoodsKM:Boolean; override;
     function GetVersionString:string; override;
+
     procedure ReportZ; override;
     procedure ReportX(AReportType: Byte); override;
+    procedure PrintReportSection; override;
+
     procedure PrintLine(ALine:string);override;    //Печать строки
     procedure BeginNonfiscalDocument; override;
     procedure EndNonfiscalDocument; override;
@@ -373,6 +376,7 @@ var
 begin
   Inc(FCurCheckNum);
   S:='Z-Отчёт о закрытии смены';
+  RxWriteLog(etDebug, S);
   ShowCheckForm(Self, S);
 end;
 
@@ -386,6 +390,15 @@ begin
   else
      S:=Format('Отчёт %d', [AReportType]);
   end;
+  ShowCheckForm(Self, S);
+end;
+
+procedure TCashRegisterFictive.PrintReportSection;
+var
+  S: String;
+begin
+  S:='Отчёт по секциям';
+  RxWriteLog(etDebug, S);
   ShowCheckForm(Self, S);
 end;
 
