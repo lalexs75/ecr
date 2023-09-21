@@ -403,6 +403,7 @@ type
     FDeviceState: TDeviceState;
     FLibraryFileName: string;
     FCheckInfoLines:TStringList;
+    function GetCheckOpen: boolean; virtual; abstract;
     procedure SetUserName(AValue: string); virtual;
     procedure SetPassword(AValue: string); virtual;
     procedure SetKassaUserINN(AValue: string); virtual;
@@ -481,6 +482,7 @@ type
     function UpdateFnmKeys:Integer; virtual; abstract;
     //
     property CheckNumber:integer read GetCheckNumber;
+    property CheckOpen:boolean read GetCheckOpen;
     property FDNumber:integer read GetFDNumber;
     //property CheckMode:integer read FCheckMode write FCheckMode;
     property CheckType:TCheckType read FCheckType write SetCheckType;
@@ -519,6 +521,7 @@ function PaymentTypeStr(APaymentType:TPaymentType):string;
 procedure MakeCRPTCode(APrefix:Word; AGTIN:string; ASerial:string; var R:TCrpCodeBuffer);
 function MakeCRPTCodeStr(APrefix:Word; AGTIN:string; ASerial:string):string;
 function KMStatusEx(AStatus:DWord):string;
+function TaxTypeStr(ATaxType:TTaxType):string;
 implementation
 uses Math;
 
@@ -536,6 +539,23 @@ begin
     %00001111:Result:='[М+] Проверка КП КМ выполнена с положительным результатом, статус товара у ОИСМ корректен';
   else
     Result:=Format( 'Статус не определён: %d', [AStatus]);
+  end;
+end;
+
+function TaxTypeStr(ATaxType: TTaxType): string;
+begin
+  case ATaxType of
+    ttaxDefault:Result:='НДС по умолчанию';
+    ttaxVat18:Result:='НДС 18 %';
+    ttaxVat10:Result:='НДС 10 %';
+    ttaxVat118:Result:='НДС 18/118 %';
+    ttaxVat110:Result:='НДС 10/100 %';
+    ttaxVat0:Result:='НДС 0 %';
+    ttaxVatNO:Result:='НДС НЕТ';
+    ttaxVat20:Result:='НДС 20 %';
+    ttaxVat120:Result:='НДС 20/120 %';
+  else
+    raise Exception.CreateFmt('Не известный тип TaxType(%d)', [Ord(ATaxType)]);
   end;
 end;
 

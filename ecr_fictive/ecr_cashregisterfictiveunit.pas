@@ -10,6 +10,9 @@ uses
 const
   fcLineWidth = 60;
 
+const
+  sFictiveDriverName = 'Тестовый фиктивный драйвер ККМ - только для тестирования!';
+
 type
 
   { TCashRegisterFictive }
@@ -26,6 +29,7 @@ type
   protected
     procedure InternalUserLogin; override;
     function GetCheckNumber: integer; override;
+    function GetCheckOpen: boolean; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -50,6 +54,9 @@ type
 
 
 procedure Register;
+procedure ShowCheckForm(AEcr:TCashRegisterFictive; const AChekStr:string); overload;
+procedure ShowCheckForm(AEcr:TCashRegisterFictive; const AChekStr:string; Args:array of const); overload;
+
 implementation
 uses rxlogging, rxstrutils, LazUTF8, Forms, ecr_ShowMemoInfoUnit;
 
@@ -102,9 +109,6 @@ begin
     Result:='Прочее (' + IntToStr(Ord(AGoodsType))
   end;
 end;
-
-const
-  sFictiveDriverName = 'Тестовый фиктивный драйвер ККМ - только для тестирования!';
 
 procedure ShowCheckForm(AEcr:TCashRegisterFictive; const AChekStr:string); overload;
 var
@@ -163,6 +167,11 @@ end;
 function TCashRegisterFictive.GetCheckNumber: integer;
 begin
   Result:=FCurCheckNum;
+end;
+
+function TCashRegisterFictive.GetCheckOpen: boolean;
+begin
+  Result:=FCheckOpen;
 end;
 
 constructor TCashRegisterFictive.Create(AOwner: TComponent);
@@ -278,6 +287,8 @@ begin
 
   for GI in GoodsList do
   begin;
+    S:=S + LineEnding;
+
     if GI.GoodsNomenclatureCode.KM<>'' then
       S1:=Trim(UTF8Copy(KMStatusEx(GI.GoodsNomenclatureCode.State), 1, 4))
     else
@@ -285,6 +296,8 @@ begin
     S:=S + UTF8UpperCase(GoodsTypeStr(GI.GoodsType)) + '      ' + UTF8UpperCase(GoodsPayModeStr(GI.GoodsPayMode)) + LineEnding;
     S:=S + UTF8Copy(GI.Name, 1, fcLineWidth) + LineEnding +
       MS(' ', 10) + S1 + ' ' + FloatToStr(GI.Quantity) +' x ' + FloatToStr( GI.Price ) + ' = ' + FloatToStr(GI.Quantity * GI.Price ) + ' ' + CHR(Ord('A') + Ord(GI.TaxType)-1) + LineEnding;
+    S:=S + TaxTypeStr(GI.TaxType) + LineEnding;
+
     FSum:=FSum + GI.Quantity * GI.Price;
     //RxWriteLog(etDebug, 'Name=%s, Quantity=%f, Price=%f, TaxType=%d', [GI.Name, GI.Quantity, GI.Price, Ord(GI.TaxType)]);
 
