@@ -67,14 +67,18 @@ type
     function RegisterPayments:Integer; override;
     procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
     procedure OpenCheck; override;
-    function CloseCheck:Integer; override;                   //Закрыть чек (со сдачей)
-    function CancelCheck:integer; override;                   //Аннулирование всего чека
+    function CloseCheck:Integer; override;                 //Закрыть чек (со сдачей)
+    function CancelCheck:integer; override;                //Аннулирование всего чека
     function ValidateGoodsKM:Boolean; override;
     function GetVersionString:string; override;
 
     procedure ReportZ; override;
     procedure ReportX(AReportType: Byte); override;
     procedure PrintReportSection; override;
+    procedure PrintReportHours; override;                  //Отчет по часам
+    procedure PrintReportCounted; override;             //Отчет количеств
+    procedure DemoPrint; override;                      //Демо-печать
+
     procedure GetOFDStatus(out AStatus:TOFDSTatusRecord); override;
 
     procedure PrintLine(ALine:string);override;    //Печать строки
@@ -399,6 +403,36 @@ var
   S: String;
 begin
   S:='Отчёт по секциям';
+  RxWriteLog(etDebug, S);
+  ShowCheckForm(Self, S);
+end;
+
+procedure TCashRegisterFictive.PrintReportHours;
+var
+  S: String;
+begin
+  S:='Отчёт по часам';
+  RxWriteLog(etDebug, S);
+  ShowCheckForm(Self, S);
+end;
+
+procedure TCashRegisterFictive.PrintReportCounted;
+var
+  S: String;
+begin
+  S:='Отчёт по количествам';
+  RxWriteLog(etDebug, S);
+  ShowCheckForm(Self, S);
+end;
+
+procedure TCashRegisterFictive.DemoPrint;
+var
+  S: String;
+begin
+  S:='Demo print' + LineEnding +
+     'DEMO PRINT' + LineEnding +
+     'ТЕСТОВАЯ ПЕЧАТЬ' + LineEnding +
+     'Тестовая печать' + LineEnding;
   RxWriteLog(etDebug, S);
   ShowCheckForm(Self, S);
 end;
