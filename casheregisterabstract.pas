@@ -382,6 +382,7 @@ type
   TCashRegisterAbstract = class(TComponent)
   private
     FAgentInfo: TCounteragentInfo;
+    FCasheRegisterUUID: string;
     FCheckElectronic: boolean;
     FCheckInfo: TCheckInfo;
     FCounteragentInfo: TCounteragentInfo;
@@ -488,6 +489,7 @@ type
     property CheckType:TCheckType read FCheckType write SetCheckType;
     property CheckElectronic:boolean read FCheckElectronic write FCheckElectronic;
   public
+    property CasheRegisterUUID:string read FCasheRegisterUUID write FCasheRegisterUUID;
     property LibraryFileName:string read FLibraryFileName write FLibraryFileName;
     property Password:string read FPassword write SetPassword;
     property UserName:string read FUserName write SetUserName;
