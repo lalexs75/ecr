@@ -9,7 +9,7 @@
       <Version Value="11"/>
       <SearchPaths>
         <OtherUnitFiles Value="ecr_fictive"/>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib/ecr_fictive/$(TargetCPU)-$(TargetOS)/$(LCLWidgetType)"/>
       </SearchPaths>
       <Other>
         <ConfigFile>
@@ -45,7 +45,7 @@
   along with this library; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 "/>
-    <Version Build="1"/>
+    <Version Major="1"/>
     <Files>
       <Item>
         <Filename Value="ecr_fictive/ecr_cashregisterfictiveunit.pas"/>

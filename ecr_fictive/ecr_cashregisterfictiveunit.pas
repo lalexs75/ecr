@@ -75,6 +75,7 @@ type
     procedure ReportZ; override;
     procedure ReportX(AReportType: Byte); override;
     procedure PrintReportSection; override;
+    procedure GetOFDStatus(out AStatus:TOFDSTatusRecord); override;
 
     procedure PrintLine(ALine:string);override;    //Печать строки
     procedure BeginNonfiscalDocument; override;
@@ -400,6 +401,16 @@ begin
   S:='Отчёт по секциям';
   RxWriteLog(etDebug, S);
   ShowCheckForm(Self, S);
+end;
+
+procedure TCashRegisterFictive.GetOFDStatus(out AStatus: TOFDSTatusRecord);
+begin
+  inherited GetOFDStatus(AStatus);
+  AStatus.ExchangeStatus:=0;
+  AStatus.UnsentCount:=0;
+  AStatus.FirstUnsentNumber:=0;
+  AStatus.OfdMessageRead:=true;
+  AStatus.LastSendDocDate:=Now;
 end;
 
 procedure TCashRegisterFictive.PrintLine(ALine: string);

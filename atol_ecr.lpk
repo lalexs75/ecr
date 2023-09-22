@@ -7,8 +7,8 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <OtherUnitFiles Value="atoll_v10_json;shtrih_fr"/>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+        <OtherUnitFiles Value="atoll_v10_json;atollv5_ecr;atollv10_ecr"/>
+        <UnitOutputDirectory Value="lib/atol_ecr/$(TargetCPU)-$(TargetOS)/$(LCLWidgetType)"/>
       </SearchPaths>
       <CodeGeneration>
         <Optimizations>
@@ -51,61 +51,52 @@
   along with this library; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 "/>
-    <Version Major="1" Release="1" Build="5"/>
-    <Files Count="8">
+    <Version Major="1" Release="2" Build="5"/>
+    <Files Count="5">
       <Item1>
-        <Filename Value="kkm_atolpropsunit.lfm"/>
-        <Type Value="LFM"/>
+        <Filename Value="atollv5_ecr/kkm_atolpropsunit.pas"/>
+        <UnitName Value="KKM_AtolPropsUnit"/>
       </Item1>
       <Item2>
-        <Filename Value="kkm_atolpropsunit.pas"/>
-        <UnitName Value="KKM_AtolPropsUnit"/>
-      </Item2>
-      <Item3>
-        <Filename Value="kkm_atol.pas"/>
+        <Filename Value="atollv5_ecr/kkm_atol.pas"/>
         <HasRegisterProc Value="True"/>
         <UnitName Value="KKM_Atol"/>
+      </Item2>
+      <Item3>
+        <Filename Value="atollv10_ecr/atollkkmv10.pas"/>
+        <UnitName Value="AtollKKMv10"/>
       </Item3>
       <Item4>
-        <Filename Value="casheregisterabstract.pas"/>
-        <UnitName Value="CasheRegisterAbstract"/>
+        <Filename Value="atollv10_ecr/libfptr10.pas"/>
+        <UnitName Value="libfptr10"/>
       </Item4>
       <Item5>
-        <Filename Value="atollkkmv10.pas"/>
-        <UnitName Value="AtollKKMv10"/>
-      </Item5>
-      <Item6>
-        <Filename Value="libfptr10.pas"/>
-        <UnitName Value="libfptr10"/>
-      </Item6>
-      <Item7>
         <Filename Value="atoll_v10_json/atollv10_json.pas"/>
         <HasRegisterProc Value="True"/>
         <UnitName Value="Atollv10_JSON"/>
-      </Item7>
-      <Item8>
-        <Filename Value="shtrih_fr/kkm_strih_fr.pas"/>
-        <UnitName Value="kkm_strih_fr"/>
-      </Item8>
+      </Item5>
     </Files>
     <CompatibilityMode Value="True"/>
     <LazDoc Paths="docs"/>
-    <RequiredPkgs Count="5">
+    <RequiredPkgs Count="6">
       <Item1>
-        <PackageName Value="rxnew"/>
+        <PackageName Value="alexs_trade_abstract"/>
       </Item1>
       <Item2>
-        <PackageName Value="laz_synapse"/>
+        <PackageName Value="rxnew"/>
       </Item2>
       <Item3>
-        <PackageName Value="LCLBase"/>
+        <PackageName Value="laz_synapse"/>
       </Item3>
       <Item4>
-        <PackageName Value="LazUtils"/>
+        <PackageName Value="LCLBase"/>
       </Item4>
       <Item5>
-        <PackageName Value="FCL"/>
+        <PackageName Value="LazUtils"/>
       </Item5>
+      <Item6>
+        <PackageName Value="FCL"/>
+      </Item6>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>

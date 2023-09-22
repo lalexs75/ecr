@@ -8,7 +8,8 @@ unit alexs_trade_abstract;
 interface
 
 uses
-  alexs_plastic_cards_abstract, PlasticCardFictive, LazarusPackageIntf;
+  alexs_plastic_cards_abstract, PlasticCardFictive, CasheRegisterAbstract, 
+  LazarusPackageIntf;
 
 implementation
 

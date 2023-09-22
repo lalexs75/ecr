@@ -8,7 +8,7 @@
       <Version Value="11"/>
       <SearchPaths>
         <OtherUnitFiles Value="egLib"/>
-        <UnitOutputDirectory Value="lib/eglib/$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib/eglib/$(TargetCPU)-$(TargetOS)/$(LCLWidgetType)"/>
       </SearchPaths>
     </CompilerOptions>
     <License Value="

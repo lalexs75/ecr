@@ -6,14 +6,14 @@ object kkmAtolPropsForm: TkkmAtolPropsForm
   Caption = 'Свойства'
   ClientHeight = 181
   ClientWidth = 369
-  OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.1'
+  LCLVersion = '3.99.0.0'
+  OnCreate = FormCreate
   object Label1: TLabel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 15
+    Height = 17
     Top = 6
     Width = 31
     BorderSpacing.Around = 6
@@ -26,8 +26,8 @@ object kkmAtolPropsForm: TkkmAtolPropsForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label2
     Left = 12
-    Height = 27
-    Top = 27
+    Height = 29
+    Top = 29
     Width = 166
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -41,7 +41,7 @@ object kkmAtolPropsForm: TkkmAtolPropsForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 190
-    Height = 117
+    Height = 122
     Top = 6
     Width = 173
     Anchors = [akTop, akLeft, akRight]
@@ -57,8 +57,8 @@ object kkmAtolPropsForm: TkkmAtolPropsForm
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 100
-    ClientWidth = 169
+    ClientHeight = 104
+    ClientWidth = 171
     Columns = 2
     Items.Strings = (
       '2400'
@@ -101,14 +101,14 @@ object kkmAtolPropsForm: TkkmAtolPropsForm
     AnchorSideLeft.Control = Owner
     AnchorSideBottom.Control = ButtonPanel1
     Left = 6
-    Height = 27
-    Top = 100
-    Width = 160
+    Height = 29
+    Top = 98
+    Width = 156
     Anchors = [akLeft, akBottom]
     AutoSize = True
     BorderSpacing.Around = 6
     Caption = 'Проверить - гудок ККМ'
-    OnClick = Button1Click
     TabOrder = 3
+    OnClick = Button1Click
   end
 end

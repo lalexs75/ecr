@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <Name Value="ecr_shtrihfr"/>
+    <Type Value="RunAndDesignTime"/>
+    <Author Value="Lagunov Aleksey"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="shtrih_fr"/>
+        <UnitOutputDirectory Value="lib/shtrih_fr/$(TargetCPU)-$(TargetOS)/$(LCLWidgetType)"/>
+      </SearchPaths>
+      <Other>
+        <ConfigFile>
+          <WriteConfigFilePath Value=""/>
+        </ConfigFile>
+      </Other>
+    </CompilerOptions>
+    <Version Minor="1"/>
+    <Files>
+      <Item>
+        <Filename Value="shtrih_fr/kkm_strih_fr.pas"/>
+        <UnitName Value="kkm_strih_fr"/>
+      </Item>
+    </Files>
+    <LazDoc Paths="docs"/>
+    <RequiredPkgs>
+      <Item>
+        <PackageName Value="atol_ecr"/>
+      </Item>
+      <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

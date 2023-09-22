@@ -11,13 +11,18 @@
       <PathDelim Value="\"/>
       <SearchPaths>
         <OtherUnitFiles Value="sbrf"/>
-        <UnitOutputDirectory Value="lib\sbrf_pc\$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib\sbrf_pc\$(TargetCPU)-$(TargetOS)\$(LCLWidgetType)"/>
       </SearchPaths>
       <Linking>
         <Debugging>
           <DebugInfoType Value="dsDwarf3"/>
         </Debugging>
       </Linking>
+      <Other>
+        <ConfigFile>
+          <WriteConfigFilePath Value="$(PkgOutDir)\fpclaz.cfg"/>
+        </ConfigFile>
+      </Other>
     </CompilerOptions>
     <Version Major="1"/>
     <Files Count="4">

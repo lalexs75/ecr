@@ -10,12 +10,17 @@
       <PathDelim Value="\"/>
       <SearchPaths>
         <IncludeFiles Value="pca"/>
-        <OtherUnitFiles Value="pca"/>
-        <UnitOutputDirectory Value="lib\pca\$(TargetCPU)-$(TargetOS)"/>
+        <OtherUnitFiles Value="pca;abstract_ecr"/>
+        <UnitOutputDirectory Value="lib\pca\$(TargetCPU)-$(TargetOS)\$(LCLWidgetType)"/>
       </SearchPaths>
+      <Other>
+        <ConfigFile>
+          <WriteConfigFilePath Value="$(PkgOutDir)\fpclaz.cfg"/>
+        </ConfigFile>
+      </Other>
     </CompilerOptions>
     <License Value="LGPL2"/>
-    <Version Major="1" Release="2" Build="2"/>
+    <Version Major="1" Minor="1" Build="4"/>
     <Files>
       <Item>
         <Filename Value="pca\alexs_plastic_cards_abstract.pas"/>
@@ -25,6 +30,10 @@
         <Filename Value="plasticcardfictive.pas"/>
         <HasRegisterProc Value="True"/>
         <UnitName Value="PlasticCardFictive"/>
+      </Item>
+      <Item>
+        <Filename Value="abstract_ecr\casheregisterabstract.pas"/>
+        <UnitName Value="CasheRegisterAbstract"/>
       </Item>
     </Files>
     <LazDoc Paths="docs"/>
