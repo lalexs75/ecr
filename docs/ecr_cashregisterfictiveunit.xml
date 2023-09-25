@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="ECR_Fictive"><module name="ecr_CashRegisterFictiveUnit"><element name="TCashRegisterFictive.OrgName"><short>Наименование организации</short><descr>Отображается в чеке
+</descr>
+      </element><element name="TCashRegisterFictive.OrgINN"><short>ИНН организации</short><descr>Отображается в чеке
+</descr>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>
