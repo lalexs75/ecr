@@ -277,6 +277,14 @@
       </element><element name="libfptr_report_type.LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS"><short>Отчёт распечатывает документы из БД по диапазонам номеров ФД и номеров смен</short>
       </element><element name="libfptr_report_type.LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS"><short>Печат документов из БД по диапазону номеров смен </short>
       </element>
+    <element name="libfptr_marking_estimated_status"><short>LIBFPTR_PARAM_MARKING_CODE_STATUS</short><descr>Значения параметра LIBFPTR_PARAM_MARKING_CODE_STATUS соответствуют значениям реквизита 2003 и могут принимать следующие значения:
+</descr>
+      </element><element name="libfptr_marking_estimated_status.LIBFPTR_MES_PIECE_SOLD"><short>штучный товар, реализован;</short>
+      </element><element name="libfptr_marking_estimated_status.LIBFPTR_MES_DRY_FOR_SALE"><short>мерный товар, в стадии реализации</short>
+      </element><element name="libfptr_marking_estimated_status.LIBFPTR_MES_PIECE_RETURN"><short>штучный товар, возвращен;</short>
+      </element><element name="libfptr_marking_estimated_status.LIBFPTR_MES_DRY_RETURN"><short> часть товара, возвращена;</short>
+      </element><element name="libfptr_marking_estimated_status.LIBFPTR_MES_UNCHANGED"><short>статус товара не изменился.</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

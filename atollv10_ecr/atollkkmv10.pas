@@ -580,6 +580,11 @@ function TaxTypeToAtollTT(AValue:TTaxType):Tlibfptr_tax_type;
 function muOKEItoAtol(muCode:Integer):Tlibfptr_item_units;
 implementation
 
+procedure Register;
+begin
+  RegisterComponents('TradeEquipment',[TAtollKKMv10]);
+end;
+
 function muOKEItoAtol(muCode:Integer):Tlibfptr_item_units;
 begin
   case muCode of
