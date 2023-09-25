@@ -16,6 +16,7 @@ implementation
 procedure Register;
 begin
   RegisterUnit('KKM_Atol', @KKM_Atol.Register);
+  RegisterUnit('AtollKKMv10', @AtollKKMv10.Register);
   RegisterUnit('Atollv10_JSON', @Atollv10_JSON.Register);
 end;
 

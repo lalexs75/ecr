@@ -56,24 +56,30 @@
       <Item1>
         <Filename Value="atollv5_ecr/kkm_atolpropsunit.pas"/>
         <UnitName Value="KKM_AtolPropsUnit"/>
+        <ResourceBaseClass Value=""/>
       </Item1>
       <Item2>
         <Filename Value="atollv5_ecr/kkm_atol.pas"/>
         <HasRegisterProc Value="True"/>
         <UnitName Value="KKM_Atol"/>
+        <ResourceBaseClass Value=""/>
       </Item2>
       <Item3>
         <Filename Value="atollv10_ecr/atollkkmv10.pas"/>
+        <HasRegisterProc Value="True"/>
         <UnitName Value="AtollKKMv10"/>
+        <ResourceBaseClass Value=""/>
       </Item3>
       <Item4>
         <Filename Value="atollv10_ecr/libfptr10.pas"/>
         <UnitName Value="libfptr10"/>
+        <ResourceBaseClass Value=""/>
       </Item4>
       <Item5>
         <Filename Value="atoll_v10_json/atollv10_json.pas"/>
         <HasRegisterProc Value="True"/>
         <UnitName Value="Atollv10_JSON"/>
+        <ResourceBaseClass Value=""/>
       </Item5>
     </Files>
     <CompatibilityMode Value="True"/>

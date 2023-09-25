@@ -285,6 +285,24 @@
       </element><element name="libfptr_marking_estimated_status.LIBFPTR_MES_DRY_RETURN"><short> часть товара, возвращена;</short>
       </element><element name="libfptr_marking_estimated_status.LIBFPTR_MES_UNCHANGED"><short>статус товара не изменился.</short>
       </element>
+    <element name="libfptr_item_units"><short>Значения параметра LIBFPTR_PARAM_MEASUREMENT_UNIT соответствуют значениям реквизита 2108 и могут принимать следующие значения:</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_PIECE"><short>штука, единица;</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_GRAM"><short>грамм</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_KILOGRAM"><short>килограмм</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_TON"><short>тонна</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_CENTIMETER"><short>сантиметр</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_DECIMETER"><short>дециметр</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_METER"><short>метр</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_SQUARE_CENTIMETER"><short>квадратный сантиметр</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_SQUARE_DECIMETER"><short> квадратный дециметр;</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_SQUARE_METER"><short>квадратный метр</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_MILLILITER"><short>миллилитр</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_LITER"><short>литр</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_CUBIC_METER"><short> кубический метр;</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_KILOWATT_HOUR"><short>киловатт час;</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_GKAL"><short>гигакалория</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_DAY"><short>сутки (день);</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
