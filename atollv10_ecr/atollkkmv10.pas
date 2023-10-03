@@ -828,8 +828,11 @@ begin
     repeat
       FLibrary.GetMarkingCodeValidationStatus(Handle);
       FValidationReady:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY));
-      FValidationReady:=true;
+      //FValidationReady:=true;
+      FValidationResult := FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
     until FValidationReady;
+
+    FValidationResult := FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
 
     FLibrary.AcceptMarkingCode(Handle);
     AGI.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
@@ -1326,7 +1329,7 @@ begin
       SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(FMarkingEstimatedStatus));
   //    SetAttributeDouble(Ord(LIBFPTR_PARAM_QUANTITY), GoodsInfo.Quantity);
   //    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(FMeasurementUnit));
-      SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), WaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
+  //    SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), WaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
       SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 
       //TODO:Реализовать дробное кол-во товара
