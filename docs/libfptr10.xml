@@ -302,6 +302,27 @@
       </element><element name="libfptr_item_units.LIBFPTR_IU_KILOWATT_HOUR"><short>киловатт час;</short>
       </element><element name="libfptr_item_units.LIBFPTR_IU_GKAL"><short>гигакалория</short>
       </element><element name="libfptr_item_units.LIBFPTR_IU_DAY"><short>сутки (день);</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_HOUR"><short>час</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_MINUTE"><short>минута</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_SECOND"><short>секунда</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_KILOBYTE"><short>килобайт</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_MEGABYTE"><short>мегабайт</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_GIGABYTE"><short>гигабайт</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_TERABYTE"><short>терабайт</short>
+      </element><element name="libfptr_item_units.LIBFPTR_IU_OTHER"><short> иные единицы измерения.</short>
+      </element>
+    <element name="libfptr_marking_code_type_1_2"><short>Значения параметра LIBFPTR_PARAM_MARKING_CODE_TYPE соответствуют значениям реквизита 2100 и могут принимать следующие значения:</short>
+      </element><element name="Tlibfptr_marking_code_type_1_2"><short>Значения параметра LIBFPTR_PARAM_MARKING_CODE_TYPE соответствуют значениям реквизита 2100 и могут принимать следующие значения:</short>
+      </element><element name="libfptr_marking_code_type_1_2.LIBFPTR_MCT12_AUTO"><short>определить автоматически</short>
+      </element><element name="libfptr_marking_code_type_1_2.LIBFPTR_MCT12_UNKNOWN"><short>неопознанный КМ, тип кода маркировки не идентифицирован</short><descr>код маркировки отсутствует, не может быть прочитан или может быть прочитан, но не может быть распознан
+</descr>
+      </element><element name="libfptr_marking_code_type_1_2.LIBFPTR_MCT12_SHORT"><short>короткий КМ;</short>
+      </element><element name="libfptr_marking_code_type_1_2.LIBFPTR_MCT12_88_CHECK"><short>КМ со значением кода проверки длиной 88 символов, подлежащим проверке в ФН;</short>
+      </element><element name="libfptr_marking_code_type_1_2.LIBFPTR_MCT12_44_NO_CHECK"><short>КМ со значением кода проверки длиной 44 символа, не подлежащим проверке в ФН;</short>
+      </element><element name="libfptr_marking_code_type_1_2.LIBFPTR_MCT12_44_CHECK"><short>КМ со значением кода проверки длиной 44 символа, подлежащим проверке в ФН;</short>
+      </element><element name="libfptr_marking_code_type_1_2.LIBFPTR_MCT12_4_NO_CHECK"><short>КМ со значением кода проверки длиной 4 символа, не подлежащим проверке в ФН.</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_MARKING_CODE_STATUS"><short>Планируемый статус КМ (тег 2003)</short>
+      </element><element name="libfptr_param.LIBFPTR_PARAM_MARKING_PROCESSING_MODE"><short>Режим обработки кода товара (тег 2102)</short>
       </element>
     </module>
   </package>
