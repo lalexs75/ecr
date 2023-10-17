@@ -54,12 +54,19 @@ type
     FCheckMemo:TStringList;
     FOrgINN: string;
     FOrgName: string;
+    FConnected:Boolean;
     procedure SetOrgINN(AValue: string);
     procedure SetOrgName(AValue: string);
+    procedure DoCheckConnected;
   protected
     procedure InternalUserLogin; override;
     function GetCheckNumber: integer; override;
     function GetCheckOpen: boolean; override;
+    function GetConnected: boolean; override;
+    procedure SetConnected(AValue: boolean); override;
+    procedure InternalOpenKKM; override;
+    procedure InternalCloseKKM; override;
+    function GetFDNumber: integer; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -71,6 +78,7 @@ type
     function CancelCheck:integer; override;                //Аннулирование всего чека
     function ValidateGoodsKM:Boolean; override;
     function GetVersionString:string; override;
+    function InternalCheckError:Integer; override;
 
     procedure ReportZ; override;
     procedure ReportX(AReportType: Byte); override;
@@ -191,6 +199,12 @@ begin
   FOrgName:=AValue;
 end;
 
+procedure TCashRegisterFictive.DoCheckConnected;
+begin
+  if not FConnected then
+    raise Exception.Create('CashRegisterFictive disconnected');
+end;
+
 procedure TCashRegisterFictive.SetOrgINN(AValue: string);
 begin
   if FOrgINN=AValue then Exit;
@@ -210,6 +224,44 @@ end;
 function TCashRegisterFictive.GetCheckOpen: boolean;
 begin
   Result:=FCheckOpen;
+end;
+
+function TCashRegisterFictive.GetConnected: boolean;
+begin
+  Result:=FConnected;
+end;
+
+procedure TCashRegisterFictive.SetConnected(AValue: boolean);
+begin
+  if AValue then
+  begin
+    if FConnected then
+      raise Exception.Create('CashRegisterFictive already connected')
+    else
+      FConnected:=true;
+  end
+  else
+  begin
+    if not FConnected then
+      raise Exception.Create('CashRegisterFictive already disconnected')
+    else
+      FConnected:=false;
+  end;
+end;
+
+procedure TCashRegisterFictive.InternalOpenKKM;
+begin
+  RxWriteLog(etDebug, 'InternalOpenKKM');
+end;
+
+procedure TCashRegisterFictive.InternalCloseKKM;
+begin
+  RxWriteLog(etDebug, 'InternalCloseKKM');
+end;
+
+function TCashRegisterFictive.GetFDNumber: integer;
+begin
+  Result:=FCurCheckNum;
 end;
 
 constructor TCashRegisterFictive.Create(AOwner: TComponent);
@@ -233,6 +285,8 @@ function TCashRegisterFictive.RegisterGoods: Integer;
 var
   GI: TGoodsInfo;
 begin
+  Result:=0;
+  DoCheckConnected;
   for GI in GoodsList do
   begin;
     RxWriteLog(etDebug, 'Name=%s, Quantity=%f, Price=%f, TaxType=%d', [GI.Name, GI.Quantity, GI.Price, Ord(GI.TaxType)]);
@@ -247,6 +301,7 @@ var
   FPayInfo: TPaymentInfo;
 begin
   Result:=0;
+  DoCheckConnected;
   for FPayInfo in PaymentsList do
   begin
     RegisterPayment(FPayInfo.PaymentType, FPayInfo.PaymentSum);
@@ -259,6 +314,7 @@ function TCashRegisterFictive.ValidateGoodsKM: Boolean;
 var
   GI: TGoodsInfo;
 begin
+  DoCheckConnected;
   Result:=True;
   for GI in GoodsList do
   begin
@@ -272,11 +328,12 @@ end;
 procedure TCashRegisterFictive.RegisterPayment(APaymentType: TPaymentType;
   APaymentSum: Currency);
 begin
-  //
+  DoCheckConnected;
 end;
 
 procedure TCashRegisterFictive.OpenCheck;
 begin
+  DoCheckConnected;
   if FCheckOpen then
     raise Exception.Create('Чек уже открыт');
 
@@ -301,6 +358,7 @@ var
   FPayInfo: TPaymentInfo;
   FSum: Extended;
 begin
+  DoCheckConnected;
   if not FCheckOpen then
     raise Exception.Create('Чек не открыт');
 
@@ -361,6 +419,7 @@ function TCashRegisterFictive.CancelCheck: integer;
 var
   S: String;
 begin
+  DoCheckConnected;
   if not FCheckOpen then
     raise Exception.Create('Чек не открыт');
   S:='Чек отменён';
@@ -375,10 +434,17 @@ begin
   Result:='Фиктивный драйвер 1.0';
 end;
 
+function TCashRegisterFictive.InternalCheckError: Integer;
+begin
+  RxWriteLog(etDebug, 'Test error code');
+  ClearError;
+end;
+
 procedure TCashRegisterFictive.ReportZ;
 var
   S: String;
 begin
+  DoCheckConnected;
   Inc(FCurCheckNum);
   S:='Z-Отчёт о закрытии смены';
   RxWriteLog(etDebug, S);
@@ -389,6 +455,7 @@ procedure TCashRegisterFictive.ReportX(AReportType: Byte);
 var
   S: String;
 begin
+  DoCheckConnected;
   Inc(FCurCheckNum);
   case AReportType of
      2:S:='X-Отчёт о закрытии смены';
@@ -402,6 +469,7 @@ procedure TCashRegisterFictive.PrintReportSection;
 var
   S: String;
 begin
+  DoCheckConnected;
   S:='Отчёт по секциям';
   RxWriteLog(etDebug, S);
   ShowCheckForm(Self, S);
@@ -411,6 +479,7 @@ procedure TCashRegisterFictive.PrintReportHours;
 var
   S: String;
 begin
+  DoCheckConnected;
   S:='Отчёт по часам';
   RxWriteLog(etDebug, S);
   ShowCheckForm(Self, S);
@@ -420,6 +489,7 @@ procedure TCashRegisterFictive.PrintReportCounted;
 var
   S: String;
 begin
+  DoCheckConnected;
   S:='Отчёт по количествам';
   RxWriteLog(etDebug, S);
   ShowCheckForm(Self, S);
@@ -429,6 +499,7 @@ procedure TCashRegisterFictive.DemoPrint;
 var
   S: String;
 begin
+  DoCheckConnected;
   S:='Demo print' + LineEnding +
      'DEMO PRINT' + LineEnding +
      'ТЕСТОВАЯ ПЕЧАТЬ' + LineEnding +
@@ -439,6 +510,7 @@ end;
 
 procedure TCashRegisterFictive.GetOFDStatus(out AStatus: TOFDSTatusRecord);
 begin
+  DoCheckConnected;
   inherited GetOFDStatus(AStatus);
   AStatus.ExchangeStatus:=0;
   AStatus.UnsentCount:=0;
@@ -449,18 +521,21 @@ end;
 
 procedure TCashRegisterFictive.PrintLine(ALine: string);
 begin
+  DoCheckConnected;
   FCheckMemo.Add(ALine);
   RxWriteLog(etDebug, 'TCashRegisterFictive.PrintLine: %s', [ALine]);
 end;
 
 procedure TCashRegisterFictive.BeginNonfiscalDocument;
 begin
+  DoCheckConnected;
   RxWriteLog(etDebug, 'TCashRegisterFictive.BeginNonfiscalDocument');
   FCheckMemo.Add('====  BEGIN NONFISCAL DOCUMENT  ====');
 end;
 
 procedure TCashRegisterFictive.EndNonfiscalDocument;
 begin
+  DoCheckConnected;
   RxWriteLog(etDebug, 'TCashRegisterFictive.EndNonfiscalDocument');
   FCheckMemo.Add('====  END NONFISCAL DOCUMENT  ====');
 end;
@@ -468,6 +543,7 @@ end;
 procedure TCashRegisterFictive.PrintNonfiscalDocument(ADoc: TStrings;
   ACutDoc: Boolean; ASkipLine: Integer);
 begin
+  DoCheckConnected;
   inherited PrintNonfiscalDocument(ADoc, ACutDoc);
   ShowCheckForm(Self, FCheckMemo.Text);
   FCheckOpen:=false;
