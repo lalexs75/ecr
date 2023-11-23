@@ -879,7 +879,8 @@ begin
 *)
   if AGI.GoodsNomenclatureCode.KM <> '' then
   begin
-    SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
+    //SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
+    SetAttributeInt( 2108 {Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT)}, Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
     //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY, L"1/2");
     SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), AGI.GoodsNomenclatureCode.KM);
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(LIBFPTR_MES_PIECE_SOLD)); //TODO:Добавить продажи/возврат
