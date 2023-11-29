@@ -802,15 +802,14 @@ var
   FMeasurementUnit: Tlibfptr_item_units;
   FMarkingEstimatedStatus: libfptr_marking_estimated_status;
 begin
+  FMeasurementUnit:=muOKEItoAtol(AGI.GoodsMeasurementUnit);
+
   if (AGI.GoodsNomenclatureCode.KM <> '') and (AGI.GoodsNomenclatureCode.State = 0) then
   begin
     if CheckType = chtSell then
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_SOLD
     else
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_RETURN; //chtSellReturn
-
-
-    FMeasurementUnit:=muOKEItoAtol(AGI.GoodsMeasurementUnit);
 
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
     SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), AGI.GoodsNomenclatureCode.KM);
