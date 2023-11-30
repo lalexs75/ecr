@@ -614,7 +614,8 @@ begin
     muTERABYTE:Result:=LIBFPTR_IU_TERABYTE;//Терабайт
   else
     //LIBFPTR_IU_OTHER = 255
-    Result:=LIBFPTR_IU_PIECE;
+    //Result:=LIBFPTR_IU_PIECE;
+    Result:=LIBFPTR_IU_OTHER;
   end;
 end;
 
@@ -836,7 +837,9 @@ begin
     FLibrary.AcceptMarkingCode(Handle);
     AGI.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
     InternalCheckError;
-  end;
+  end
+  else
+  ;
 
   //Обработаем данные поставщика
   if (AGI.SuplierInfo.Name <> '') and (AGI.SuplierInfo.INN<>'') then
@@ -866,27 +869,22 @@ begin
 
   if (AGI.DeclarationNumber<> '') then
     SetAttributeStr(1231, AGI.DeclarationNumber);
-(*
-  if AGI.GoodsNomenclatureCode.GroupCode <> 0 then
-    FLibrary.SetParamByteArray(FHandle, 1162, AGI.GoodsNomenclatureCode.Make1162Value)
-  else
-  begin
-    SetLength(FMark, 2);
-    FillByte(FMark[0], 2, 0);
-    FLibrary.SetParamByteArray(FHandle, 1162, FMark)
-  end;
-*)
+
+
   if AGI.GoodsNomenclatureCode.KM <> '' then
   begin
     //SetAttributeInt(Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT), Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
+    SetAttributeInt( 2108 {Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT)}, Ord(LIBFPTR_IU_PIECE));   //TODO:Добавить разные единицы измерения
+
     //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY, L"1/2");
     SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), AGI.GoodsNomenclatureCode.KM);
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(LIBFPTR_MES_PIECE_SOLD)); //TODO:Добавить продажи/возврат
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT), AGI.GoodsNomenclatureCode.State);
-  end;
+  end
+  else
+    SetAttributeInt( 2108 {Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT)}, Ord(FMeasurementUnit));   //TODO:Добавить разные единицы измерения
 
-  SetAttributeInt( 2108 {Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT)}, Ord(FMeasurementUnit));   //TODO:Добавить разные единицы измерения
 
   case AGI.GoodsPayMode of
     //gpmFullPay:SetAttributeInt(1214, 0);
