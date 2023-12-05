@@ -106,6 +106,40 @@ procedure ShowCheckForm(AEcr:TCashRegisterFictive; const AChekStr:string; Args:a
 implementation
 uses rxlogging, rxstrutils, LazUTF8, Forms, ecr_ShowMemoInfoUnit;
 
+function muOKEItoStr(muCode:Integer):string;
+begin
+  case muCode of
+    muPIECE:Result:='шт';         //шт
+    muGRAM:Result:='г';           //Грамм
+    muKILOGRAM:Result:='кг';      //Килограмм
+    muTON:Result:='т';            //Тонна
+    muCENTIMETER:Result:='см';    //Сантиметр
+    muDECIMETER:Result:='дм';     //Дециметр
+    muMETER:Result:='м';          //Метр
+    muSQUARE_CENTIMETER:Result:='кв.см'; //Квадратный сантиметр
+    muSQUARE_DECIMETER:Result:='кв.дм';  //Квадратный дециметр
+    muSQUARE_METER:Result:='кв.м';       //Квадратный метр
+    muMILLILITER:Result:='мл';           //Кубический сантиметр; миллилитр
+    muLITER:Result:='л';                 //Литр; кубический дециметр
+    muCUBIC_METER:Result:='м3';      //Кубический метр
+    muKILOWATT_HOUR:Result:='кВт*ч'; //Киловатт-час
+    muGKAL:Result:='Гкал';           //Гигакалория
+    muDAY:Result:='сут';             //Сутки
+    muHOUR:Result:='ч';              //Час
+    muMINUTE:Result:='мин';          //Минута
+    muSECOND:Result:='с';            //Секунда
+    muKILOBYTE:Result:='кбайт';      //Килобайт
+    muMEGABYTE:Result:='Мбайт';      //Мегабайт
+    muGIGABYTE:Result:='Гбайт';      //Гигабайт
+    muTERABYTE:Result:='Тбайт';      //Терабайт
+  else
+    //LIBFPTR_IU_OTHER = 255
+    //Result:=LIBFPTR_IU_PIECE;
+    Result:='ДРУГОЕ';
+  end;
+end;
+
+
 function GoodsPayModeStr(AGoodsPayMode:TGoodsPayMode):string;
 begin
   case AGoodsPayMode of
@@ -289,7 +323,7 @@ begin
   DoCheckConnected;
   for GI in GoodsList do
   begin;
-    RxWriteLog(etDebug, 'Name=%s, Quantity=%f, Price=%f, TaxType=%d', [GI.Name, GI.Quantity, GI.Price, Ord(GI.TaxType)]);
+    RxWriteLog(etDebug, 'Name=%s, Quantity=%f, Price=%f, TaxType=%d, GoodsMeasurementUnit=%d', [GI.Name, GI.Quantity, GI.Price, Ord(GI.TaxType), GI.GoodsMeasurementUnit]);
 
     //GI.GoodsPayMode:=gpmAvance;
     //GI.GoodsType:=gtCommodity;
@@ -391,7 +425,8 @@ begin
       S1:='';
     S:=S + UTF8UpperCase(GoodsTypeStr(GI.GoodsType)) + '      ' + UTF8UpperCase(GoodsPayModeStr(GI.GoodsPayMode)) + LineEnding;
     S:=S + UTF8Copy(GI.Name, 1, fcLineWidth) + LineEnding +
-      MS(' ', 10) + S1 + ' ' + FloatToStr(GI.Quantity) +' x ' + FloatToStr( GI.Price ) + ' = ' + FloatToStr(GI.Quantity * GI.Price ) + ' ' + CHR(Ord('A') + Ord(GI.TaxType)-1) + LineEnding;
+      MS(' ', 10) + muOKEItoStr( GI.GoodsMeasurementUnit) + ' ' +
+       S1 + ' ' + FloatToStr(GI.Quantity) +' x ' + FloatToStr( GI.Price ) + ' = ' + FloatToStr(GI.Quantity * GI.Price ) + ' ' + CHR(Ord('A') + Ord(GI.TaxType)-1) + LineEnding;
     S:=S + TaxTypeStr(GI.TaxType) + LineEnding;
 
     FSum:=FSum + GI.Quantity * GI.Price;
