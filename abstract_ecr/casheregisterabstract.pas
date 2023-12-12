@@ -164,6 +164,7 @@ type
     FGroupCode: word;
     FGTIN: string;
     FKM: String;
+    FMarkingID: Integer;
     FSerial: string;
     FState: DWord;
   public
@@ -174,6 +175,8 @@ type
     property Serial:string read FSerial write FSerial;
     property KM:String read FKM write FKM;
     property State:DWord read FState write FState;
+    //for internal use
+    property MarkingID:Integer read FMarkingID write FMarkingID;
   end;
 
   { TTextParams }
@@ -272,9 +275,11 @@ type
     FCountryCode: Integer;
     FDeclarationNumber: String;
     FGoodsArticle: string;
+    FGoodsID: integer;
     FGoodsMeasurementUnit: Integer;
     FGoodsNomenclatureCode: TGoodsNomenclatureCode;
     FGoodsPayMode: TGoodsPayMode;
+    FGoodsRowType: integer;
     FGoodsType: TGoodsType;
     FName: string;
     FPrice: Currency;
@@ -297,6 +302,9 @@ type
     property GoodsType:TGoodsType read FGoodsType write FGoodsType;
     property GoodsMeasurementUnit:Integer read FGoodsMeasurementUnit write FGoodsMeasurementUnit;
     property GoodsArticle:string read FGoodsArticle write FGoodsArticle;
+    //for internal use
+    property GoodsID:integer read FGoodsID write FGoodsID;
+    property GoodsRowType:integer read FGoodsRowType write FGoodsRowType;
   end;
 
   { TGoodsList }
