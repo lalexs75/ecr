@@ -455,6 +455,7 @@ type
     function InternalRegistration1_05:integer;
     function InternalRegistration1_2(AGI:TGoodsInfo):integer;
     function InternalRegisterBuyer1_2:integer;
+    procedure InternalSetCorrectionInfo;
   protected
     procedure InternalUserLogin; override;
     procedure InternalOpenKKM; override;
@@ -920,6 +921,42 @@ begin
   FLibrary.SetParamByteArray(FHandle, 1256, FBuyerInf);
 end;
 
+procedure TAtollKKMv10.InternalSetCorrectionInfo;
+var
+  FCorrectionInfoBytes: TBytes;
+begin
+  if CorrectionInfo.CorrectionType = ectNone then
+    raise Exception.Create('Unknow correction type');
+
+  if (CorrectionInfo.CorrectionType = ectInstruction) and (CorrectionInfo.CorrectionBaseNumber = '') then
+    raise Exception.Create('"CorrectionBaseNumber" not defined');
+
+  //libfptr_set_param_datetime(fptr, 1178, 2018, 1, 2, 0, 0, 0);
+  FLibrary.SetParamDateTime(FHandle, 1178, CorrectionInfo.CorrectionDate);
+  //libfptr_set_param_str(fptr, 1179, L"№1234");
+  if (CorrectionInfo.CorrectionBaseNumber <> '') and (CorrectionInfo.CorrectionType = ectInstruction) then
+    FLibrary.SetParamStr(FHandle, 1179, CorrectionInfo.CorrectionBaseNumber);
+  //libfptr_util_form_tlv(fptr);
+  FLibrary.UtilFormTLV(FHandle);
+
+  //std::vector<uchar> correctionInfo(128);
+  //int size = libfptr_get_param_bytearray(fptr, LIBFPTR_PARAM_TAG_VALUE, &correctionInfo[0], correctionInfo.size());
+  //if (size > correctionInfo.size())
+  //  {
+  //      correctionInfo.resize(size);
+  //      libfptr_get_param_bytearray(fptr, LIBFPTR_PARAM_TAG_VALUE, &correctionInfo[0], correctionInfo.size());
+  //  }
+  //correctionInfo.resize(size);
+  FCorrectionInfoBytes:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
+  //libfptr_set_param_int(fptr, LIBFPTR_PARAM_RECEIPT_TYPE, LIBFPTR_RT_SELL_CORRECTION);
+  //FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_RECEIPT_TYPE, ) //Это выше по уровню
+
+  //libfptr_set_param_int(fptr, 1173, 1);
+  SetAttributeInt(1173, Ord(CorrectionInfo.CorrectionType)-1);
+  //libfptr_set_param_bytearray(fptr, 1174, &correctionInfo[0], correctionInfo.size());
+  FLibrary.SetParamByteArray(FHandle, 1174, FCorrectionInfoBytes);
+end;
+
 procedure TAtollKKMv10.InternalGetDeviceInfo(var ALineLength,
   ALineLengthPix: integer);
 begin
@@ -1233,6 +1270,10 @@ begin
 
     if CheckInfo.Electronically then
       FLibrary.SetParamBool(FHandle, LIBFPTR_PARAM_RECEIPT_ELECTRONICALLY, CheckInfo.Electronically);
+
+
+    if CheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
+      InternalSetCorrectionInfo;
 
     FLibrary.OpenReceipt(FHandle);
     InternalCheckError;

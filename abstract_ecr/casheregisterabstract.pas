@@ -187,7 +187,7 @@ type
     FState: DWord;
   public
     procedure Clear;
-    procedure Assign(ASource:TCorrectionInfo);
+    procedure Assign(ASource:TGoodsNomenclatureCode);
     function Make1162Value:TBytes;
     property GroupCode:word read FGroupCode write FGroupCode;
     property GTIN:string read FGTIN write FGTIN;
@@ -842,6 +842,21 @@ begin
   FSerial:='';
   KM:='';
   State:=0;
+end;
+
+procedure TGoodsNomenclatureCode.Assign(ASource: TGoodsNomenclatureCode);
+begin
+  if Assigned(ASource) then
+  begin
+    FGroupCode:=ASource.FGroupCode;
+    FGTIN:=ASource.FGTIN;
+    FSerial:=ASource.FSerial;
+    FKM:=ASource.FKM;
+    FState:=ASource.FState;
+    FMarkingID:=ASource.FMarkingID;
+  end
+  else
+    Clear;
 end;
 
 function TGoodsNomenclatureCode.Make1162Value: TBytes;
