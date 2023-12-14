@@ -25,7 +25,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
   ExtCtrls, Spin, DB, libfptr10, AtollKKMv10, KKM_Atol, CasheRegisterAbstract,
-  rxdbgrid, rxmemds, rxcurredit, tv10globalunit, Types;
+  ecr_CashRegisterFictiveUnit, rxdbgrid, rxmemds, rxcurredit, tv10globalunit,
+  Types;
 
 type
 
@@ -33,6 +34,7 @@ type
 
   TMainForm = class(TForm)
     Button1: TButton;
+    CashRegisterFictive1: TCashRegisterFictive;
     CheckBox1: TCheckBox;
     Memo1: TMemo;
     Panel1: TPanel;
@@ -162,8 +164,7 @@ begin
   {$IFDEF CPU386}
   Result:=Result + AppendPathDelim('linux-x86');
   {$ENDIF}
-  Result:={Result} '/home/alexs/install/install/atol/v10/10.9.0.0/10.9.0.0/linux-x64/'+ slibFPPtr10FileName;
-  //Result:={Result} '/home/alexs/install/install/atol/v10/10.8.1.0/linux-x64/'+ slibFPPtr10FileName;
+  Result:='/home/alexs/install/install/atol/v10/10.9.2.3/linux-x64/'+ slibFPPtr10FileName;
   {$ENDIF}
 end;
 
@@ -260,7 +261,7 @@ begin
   else
   begin
     FAtollKKMv10.Close;
-    FAtollKKMv10.Connected:=true;
+    FAtollKKMv10.Connected:=false;
   end;
 
   UpdateCtrlState;

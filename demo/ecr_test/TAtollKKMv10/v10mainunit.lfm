@@ -6,8 +6,8 @@ object MainForm: TMainForm
   Caption = 'Тесты 10 версии ATOL'
   ClientHeight = 810
   ClientWidth = 1460
+  LCLVersion = '3.99.0.0'
   OnCreate = FormCreate
-  LCLVersion = '2.3.0.0'
   object Memo1: TMemo
     Left = 0
     Height = 186
@@ -65,8 +65,8 @@ object MainForm: TMainForm
       AutoSize = True
       BorderSpacing.Around = 6
       Caption = 'Свойства'
-      OnClick = Button1Click
       TabOrder = 0
+      OnClick = Button1Click
     end
     object CheckBox1: TCheckBox
       AnchorSideLeft.Control = Panel2
@@ -77,8 +77,8 @@ object MainForm: TMainForm
       Width = 89
       BorderSpacing.Around = 6
       Caption = 'Включено'
-      OnChange = CheckBox1Change
       TabOrder = 1
+      OnChange = CheckBox1Change
     end
   end
   object Splitter2: TSplitter
@@ -103,5 +103,9 @@ object MainForm: TMainForm
     Width = 1460
     Align = alBottom
     ResizeAnchor = akBottom
+  end
+  object CashRegisterFictive1: TCashRegisterFictive
+    Left = 1216
+    Top = 16
   end
 end

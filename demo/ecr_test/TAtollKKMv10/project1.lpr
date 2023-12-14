@@ -28,8 +28,8 @@ uses
   Forms,
   rxlogging,
   lazcontrols,
-  ssl_openssl,
-  ssl_openssl_lib,
+  ssl_openssl3,
+  ssl_openssl3_lib, ecr_fictive,
 
   v10MainUnit,
   tv10globalunit,
@@ -43,7 +43,9 @@ uses
   v10OrgParamsUnit,
   v10MarkingUnit,
   v10RegisterCheckFFD1_2Unit,
-  v10RegisterCheckCmpUnit, v10OFDUnit;
+  v10RegisterCheckCmpUnit,
+  v10OFDUnit,
+  clocale;
 
 {$R *.res}
 

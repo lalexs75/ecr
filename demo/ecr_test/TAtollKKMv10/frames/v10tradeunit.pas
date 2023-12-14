@@ -23,8 +23,9 @@ unit v10tradeunit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, rxmemds,
-  RxDBGrid, DB, tv10globalunit, AtollKKMv10;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
+  EditBtn, rxmemds, CasheRegisterAbstract, RxDBGrid, DB, tv10globalunit,
+  AtollKKMv10;
 
 type
 
@@ -36,8 +37,11 @@ type
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    DateEdit1: TDateEdit;
     dsGoods: TDataSource;
     dsPays: TDataSource;
+    Edit1: TEdit;
     edtContragentInn: TEdit;
     edtContragentInn1: TEdit;
     edtContragentName: TEdit;
@@ -52,6 +56,7 @@ type
     edtSuplierPhone: TEdit;
     Label1: TLabel;
     Label10: TLabel;
+    Label11: TLabel;
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
@@ -63,9 +68,13 @@ type
     Label21: TLabel;
     Label22: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    Label8: TLabel;
     Label9: TLabel;
+    PageControl1: TPageControl;
     RxDBGrid1: TRxDBGrid;
     RxDBGrid2: TRxDBGrid;
     rxGoods: TRxMemoryData;
@@ -84,18 +93,23 @@ type
     rxPaysPaySum: TCurrencyField;
     rxPaysPayType: TLongintField;
     rxPaysPayTypeName: TStringField;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TimeEdit1: TTimeEdit;
     procedure Button8Click(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
     procedure rxGoodsBeforePost(DataSet: TDataSet);
   private
     procedure InitGoodsDataSet;
+    function InternalCheckType:TCheckType;
   public
     procedure InitData(AKKM:TAtollKKMv10); override;
     procedure UpdateCtrlState; override;
   end;
 
 implementation
-uses rxlogging, CasheRegisterAbstract;
+uses rxlogging;
 
 {$R *.lfm}
 
@@ -115,7 +129,13 @@ begin
   end;
 
   FKKM.BeginCheck;
-  FKKM.CheckType:=TCheckType(ComboBox1.ItemIndex+1); //chtSell;
+  FKKM.CheckType:=InternalCheckType;
+
+  if InternalCheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
+  begin
+    FKKM.CorrectionInfo;
+  end;
+
   //Определим параметры покупателя
   FKKM.CounteragentInfo.Name:=edtContragentName.Text;
   FKKM.CounteragentInfo.INN:=edtContragentInn.Text;
@@ -221,6 +241,11 @@ begin
   rxPays.Post;
 end;
 
+function Tv10TradeFrame.InternalCheckType: TCheckType;
+begin
+  Result:=TCheckType(ComboBox1.ItemIndex+1); //chtSell;;
+end;
+
 procedure Tv10TradeFrame.InitData(AKKM: TAtollKKMv10);
 var
   C: TCheckType;
@@ -268,6 +293,16 @@ begin
   edtSuplierInn.Enabled:=CheckBox3.Checked and FKKM.Connected;
   edtSuplierPhone.Enabled:=CheckBox3.Checked and FKKM.Connected;
   edtSuplierEmail.Enabled:=CheckBox3.Checked and FKKM.Connected;
+
+  Label4.Enabled:=InternalCheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection];
+  Label5.Enabled:=Label4.Enabled;
+  Label8.Enabled:=Label4.Enabled;
+  Label11.Enabled:=Label4.Enabled;
+  DateEdit1.Enabled:=Label4.Enabled;
+  Edit1.Enabled:=Label4.Enabled;
+  TimeEdit1.Enabled:=Label4.Enabled;
+  ComboBox2.Enabled:=Label4.Enabled;
+
 end;
 
 end.

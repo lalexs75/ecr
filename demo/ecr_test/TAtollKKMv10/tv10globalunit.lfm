@@ -3,8 +3,7 @@ object ConfigFrame: TConfigFrame
   Height = 324
   Top = 0
   Width = 497
-  LCLVersion = '2.3.0.0'
   TabOrder = 0
-  DesignLeft = 657
-  DesignTop = 329
+  DesignLeft = 491
+  DesignTop = 321
 end
