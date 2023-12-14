@@ -155,7 +155,25 @@ type
 
   TEcrTextAlign = (etaLeft, etaCenter, etaRight);
   TEcrWordWrap = (ewwNone, ewwWords, ewwChars);
+  TEcrCorrectionType = (ectNone, ectSelf, ectInstruction);
+
+
   TCrpCodeBuffer = array [1..32] of byte;
+
+  { TCorrectionInfo }
+
+  TCorrectionInfo = class
+  private
+    FCorrectionBaseNumber: string;
+    FCorrectionDate: TDateTime;
+    FCorrectionType: TEcrCorrectionType;
+  public
+    property CorrectionType:TEcrCorrectionType read FCorrectionType write FCorrectionType;
+    property CorrectionDate:TDateTime read FCorrectionDate write FCorrectionDate;
+    property CorrectionBaseNumber:string read FCorrectionBaseNumber write FCorrectionBaseNumber;
+    procedure Clear;
+    procedure Assign(ASource:TCorrectionInfo);
+  end;
 
   { TGoodsNomenclatureCode }
 
@@ -169,6 +187,7 @@ type
     FState: DWord;
   public
     procedure Clear;
+    procedure Assign(ASource:TCorrectionInfo);
     function Make1162Value:TBytes;
     property GroupCode:word read FGroupCode write FGroupCode;
     property GTIN:string read FGTIN write FGTIN;
@@ -393,6 +412,7 @@ type
     FCasheRegisterUUID: string;
     FCheckElectronic: boolean;
     FCheckInfo: TCheckInfo;
+    FCorrectionInfo: TCorrectionInfo;
     FCounteragentInfo: TCounteragentInfo;
     FDeviceInfo: TDeviceInfo;
     FErrorCode: integer;
@@ -516,6 +536,7 @@ type
     property GoodsList:TGoodsList read FGoodsList;
     property PaymentsList:TPaymentsList read FPaymentsList;
     property PaymentPlace:string read FPaymentPlace write FPaymentPlace;
+    property CorrectionInfo:TCorrectionInfo read FCorrectionInfo write FCorrectionInfo;
 
     //Статус и информация о аппарате
     property DeviceState:TDeviceState read FDeviceState;
@@ -532,6 +553,7 @@ procedure MakeCRPTCode(APrefix:Word; AGTIN:string; ASerial:string; var R:TCrpCod
 function MakeCRPTCodeStr(APrefix:Word; AGTIN:string; ASerial:string):string;
 function KMStatusEx(AStatus:DWord):string;
 function TaxTypeStr(ATaxType:TTaxType):string;
+function CorrectionTypeStr(ACorrectionType:TEcrCorrectionType):string;
 implementation
 uses Math;
 
@@ -566,6 +588,17 @@ begin
     ttaxVat120:Result:='НДС 20/120 %';
   else
     raise Exception.CreateFmt('Не известный тип TaxType(%d)', [Ord(ATaxType)]);
+  end;
+end;
+
+function CorrectionTypeStr(ACorrectionType: TEcrCorrectionType): string;
+begin
+  case ACorrectionType of
+    ectNone:Result:='NONE';
+    ectSelf:Result:='САМОСТОЯТЕЛЬНО';
+    ectInstruction:Result:='ПО ПРЕДПИСАНИЮ';
+  else
+    raise Exception.Create('Unknow correction type');
   end;
 end;
 
@@ -650,6 +683,27 @@ function TPaymentsListEnumerator.MoveNext: Boolean;
 begin
   Inc(FPosition);
   Result := FPosition < FList.Count;
+end;
+
+{ TCorrectionInfo }
+
+procedure TCorrectionInfo.Clear;
+begin
+  FCorrectionBaseNumber:='';
+  FCorrectionDate:=0;
+  FCorrectionType:=ectNone;
+end;
+
+procedure TCorrectionInfo.Assign(ASource: TCorrectionInfo);
+begin
+  if Assigned(ASource) then
+  begin
+    FCorrectionBaseNumber:=ASource.FCorrectionBaseNumber;
+    FCorrectionDate:=ASource.FCorrectionDate;
+    FCorrectionType:=ASource.FCorrectionType;
+  end
+  else
+    Clear;
 end;
 
 { TPaymentsList }
@@ -954,10 +1008,12 @@ begin
   FDeviceInfo:=TDeviceInfo.Create;
   FGoodsList:=TGoodsList.Create;
   FPaymentsList:=TPaymentsList.Create;
+  FCorrectionInfo:=TCorrectionInfo.Create;
 end;
 
 destructor TCashRegisterAbstract.Destroy;
 begin
+  FreeAndNil(FCorrectionInfo);
   FreeAndNil(FCounteragentInfo);
   FreeAndNil(FCheckInfo);
   FreeAndNil(FGoodsInfo);
@@ -1040,6 +1096,7 @@ begin
   FGoodsList.Clear;
   FCheckType:=chtNone;
   FCheckInfoLines.Clear;
+  FCorrectionInfo.Clear;
 end;
 
 function TCashRegisterAbstract.CancelCheck: integer;
