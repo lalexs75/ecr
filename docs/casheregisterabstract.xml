@@ -132,6 +132,50 @@
       </element>
     <element name="TCashRegisterAbstract.GetVersionString"><short>Версия драйвера ККМ</short>
       </element>
+    <element name="muPIECE"><short>шт</short>
+      </element><element name="muGRAM"><short>Грамм</short>
+      </element><element name="muKILOGRAM"><short>Килограмм</short>
+      </element><element name="muTON"><short>Тонна</short>
+      </element><element name="muCENTIMETER"><short>Сантиметр</short>
+      </element><element name="muDECIMETER"><short>Дециметр</short>
+      </element><element name="muMETER"><short>Метр</short>
+      </element><element name="muSQUARE_CENTIMETER"><short>Квадратный сантиметр</short>
+      </element><element name="muSQUARE_DECIMETER"><short>Квадратный дециметр</short>
+      </element><element name="muSQUARE_METER"><short>Квадратный метр</short>
+      </element><element name="muMILLILITER"><short>Кубический сантиметр; миллилитр</short>
+      </element><element name="muLITER"><short>Литр; кубический дециметр</short>
+      </element><element name="muCUBIC_METER"><short>Кубический метр</short>
+      </element><element name="muKILOWATT_HOUR"><short>Киловатт-час</short>
+      </element><element name="muGKAL"><short>Гигакалория</short>
+      </element><element name="muDAY"><short>Сутки</short>
+      </element><element name="muHOUR"><short>Час</short>
+      </element><element name="muMINUTE"><short>Минута</short>
+      </element><element name="muSECOND"><short>Секунда</short>
+      </element><element name="muKILOBYTE"><short>Килобайт</short>
+      </element><element name="muMEGABYTE"><short>Мегабайт</short>
+      </element><element name="muGIGABYTE"><short>Гигабайт</short>
+      </element><element name="muTERABYTE"><short>Терабайт</short>
+      </element><element name="TCheckType.chtNone"/><element name="TCheckType.chtSell"><short>чек прихода (продажи)</short>
+      </element><element name="TCheckType.chtSellReturn"><short>чек возврата прихода (продажи);</short>
+      </element><element name="TCheckType.chtSellCorrection"><short>чек коррекции прихода (продажи)</short>
+      </element><element name="TCheckType.chtBuy"><short>чек расхода (покупки)</short>
+      </element><element name="TCheckType.chtBuyReturn"><short>чек возврата расхода (покупки)</short>
+      </element><element name="TCheckType.chtBuyCorrection"><short>чек коррекции расхода (покупки)</short>
+      </element><element name="TCheckType.chtSellReturnCorrection"><short>чек коррекции возврата прихода (возврата продажи)</short>
+      </element><element name="TCheckType.chtBuyReturnCorrection"><short>чек коррекции возврата расхода (возврата покупки)</short>
+      </element><element name="TPaymentType.pctCash"><short>наличный</short>
+      </element><element name="TPaymentType.pctElectronically"><short>электронный</short>
+      </element><element name="TCorrectionInfo"><short>Информация на корректировочный документ</short>
+      </element><element name="TCorrectionInfo.CorrectionType"><short>Тип коррекции</short>
+      </element><element name="TEcrCorrectionType"><short>Тип коррекции</short>
+      </element><element name="TEcrCorrectionType.ectSelf"><short>самостоятельно </short>
+      </element><element name="TEcrCorrectionType.ectInstruction"><short>по предписанию</short>
+      </element><element name="TCorrectionInfo.CorrectionDate"><short>Дата совершения корректируемого расчета</short>
+      </element><element name="TCorrectionInfo.CorrectionBaseNumber"><short>Номер предписания налогового органа</short>
+      </element><element name="TCorrectionInfo.Clear"><short>Очистка полей основания коррекции</short>
+      </element><element name="TGoodsNomenclatureCode"><short>Код номенклатуры товара</short>
+      </element><element name="TGoodsNomenclatureCode.Clear"><short>Очистка полей кода номенклатуры товара</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
