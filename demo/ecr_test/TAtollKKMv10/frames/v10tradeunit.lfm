@@ -882,7 +882,7 @@ inherited v10TradeFrame: Tv10TradeFrame
       end
       object Label11: TLabel
         AnchorSideLeft.Control = TabSheet3
-        AnchorSideBottom.Control = Edit1
+        AnchorSideBottom.Control = edtCorrectionNumber
         AnchorSideBottom.Side = asrBottom
         Left = 6
         Height = 17
@@ -924,7 +924,7 @@ inherited v10TradeFrame: Tv10TradeFrame
         Spacing = 0
         TabOrder = 2
       end
-      object Edit1: TEdit
+      object edtCorrectionNumber: TEdit
         AnchorSideLeft.Control = Label11
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = DateEdit1
