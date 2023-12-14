@@ -415,6 +415,14 @@ begin
   S:=S + MS('-', fcLineWidth) + LineEnding +
     MS(' ', 10) + 'КАССОВЫЙ ЧЕК / ' + UTF8UpperCase(CheckTypeStr(CheckType)) + LineEnding;
 
+  if CheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
+  begin
+    S:=S + 'Основание для коррекции: ' + DateToStr(CorrectionInfo.CorrectionDate) + LineEnding;
+    if CorrectionInfo.CorrectionBaseNumber <> '' then
+      S:=S + CorrectionInfo.CorrectionBaseNumber + LineEnding;
+    S:=S + 'Тип коррекции: ' + CorrectionTypeStr(CorrectionInfo.CorrectionType) + LineEnding;
+  end;
+
   for GI in GoodsList do
   begin;
     S:=S + LineEnding;
