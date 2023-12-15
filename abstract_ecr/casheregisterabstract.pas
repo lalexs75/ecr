@@ -546,6 +546,7 @@ type
     //
     property OnError:TNotifyEvent read FOnError write FOnError;
   end;
+  TCashRegisterAbstractClass = class of TCashRegisterAbstract;
 
 function CheckTypeStr(ACheckType:TCheckType):string;
 function PaymentTypeStr(APaymentType:TPaymentType):string;
