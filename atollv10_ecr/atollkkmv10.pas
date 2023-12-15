@@ -934,7 +934,7 @@ begin
   //libfptr_set_param_datetime(fptr, 1178, 2018, 1, 2, 0, 0, 0);
   FLibrary.SetParamDateTime(FHandle, 1178, CorrectionInfo.CorrectionDate);
   //libfptr_set_param_str(fptr, 1179, L"№1234");
-  if (CorrectionInfo.CorrectionBaseNumber <> '') and (CorrectionInfo.CorrectionType = ectInstruction) then
+//  if (CorrectionInfo.CorrectionBaseNumber <> '') and (CorrectionInfo.CorrectionType = ectInstruction) then
     FLibrary.SetParamStr(FHandle, 1179, CorrectionInfo.CorrectionBaseNumber);
   //libfptr_util_form_tlv(fptr);
   FLibrary.UtilFormTLV(FHandle);
@@ -1243,6 +1243,9 @@ begin
   begin
     InternalUserLogin;
 
+    if CheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
+      InternalSetCorrectionInfo;
+
     if FFD1_2 then
     begin
       InternalRegisterBuyer1_2;
@@ -1271,9 +1274,6 @@ begin
     if CheckInfo.Electronically then
       FLibrary.SetParamBool(FHandle, LIBFPTR_PARAM_RECEIPT_ELECTRONICALLY, CheckInfo.Electronically);
 
-
-    if CheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
-      InternalSetCorrectionInfo;
 
     FLibrary.OpenReceipt(FHandle);
     InternalCheckError;
