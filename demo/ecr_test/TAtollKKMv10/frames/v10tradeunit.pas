@@ -23,7 +23,7 @@ unit v10tradeunit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls, IniFiles,
   EditBtn, rxmemds, CasheRegisterAbstract, RxDBGrid, DB, tv10globalunit,
   AtollKKMv10;
 
@@ -37,8 +37,8 @@ type
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     ComboBox1: TComboBox;
-    ComboBox2: TComboBox;
-    DateEdit1: TDateEdit;
+    cbCorrectionType: TComboBox;
+    edtCorrectionDate: TDateEdit;
     dsGoods: TDataSource;
     dsPays: TDataSource;
     edtCorrectionNumber: TEdit;
@@ -96,7 +96,7 @@ type
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
-    TimeEdit1: TTimeEdit;
+    edtCorrectionTime: TTimeEdit;
     procedure Button8Click(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
     procedure rxGoodsBeforePost(DataSet: TDataSet);
@@ -106,6 +106,8 @@ type
   public
     procedure InitData(AKKM:TAtollKKMv10); override;
     procedure UpdateCtrlState; override;
+    procedure SaveConfig(ACfg:TIniFile); override;
+    procedure LoadConfig(ACfg:TIniFile); override;
   end;
 
 implementation
@@ -133,8 +135,8 @@ begin
 
   if InternalCheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
   begin
-    FKKM.CorrectionInfo.CorrectionType:=TEcrCorrectionType(ComboBox2.ItemIndex + 1);
-    FKKM.CorrectionInfo.CorrectionDate:=DateEdit1.Date + TimeEdit1.Time;
+    FKKM.CorrectionInfo.CorrectionType:=TEcrCorrectionType(cbCorrectionType.ItemIndex + 1);
+    FKKM.CorrectionInfo.CorrectionDate:=edtCorrectionDate.Date + edtCorrectionTime.Time;
     FKKM.CorrectionInfo.CorrectionBaseNumber:=edtCorrectionNumber.Text;
   end;
 
@@ -300,11 +302,43 @@ begin
   Label5.Enabled:=Label4.Enabled;
   Label8.Enabled:=Label4.Enabled;
   Label11.Enabled:=Label4.Enabled;
-  DateEdit1.Enabled:=Label4.Enabled;
+  edtCorrectionDate.Enabled:=Label4.Enabled;
   edtCorrectionNumber.Enabled:=Label4.Enabled;
-  TimeEdit1.Enabled:=Label4.Enabled;
-  ComboBox2.Enabled:=Label4.Enabled;
+  edtCorrectionTime.Enabled:=Label4.Enabled;
+  cbCorrectionType.Enabled:=Label4.Enabled;
 
+end;
+
+procedure Tv10TradeFrame.SaveConfig(ACfg: TIniFile);
+begin
+  inherited SaveConfig(ACfg);
+  ACfg.WriteInteger(ClassName, 'CorrectionType', cbCorrectionType.ItemIndex);
+  ACfg.WriteDate(ClassName, 'CorrectionDate', edtCorrectionDate.Date);
+  ACfg.WriteTime(ClassName, 'CorrectionTime', edtCorrectionTime.Time);
+  ACfg.WriteString(ClassName, 'CorrectionNumber', edtCorrectionNumber.Text);
+
+  ACfg.WriteString(ClassName, 'ContragentName', edtContragentName.Text);
+  ACfg.WriteString(ClassName, 'ContragentInn', edtContragentInn.Text);
+  ACfg.WriteString(ClassName, 'ContragentPhone', edtPhone.Text);
+  ACfg.WriteString(ClassName, 'ContragentEmail', edtEmail.Text);
+end;
+
+procedure Tv10TradeFrame.LoadConfig(ACfg: TIniFile);
+begin
+  inherited LoadConfig(ACfg);
+  cbCorrectionType.ItemIndex:=ACfg.ReadInteger(ClassName, 'CorrectionType', 0);
+
+  if ACfg.ReadDate(ClassName, 'CorrectionDate', 0) > 0 then
+    edtCorrectionDate.Date:=ACfg.ReadDate(ClassName, 'CorrectionDate', 0);
+  if ACfg.ReadTime(ClassName, 'CorrectionTime', 0) > 0 then
+    edtCorrectionTime.Time:=ACfg.ReadTime(ClassName, 'CorrectionTime', 0);
+
+  edtCorrectionNumber.Text:=ACfg.ReadString(ClassName, 'CorrectionNumber', '');
+
+  edtContragentName.Text:=ACfg.ReadString(ClassName, 'ContragentName', edtContragentName.Text);
+  edtContragentInn.Text:=ACfg.ReadString(ClassName, 'ContragentInn', edtContragentInn.Text);
+  edtPhone.Text:=ACfg.ReadString(ClassName, 'ContragentPhone', edtPhone.Text);
+  edtEmail.Text:=ACfg.ReadString(ClassName, 'ContragentEmail', edtEmail.Text);
 end;
 
 end.

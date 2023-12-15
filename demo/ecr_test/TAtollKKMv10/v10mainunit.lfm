@@ -7,6 +7,7 @@ object MainForm: TMainForm
   ClientHeight = 810
   ClientWidth = 1460
   LCLVersion = '3.99.0.0'
+  OnClose = FormClose
   OnCreate = FormCreate
   object Memo1: TMemo
     Left = 0
@@ -107,5 +108,11 @@ object MainForm: TMainForm
   object CashRegisterFictive1: TCashRegisterFictive
     Left = 1216
     Top = 16
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = False
+    Left = 227
+    Top = 71
   end
 end

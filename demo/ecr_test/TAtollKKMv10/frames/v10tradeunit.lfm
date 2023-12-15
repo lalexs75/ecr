@@ -823,7 +823,7 @@ inherited v10TradeFrame: Tv10TradeFrame
       Caption = 'Данные к коррекции'
       ClientHeight = 154
       ClientWidth = 670
-      object ComboBox2: TComboBox
+      object cbCorrectionType: TComboBox
         AnchorSideLeft.Control = Label4
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
@@ -847,7 +847,7 @@ inherited v10TradeFrame: Tv10TradeFrame
       end
       object Label4: TLabel
         AnchorSideLeft.Control = TabSheet3
-        AnchorSideBottom.Control = ComboBox2
+        AnchorSideBottom.Control = cbCorrectionType
         AnchorSideBottom.Side = asrBottom
         Left = 6
         Height = 17
@@ -859,7 +859,7 @@ inherited v10TradeFrame: Tv10TradeFrame
       end
       object Label5: TLabel
         AnchorSideLeft.Control = TabSheet3
-        AnchorSideTop.Control = ComboBox2
+        AnchorSideTop.Control = cbCorrectionType
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
@@ -870,7 +870,7 @@ inherited v10TradeFrame: Tv10TradeFrame
       end
       object Label8: TLabel
         AnchorSideLeft.Control = TabSheet3
-        AnchorSideBottom.Control = DateEdit1
+        AnchorSideBottom.Control = edtCorrectionDate
         AnchorSideBottom.Side = asrBottom
         Left = 6
         Height = 17
@@ -892,7 +892,7 @@ inherited v10TradeFrame: Tv10TradeFrame
         BorderSpacing.Left = 6
         Caption = 'Номер предписания налогового органа'
       end
-      object DateEdit1: TDateEdit
+      object edtCorrectionDate: TDateEdit
         AnchorSideTop.Control = Label5
         AnchorSideTop.Side = asrBottom
         Left = 296
@@ -908,8 +908,8 @@ inherited v10TradeFrame: Tv10TradeFrame
         TabOrder = 1
         Spacing = 0
       end
-      object TimeEdit1: TTimeEdit
-        AnchorSideLeft.Control = DateEdit1
+      object edtCorrectionTime: TTimeEdit
+        AnchorSideLeft.Control = edtCorrectionDate
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = Label5
         AnchorSideTop.Side = asrBottom
@@ -927,7 +927,7 @@ inherited v10TradeFrame: Tv10TradeFrame
       object edtCorrectionNumber: TEdit
         AnchorSideLeft.Control = Label11
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = DateEdit1
+        AnchorSideTop.Control = edtCorrectionDate
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = TabSheet3
         AnchorSideRight.Side = asrBottom

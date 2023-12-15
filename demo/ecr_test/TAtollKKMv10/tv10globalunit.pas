@@ -23,7 +23,7 @@ unit tv10globalunit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, libfptr10, AtollKKMv10;
+  Classes, SysUtils, Forms, Controls, libfptr10, AtollKKMv10, IniFiles;
 
 type
 
@@ -36,6 +36,8 @@ type
   public
     procedure InitData(AKKM:TAtollKKMv10); virtual;
     procedure UpdateCtrlState; virtual;
+    procedure SaveConfig(ACfg:TIniFile); virtual;
+    procedure LoadConfig(ACfg:TIniFile); virtual;
   end;
 
 function IndToItemUnits(AIndex:Integer):Tlibfptr_item_units;
@@ -96,6 +98,16 @@ begin
 end;
 
 procedure TConfigFrame.UpdateCtrlState;
+begin
+
+end;
+
+procedure TConfigFrame.SaveConfig(ACfg: TIniFile);
+begin
+
+end;
+
+procedure TConfigFrame.LoadConfig(ACfg: TIniFile);
 begin
 
 end;

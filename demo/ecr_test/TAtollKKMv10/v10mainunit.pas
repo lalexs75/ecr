@@ -25,8 +25,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
   ExtCtrls, Spin, DB, libfptr10, AtollKKMv10, KKM_Atol, CasheRegisterAbstract,
-  ecr_CashRegisterFictiveUnit, rxdbgrid, rxmemds, rxcurredit, tv10globalunit,
-  Types;
+  ecr_CashRegisterFictiveUnit, rxdbgrid, rxmemds, rxcurredit, RxIniPropStorage,
+  tv10globalunit, Types;
 
 type
 
@@ -39,6 +39,7 @@ type
     Memo1: TMemo;
     Panel1: TPanel;
     Panel2: TPanel;
+    RxIniPropStorage1: TRxIniPropStorage;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
@@ -46,6 +47,7 @@ type
     TreeView1: TTreeView;
     procedure Button1Click(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure TreeView1Click(Sender: TObject);
   private
@@ -65,6 +67,8 @@ type
     function InternalCheckError:Integer;
 
     function AddFrame(const ARootNodeName, APageName:string; AFrame:TConfigFrame):TConfigFrame;
+    procedure LoadConfig;
+    procedure SaveConfig;
   public
 
   end;
@@ -74,7 +78,8 @@ var
 
 procedure DoDefaultWriteLog( ALogType:TEventType; const ALogMessage:string);
 implementation
-uses LazFileUtils, Math, rxlogging, v10tradeunit, v10CRPTUnit,
+uses LazFileUtils, Math, rxlogging, rxAppUtils, IniFiles,
+  v10tradeunit, v10CRPTUnit,
   v10SimpleTestUnit, v10ReportsUnit, v10ServiceUnit, v10OtherUnit,
   v10OrgParamsUnit, v10MarkingUnit, v10RegisterCheckFFD1_2Unit,
   v10RegisterCheckCmpUnit, v10OFDUnit;
@@ -221,6 +226,30 @@ begin
   RN.Expanded:=true;
 end;
 
+procedure TMainForm.LoadConfig;
+var
+  Cfg: TIniFile;
+  N: TTreeNode;
+begin
+  Cfg:=TIniFile.Create(GetDefaultIniName);
+  for N in TreeView1.Items do
+    if Assigned(N.Data) and (TObject(N.Data) is TConfigFrame) then
+      TConfigFrame(N.Data).LoadConfig(Cfg);
+  Cfg.Free;
+end;
+
+procedure TMainForm.SaveConfig;
+var
+  Cfg: TIniFile;
+  N: TTreeNode;
+begin
+  Cfg:=TIniFile.Create(GetDefaultIniName);
+  for N in TreeView1.Items do
+    if Assigned(N.Data) and (TObject(N.Data) is TConfigFrame) then
+      TConfigFrame(N.Data).SaveConfig(Cfg);
+  Cfg.Free;
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 var
   R: TConfigFrame;
@@ -248,6 +277,8 @@ begin
   R:=AddFrame('Компонента', 'Регистрация чека', Tv10RegisterCheckCmpFrame.Create(Self));
 
   UpdateCtrlState;
+
+  LoadConfig;
 end;
 
 procedure TMainForm.CheckBox1Change(Sender: TObject);
@@ -265,6 +296,11 @@ begin
   end;
 
   UpdateCtrlState;
+end;
+
+procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  SaveConfig;
 end;
 
 procedure TMainForm.Button1Click(Sender: TObject);
