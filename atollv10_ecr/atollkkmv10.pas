@@ -454,7 +454,7 @@ type
     procedure InternalSetCheckType(AValue: TCheckType);
     function InternalRegistration1_05:integer;
     function InternalRegistration1_2(AGI:TGoodsInfo):integer;
-    function InternalRegisterBuyer1_2:integer;
+    function InternalRegisterBuyer1_2:TBytes;
     procedure InternalSetCorrectionInfo;
   protected
     procedure InternalUserLogin; override;
@@ -904,10 +904,11 @@ begin
   Result:=FLibrary.Registration(FHandle);
 end;
 
-function TAtollKKMv10.InternalRegisterBuyer1_2: integer;
+function TAtollKKMv10.InternalRegisterBuyer1_2: TBytes;
 var
   FBuyerInf: TBytes;
 begin
+  Result:=nil;
   if (CounteragentInfo.Name = '') and (CounteragentInfo.INN = '') then Exit;
 
   if CounteragentInfo.Name <> '' then
@@ -917,8 +918,11 @@ begin
 
   FLibrary.UtilFormTLV(FHandle);
   FBuyerInf:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
-
+  Result:=FBuyerInf;
+{
   FLibrary.SetParamByteArray(FHandle, 1256, FBuyerInf);
+  InternalCheckError;
+}
 end;
 
 procedure TAtollKKMv10.InternalSetCorrectionInfo;
@@ -1237,22 +1241,32 @@ begin
 end;
 
 procedure TAtollKKMv10.OpenCheck;
+var
+  FBuyerInf: TBytes;
 begin
   inherited OpenCheck;
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     InternalUserLogin;
 
-    if CheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
-      InternalSetCorrectionInfo;
 
     if FFD1_2 then
     begin
-      InternalRegisterBuyer1_2;
+      //InternalRegisterBuyer1_2;
+      FBuyerInf:=InternalRegisterBuyer1_2;
+
+      if CheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
+        InternalSetCorrectionInfo;
+      if FBuyerInf<>nil then
+        FLibrary.SetParamByteArray(FHandle, 1256, FBuyerInf);
+      InternalCheckError;
+
       InternalSetCheckType(CheckType);
     end
     else
     begin
+      if CheckType in [chtSellCorrection, chtSellReturnCorrection, chtBuyCorrection, chtBuyReturnCorrection] then
+        InternalSetCorrectionInfo;
       InternalSetCheckType(CheckType);
 
       if CounteragentInfo.Name <> '' then
