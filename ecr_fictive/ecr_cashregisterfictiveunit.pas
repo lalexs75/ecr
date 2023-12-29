@@ -89,6 +89,13 @@ type
 
     procedure GetOFDStatus(out AStatus:TOFDSTatusRecord); override;
 
+    //Операции со сменой
+    procedure OpenShift; override;                      //Открыть смену
+
+    //Внесения и выплаты
+    function CashIncome(APaymentSum:Currency):integer; override;          //Внесение денег
+    function CashOutcome(APaymentSum:Currency):integer; override;         //Выплата денег
+
     procedure PrintLine(ALine:string);override;    //Печать строки
     procedure BeginNonfiscalDocument; override;
     procedure EndNonfiscalDocument; override;
@@ -560,6 +567,41 @@ begin
   AStatus.FirstUnsentNumber:=0;
   AStatus.OfdMessageRead:=true;
   AStatus.LastSendDocDate:=Now;
+end;
+
+procedure TCashRegisterFictive.OpenShift;
+var
+  S: String;
+begin
+  inherited OpenShift;
+  DoCheckConnected;
+  S:='Открытие смены' + LineEnding;
+  RxWriteLog(etDebug, S);
+  ShowCheckForm(Self, S);
+end;
+
+function TCashRegisterFictive.CashIncome(APaymentSum: Currency): integer;
+var
+  S: String;
+begin
+  Result:=0;
+  DoCheckConnected;
+  S:='Чек внесения в кассу ' +  LineEnding +
+     '   Сумма : ' + FloatToStr(APaymentSum) ;
+  RxWriteLog(etDebug, S);
+  ShowCheckForm(Self, S);
+end;
+
+function TCashRegisterFictive.CashOutcome(APaymentSum: Currency): integer;
+var
+  S: String;
+begin
+  Result:=0;
+  DoCheckConnected;
+  S:='Чек выплаты из кассы ' +  LineEnding +
+     '   Сумма : ' + FloatToStr(APaymentSum) ;
+  RxWriteLog(etDebug, S);
+  ShowCheckForm(Self, S);
 end;
 
 procedure TCashRegisterFictive.PrintLine(ALine: string);

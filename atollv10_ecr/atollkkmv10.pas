@@ -481,7 +481,7 @@ type
     procedure PrintLine(ALine:string); override;        //Печать строки
     procedure PrintClishe; override;
 
-    //Отперации со сменой
+    //Операции со сменой
     procedure OpenShift; override;                      //Открыть смену
 
     //Внесения и выплаты
