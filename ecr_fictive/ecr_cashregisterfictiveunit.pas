@@ -430,6 +430,11 @@ begin
     S:=S + 'Тип коррекции: ' + CorrectionTypeStr(CorrectionInfo.CorrectionType) + LineEnding;
   end;
 
+
+  if FCheckInfoLines.Count>0 then
+    S:=S + LineEnding + FCheckInfoLines.Text + LineEnding;
+
+
   for GI in GoodsList do
   begin;
     S:=S + LineEnding;
