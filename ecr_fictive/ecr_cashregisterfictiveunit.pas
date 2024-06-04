@@ -67,6 +67,7 @@ type
     procedure InternalOpenKKM; override;
     procedure InternalCloseKKM; override;
     function GetFDNumber: integer; override;
+    function GetDeviceDateTime: TDateTime; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -303,6 +304,11 @@ end;
 function TCashRegisterFictive.GetFDNumber: integer;
 begin
   Result:=FCurCheckNum;
+end;
+
+function TCashRegisterFictive.GetDeviceDateTime: TDateTime;
+begin
+  Result:=Now;
 end;
 
 constructor TCashRegisterFictive.Create(AOwner: TComponent);
