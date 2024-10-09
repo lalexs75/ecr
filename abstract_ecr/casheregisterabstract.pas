@@ -403,6 +403,17 @@ type
     property Current: TPaymentInfo read GetCurrent;
   end;
 
+  { TPermissiveModeDoc }
+
+  TPermissiveModeDoc = class
+  private
+    FDocTimeStamp: string;
+    FUUID: string;
+  public
+    procedure Clear;
+    property UUID:string read FUUID write FUUID;
+    property DocTimeStamp:string read FDocTimeStamp write FDocTimeStamp;
+  end;
 
   { TCashRegisterAbstract }
 
@@ -425,6 +436,7 @@ type
     FPaymentPlace: string;
     FCheckType: TCheckType;
     FPaymentsList: TPaymentsList;
+    FPermissiveModeDoc: TPermissiveModeDoc;
     FTextParams: TTextParams;
     FUserName: string;
     FWaitForMarkingValidationResult: Boolean;
@@ -534,6 +546,7 @@ type
     property CheckInfo:TCheckInfo read FCheckInfo;
     property GoodsInfo:TGoodsInfo read FGoodsInfo; deprecated;
     property GoodsList:TGoodsList read FGoodsList;
+    property PermissiveModeDoc:TPermissiveModeDoc read FPermissiveModeDoc;
     property PaymentsList:TPaymentsList read FPaymentsList;
     property PaymentPlace:string read FPaymentPlace write FPaymentPlace;
     property CorrectionInfo:TCorrectionInfo read FCorrectionInfo write FCorrectionInfo;
@@ -684,6 +697,14 @@ function TPaymentsListEnumerator.MoveNext: Boolean;
 begin
   Inc(FPosition);
   Result := FPosition < FList.Count;
+end;
+
+{ TPermissiveModeDoc }
+
+procedure TPermissiveModeDoc.Clear;
+begin
+  FDocTimeStamp:='';
+  FUUID:='';
 end;
 
 { TCorrectionInfo }
@@ -1025,10 +1046,12 @@ begin
   FGoodsList:=TGoodsList.Create;
   FPaymentsList:=TPaymentsList.Create;
   FCorrectionInfo:=TCorrectionInfo.Create;
+  FPermissiveModeDoc:=TPermissiveModeDoc.Create;
 end;
 
 destructor TCashRegisterAbstract.Destroy;
 begin
+  FreeAndNil(FPermissiveModeDoc);
   FreeAndNil(FCorrectionInfo);
   FreeAndNil(FCounteragentInfo);
   FreeAndNil(FCheckInfo);
@@ -1113,6 +1136,7 @@ begin
   FCheckType:=chtNone;
   FCheckInfoLines.Clear;
   FCorrectionInfo.Clear;
+  FPermissiveModeDoc.Clear;
 end;
 
 function TCashRegisterAbstract.CancelCheck: integer;
@@ -1126,6 +1150,7 @@ begin
   FGoodsList.Clear;
   FCheckInfoLines.Clear;
   FCheckType:=chtNone;
+  FPermissiveModeDoc.Clear;
 end;
 
 function TCashRegisterAbstract.Registration: integer;

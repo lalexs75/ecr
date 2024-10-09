@@ -797,7 +797,7 @@ end;
 
 function TAtollKKMv10.InternalRegistration1_2(AGI: TGoodsInfo): integer;
 var
-  FSupInf, FMark: TBytes;
+  FSupInf, FMark, FIndustryInfo: TBytes;
   FValidationResult, FOfflineValidationErrors,
     FKMOnlineValidationResult: Integer;
   FValidationReady: Boolean;
@@ -812,6 +812,18 @@ begin
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_SOLD
     else
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_RETURN; //chtSellReturn
+
+    if PermissiveModeDoc.UUID <> '' then
+    begin
+      //Разрешительный режим
+      SetAttributeStr(1262, '030');
+      SetAttributeStr(1263, '21.11.2023');
+      SetAttributeStr(1264, '1944');
+      SetAttributeStr(1265,  Format('UUID=%s&Time=%s', [PermissiveModeDoc.UUID, PermissiveModeDoc.DocTimeStamp]));
+      FLibrary.UtilFormTLV(FHandle);
+      FIndustryInfo:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
+      FLibrary.SetParamByteArray(FHandle, 1260, FIndustryInfo);
+    end;
 
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
     SetAttributeStr(Ord(LIBFPTR_PARAM_MARKING_CODE), AGI.GoodsNomenclatureCode.KM);

@@ -7,11 +7,11 @@ object kssShowPKSlipForm: TkssShowPKSlipForm
   ClientHeight = 385
   ClientWidth = 351
   Position = poScreenCenter
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 42
-    Top = 337
+    Height = 37
+    Top = 342
     Width = 339
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -26,7 +26,7 @@ object kssShowPKSlipForm: TkssShowPKSlipForm
   end
   object Memo1: TMemo
     Left = 0
-    Height = 331
+    Height = 336
     Top = 0
     Width = 351
     Align = alClient

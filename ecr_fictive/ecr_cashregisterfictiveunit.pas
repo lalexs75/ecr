@@ -469,7 +469,16 @@ begin
     S:=S + MS(' ', 15) + PaymentTypeStr(FPayInfo.PaymentType) + ' = ' + FloatToStr(FPayInfo.PaymentSum) + LineEnding;
   end;
 
-  //RxWriteLog(etDebug, 'TFictiveDriverKKM.IsCheckOpen ACloseType:%d', [CloseType]);
+
+  if PermissiveModeDoc.UUID <> '' then
+  begin
+    S:= S + MS('-', fcLineWidth) + LineEnding +
+        'Разрешительный режим '+ LineEnding +
+         MS(' ', 10) + 'UUID=' + PermissiveModeDoc.UUID + LineEnding +
+         MS(' ', 10) + 'Time=' + PermissiveModeDoc.DocTimeStamp + LineEnding
+         ;
+  end;
+
   ShowCheckForm(Self, S);
 
   Result:=inherited CloseCheck;
