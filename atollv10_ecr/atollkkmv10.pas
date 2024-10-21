@@ -823,7 +823,7 @@ begin
       SetAttributeStr(1265,  Format('UUID=%s&Time=%s', [PermissiveModeDoc.UUID, PermissiveModeDoc.DocTimeStamp]));
       FLibrary.UtilFormTLV(FHandle);
       FIndustryInfo:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
-      FLibrary.SetParamByteArray(FHandle, 1260, FIndustryInfo);
+//      FLibrary.SetParamByteArray(FHandle, 1260, FIndustryInfo);
       rxWriteLog(etDebug, 'Заполнили информацию о разрешительном режиме, UUID=%s&Time=%s', [PermissiveModeDoc.UUID, PermissiveModeDoc.DocTimeStamp]);
     end;
 
@@ -896,6 +896,12 @@ begin
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_STATUS), Ord(LIBFPTR_MES_PIECE_SOLD)); //TODO:Добавить продажи/возврат
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT), AGI.GoodsNomenclatureCode.State);
+
+    if PermissiveModeDoc.UUID <> '' then
+    begin
+      FLibrary.SetParamByteArray(FHandle, 1260, FIndustryInfo);
+      rxWriteLog(etDebug, 'Заполнили информацию о разрешительном режиме-2, UUID=%s&Time=%s', [PermissiveModeDoc.UUID, PermissiveModeDoc.DocTimeStamp]);
+    end;
   end
   else
     SetAttributeInt( 2108 {Ord(LIBFPTR_PARAM_MEASUREMENT_UNIT)}, Ord(FMeasurementUnit));   //TODO:Добавить разные единицы измерения
