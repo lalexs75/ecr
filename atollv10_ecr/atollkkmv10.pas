@@ -581,6 +581,7 @@ function TaxTypeToAtollTT(AValue:TTaxType):Tlibfptr_tax_type;
 function muOKEItoAtol(muCode:Integer):Tlibfptr_item_units;
 procedure Register;
 implementation
+uses rxlogging;
 
 procedure Register;
 begin
@@ -823,6 +824,7 @@ begin
       FLibrary.UtilFormTLV(FHandle);
       FIndustryInfo:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
       FLibrary.SetParamByteArray(FHandle, 1260, FIndustryInfo);
+      rxWriteLog(etDebug, 'Заполнили информацию о разрешительном режиме, UUID=%s&Time=%s', [PermissiveModeDoc.UUID, PermissiveModeDoc.DocTimeStamp]);
     end;
 
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
