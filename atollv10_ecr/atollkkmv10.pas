@@ -807,7 +807,7 @@ var
 begin
   FMeasurementUnit:=muOKEItoAtol(AGI.GoodsMeasurementUnit);
 
-  if (AGI.GoodsNomenclatureCode.KM <> '') and (AGI.GoodsNomenclatureCode.State = 0) then
+  if (AGI.GoodsNomenclatureCode.KM <> '') {and (AGI.GoodsNomenclatureCode.State = 0)} then
   begin
     if CheckType = chtSell then
       FMarkingEstimatedStatus:=LIBFPTR_MES_PIECE_SOLD
