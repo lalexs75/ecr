@@ -176,6 +176,10 @@
       </element><element name="TGoodsNomenclatureCode"><short>Код номенклатуры товара</short>
       </element><element name="TGoodsNomenclatureCode.Clear"><short>Очистка полей кода номенклатуры товара</short>
       </element>
+    <element name="TShiftState.ssCLOSED"><short>смена закрыта</short>
+      </element><element name="TShiftState.ssOPENED"><short>смена открыта</short>
+      </element><element name="TShiftState.ssEXPIRED"><short>смена истекла</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

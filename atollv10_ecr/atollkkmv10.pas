@@ -466,6 +466,7 @@ type
     function GetConnected: boolean; override;
     procedure SetConnected(AValue: boolean); override;
 
+    function GetShiftState: TShiftState; override;
     function GetCheckNumber: integer; override;
     function GetFDNumber: integer; override;
   public
@@ -1016,6 +1017,30 @@ begin
         FLibrary.DestroyHandle(FHandle);
         FHandle:=nil;
       end;
+  end;
+end;
+
+function TAtollKKMv10.GetShiftState: TShiftState;
+var
+  C: Tlibfptr_shift_state;
+begin
+  Result:=ssCLOSED;
+  if Assigned(FLibrary) and FLibrary.Loaded then
+  begin
+    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_DATA_TYPE, Ord(LIBFPTR_DT_STATUS));
+    FLibrary.QueryData(FHandle);
+    InternalCheckError;
+    if ErrorCode = 0 then
+    begin
+      C:=Tlibfptr_shift_state(FLibrary.GetParamInt(FHandle, Ord(LIBFPTR_PARAM_SHIFT_STATE)));
+      case C of
+        LIBFPTR_SS_CLOSED:Result:=ssCLOSED;
+        LIBFPTR_SS_OPENED:Result:=ssOPENED;
+        LIBFPTR_SS_EXPIRED:Result:=ssEXPIRED;
+      else
+        raise Exception.CreateFmt('Не известный статус смены %d', [C]);
+      end;
+    end;
   end;
 end;
 

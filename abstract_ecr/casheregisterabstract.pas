@@ -74,6 +74,13 @@ type
      chtSell, chtSellReturn, chtSellCorrection, chtSellReturnCorrection,
      chtBuy, chtBuyReturn, chtBuyCorrection, chtBuyReturnCorrection);
 
+  TShiftState =
+      (ssCLOSED, //смена закрыта
+       ssOPENED, //смена открыта
+       ssEXPIRED //смена истекла
+      );
+
+
   TPaymentType =
     (pctCash,           //наличный
      pctElectronically, //электронный
@@ -444,6 +451,7 @@ type
     FDeviceState: TDeviceState;
     FLibraryFileName: string;
     FCheckInfoLines:TStringList;
+    function GetShiftState: TShiftState; virtual; abstract;
     function GetCheckOpen: boolean; virtual; abstract;
     procedure SetUserName(AValue: string); virtual;
     procedure SetPassword(AValue: string); virtual;
@@ -524,6 +532,7 @@ type
     //
     property CheckNumber:integer read GetCheckNumber;
     property CheckOpen:boolean read GetCheckOpen;
+    property ShiftState:TShiftState read GetShiftState;
     property FDNumber:integer read GetFDNumber;
     //property CheckMode:integer read FCheckMode write FCheckMode;
     property CheckType:TCheckType read FCheckType write SetCheckType;
