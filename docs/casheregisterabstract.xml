@@ -180,6 +180,8 @@
       </element><element name="TShiftState.ssOPENED"><short>смена открыта</short>
       </element><element name="TShiftState.ssEXPIRED"><short>смена истекла</short>
       </element>
+    <element name="TCashRegisterAbstract.ShiftState"><short>Состояние кассового дня - открыта/закрыта</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

@@ -167,6 +167,18 @@ type
 
   TCrpCodeBuffer = array [1..32] of byte;
 
+  { TPermissiveModeDoc }
+
+  TPermissiveModeDoc = class
+  private
+    FDocTimeStamp: string;
+    FUUID: string;
+  public
+    procedure Clear;
+    property UUID:string read FUUID write FUUID;
+    property DocTimeStamp:string read FDocTimeStamp write FDocTimeStamp;
+  end;
+
   { TCorrectionInfo }
 
   TCorrectionInfo = class
@@ -190,9 +202,13 @@ type
     FGTIN: string;
     FKM: String;
     FMarkingID: Integer;
+    FPermissiveModeDoc : TPermissiveModeDoc;
     FSerial: string;
     FState: DWord;
   public
+    constructor Create;
+    destructor Destroy; override;
+
     procedure Clear;
     procedure Assign(ASource:TGoodsNomenclatureCode);
     function Make1162Value:TBytes;
@@ -201,6 +217,7 @@ type
     property Serial:string read FSerial write FSerial;
     property KM:String read FKM write FKM;
     property State:DWord read FState write FState;
+    property PermissiveModeDoc:TPermissiveModeDoc read FPermissiveModeDoc;
     //for internal use
     property MarkingID:Integer read FMarkingID write FMarkingID;
   end;
@@ -339,16 +356,17 @@ type
   private
     FList:TFPList;
     function GetCount: integer;
-    function GetItems(AIndex: integer): TGoodsInfo;
+    function GetItem(AIndex: integer): TGoodsInfo;
   public
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
     function Add:TGoodsInfo;
     function GetEnumerator: TGoodsListEnumerator;
+    function FindByKM(AKM:string):TGoodsInfo; //Поиск товарной позиции по коду маркировки
 
     property Count:integer read GetCount;
-    property Items[AIndex:integer]:TGoodsInfo read GetItems; default;
+    property Items[AIndex:integer]:TGoodsInfo read GetItem; default;
   end;
 
   { TGoodsListEnumerator }
@@ -408,18 +426,6 @@ type
     function GetCurrent: TPaymentInfo;
     function MoveNext: Boolean;
     property Current: TPaymentInfo read GetCurrent;
-  end;
-
-  { TPermissiveModeDoc }
-
-  TPermissiveModeDoc = class
-  private
-    FDocTimeStamp: string;
-    FUUID: string;
-  public
-    procedure Clear;
-    property UUID:string read FUUID write FUUID;
-    property DocTimeStamp:string read FDocTimeStamp write FDocTimeStamp;
   end;
 
   { TCashRegisterAbstract }
@@ -826,7 +832,7 @@ begin
   Result:=FList.Count;
 end;
 
-function TGoodsList.GetItems(AIndex: integer): TGoodsInfo;
+function TGoodsList.GetItem(AIndex: integer): TGoodsInfo;
 begin
   Result:=TGoodsInfo(FList[AIndex]);
 end;
@@ -864,7 +870,30 @@ begin
   Result:=TGoodsListEnumerator.Create(Self);
 end;
 
+function TGoodsList.FindByKM(AKM : string) : TGoodsInfo;
+var
+  I : Integer;
+begin
+  if AKM<>'' then
+    for I:=0 to FList.Count - 1 do
+      if Copy(TGoodsInfo(FList[I]).FGoodsNomenclatureCode.KM, 1, 31)  = Copy(AKM, 1, 31) then
+        Exit(TGoodsInfo(FList[I]));
+  raise Exception.CreateFmt('Не найден код маркировки " %s "', [AKM]);
+end;
+
 { TGoodsNomenclatureCode }
+
+constructor TGoodsNomenclatureCode.Create;
+begin
+  inherited Create;
+  FPermissiveModeDoc := TPermissiveModeDoc.Create;
+end;
+
+destructor TGoodsNomenclatureCode.Destroy;
+begin
+  FreeAndNil(FPermissiveModeDoc);
+  inherited Destroy;
+end;
 
 procedure TGoodsNomenclatureCode.Clear;
 begin
@@ -873,6 +902,7 @@ begin
   FSerial:='';
   KM:='';
   State:=0;
+  FPermissiveModeDoc.Clear;
 end;
 
 procedure TGoodsNomenclatureCode.Assign(ASource: TGoodsNomenclatureCode);

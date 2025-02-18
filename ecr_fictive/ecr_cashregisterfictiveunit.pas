@@ -68,6 +68,7 @@ type
     procedure InternalCloseKKM; override;
     function GetFDNumber: integer; override;
     function GetDeviceDateTime: TDateTime; override;
+    function GetShiftState: TShiftState; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -311,6 +312,11 @@ begin
   Result:=Now;
 end;
 
+function TCashRegisterFictive.GetShiftState : TShiftState;
+begin
+  Result:=ssOPENED;
+end;
+
 constructor TCashRegisterFictive.Create(AOwner: TComponent);
 var
   MS, S, M, H: word;
@@ -460,6 +466,16 @@ begin
 
     //GI.GoodsPayMode:=gpmAvance;
     //GI.GoodsType:=gtCommodity;
+
+    if GI.GoodsNomenclatureCode.PermissiveModeDoc.UUID <> '' then
+    begin
+      S:= S + MS('-', fcLineWidth) + LineEnding +
+          'Разрешительный режим '+ LineEnding +
+           MS(' ', 10) + 'UUID=' + GI.GoodsNomenclatureCode.PermissiveModeDoc.UUID + LineEnding +
+           MS(' ', 10) + 'Time=' + GI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp + LineEnding
+           ;
+    end;
+
   end;
   S:=S + MS('-', fcLineWidth) + LineEnding +
     MS(' ', 15) + 'ИТОГ = ' + FloatToStr(FSum) + LineEnding;
