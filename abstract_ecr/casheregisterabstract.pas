@@ -393,6 +393,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    procedure Assign(const AInfo:TPaymentInfo);
     property PaymentType:TPaymentType read FPaymentType write FPaymentType;
     property PaymentSum: Currency read FPaymentSum write FPaymentSum;
   end;
@@ -408,6 +409,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    procedure Assign(const AList:TPaymentsList);
     function Add:TPaymentInfo;
     function GetEnumerator: TPaymentsListEnumerator;
 
@@ -777,6 +779,19 @@ begin
   FList.Clear;
 end;
 
+procedure TPaymentsList.Assign(const AList : TPaymentsList);
+var
+  P, P1 : TPaymentInfo;
+begin
+  Clear;
+  if not Assigned(AList) then Exit;
+  for P in AList do
+  begin
+    P1:=Add;
+    P1.Assign(P);
+  end;
+end;
+
 function TPaymentsList.Add: TPaymentInfo;
 begin
   Result:=TPaymentInfo.Create;
@@ -804,6 +819,14 @@ procedure TPaymentInfo.Clear;
 begin
   FPaymentSum:=0;
   FPaymentType:=pctCash;
+end;
+
+procedure TPaymentInfo.Assign(const AInfo : TPaymentInfo);
+begin
+  Clear;
+  if not Assigned(AInfo) then Exit;
+  FPaymentSum:=AInfo.FPaymentSum;
+  FPaymentType:=AInfo.FPaymentType;
 end;
 
 { TGoodsListEnumerator }
