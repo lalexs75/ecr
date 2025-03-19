@@ -1035,7 +1035,7 @@ begin
   begin
     FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_DATA_TYPE, Ord(LIBFPTR_DT_STATUS));
     FLibrary.QueryData(FHandle);
-    InternalCheckError;
+//    InternalCheckError;
     if ErrorCode = 0 then
     begin
       C:=Tlibfptr_shift_state(FLibrary.GetParamInt(FHandle, Ord(LIBFPTR_PARAM_SHIFT_STATE)));

@@ -256,6 +256,7 @@ type
     FPhone: string;
   public
     procedure Clear;
+    procedure Assign(ASource:TCounteragentInfo);
     property Name:string read FName write FName;
     property Adress:string read FAdress write FAdress;
     property INN:string read FINN write FINN;
@@ -333,6 +334,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    procedure Assign(ASource:TGoodsInfo);
     property Name:string read FName write FName;
     property Price:Currency read FPrice write FPrice;
     property Quantity:Double read FQuantity write FQuantity;
@@ -361,6 +363,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    procedure Assign(ASource:TGoodsList);
     function Add:TGoodsInfo;
     function GetEnumerator: TGoodsListEnumerator;
     function FindByKM(AKM:string):TGoodsInfo; //Поиск товарной позиции по коду маркировки
@@ -882,6 +885,16 @@ begin
   FList.Clear;
 end;
 
+procedure TGoodsList.Assign(ASource : TGoodsList);
+var
+  P : TGoodsInfo;
+begin
+  Clear;
+  if not Assigned(ASource) then Exit;
+  for P in ASource do
+    Add.Assign(P);
+end;
+
 function TGoodsList.Add: TGoodsInfo;
 begin
   Result:=TGoodsInfo.Create;
@@ -1043,6 +1056,26 @@ begin
   FGoodsArticle:='';
 end;
 
+procedure TGoodsInfo.Assign(ASource : TGoodsInfo);
+begin
+  Clear;
+  if not Assigned(ASource) then Exit;
+  FCountryCode:=ASource.FCountryCode;
+  FDeclarationNumber:=ASource.FDeclarationNumber;
+  FGoodsArticle:=ASource.FGoodsArticle;
+  FGoodsID:=ASource.FGoodsID;
+  FGoodsMeasurementUnit:=ASource.FGoodsMeasurementUnit;
+  FGoodsNomenclatureCode.Assign(ASource.FGoodsNomenclatureCode);
+  FGoodsPayMode:=ASource.FGoodsPayMode;
+  FGoodsRowType:=ASource.FGoodsRowType;
+  FGoodsType:=ASource.FGoodsType;
+  FName:=ASource.FName;
+  FPrice:=ASource.FPrice;
+  FQuantity:=ASource.FQuantity;
+  FSuplierInfo.Assign(ASource.FSuplierInfo);
+  FTaxType:=ASource.FTaxType;
+end;
+
 { TCheckInfo }
 
 procedure TCheckInfo.Clear;
@@ -1059,6 +1092,17 @@ begin
   FPhone:='';
   FINN:='';
   FEmail:='';
+end;
+
+procedure TCounteragentInfo.Assign(ASource : TCounteragentInfo);
+begin
+  Clear;
+  if not Assigned(ASource) then Exit;
+  FAdress:=ASource.FAdress;
+  FEmail:=ASource.FEmail;
+  FINN:=ASource.FINN;
+  FName:=ASource.FName;
+  FPhone:=ASource.FPhone;
 end;
 
 { TCashRegisterAbstract }
