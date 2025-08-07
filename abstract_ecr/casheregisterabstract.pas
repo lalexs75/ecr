@@ -105,7 +105,11 @@ type
     ttaxVat0,
     ttaxVatNO,
     ttaxVat20,
-    ttaxVat120
+    ttaxVat120,
+    ttaxVat5,   //НДС 5%;
+    ttaxVat105, //НДС рассчитанный 5/105;
+    ttaxVat7,   //НДС 7%;
+    ttaxVat107  //НДС рассчитанный 7/107.
   );
 
   TGoodsPayMode =
@@ -149,6 +153,43 @@ type
        gtCsiContributions = 25,               //или 25 - взносы на ОСС
        gtCasinoPayment = 26                   //или 26 - платеж казино
       );
+
+  TElectronPaytMethod =
+    ( epmNone = 0,
+      epmBankCard = 1,           //1 — Банковская карта
+      epmMobailAppPay = 2,       //2 — Мобильное приложение (например, Apple Pay, Google Pay)
+      epmElectronServicePay = 3, //3 — Электронное средство платежа (например, Яндекс.Деньги, WebMoney)
+      epmNonCashTransfer = 4,    //4 — Безналичный перевод (включая СБП — Систему быстрых платежей)
+      epmAnotherFormOfNCPay = 5  // 5 — Иная форма безналичной оплаты
+    );
+
+  TEcrTimeZone =
+    (
+      ecrTimeZoneNone = -1,
+      ecrTimeZoneDevice = 0,
+      ecrTimeZone1 = 1,
+      ecrTimeZone2 = 2,
+      ecrTimeZone3 = 3,
+      ecrTimeZone4 = 4,
+      ecrTimeZone5 = 5,
+      ecrTimeZone6 = 6,
+      ecrTimeZone7 = 7,
+      ecrTimeZone8 = 8,
+      ecrTimeZone9 = 9,
+      ecrTimeZone10 = 10,
+      ecrTimeZone11 = 11,
+      ecrTimeZoneUTC2 = 1,
+      ecrTimeZoneUTC3 = 2,
+      ecrTimeZoneUTC4 = 3,
+      ecrTimeZoneUTC5 = 4,
+      ecrTimeZoneUTC6 = 5,
+      ecrTimeZoneUTC7 = 6,
+      ecrTimeZoneUTC8 = 7,
+      ecrTimeZoneUTC9 = 8,
+      ecrTimeZoneUTC10 = 9,
+      ecrTimeZoneUTC11 = 10,
+      ecrTimeZoneUTC12 = 11
+  );
 
   TOFDSTatusRecord = record
     ExchangeStatus:Cardinal;
@@ -390,6 +431,9 @@ type
 
   TPaymentInfo = class
   private
+    FElectronPaytMethod : TElectronPaytMethod;
+    FPaymentAddInfo : string;
+    FPaymentId : string;
     FPaymentSum: Currency;
     FPaymentType: TPaymentType;
   public
@@ -399,6 +443,10 @@ type
     procedure Assign(const AInfo:TPaymentInfo);
     property PaymentType:TPaymentType read FPaymentType write FPaymentType;
     property PaymentSum: Currency read FPaymentSum write FPaymentSum;
+    //Дополнительная информация при безналичной оплате
+    property ElectronPaytMethod:TElectronPaytMethod read FElectronPaytMethod write FElectronPaytMethod;
+    property PaymentId:string read FPaymentId write FPaymentId;
+    property PaymentAddInfo:string read FPaymentAddInfo write FPaymentAddInfo;
   end;
 
   { TPaymentsList }
@@ -456,6 +504,7 @@ type
     FPaymentsList: TPaymentsList;
     FPermissiveModeDoc: TPermissiveModeDoc;
     FTextParams: TTextParams;
+    FTimeZone : TEcrTimeZone;
     FUserName: string;
     FWaitForMarkingValidationResult: Boolean;
   protected
@@ -548,6 +597,7 @@ type
     //property CheckMode:integer read FCheckMode write FCheckMode;
     property CheckType:TCheckType read FCheckType write SetCheckType;
     property CheckElectronic:boolean read FCheckElectronic write FCheckElectronic;
+    property TimeZone:TEcrTimeZone read FTimeZone write FTimeZone;
   public
     property CasheRegisterUUID:string read FCasheRegisterUUID write FCasheRegisterUUID;
     property LibraryFileName:string read FLibraryFileName write FLibraryFileName;
@@ -822,6 +872,9 @@ procedure TPaymentInfo.Clear;
 begin
   FPaymentSum:=0;
   FPaymentType:=pctCash;
+  FElectronPaytMethod:=epmNone;
+  FPaymentId:='';
+  FPaymentAddInfo:='';
 end;
 
 procedure TPaymentInfo.Assign(const AInfo : TPaymentInfo);
@@ -1233,6 +1286,7 @@ end;
 function TCashRegisterAbstract.CloseCheck: Integer;
 begin
   Result:=0;
+  FTimeZone:=ecrTimeZoneNone;
   FCounteragentInfo.Clear;
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
@@ -1248,6 +1302,7 @@ end;
 function TCashRegisterAbstract.CancelCheck: integer;
 begin
   Result:=0;
+  FTimeZone:=ecrTimeZoneNone;
   FCounteragentInfo.Clear;
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
