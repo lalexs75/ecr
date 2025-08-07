@@ -347,6 +347,19 @@ extern "C"
     LIBFPTR_ERROR_MINIPOS_MODE_FR_DISABLED,
     LIBFPTR_ERROR_ENTRY_NOT_FOUND_IN_OTP,
     LIBFPTR_ERROR_EXCISABLE_COMMODITY_WITHOUT_EXCISE,
+    LIBFPTR_ERROR_BARCODE_TYPE_NOT_SUPPORTED,
+    LIBFPTR_ERROR_OVERLAY_DATA_OVERFLOW,
+    LIBFPTR_ERROR_INVALID_MODULE_ADDRESS,
+    LIBFPTR_ERROR_ECR_MODEL_NOT_SUPPORTED,
+    LIBFPTR_ERROR_PAID_NOT_REQUIRED,
+    LIBFPTR_ERROR_NON_PRINTABLE_CHAR,
+    LIBFPTR_ERROR_INVALID_USER_TAG,
+    LIBFPTR_ERROR_COMMODITIES_TABLE_ITERATION_STOPPED,
+    LIBFPTR_ERROR_COMMODITIES_TABLE_INVALID_CSV_FORMAT,
+    LIBFPTR_ERROR_MINIPOS_NO_FILE_ON_USB_STORE,
+    LIBFPTR_ERROR_MINIPOS_NO_AGENT_FISCAL_PROPERTY,
+    LIBFPTR_ERROR_NO_CONNECTION_WITH_PRINT_SERVICE,
+    LIBFPTR_ERROR_UNIVERSAL_COUNTERS_ARE_DISABLED,
 
     LIBFPTR_ERROR_BASE_MARKING = 400,
     LIBFPTR_ERROR_MARKING_CODE_VALIDATION_IN_PROGRESS,
@@ -370,6 +383,11 @@ extern "C"
     LIBFPTR_ERROR_UPDATE_KEYS_SERVICE,
     LIBFPTR_ERROR_MARK_NOT_CHECKED,
     LIBFPTR_ERROR_MARK_CHECK_TIMEOUT_EXPIRED,
+    LIBFPTR_ERROR_NO_MARKING_CODE_IN_TABLE,
+    LIBFPTR_ERROR_CHEKING_MARK_IN_PROGRESS,
+    LIBFPTR_ERROR_INVALID_SERVER_ADDRESS,
+    LIBFPTR_ERROR_UPDATE_KEYS_TIMEOUT,
+    LIBFPTR_ERROR_PROPERTY_FOR_MARKING_POSITION_ONLY,
     LIBFPTR_ERROR_MARKING_END = 499,
 
     LIBFPTR_ERROR_BASE_WEB = 500,
@@ -748,6 +766,64 @@ extern "C"
     LIBFPTR_PARAM_MARK_CHECKING_STAGE_IN_CASH,
     LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT,
     LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_ERROR_DESCRIPTION,
+    LIBFPTR_PARAM_FN_CONTAINS_KEYS_UPDATER_SERVER_URI,
+    LIBFPTR_PARAM_CLEAR_MARKING_TABLE,
+    LIBFPTR_PARAM_MODULE_ADDRESS,
+    LIBFPTR_PARAM_SEGMENT_ADDRESS,
+    LIBFPTR_PARAM_LAST_SUCCESSFUL_OKP,
+    LIBFPTR_PARAM_FN_SERIAL_NUMBER,
+    LIBFPTR_PARAM_ECR_REGISTRATION_NUMBER,
+    LIBFPTR_PARAM_OFD_VATIN,
+    LIBFPTR_PARAM_FNS_URL,
+    LIBFPTR_PARAM_MACHINE_NUMBER,
+    LIBFPTR_PARAM_MARKING_PRODUCT_ID,
+    LIBFPTR_PARAM_TIMEOUT,
+    LIBFPTR_PARAM_PRINT_UPDATE_FNM_KEYS_REPORT,
+    LIBFPTR_PARAM_FN_KEYS_UPDATER_SERVER_URI,
+    LIBFPTR_PARAM_DOCUMENT_ELECTRONICALLY,
+    LIBFPTR_PARAM_FORMAT_TEXT,
+    LIBFPTR_PARAM_RECEIPT_SIZE,
+    LIBFPTR_PARAM_MARK_SIZE,
+    LIBFPTR_PARAM_MCU_TEMPERATURE,
+    LIBFPTR_PARAM_DATA_FOR_SEND_IS_EMPTY,
+    LIBFPTR_PARAM_AVAILABLE_CLOSING,
+    LIBFPTR_PARAM_AVAILABLE_CANCELLATION,
+    LIBFPTR_PARAM_AVAILABLE_POSITION_ADDING,
+    LIBFPTR_PARAM_AVAILABLE_PAYMENT,
+    LIBFPTR_PARAM_AVAILABLE_TOTAL,
+    LIBFPTR_PARAM_AVAILABLE_ATTRIBUTES_ADDING,
+    LIBFPTR_PARAM_OPERATOR_REGISTERED,
+    LIBFPTR_PARAM_DEVICE_PLATFORM_VERSION,
+    LIBFPTR_PARAM_GUID,
+    LIBFPTR_PARAM_PATTERN_REGISTERS,
+    LIBFPTR_PARAM_PATTERN_TAGS,
+    LIBFPTR_PARAM_PATTERN_SETTINGS,
+    LIBFPTR_PARAM_VENDING,
+    LIBFPTR_PARAM_CATERING,
+    LIBFPTR_PARAM_WHOLESALE,
+    LIBFPTR_PARAM_REGISTRATION_POSITION_FORM,
+    LIBFPTR_PARAM_MERGE_POSITIONS,
+    LIBFPTR_PARAM_DATAFLASH_JEDEC_ID,
+    LIBFPTR_PARAM_DATAFLASH_NAME,
+    LIBFPTR_PARAM_DATAFLASH_SIZE,
+    LIBFPTR_PARAM_FRAM_EEPROM_NAME,
+    LIBFPTR_PARAM_FRAM_EEPROM_SIZE,
+    LIBFPTR_PARAM_MARKING_NOT_FORM_REQUEST,
+    LIBFPTR_PARAM_PRINT_ENTITY_TYPE,
+    LIBFPTR_PARAM_RECEIPT_TAPE_PATH_LENGTH,
+    LIBFPTR_PARAM_LICENSE_INDEX,
+    LIBFPTR_PARAM_IS_LICENSE_VALID,
+    LIBFPTR_PARAM_RECEIPT_PERCENTAGE_SIZE,
+    LIBFPTR_PARAM_ADDITIONAL_ATTRIBUTE,
+    LIBFPTR_PARAM_ADDITIONAL_DATA,
+    LIBFPTR_PARAM_ELECTRONICALLY_PAYMENT_METHOD,
+    LIBFPTR_PARAM_ELECTRONICALLY_ID,
+    LIBFPTR_PARAM_ELECTRONICALLY_ADD_INFO,
+
+    // certification
+    LIBFPTR_PARAM_LAST_SUCCESS_FNM_UPDATE_KEYS_DATE_TIME,
+    LIBFPTR_PARAM_LAST_ATTEMPTION_FNM_UPDATE_KEYS_DATE_TIME,
+    LIBFPTR_PARAM_COUNT_ATTEMPTION_FNM_UPDATE_KEYS,
 
     LIBFPTR_PARAM_LAST
   );
@@ -768,6 +844,7 @@ extern "C"
     LIBFPTR_MODEL_ATOL_50F = 80,
     LIBFPTR_MODEL_ATOL_52F = 64,
     LIBFPTR_MODEL_ATOL_55F = 62,
+    LIBFPTR_MODEL_ATOL_55v2F = 66,
     LIBFPTR_MODEL_ATOL_60F = 75,
     LIBFPTR_MODEL_ATOL_77F = 69,
     LIBFPTR_MODEL_ATOL_90F = 72,
@@ -779,7 +856,14 @@ extern "C"
     LIBFPTR_MODEL_ATOL_PT_5F = 89,
     LIBFPTR_MODEL_KAZNACHEY_FA = 76,
     LIBFPTR_MODEL_ATOL_1F = 93,
-    LIBFPTR_MODEL_ATOL_22v2F = 95
+    LIBFPTR_MODEL_ATOL_2F = 96,
+    LIBFPTR_MODEL_ATOL_22v2F = 95,
+    LIBFPTR_MODEL_ATOL_42FA = 70,
+    LIBFPTR_MODEL_ALLIANCE_20F = 50,
+    LIBFPTR_MODEL_ATOL_STB_6F = 94,
+    LIBFPTR_MODEL_ATOL_35F = 97,
+    // certification
+    LIBFPTR_MODEL_ATOL_27_FP7_F = 99
   );
   Tlibfptr_model = libfptr_model;
 
@@ -811,6 +895,16 @@ const
   LIBFPTR_SETTING_REMOTE_SERVER_CONNECTION_TIMEOUT = 'RemoteServerConnectionTimeout';
   LIBFPTR_SETTING_VALIDATE_MARK_WITH_FNM_ONLY = 'ValidateMarksWithFnmOnly';
   LIBFPTR_SETTING_AUTO_MEASUREMENT_UNIT       = 'AutoMeasurementUnit';
+  LIBFPTR_SETTING_SILENT_REBOOT               = 'SilentReboot';
+  LIBFPTR_SETTING_GUI_PARAMETERS              = 'GuiParametersMapping';
+  LIBFPTR_SETTING_GUI_PATTERN_REG             = 'PatternParameters';
+  LIBFPTR_SETTING_AUTO_TIME_SYNC              = 'AutoTimeSync';
+  LIBFPTR_SETTING_AUTO_TIME_SYNC_TIME         = 'AutoTimeSyncTime';
+  LIBFPTR_SETTING_LOG_PATHS                   = 'LogPaths';
+  LIBFPTR_SETTING_MERGE_RECEIPT_ITEMS         = 'MergeReceiptItems';
+  LIBFPTR_SETTING_LICENSE                     = 'Licenses';
+  LIBFPTR_SETTING_TIME_ZONE                   = 'TimeZone';
+  LIBFPTR_SETTING_REMOTE_TIMEOUT              = 'RemoteTimeout';
 
 
 type
@@ -1004,7 +1098,8 @@ type
     LIBFPTR_PT_7,
     LIBFPTR_PT_8,
     LIBFPTR_PT_9,
-    LIBFPTR_PT_10
+    LIBFPTR_PT_10,
+    LIBFPTR_PT_ADD_INFO
   );
   Tlibfptr_payment_type = libfptr_payment_type;
 
@@ -1018,6 +1113,10 @@ type
     LIBFPTR_TAX_NO,
     LIBFPTR_TAX_VAT20,
     LIBFPTR_TAX_VAT120,
+    LIBFPTR_TAX_VAT5,
+    LIBFPTR_TAX_VAT7,
+    LIBFPTR_TAX_VAT105,
+    LIBFPTR_TAX_VAT107,
     LIBFPTR_TAX_INVALID
   );
   Tlibfptr_tax_type = libfptr_tax_type;
@@ -1081,7 +1180,15 @@ type
     LIBFPTR_DT_FONT_INFO,
     LIBFPTR_DT_SOFTLOCK_STATUS,
     LIBFPTR_DT_LAST_SENT_ISM_NOTICE_DATE_TIME,
-    LIBFPTR_DT_MCU_INFO
+    LIBFPTR_DT_MCU_INFO,
+    LIBFPTR_DT_MODULE_ADDRESS,
+    LIBFPTR_DT_CACHE_REQUISITES,
+    LIBFPTR_DT_DEPARTMENT_SUM,
+    LIBFPTR_DT_MCU_TEMPERATURE,
+    LIBFPTR_DT_AVAILABLE_OPERATIONS,
+    LIBFPTR_DT_PATTERN_PARAMETERS,
+    LIBFPTR_DT_RECEIPT_TAPE_PATH_LENGTH,
+    LIBFPTR_DT_LAST_DATA_TYPE
   );
   Tlibfptr_kkt_data_type = libfptr_kkt_data_type;
 
@@ -1108,7 +1215,12 @@ type
     LIBFPTR_FNDT_ISM_ERRORS,
     LIBFPTR_FNDT_ISM_EXCHANGE_STATUS,
     LIBFPTR_FNDT_MARKING_MODE_STATUS,
-    LIBFPTR_FNDT_CHECK_MARK_TIME
+    LIBFPTR_FNDT_CHECK_MARK_TIME,
+    LIBFPTR_FNDT_RECEIPT_SIZE,
+    LIBFPTR_FNDT_NOTIFICATION_STATUS,
+
+    // certification
+    LIBFPTR_FNDT_FNM_KEYS_UPDATE_DATE_TIME
   );
   Tlibfptr_fn_data_type = libfptr_fn_data_type;
 
@@ -1330,6 +1442,8 @@ type
     LIBFPTR_MES_DRY_FOR_SALE,
     LIBFPTR_MES_PIECE_RETURN,
     LIBFPTR_MES_DRY_RETURN,
+    LIBFPTR_MES_PIECE_FOR_SALE,
+    LIBFPTR_MES_DRY_SOLD,
     LIBFPTR_MES_UNCHANGED = 255
   );
   Tlibfptr_marking_estimated_status = libfptr_marking_estimated_status;
@@ -1411,7 +1525,8 @@ type
        LIBFPTR_NFM_LESS_50_PERCENT = 0,
        LIBFPTR_NFM_FROM_50_TO_80_PERCENT,
        LIBFPTR_NFM_FROM_80_TO_90_PERCENT,
-       LIBFPTR_NFM_MORE_90_PERCENT
+       LIBFPTR_NFM_MORE_90_PERCENT,
+       LIBFPTR_NFM_OUT_OF_MEMORY
   );
   Tlibfptr_notice_free_memory = libfptr_notice_free_memory;
 
@@ -1450,7 +1565,8 @@ type
        LIBFPTR_MCT_AUTONOMOUS = 0,
        LIBFPTR_MCT_WAIT_FOR_RESULT,
        LIBFPTR_MCT_RESULT_NOT_WAIT,
-       LIBFPTR_MCT_QUERY_NOT_SEND
+       LIBFPTR_MCT_QUERY_NOT_SEND,
+       LIBFPTR_MCT_QUERY_NOT_FORM
   );
   Tlibfptr_mark_checking_type_in_cash = libfptr_mark_checking_type_in_cash;
 
@@ -1466,6 +1582,80 @@ type
   );
   Tlibfptr_mark_checking_stage_in_cash = libfptr_mark_checking_stage_in_cash;
 
+  libfptr_silent_reboot = (
+       LIBFPTR_SILENT_REBOOT_NO = 0,
+       LIBFPTR_SILENT_REBOOT_AFTER_SESSION_CLOSE,
+       LIBFPTR_SILENT_REBOOT_BEFORE_SESSION_OPEN
+  );
+  Tlibfptr_silent_reboot = libfptr_silent_reboot;
+
+  libfptr_platform_version = (
+       LIBFPTR_PLATFORM_UNKNOWN = 0,
+       LIBFPTR_PLATFORM_25 = 25,
+       LIBFPTR_PLATFORM_50 = 50
+  );
+  Tlibfptr_platform_version = libfptr_platform_version;
+
+  libfptr_registration_position_form = (
+       LIBFPTR_RPF_ELECTRONIC_AND_PRINT = 0,
+       LIBFPTR_RPF_ONLY_ELECTRONIC,
+       LIBFPTR_RPF_ONLY_PRINT
+  );
+  Tlibfptr_registration_position_form = libfptr_registration_position_form;
+
+  libfptr_merge_receipt_items = (
+       LIBFPTR_MERGE_RECEIPT_NO = 0,
+       LIBFPTR_MERGE_RECEIPT_ALL,
+       LIBFPTR_MERGE_RECEIPT_MARK_ONLY
+  );
+  Tlibfptr_merge_receipt_items = libfptr_merge_receipt_items;
+
+  libfptr_license = (
+       LIBFPTR_LIC_BASE_FISCAL = 1,
+       LIBFPTR_LIC_WRITE_FW,
+       LIBFPTR_LIC_TAX_20,
+       LIBFPTR_LIC_FFD_1_1,
+       LIBFPTR_LIC_MARK_CODE,
+       LIBFPTR_LIC_EXT_FUNC,
+       LIBFPTR_LIC_TEMPLATE,
+       LIBFPTR_LIC_PRINT_BMP,
+       LIBFPTR_LIC_DISABLE_PF,
+       LIBFPTR_LIC_FFD_1_2,
+       LIBFPTR_LIC_FR_WORK,
+       LIBFPTR_LIC_WEB,
+       LIBFPTR_LIC_FFD_1_1_2,
+       LIBFPTR_LIC_TEST_LAB,
+       LIBFPTR_LIC_WEB_REQ,
+       LIBFPTR_LIC_RELESE,
+       LIBFPTR_LIC_EXT_PRINT,
+       LIBFPTR_LIC_OSU,
+       LIBFPTR_LIC_EXT_FISCAL
+  );
+  Tlibfptr_license = libfptr_license;
+
+  libfptr_print_entity_type = (
+       LIBFPTR_PET_STRINGS = 0,
+       LIBFPTR_PET_PICTURES,
+       LIBFPTR_PET_FISCAL_DOCUMENT
+  );
+  Tlibfptr_print_entity_type = libfptr_print_entity_type;
+
+  libfptr_time_zone = (
+       LIBFPTR_TIME_ZONE_NO = -1,
+       LIBFPTR_TIME_ZONE_DEVICE = 0,
+       LIBFPTR_TIME_ZONE_1 = 1,
+       LIBFPTR_TIME_ZONE_2,
+       LIBFPTR_TIME_ZONE_3,
+       LIBFPTR_TIME_ZONE_4,
+       LIBFPTR_TIME_ZONE_5,
+       LIBFPTR_TIME_ZONE_6,
+       LIBFPTR_TIME_ZONE_7,
+       LIBFPTR_TIME_ZONE_8,
+       LIBFPTR_TIME_ZONE_9,
+       LIBFPTR_TIME_ZONE_10,
+       LIBFPTR_TIME_ZONE_11
+  );
+  Tlibfptr_time_zone = libfptr_time_zone;
 const
   LIBFPTR_UC_OTHERS = 4294967295;
 
@@ -1487,6 +1677,10 @@ type
 
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_set_settings(libfptr_handle handle, const wchar_t *settings);
   Tlibfptr_set_settings = function(Handle:PLibFPtrHandle; Settings:PWchar_t):integer; cdecl;
+
+  { #todo -oalexs : Реализовать функцию libfptr_validate_merge_position_support }
+  // DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_validate_merge_position_support(libfptr_handle handle,
+  //                                                                               wchar_t *value, int size);
 
   //DTOX_SHARED_EXPORT void DTOX_SHARED_CCA libfptr_destroy(libfptr_handle *handle);
   Tlibfptr_destroy = procedure(Handle:PLibFPtrHandle); cdecl;
@@ -1933,6 +2127,22 @@ type
   //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_get_last_document_journal(libfptr_handle handle);
   Tlibfptr_get_last_document_journal = function(Handle:TLibFPtrHandle):Integer; cdecl;
 
+  { #todo -oalexs : Реализовать функцию libfptr_change_label }
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_change_label(libfptr_handle handle, const wchar_t *label);
+
+  { #todo -oalexs : Реализовать функцию libfptr_is_param_available }
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_is_param_available(libfptr_handle handle, int param_id);
+
+  { #todo -oalexs : Реализовать функцию libfptr_error_recommendation }
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_error_recommendation(libfptr_handle handle, wchar_t *value, int size);
+
+  { #todo -oalexs : Реализовать функцию libfptr_find_document_in_journal }
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_find_document_in_journal(libfptr_handle handle);
+
+  // certification
+
+  { #todo -oalexs : Реализовать функцию libfptr_run_fn_command }
+  //DTOX_SHARED_EXPORT int DTOX_SHARED_CCA libfptr_run_fn_command(libfptr_handle handle);
 
 function AtollWideStrToString(const AValue:TAtollWideString):string;
 function StringToAtollWideStr(const AValue:string):TAtollWideString;
