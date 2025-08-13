@@ -75,6 +75,7 @@ type
     function RegisterGoods:Integer; override;
     function RegisterPayments:Integer; override;
     procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
+    procedure RegisterPayment(APaymentInfo:TPaymentInfo); override;
     procedure OpenCheck; override;
     function CloseCheck:Integer; override;                 //Закрыть чек (со сдачей)
     function CancelCheck:integer; override;                //Аннулирование всего чека
@@ -197,6 +198,27 @@ begin
   else
     Result:='Прочее (' + IntToStr(Ord(AGoodsType))
   end;
+end;
+
+function ECRTimeZoneToStr(ATimeZone:TEcrTimeZone):string;
+begin
+  case ATimeZone of
+    ecrTimeZoneNone:Result:='TimeZoneNone (-1)';
+    ecrTimeZoneDevice:Result:='TimeZoneDevice';
+    ecrTimeZone1:Result:='TimeZone 1 (UTC+2)';
+    ecrTimeZone2:Result:='TimeZone 2 (UTC+3)';
+    ecrTimeZone3:Result:='TimeZone 3 (UTC+4)';
+    ecrTimeZone4:Result:='TimeZone 4 (UTC+5)';
+    ecrTimeZone5:Result:='TimeZone 5 (UTC+6)';
+    ecrTimeZone6:Result:='TimeZone 6 (UTC+7)';
+    ecrTimeZone7:Result:='TimeZone 7 (UTC+8)';
+    ecrTimeZone8:Result:='TimeZone 8 (UTC+9)';
+    ecrTimeZone9:Result:='TimeZone 9 (UTC+10)';
+    ecrTimeZone10:Result:='TimeZone 10 (UTC+11)';
+    ecrTimeZone11:Result:='TimeZone 11 (UTC+12)';
+  else
+    Result:=Format('Не известная временная зона (%d)', [Ord(ATimeZone)]);
+  end
 end;
 
 procedure ShowCheckForm(AEcr:TCashRegisterFictive; const AChekStr:string); overload;
@@ -384,6 +406,11 @@ begin
   DoCheckConnected;
 end;
 
+procedure TCashRegisterFictive.RegisterPayment(APaymentInfo : TPaymentInfo);
+begin
+  DoCheckConnected;
+end;
+
 procedure TCashRegisterFictive.OpenCheck;
 begin
   DoCheckConnected;
@@ -410,6 +437,7 @@ var
   GI: TGoodsInfo;
   FPayInfo: TPaymentInfo;
   FSum: Extended;
+  STechInfo : String;
 begin
   DoCheckConnected;
   if not FCheckOpen then
@@ -483,17 +511,39 @@ begin
   for FPayInfo in PaymentsList do
   begin
     S:=S + MS(' ', 15) + PaymentTypeStr(FPayInfo.PaymentType) + ' = ' + FloatToStr(FPayInfo.PaymentSum) + LineEnding;
+
+    if FPayInfo.PaymentType = pctElectronically then
+    begin
+      S:=S + MS(' ', 15) + Format('ElectronPaytMethod=%d,  PaymentId=%s, PaymentAddInfo=%s', [Ord(FPayInfo.PaymentType), FPayInfo.PaymentId, FPayInfo.PaymentAddInfo]) +  LineEnding;
+    end;
   end;
 
 
+  STechInfo := '';
   if PermissiveModeDoc.UUID <> '' then
   begin
-    S:= S + MS('-', fcLineWidth) + LineEnding +
+    STechInfo:= STechInfo + LineEnding +
         'Разрешительный режим '+ LineEnding +
          MS(' ', 10) + 'UUID=' + PermissiveModeDoc.UUID + LineEnding +
          MS(' ', 10) + 'Time=' + PermissiveModeDoc.DocTimeStamp + LineEnding
          ;
   end;
+
+  if TimeZone <> ecrTimeZoneNone then
+  begin
+    STechInfo:= STechInfo +
+        'Временная зона : '+ ECRTimeZoneToStr(TimeZone) + LineEnding;
+  end;
+
+  if InternetPayment then
+  begin
+    STechInfo:= STechInfo +
+        'Место расчёта ИНТЕРНЕТ.'+ LineEnding +
+        'Адрес сайта ' + InternetPaymentURL + LineEnding;
+  end;
+
+  if STechInfo <> '' then
+    S:= S + LineEnding + MS('-', fcLineWidth) + LineEnding + STechInfo;
 
   ShowCheckForm(Self, S);
 

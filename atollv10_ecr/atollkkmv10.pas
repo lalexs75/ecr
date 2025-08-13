@@ -456,6 +456,7 @@ type
     function InternalRegistration1_2(AGI:TGoodsInfo):integer;
     function InternalRegisterBuyer1_2:TBytes;
     procedure InternalSetCorrectionInfo;
+    procedure InternalRegisterSalesNotice;
   protected
     procedure InternalUserLogin; override;
     procedure InternalOpenKKM; override;
@@ -500,7 +501,8 @@ type
     function RegisterPayments:Integer; override;
     function ValidateGoodsKM:Boolean; override;
 
-    procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
+    //procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
+    procedure RegisterPayment(APaymentInfo:TPaymentInfo); override;
 
     procedure SetAttributeInt(AttribNum, AttribValue:Integer); override;
     procedure SetAttributeStr(AttribNum:Integer; AttribValue:string); override;
@@ -639,6 +641,26 @@ begin
   end;
 end;
 
+function  EcrTimeZoneToATOLTZ(ATimeZone:TEcrTimeZone):Tlibfptr_time_zone;
+begin
+  case ATimeZone of
+    ecrTimeZoneNone:Result:=LIBFPTR_TIME_ZONE_NO;
+    ecrTimeZoneDevice:Result:=LIBFPTR_TIME_ZONE_DEVICE;
+    ecrTimeZone1:Result:=LIBFPTR_TIME_ZONE_1;
+    ecrTimeZone2:Result:=LIBFPTR_TIME_ZONE_2;
+    ecrTimeZone3:Result:=LIBFPTR_TIME_ZONE_3;
+    ecrTimeZone4:Result:=LIBFPTR_TIME_ZONE_4;
+    ecrTimeZone5:Result:=LIBFPTR_TIME_ZONE_5;
+    ecrTimeZone6:Result:=LIBFPTR_TIME_ZONE_6;
+    ecrTimeZone7:Result:=LIBFPTR_TIME_ZONE_7;
+    ecrTimeZone8:Result:=LIBFPTR_TIME_ZONE_8;
+    ecrTimeZone9:Result:=LIBFPTR_TIME_ZONE_9;
+    ecrTimeZone10:Result:=LIBFPTR_TIME_ZONE_10;
+    ecrTimeZone11:Result:=LIBFPTR_TIME_ZONE_11;
+  else
+    raise Exception.CreateFmt('Unknow timezone (%d)', [Ord(ATimeZone)]);
+  end;
+end;
 { TAtollKKMv10 }
 
 procedure TAtollKKMv10.InternalUserLogin;
@@ -986,6 +1008,25 @@ begin
   SetAttributeInt(1173, Ord(CorrectionInfo.CorrectionType)-1);
   //libfptr_set_param_bytearray(fptr, 1174, &correctionInfo[0], correctionInfo.size());
   FLibrary.SetParamByteArray(FHandle, 1174, FCorrectionInfoBytes);
+end;
+
+procedure TAtollKKMv10.InternalRegisterSalesNotice;
+begin
+{    fptr.setParam(1262, '016');
+    fptr.setParam(1263, '24.09.2020');
+    fptr.setParam(1264, '8252');
+    fptr.setParam(1265, 'значение');
+    fptr.utilFormTlv;
+    industryInfo := fptr.getParamByteArray(fptr.LIBFPTR_PARAM_TAG_VALUE);
+}
+
+  if CounteragentInfo.INN<>'' then
+    SetAttributeStr(1228, CounteragentInfo.INN);
+//    fptr.setParam(1261, industryInfo);
+
+  if TimeZone <> ecrTimeZoneNone then
+    SetAttributeInt(1011,  Ord( EcrTimeZoneToATOLTZ(TimeZone)));
+  FLibrary.WriteSalesNotice(FHandle);
 end;
 
 procedure TAtollKKMv10.InternalGetDeviceInfo(var ALineLength,
@@ -1400,9 +1441,13 @@ var
 begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
+    if ExistsMarkingGoods then
+      InternalRegisterSalesNotice;
+
     for FPayInfo in PaymentsList do
     begin
-      RegisterPayment(FPayInfo.PaymentType, FPayInfo.PaymentSum);
+      //RegisterPayment(FPayInfo.PaymentType, FPayInfo.PaymentSum);
+      RegisterPayment(FPayInfo);
       if ErrorCode <> 0 then
         Exit;
     end;
@@ -1462,7 +1507,7 @@ begin
     end;
   end;
 end;
-
+(*
 procedure TAtollKKMv10.RegisterPayment(APaymentType: TPaymentType;
   APaymentSum: Currency);
 var
@@ -1488,6 +1533,45 @@ begin
     FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(FPT));
     FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentSum);
     FLibrary.Payment(FHandle);
+  end;
+end;
+*)
+procedure TAtollKKMv10.RegisterPayment(APaymentInfo : TPaymentInfo);
+var
+  FPT : libfptr_payment_type;
+begin
+  if Assigned(FLibrary) and FLibrary.Loaded and Assigned(APaymentInfo) then
+  begin
+    case APaymentInfo.PaymentType of
+      pctCash:FPT:=LIBFPTR_PT_CASH;                     //наличный
+      pctElectronically:FPT:=LIBFPTR_PT_ELECTRONICALLY; //электронный
+      pctPrePaid:FPT:=LIBFPTR_PT_PREPAID;               //предварительная оплата (аванс)
+      pctCredit:FPT:=LIBFPTR_PT_CREDIT;                 //последующая оплата (кредит)
+      pctOther:FPT:=LIBFPTR_PT_OTHER;                   //иная форма оплаты (встречное предоставление)
+      pctOther_6:FPT:=LIBFPTR_PT_6;                     //тип оплаты №6
+      pctOther_7:FPT:=LIBFPTR_PT_7;                     //тип оплаты №7
+      pctOther_8:FPT:=LIBFPTR_PT_8;                     //тип оплаты №8
+      pctOther_9:FPT:=LIBFPTR_PT_9;                     //тип оплаты №9
+      pctOther_10:FPT:=LIBFPTR_PT_10;                   //тип оплаты №10
+    else
+      raise EAtollLibrary.Create('Не известный тип оплаты');
+    end;
+
+    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(FPT));
+    FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentInfo.PaymentSum);
+    FLibrary.Payment(FHandle);
+{$IFDEF LINUX}
+    //if APaymentInfo.PaymentType = pctElectronically then
+    if ((APaymentInfo.PaymentType <> pctCash) and (APaymentInfo.ElectronPayMethod <> epmNone)) then
+    begin
+      FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(LIBFPTR_PT_ADD_INFO));
+      FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentInfo.PaymentSum);
+      FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_ELECTRONICALLY_PAYMENT_METHOD, Ord(APaymentInfo.ElectronPayMethod));
+      FLibrary.SetParamStr(FHandle, Ord(LIBFPTR_PARAM_ELECTRONICALLY_ID), APaymentInfo.PaymentId);
+      FLibrary.SetParamStr(FHandle, Ord(LIBFPTR_PARAM_ELECTRONICALLY_ADD_INFO), APaymentInfo.PaymentAddInfo);
+      FLibrary.Payment(FHandle);
+    end;
+{$ENDIF}
   end;
 end;
 

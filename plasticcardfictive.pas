@@ -99,7 +99,18 @@ begin
   'Cумма : ' +FloatToStr(APaySum)+ LineEnding +
   'Комиссия : ' + FloatToStr(RoundTo(APaySum / 100, -2))+ LineEnding +
   'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
-  'Фиктивный СЛИП' ;
+  'Фиктивный СЛИП';
+
+  case Random(3) of
+    0:FSlipInfo:=FSlipInfo + 'TransactionID: 010029528297' + LineEnding;
+    1:FSlipInfo:=FSlipInfo + 'Подпись клиента не требуется' + LineEnding;
+  else
+    FSlipInfo:=FSlipInfo + 'Введен ПИН-код' + LineEnding;
+  end;
+
+  //StatusVector:='00-00-000000';
+  FInvoiceNumber:='000-000-'+IntToStr(Trunc(Now) * 10000);
+  FRRN:='XXXXX'+FInvoiceNumber;
 end;
 
 procedure TPlasticCardFictive.ReportItog;

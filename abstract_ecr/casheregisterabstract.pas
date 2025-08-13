@@ -154,7 +154,7 @@ type
        gtCasinoPayment = 26                   //или 26 - платеж казино
       );
 
-  TElectronPaytMethod =
+  TElectronPayMethod =
     ( epmNone = 0,
       epmBankCard = 1,           //1 — Банковская карта
       epmMobailAppPay = 2,       //2 — Мобильное приложение (например, Apple Pay, Google Pay)
@@ -431,7 +431,7 @@ type
 
   TPaymentInfo = class
   private
-    FElectronPaytMethod : TElectronPaytMethod;
+    FElectronPayMethod : TElectronPayMethod;
     FPaymentAddInfo : string;
     FPaymentId : string;
     FPaymentSum: Currency;
@@ -444,7 +444,7 @@ type
     property PaymentType:TPaymentType read FPaymentType write FPaymentType;
     property PaymentSum: Currency read FPaymentSum write FPaymentSum;
     //Дополнительная информация при безналичной оплате
-    property ElectronPaytMethod:TElectronPaytMethod read FElectronPaytMethod write FElectronPaytMethod;
+    property ElectronPayMethod:TElectronPayMethod read FElectronPayMethod write FElectronPayMethod;
     property PaymentId:string read FPaymentId write FPaymentId;
     property PaymentAddInfo:string read FPaymentAddInfo write FPaymentAddInfo;
   end;
@@ -496,6 +496,8 @@ type
     FErrorDescription: string;
     FGoodsInfo: TGoodsInfo;
     FGoodsList: TGoodsList;
+    FInternetPayment : Boolean;
+    FInternetPaymentURL : string;
     FKassaUserINN: string;
     FOnError: TNotifyEvent;
     FPassword: string;
@@ -566,6 +568,7 @@ type
     function ReceiptTotal:integer;virtual; abstract;
     function Payment:integer; virtual; abstract;
     procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); virtual; abstract; deprecated;
+    procedure RegisterPayment(APaymentInfo:TPaymentInfo); virtual; abstract;
 
     //Методы для формирования чека по заполненной ранее информации
     procedure PrintCheckInfoLines;
@@ -589,6 +592,7 @@ type
     procedure BeginNonfiscalDocument; virtual; abstract;
     procedure EndNonfiscalDocument; virtual; abstract;
     function UpdateFnmKeys:Integer; virtual; abstract;
+    function ExistsMarkingGoods : boolean;
     //
     property CheckNumber:integer read GetCheckNumber;
     property CheckOpen:boolean read GetCheckOpen;
@@ -597,7 +601,6 @@ type
     //property CheckMode:integer read FCheckMode write FCheckMode;
     property CheckType:TCheckType read FCheckType write SetCheckType;
     property CheckElectronic:boolean read FCheckElectronic write FCheckElectronic;
-    property TimeZone:TEcrTimeZone read FTimeZone write FTimeZone;
   public
     property CasheRegisterUUID:string read FCasheRegisterUUID write FCasheRegisterUUID;
     property LibraryFileName:string read FLibraryFileName write FLibraryFileName;
@@ -620,6 +623,9 @@ type
     property PaymentsList:TPaymentsList read FPaymentsList;
     property PaymentPlace:string read FPaymentPlace write FPaymentPlace;
     property CorrectionInfo:TCorrectionInfo read FCorrectionInfo write FCorrectionInfo;
+    property TimeZone:TEcrTimeZone read FTimeZone write FTimeZone;
+    property InternetPayment:Boolean read FInternetPayment write FInternetPayment;
+    property InternetPaymentURL:string read FInternetPaymentURL write FInternetPaymentURL;
 
     //Статус и информация о аппарате
     property DeviceState:TDeviceState read FDeviceState;
@@ -872,7 +878,7 @@ procedure TPaymentInfo.Clear;
 begin
   FPaymentSum:=0;
   FPaymentType:=pctCash;
-  FElectronPaytMethod:=epmNone;
+  FElectronPayMethod:=epmNone;
   FPaymentId:='';
   FPaymentAddInfo:='';
 end;
@@ -1195,6 +1201,7 @@ end;
 constructor TCashRegisterAbstract.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  FTimeZone:=ecrTimeZoneNone;
   FCheckInfoLines:=TStringList.Create;
   FCounteragentInfo:=TCounteragentInfo.Create;
   FCheckInfo:=TCheckInfo.Create;
@@ -1286,7 +1293,6 @@ end;
 function TCashRegisterAbstract.CloseCheck: Integer;
 begin
   Result:=0;
-  FTimeZone:=ecrTimeZoneNone;
   FCounteragentInfo.Clear;
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
@@ -1302,7 +1308,6 @@ end;
 function TCashRegisterAbstract.CancelCheck: integer;
 begin
   Result:=0;
-  FTimeZone:=ecrTimeZoneNone;
   FCounteragentInfo.Clear;
   FCheckInfo.Clear;
   FGoodsInfo.Clear;
@@ -1355,6 +1360,16 @@ end;
 procedure TCashRegisterAbstract.AddCheckInfo(AInfo: string);
 begin
   FCheckInfoLines.Add(AInfo);
+end;
+
+function TCashRegisterAbstract.ExistsMarkingGoods : boolean;
+var
+  GI : TGoodsInfo;
+begin
+  Result:=false;
+  for GI in GoodsList do
+    if GI.GoodsNomenclatureCode.KM <> '' then
+      Exit(true);
 end;
 
 procedure TCashRegisterAbstract.SetUserName(AValue: string);

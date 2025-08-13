@@ -1,5 +1,5 @@
 //Интерфейс универсального драйвера к ККМ АТОЛ
-//Версия 10.7.0.0
+//Версия 10.10.7.0
 //Исходный файл libfptr10.h
 //Версия для FPC - Лагунов А.А. (c) alexs, 2018-2023
 // alexs75@yandex.ru
@@ -23,7 +23,7 @@ const
   aFirstStrChar = 0;
   {$ENDIF}
 
-  atolAPIVersion = '10.7.0.0';
+  atolAPIVersion = '10.10.7.0';
 type
   PWchar_t = Pointer;
   {$IFDEF WINDOWS}
