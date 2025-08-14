@@ -539,8 +539,12 @@ begin
   begin
     STechInfo:= STechInfo +
         'Место расчёта ИНТЕРНЕТ.'+ LineEnding +
-        'Адрес сайта ' + InternetPaymentURL + LineEnding;
-  end;
+        'Адрес сайта ' + PaymentPlace + LineEnding;
+  end
+  else
+  if PaymentPlace<>'' then
+    STechInfo:= STechInfo +
+        'Место расчётов ' + PaymentPlace + LineEnding;
 
   if STechInfo <> '' then
     S:= S + LineEnding + MS('-', fcLineWidth) + LineEnding + STechInfo;

@@ -625,7 +625,7 @@ type
     property CorrectionInfo:TCorrectionInfo read FCorrectionInfo write FCorrectionInfo;
     property TimeZone:TEcrTimeZone read FTimeZone write FTimeZone;
     property InternetPayment:Boolean read FInternetPayment write FInternetPayment;
-    property InternetPaymentURL:string read FInternetPaymentURL write FInternetPaymentURL;
+//    property InternetPaymentURL:string read FInternetPaymentURL write FInternetPaymentURL;
 
     //Статус и информация о аппарате
     property DeviceState:TDeviceState read FDeviceState;
