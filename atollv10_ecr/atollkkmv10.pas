@@ -1562,7 +1562,7 @@ begin
     FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(FPT));
     FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentInfo.PaymentSum);
     FLibrary.Payment(FHandle);
-{$IFDEF LINUX}
+{.$IFDEF LINUX}
     //if APaymentInfo.PaymentType = pctElectronically then
     if ((APaymentInfo.PaymentType <> pctCash) and (APaymentInfo.ElectronPayMethod <> epmNone)) then
     begin
@@ -1573,7 +1573,7 @@ begin
       FLibrary.SetParamStr(FHandle, Ord(LIBFPTR_PARAM_ELECTRONICALLY_ADD_INFO), APaymentInfo.PaymentAddInfo);
       FLibrary.Payment(FHandle);
     end;
-{$ENDIF}
+{.$ENDIF}
   end;
 end;
 
