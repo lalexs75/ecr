@@ -1196,7 +1196,7 @@ begin
   if Assigned(FLibrary) and FLibrary.Loaded and Assigned(FHandle) then
   begin
     Result:=FLibrary.GetVersionString;
-    InternalCheckError;
+//    InternalCheckError;
   end
   else
     Result:='';
@@ -1563,8 +1563,8 @@ begin
     FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentInfo.PaymentSum);
     FLibrary.Payment(FHandle);
 {.$IFDEF LINUX}
-    //if APaymentInfo.PaymentType = pctElectronically then
-    if ((APaymentInfo.PaymentType <> pctCash) and (APaymentInfo.ElectronPayMethod <> epmNone)) then
+    if APaymentInfo.PaymentType = pctElectronically then
+    //if ((APaymentInfo.PaymentType <> pctCash) and (APaymentInfo.ElectronPayMethod <> epmNone)) then
     begin
       FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(LIBFPTR_PT_ADD_INFO));
       FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentInfo.PaymentSum);
