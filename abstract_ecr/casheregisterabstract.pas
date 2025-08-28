@@ -567,7 +567,7 @@ type
     function Registration:integer;virtual; deprecated;
     function ReceiptTotal:integer;virtual; abstract;
     function Payment:integer; virtual; abstract;
-    procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); virtual; abstract; deprecated;
+    //procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); virtual; abstract; deprecated;
     procedure RegisterPayment(APaymentInfo:TPaymentInfo); virtual; abstract;
 
     //Методы для формирования чека по заполненной ранее информации

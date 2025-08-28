@@ -74,7 +74,7 @@ type
     destructor Destroy; override;
     function RegisterGoods:Integer; override;
     function RegisterPayments:Integer; override;
-    procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
+    //procedure RegisterPayment(APaymentType:TPaymentType; APaymentSum:Currency); override;
     procedure RegisterPayment(APaymentInfo:TPaymentInfo); override;
     procedure OpenCheck; override;
     function CloseCheck:Integer; override;                 //Закрыть чек (со сдачей)
@@ -379,7 +379,7 @@ begin
   DoCheckConnected;
   for FPayInfo in PaymentsList do
   begin
-    RegisterPayment(FPayInfo.PaymentType, FPayInfo.PaymentSum);
+    RegisterPayment(FPayInfo);
     if ErrorCode <> 0 then
       Exit;
   end;
@@ -399,13 +399,13 @@ begin
       GI.GoodsNomenclatureCode.State:=0;
   end;
 end;
-
+{
 procedure TCashRegisterFictive.RegisterPayment(APaymentType: TPaymentType;
   APaymentSum: Currency);
 begin
   DoCheckConnected;
 end;
-
+}
 procedure TCashRegisterFictive.RegisterPayment(APaymentInfo : TPaymentInfo);
 begin
   DoCheckConnected;
