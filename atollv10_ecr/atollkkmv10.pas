@@ -1562,18 +1562,16 @@ begin
     FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(FPT));
     FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentInfo.PaymentSum);
     FLibrary.Payment(FHandle);
-{.$IFDEF LINUX}
     if APaymentInfo.PaymentType = pctElectronically then
     //if ((APaymentInfo.PaymentType <> pctCash) and (APaymentInfo.ElectronPayMethod <> epmNone)) then
     begin
       FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(LIBFPTR_PT_ADD_INFO));
       FLibrary.SetParamDouble(FHandle, Ord(LIBFPTR_PARAM_PAYMENT_SUM), APaymentInfo.PaymentSum);
-      FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_ELECTRONICALLY_PAYMENT_METHOD, Ord(APaymentInfo.ElectronPayMethod));
+      FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_ELECTRONICALLY_PAYMENT_METHOD, 1); //Ord(APaymentInfo.ElectronPayMethod));
       FLibrary.SetParamStr(FHandle, Ord(LIBFPTR_PARAM_ELECTRONICALLY_ID), APaymentInfo.PaymentId);
       FLibrary.SetParamStr(FHandle, Ord(LIBFPTR_PARAM_ELECTRONICALLY_ADD_INFO), APaymentInfo.PaymentAddInfo);
       FLibrary.Payment(FHandle);
     end;
-{.$ENDIF}
   end;
 end;
 
@@ -1683,6 +1681,10 @@ function TAtollKKMv10.CloseCheck: Integer;
 begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
+
+//    if APaymentInfo.PaymentType = pctElectronically then
+//    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(LIBFPTR_PT_ELECTRONICALLY));
+
     FLibrary.CloseReceipt(FHandle);
     InternalCheckError;
   end;
