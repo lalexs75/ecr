@@ -213,11 +213,15 @@ type
   TPermissiveModeDoc = class
   private
     FDocTimeStamp: string;
+    FInst : string;
     FUUID: string;
+    FVer : string;
   public
     procedure Clear;
     property UUID:string read FUUID write FUUID;
     property DocTimeStamp:string read FDocTimeStamp write FDocTimeStamp;
+    property Inst:string read FInst write FInst;
+    property Ver:string read FVer write FVer;
   end;
 
   { TCorrectionInfo }
@@ -781,6 +785,8 @@ procedure TPermissiveModeDoc.Clear;
 begin
   FDocTimeStamp:='';
   FUUID:='';
+  FInst :='';
+  FVer :='';
 end;
 
 { TCorrectionInfo }

@@ -497,11 +497,21 @@ begin
 
     if GI.GoodsNomenclatureCode.PermissiveModeDoc.UUID <> '' then
     begin
-      S:= S + MS('-', fcLineWidth) + LineEnding +
-          'Разрешительный режим '+ LineEnding +
+      S:= S + MS('-', fcLineWidth) + LineEnding;
+      if GI.GoodsNomenclatureCode.PermissiveModeDoc.Inst <> '' then
+        S:=S +'Разрешительный режим (локальный модуль)'+ LineEnding
+      else
+        S:=S +'Разрешительный режим '+ LineEnding;
+      S:=S +
            MS(' ', 10) + 'UUID=' + GI.GoodsNomenclatureCode.PermissiveModeDoc.UUID + LineEnding +
            MS(' ', 10) + 'Time=' + GI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp + LineEnding
            ;
+      if GI.GoodsNomenclatureCode.PermissiveModeDoc.Inst <> '' then
+      begin
+      S:=S +
+           MS(' ', 10) + 'Inst=' + GI.GoodsNomenclatureCode.PermissiveModeDoc.Inst + LineEnding +
+           MS(' ', 10) + 'Ver=' + GI.GoodsNomenclatureCode.PermissiveModeDoc.Ver + LineEnding
+      end;
     end;
 
   end;

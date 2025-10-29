@@ -827,6 +827,7 @@ var
   FValidationReady: Boolean;
   FMeasurementUnit: Tlibfptr_item_units;
   FMarkingEstimatedStatus: libfptr_marking_estimated_status;
+  S : String;
 begin
   FMeasurementUnit:=muOKEItoAtol(AGI.GoodsMeasurementUnit);
 
@@ -844,14 +845,21 @@ begin
       SetAttributeStr(1262, '030');
       SetAttributeStr(1263, '21.11.2023');
       SetAttributeStr(1264, '1944');
-//      SetAttributeStr(1265,  Format('UUID=%s&Time=%s', [PermissiveModeDoc.UUID, PermissiveModeDoc.DocTimeStamp]));
-      SetAttributeStr(1265,  Format('UUID=%s&Time=%s', [AGI.GoodsNomenclatureCode.PermissiveModeDoc.UUID, AGI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp]));
+
+{      if (AGI.GoodsNomenclatureCode.PermissiveModeDoc.Inst <>'') and (AGI.GoodsNomenclatureCode.PermissiveModeDoc.Ver <>'') then
+        SetAttributeStr(1265,  Format('UUID=%s&Time=%s&Inst=%s&Ver=%s', [AGI.GoodsNomenclatureCode.PermissiveModeDoc.UUID, AGI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp, AGI.GoodsNomenclatureCode.PermissiveModeDoc.Inst, AGI.GoodsNomenclatureCode.PermissiveModeDoc.Ver]))
+      else
+        SetAttributeStr(1265,  Format('UUID=%s&Time=%s', [AGI.GoodsNomenclatureCode.PermissiveModeDoc.UUID, AGI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp]));}
+      if (AGI.GoodsNomenclatureCode.PermissiveModeDoc.Inst <>'') and (AGI.GoodsNomenclatureCode.PermissiveModeDoc.Ver <>'') then
+        S:=Format('UUID=%s&Time=%s&Inst=%s&Ver=%s', [AGI.GoodsNomenclatureCode.PermissiveModeDoc.UUID, AGI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp, AGI.GoodsNomenclatureCode.PermissiveModeDoc.Inst, AGI.GoodsNomenclatureCode.PermissiveModeDoc.Ver])
+      else
+        S:=Format('UUID=%s&Time=%s', [AGI.GoodsNomenclatureCode.PermissiveModeDoc.UUID, AGI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp]);
+      SetAttributeStr(1265,  S);
 
       FLibrary.UtilFormTLV(FHandle);
       FIndustryInfo:=FLibrary.GetParamByteArray(FHandle, Ord(LIBFPTR_PARAM_TAG_VALUE));
 //      FLibrary.SetParamByteArray(FHandle, 1260, FIndustryInfo);
-//      rxWriteLog(etDebug, 'Заполнили информацию о разрешительном режиме, UUID=%s&Time=%s', [PermissiveModeDoc.UUID, PermissiveModeDoc.DocTimeStamp]);
-      rxWriteLog(etDebug, 'Заполнили информацию о разрешительном режиме, UUID=%s&Time=%s', [AGI.GoodsNomenclatureCode.PermissiveModeDoc.UUID, AGI.GoodsNomenclatureCode.PermissiveModeDoc.DocTimeStamp]);
+      rxWriteLog(etDebug, 'Заполнили информацию о разрешительном режиме: %s', [S]);
     end;
 
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_CODE_TYPE), Ord(LIBFPTR_MCT12_AUTO));
