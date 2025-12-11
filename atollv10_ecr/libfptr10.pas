@@ -1,7 +1,7 @@
 //Интерфейс универсального драйвера к ККМ АТОЛ
 //Версия 10.10.7.0
 //Исходный файл libfptr10.h
-//Версия для FPC - Лагунов А.А. (c) alexs, 2018-2023
+//Версия для FPC - Лагунов А.А. (c) alexs, 2018-2025
 // alexs75@yandex.ru
 
 unit libfptr10;
@@ -23,7 +23,9 @@ const
   aFirstStrChar = 0;
   {$ENDIF}
 
-  atolAPIVersion = '10.10.7.0';
+  atolAPIVersion = '10.10.8.0';
+const
+  _nLIBFPTR_PARAM_FIRST = 65536;
 type
   PWchar_t = Pointer;
   {$IFDEF WINDOWS}
@@ -410,8 +412,9 @@ extern "C"
 
   TLibFPtr_Error = libfptr_error;
 
+
   libfptr_param = (
-    LIBFPTR_PARAM_FIRST = 65536,
+    LIBFPTR_PARAM_FIRST = _nLIBFPTR_PARAM_FIRST {65536} ,
     LIBFPTR_PARAM_TEXT = LIBFPTR_PARAM_FIRST,
     LIBFPTR_PARAM_TEXT_WRAP,
     LIBFPTR_PARAM_ALIGNMENT,
@@ -819,9 +822,13 @@ extern "C"
     LIBFPTR_PARAM_ELECTRONICALLY_PAYMENT_METHOD,
     LIBFPTR_PARAM_ELECTRONICALLY_ID,
     LIBFPTR_PARAM_ELECTRONICALLY_ADD_INFO,
+    LIBFPTR_PARAM_PRINTER_DRIVER_NAME,
+    LIBFPTR_PARAM_SCRIPT_NUMBER,
+    LIBFPTR_PARAM_SCRIPT_EMBEDDED,
+    LIBFPTR_PARAM_OVERWRITE,
 
     // certification
-    LIBFPTR_PARAM_LAST_SUCCESS_FNM_UPDATE_KEYS_DATE_TIME,
+    LIBFPTR_PARAM_LAST_SUCCESS_FNM_UPDATE_KEYS_DATE_TIME = {LIBFPTR_PARAM_FIRST} _nLIBFPTR_PARAM_FIRST + 900,
     LIBFPTR_PARAM_LAST_ATTEMPTION_FNM_UPDATE_KEYS_DATE_TIME,
     LIBFPTR_PARAM_COUNT_ATTEMPTION_FNM_UPDATE_KEYS,
 
@@ -906,6 +913,7 @@ const
   LIBFPTR_SETTING_TIME_ZONE                   = 'TimeZone';
   LIBFPTR_SETTING_REMOTE_TIMEOUT              = 'RemoteTimeout';
 
+  LIBFPTR_SETTING_USE_COMMODITY_NAME_FOR_ADVANCE  = 'UseCommodityNameForAdvance';
 
 type
   libfptr_port = (
@@ -1084,7 +1092,8 @@ type
     LIBFPTR_RT_DISCOUNTS,
     LIBFPTR_RT_JOURNAL_DOCUMENT_BY_NUMBERS,
     LIBFPTR_RT_JOURNAL_DOCUMENT_BY_SHIFTS,
-    LIBFPTR_RT_CLOSE_SHIFT_REPORTS
+    LIBFPTR_RT_CLOSE_SHIFT_REPORTS,
+    LIBFPTR_RT_CLICHE_PICTURES
   );
   Tlibfptr_report_type = libfptr_report_type;
 
@@ -1117,6 +1126,8 @@ type
     LIBFPTR_TAX_VAT7,
     LIBFPTR_TAX_VAT105,
     LIBFPTR_TAX_VAT107,
+    LIBFPTR_TAX_VAT22,
+    LIBFPTR_TAX_VAT122,
     LIBFPTR_TAX_INVALID
   );
   Tlibfptr_tax_type = libfptr_tax_type;
@@ -1300,7 +1311,8 @@ type
     LIBFPTR_RT_FN_QUANTITY_COUNTERS,
     LIBFPTR_RT_FN_UNSENT_DOCS_COUNTERS,
     LIBFPTR_RT_SETTINGS,
-    LIBFPTR_RT_RUN_COMMAND
+    LIBFPTR_RT_RUN_COMMAND,
+    LIBFPTR_RT_SCRIPTS_INFO
   );
   Tlibfptr_records_type = libfptr_records_type;
 

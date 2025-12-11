@@ -1,6 +1,6 @@
 { Билиотека для работы с ККМ
 
-  Copyright (C) 2013-2023 Лагунов Алексей alexs75@yandex.ru
+  Copyright (C) 2013-2025 Лагунов Алексей alexs75@yandex.ru
 
   This library is free software; you can redistribute it and/or modify it
   under the terms of the GNU Library General Public License as published by
@@ -110,8 +110,8 @@ type
     ttaxVat105, //НДС рассчитанный 5/105;
     ttaxVat7,   //НДС 7%;
     ttaxVat107, //НДС рассчитанный 7/107.
-    ttaxVat22,
-    ttaxVat122
+    ttaxVat22,  //НДС 22%;
+    ttaxVat122  //НДС рассчитанный 22/122.
   );
 
   TGoodsPayMode =
@@ -650,6 +650,8 @@ function MakeCRPTCodeStr(APrefix:Word; AGTIN:string; ASerial:string):string;
 function KMStatusEx(AStatus:DWord):string;
 function TaxTypeStr(ATaxType:TTaxType):string;
 function CorrectionTypeStr(ACorrectionType:TEcrCorrectionType):string;
+function GoodsPayModeStr(AValue:TGoodsPayMode):string;
+
 implementation
 uses Math;
 
@@ -764,7 +766,23 @@ begin
     pctOther_9:Result:='тип оплаты №9';
     pctOther_10:Result:='тип оплаты №10';
   else
-    Result:='Не известный тип оплаты';
+    Result:='Не известный тип оплаты (' + IntToStr(Ord(APaymentType)) + ')';
+  end;
+end;
+
+function GoodsPayModeStr(AValue : TGoodsPayMode) : string;
+begin
+  case AValue of
+    gpmFullPay:Result:='Полный расчет ';
+    gpmPrePay100:Result:='Предоплата 100%';
+    gpmPrePay:Result:='Предоплата';
+    gpmAvance:Result:='Аванс';
+    gpmFullPay2:Result:='полный расчет 2';
+    gpmPartialPayAndKredit:Result:='Частичный расчет и кредит';
+    gpmKredit:Result:='Передача в кредит';
+    gpmKreditPay:Result:='Оплата кредита';
+  else
+    Result:='Не известный тип оплаты (' + IntToStr(Ord(AValue)) + ')';
   end;
 end;
 

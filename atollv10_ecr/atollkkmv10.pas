@@ -1,6 +1,6 @@
 { Билиотека для работы с ККМ АТОЛ
 
-  Copyright (C) 2013-2023 Лагунов Алексей alexs75@yandex.ru
+  Copyright (C) 2013-2025 Лагунов Алексей alexs75@yandex.ru
 
   This library is free software; you can redistribute it and/or modify it
   under the terms of the GNU Library General Public License as published by
@@ -636,6 +636,15 @@ begin
     ttaxVatNO:Result:=LIBFPTR_TAX_NO;
     ttaxVat20:Result:=LIBFPTR_TAX_VAT20;
     ttaxVat120:Result:=LIBFPTR_TAX_VAT120;
+
+    ttaxVat5:Result:=LIBFPTR_TAX_VAT5;
+    ttaxVat105:Result:=LIBFPTR_TAX_VAT105;
+
+    ttaxVat7:Result:=LIBFPTR_TAX_VAT7;
+    ttaxVat107:Result:=LIBFPTR_TAX_VAT107;
+
+    ttaxVat22:Result:=LIBFPTR_TAX_VAT22;
+    ttaxVat122:Result:=LIBFPTR_TAX_VAT122;
   else
     raise EAtollLibrary.Create('Не известный тип налога');
   end;
@@ -728,7 +737,6 @@ end;
 procedure TAtollKKMv10.InternalSetCheckType(AValue: TCheckType);
 var
   CT: Tlibfptr_receipt_type;
-  FE: Integer;
 begin
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
@@ -821,9 +829,9 @@ end;
 
 function TAtollKKMv10.InternalRegistration1_2(AGI: TGoodsInfo): integer;
 var
-  FSupInf, FMark, FIndustryInfo: TBytes;
-  FValidationResult, FOfflineValidationErrors,
-    FKMOnlineValidationResult: Integer;
+  FSupInf, {FMark, }FIndustryInfo: TBytes;
+  FValidationResult{,
+  FOfflineValidationErrors, FKMOnlineValidationResult}: Integer;
   FValidationReady: Boolean;
   FMeasurementUnit: Tlibfptr_item_units;
   FMarkingEstimatedStatus: libfptr_marking_estimated_status;
@@ -889,6 +897,7 @@ begin
     InternalCheckError;
   end
   else
+
   ;
 
   //Обработаем данные поставщика
@@ -953,6 +962,8 @@ begin
     gpmPartialPayAndKredit:SetAttributeInt(1214, 5);
     gpmKredit:SetAttributeInt(1214, 6);
     gpmKreditPay:SetAttributeInt(1214, 7);
+  else
+    raise EAtollLibrary.CreateFmt('Unknow GoodsPayMode %s', [GoodsPayModeStr(AGI.GoodsPayMode)]);
   end;
 
   if AGI.GoodsType <> gtNone then
@@ -1211,10 +1222,10 @@ begin
 end;
 
 procedure TAtollKKMv10.GetOFDStatus(out AStatus: TOFDSTatusRecord);
-var
-  FFirstUnsentDate: TDateTime;
-  FOfdMessageRead: Boolean;
-  FFirstUnsentNumber, FUnsentCount, FExchangeStatus, C: Integer;
+//var
+//  FFirstUnsentDate: TDateTime;
+//  FOfdMessageRead: Boolean;
+//  FFirstUnsentNumber, FUnsentCount, FExchangeStatus, C: Integer;
 begin
   inherited GetOFDStatus(AStatus);
   if Assigned(FLibrary) and FLibrary.Loaded and Assigned(FHandle) then
@@ -1422,9 +1433,10 @@ end;
 
 function TAtollKKMv10.Payment: integer;
 begin
+  Result:=-1;
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
-    FLibrary.Payment(FHandle);
+    Result:=FLibrary.Payment(FHandle);
     InternalCheckError;
   end;
 end;
@@ -1449,6 +1461,7 @@ function TAtollKKMv10.RegisterPayments: Integer;
 var
   FPayInfo: TPaymentInfo;
 begin
+  Result:=0;;
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
     if ExistsMarkingGoods then
@@ -1641,9 +1654,10 @@ end;
 
 function TAtollKKMv10.UpdateFnmKeys: Integer;
 begin
+  Result:=0;
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
-    FLibrary.UpdateFnmKeys(Handle);
+    Result:=FLibrary.UpdateFnmKeys(Handle);
     InternalCheckError;
   end;
 end;
@@ -1687,13 +1701,14 @@ end;
 
 function TAtollKKMv10.CloseCheck: Integer;
 begin
+  Result:=0;
   if Assigned(FLibrary) and FLibrary.Loaded then
   begin
 
 //    if APaymentInfo.PaymentType = pctElectronically then
 //    FLibrary.SetParamInt(FHandle, LIBFPTR_PARAM_PAYMENT_TYPE, Ord(LIBFPTR_PT_ELECTRONICALLY));
 
-    FLibrary.CloseReceipt(FHandle);
+    Result:=FLibrary.CloseReceipt(FHandle);
     InternalCheckError;
   end;
   inherited CloseCheck;
@@ -2248,6 +2263,9 @@ var
   S:TAtollWideString;
 begin
   Result:='';
+  {$IFDEF LINUX}
+  S:=nil;
+  {$ENDIF}
   if Assigned(Flibfptr_error_description) then
   begin
     L:=1024;
@@ -2764,6 +2782,9 @@ var
   FSize, L: Integer;
 begin
   Result:='';
+  {$IFDEF LINUX}
+  S:=nil;
+  {$ENDIF}
   if Assigned(Flibfptr_get_settings) then
   begin
     L:=1024;
@@ -2790,6 +2811,9 @@ var
   L, FSize: Integer;
 begin
   Result:='';
+  {$IFDEF LINUX}
+  S:=nil;
+  {$ENDIF}
   if Assigned(Flibfptr_get_single_setting) then
   begin
     L:=1024;
@@ -2841,6 +2865,9 @@ var
   S:TAtollWideString;
 begin
   Result:='';
+  {$IFDEF LINUX}
+  S:=nil;
+  {$ENDIF}
   if Assigned(Flibfptr_get_param_str) then
   begin
     L:=1024;
@@ -2876,6 +2903,7 @@ function TAtollLibraryV10.GetParamByteArray(Handle: TLibFPtrHandle;
 var
   L, FLen: Integer;
 begin
+  Result:=nil;
   if Assigned(Flibfptr_get_param_bytearray) then
   begin
     L:=1024;

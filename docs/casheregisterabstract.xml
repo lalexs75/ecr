@@ -182,6 +182,11 @@
       </element>
     <element name="TCashRegisterAbstract.ShiftState"><short>Состояние кассового дня - открыта/закрыта</short>
       </element>
+    <element name="TTaxType.ttaxDefault"/><element name="TGoodsPayMode"><short>Признак способа рaсчета</short>
+      </element><element name="TGoodsPayMode.gpmPrePay"><short>предоплата </short>
+      </element><element name="TGoodsPayMode.gpmAvance"><short>аванс </short>
+      </element><element name="TGoodsPayMode.gpmFullPay2"><short>полный расчет </short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>
