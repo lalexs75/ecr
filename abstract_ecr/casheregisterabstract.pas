@@ -109,7 +109,9 @@ type
     ttaxVat5,   //НДС 5%;
     ttaxVat105, //НДС рассчитанный 5/105;
     ttaxVat7,   //НДС 7%;
-    ttaxVat107  //НДС рассчитанный 7/107.
+    ttaxVat107, //НДС рассчитанный 7/107.
+    ttaxVat22,
+    ttaxVat122
   );
 
   TGoodsPayMode =
@@ -680,6 +682,12 @@ begin
     ttaxVatNO:Result:='НДС НЕТ';
     ttaxVat20:Result:='НДС 20 %';
     ttaxVat120:Result:='НДС 20/120 %';
+    ttaxVat5:Result:='НДС 5%';
+    ttaxVat105:Result:='НДС рассчитанный 5/105';
+    ttaxVat7:Result:='НДС 7%';
+    ttaxVat107:Result:='НДС рассчитанный 7/107';
+    ttaxVat22:Result:='НДС 22%';
+    ttaxVat122:Result:='НДС рассчитанный 22/122';
   else
     raise Exception.CreateFmt('Не известный тип TaxType(%d)', [Ord(ATaxType)]);
   end;
