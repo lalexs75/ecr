@@ -815,7 +815,8 @@ begin
     gpmPrePay100:SetAttributeInt(1214, 1);
     gpmPrePay:SetAttributeInt(1214, 2);
     gpmAvance:SetAttributeInt(1214, 3);
-    gpmFullPay2:SetAttributeInt(1214, 4);
+    gpmFullPay2,
+    gpmFullPay:SetAttributeInt(1214, 4);
     gpmPartialPayAndKredit:SetAttributeInt(1214, 5);
     gpmKredit:SetAttributeInt(1214, 6);
     gpmKreditPay:SetAttributeInt(1214, 7);
