@@ -1399,7 +1399,8 @@ begin
     if CheckInfo.Electronically then
       FLibrary.SetParamBool(FHandle, LIBFPTR_PARAM_RECEIPT_ELECTRONICALLY, CheckInfo.Electronically);
 
-    FLibrary.SetParamBool(FHandle, 1125, InternetPayment);
+    if InternetPayment then
+      FLibrary.SetParamBool(FHandle, 1125, InternetPayment);
 
     if PaymentPlace<>'' then
       SetAttributeStr(1187, PaymentPlace);
