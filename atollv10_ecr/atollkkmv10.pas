@@ -879,9 +879,6 @@ begin
     SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), WaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 
-    //TODO:Реализовать дробное кол-во товара
-    //FKKM.LibraryAtol.SetParamStr(FKKM.Handle, Ord(LIBFPTR_PARAM_MARKING_FRACTIONAL_QUANTITY), Edit3.Text);
-
     FLibrary.BeginMarkingCodeValidation(Handle);
     InternalCheckError;
     repeat

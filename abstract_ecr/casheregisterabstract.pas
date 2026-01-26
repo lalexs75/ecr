@@ -153,7 +153,12 @@ type
        soleProprietorCMIContributions = 23,   //или 23 - взносы на ОМС ИП
        gtCmiContributions = 24,               //или 24 - взносы на ОМС
        gtCsiContributions = 25,               //или 25 - взносы на ОСС
-       gtCasinoPayment = 26                   //или 26 - платеж казино
+       gtCasinoPayment = 26,                  //или 26 - платеж казино
+       gtFundsIssuance = 27,                  //или 27 - выдача денежных средств
+       gtExciseWithoutMarking = 30,           //или 30 - подакцизный товар, не имеющий код маркировки
+       gtExciseWithMarking = 31,              //или 31 - подакцизный товар, имеющий код маркировки
+       gtCommodityWithoutMarking = 32,        //или 32 - товар, не имеющий код маркировки
+       gtCommodityWithMarking = 33            //или 33 - товар, имеющий код маркировки
       );
 
   TElectronPayMethod =

@@ -8,8 +8,7 @@ unit atol_ecr;
 interface
 
 uses
-  KKM_AtolPropsUnit, KKM_Atol, AtollKKMv10, libfptr10, Atollv10_JSON, 
-  LazarusPackageIntf;
+  KKM_AtolPropsUnit, KKM_Atol, AtollKKMv10, libfptr10, LazarusPackageIntf;
 
 implementation
 
@@ -17,7 +16,6 @@ procedure Register;
 begin
   RegisterUnit('KKM_Atol', @KKM_Atol.Register);
   RegisterUnit('AtollKKMv10', @AtollKKMv10.Register);
-  RegisterUnit('Atollv10_JSON', @Atollv10_JSON.Register);
 end;
 
 initialization
