@@ -251,6 +251,7 @@ type
   TGoodsNomenclatureCode = class
   private
     FGroupCode: word;
+    FGroupName: string;
     FGTIN: string;
     FKM: String;
     FMarkingID: Integer;
@@ -265,6 +266,7 @@ type
     procedure Assign(ASource:TGoodsNomenclatureCode);
     function Make1162Value:TBytes;
     property GroupCode:word read FGroupCode write FGroupCode;
+    property GroupName:string read FGroupName write FGroupName;
     property GTIN:string read FGTIN write FGTIN;
     property Serial:string read FSerial write FSerial;
     property KM:String read FKM write FKM;
@@ -1042,6 +1044,7 @@ begin
   if Assigned(ASource) then
   begin
     FGroupCode:=ASource.FGroupCode;
+    FGroupName:=ASource.FGroupName;
     FGTIN:=ASource.FGTIN;
     FSerial:=ASource.FSerial;
     FKM:=ASource.FKM;

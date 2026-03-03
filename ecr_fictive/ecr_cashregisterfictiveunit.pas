@@ -82,6 +82,7 @@ type
     function ValidateGoodsKM:Boolean; override;
     function GetVersionString:string; override;
     function InternalCheckError:Integer; override;
+    function ShowProperties:boolean; override;      //Отобразить окно параметров ККМ
 
     procedure ReportZ; override;
     procedure ReportX(AReportType: Byte); override;
@@ -588,6 +589,15 @@ function TCashRegisterFictive.InternalCheckError: Integer;
 begin
   RxWriteLog(etDebug, 'Test error code');
   ClearError;
+end;
+
+function TCashRegisterFictive.ShowProperties: boolean;
+var
+  S: String;
+begin
+  S:='Свойства фиктивного ККМ';
+  RxWriteLog(etDebug, S);
+  ShowCheckForm(Self, S);
 end;
 
 procedure TCashRegisterFictive.ReportZ;
