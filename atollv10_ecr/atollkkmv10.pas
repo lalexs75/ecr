@@ -1519,6 +1519,13 @@ begin
       repeat
         FLibrary.GetMarkingCodeValidationStatus(Handle);
         InternalCheckError;
+
+        if ErrorCode <> 0 then
+        begin
+          FLibrary.CancelMarkingCodeValidation(Handle);
+          Exit(false);
+        end;
+
         FValidationReady:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY));
       until FValidationReady;
 
