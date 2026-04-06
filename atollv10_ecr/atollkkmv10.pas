@@ -879,19 +879,24 @@ begin
     SetAttributeBool(Ord(LIBFPTR_PARAM_MARKING_WAIT_FOR_VALIDATION_RESULT), WaitForMarkingValidationResult);  //TODO:Добавить поддержку ожидания окончания операции на сервере ОФД
     SetAttributeInt(Ord(LIBFPTR_PARAM_MARKING_PROCESSING_MODE), 0); //TODO:Что это за режим обработки?
 
-    FLibrary.BeginMarkingCodeValidation(Handle);
-    InternalCheckError;
-    repeat
-      FLibrary.GetMarkingCodeValidationStatus(Handle);
-      FValidationReady:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY));
-      //FValidationReady:=true;
+    if AGI.GoodsNomenclatureCode.State and $1000 = 0 then
+    begin
+      FLibrary.BeginMarkingCodeValidation(Handle);
+      InternalCheckError;
+      repeat
+        FLibrary.GetMarkingCodeValidationStatus(Handle);
+        FValidationReady:=FLibrary.GetParamBool(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_VALIDATION_READY));
+        //FValidationReady:=true;
+        FValidationResult := FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+      until FValidationReady;
+
       FValidationResult := FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
-    until FValidationReady;
 
-    FValidationResult := FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
-
-    FLibrary.AcceptMarkingCode(Handle);
-    AGI.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+      FLibrary.AcceptMarkingCode(Handle);
+      AGI.GoodsNomenclatureCode.State:=FLibrary.GetParamInt(Handle, Ord(LIBFPTR_PARAM_MARKING_CODE_ONLINE_VALIDATION_RESULT));
+    end
+    else
+      AGI.GoodsNomenclatureCode.State:=0;
     InternalCheckError;
   end
   else
