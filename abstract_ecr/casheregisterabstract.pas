@@ -374,10 +374,12 @@ type
     FDeclarationNumber: String;
     FGoodsArticle: string;
     FGoodsID: integer;
+    FGoodsMarkingGroupABV: string;
     FGoodsMeasurementUnit: Integer;
     FGoodsNomenclatureCode: TGoodsNomenclatureCode;
     FGoodsPayMode: TGoodsPayMode;
     FGoodsRowType: integer;
+    FGoodsTNVED: string;
     FGoodsType: TGoodsType;
     FName: string;
     FPrice: Currency;
@@ -401,6 +403,8 @@ type
     property GoodsType:TGoodsType read FGoodsType write FGoodsType;
     property GoodsMeasurementUnit:Integer read FGoodsMeasurementUnit write FGoodsMeasurementUnit;
     property GoodsArticle:string read FGoodsArticle write FGoodsArticle;
+    property GoodsTNVED:string read FGoodsTNVED write FGoodsTNVED;
+    property GoodsMarkingGroupABV:string read FGoodsMarkingGroupABV write FGoodsMarkingGroupABV;
     //for internal use
     property GoodsID:integer read FGoodsID write FGoodsID;
     property GoodsRowType:integer read FGoodsRowType write FGoodsRowType;
@@ -1173,6 +1177,8 @@ begin
   FQuantity:=ASource.FQuantity;
   FSuplierInfo.Assign(ASource.FSuplierInfo);
   FTaxType:=ASource.FTaxType;
+  FGoodsTNVED:=ASource.FGoodsTNVED;
+  FGoodsMarkingGroupABV:=ASource.FGoodsMarkingGroupABV;
 end;
 
 { TCheckInfo }
