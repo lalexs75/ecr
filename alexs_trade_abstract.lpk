@@ -13,11 +13,6 @@
         <OtherUnitFiles Value="pca;abstract_ecr"/>
         <UnitOutputDirectory Value="lib\pca\$(TargetCPU)-$(TargetOS)\$(LCLWidgetType)"/>
       </SearchPaths>
-      <Other>
-        <ConfigFile>
-          <WriteConfigFilePath Value="$(PkgOutDir)\fpclaz.cfg"/>
-        </ConfigFile>
-      </Other>
     </CompilerOptions>
     <License Value="LGPL2"/>
     <Version Major="1" Minor="1" Build="4"/>
@@ -42,6 +37,9 @@
       <OutDir Value="languages"/>
     </i18n>
     <RequiredPkgs>
+      <Item>
+        <PackageName Value="LCL"/>
+      </Item>
       <Item>
         <PackageName Value="FCL"/>
       </Item>

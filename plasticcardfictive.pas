@@ -47,7 +47,7 @@ type
 procedure Register;
 
 implementation
-uses Math;
+uses Math, Dialogs, Controls;
 
 procedure Register;
 begin
@@ -89,7 +89,13 @@ end;
 
 procedure TPlasticCardFictive.Pay(APaySum: Currency; ACheckNum: integer;
   APayTypeMethod: Integer);
+var
+  S: String;
 begin
+  if QuestionDlg('Тип оплаты', 'Опаоата пластиковой картой (ДА) или Цифровым рублём (НЕТ)', mtConfirmation, [mrYes, mrNo], '') = mrYes then
+    S:=''
+  else
+    S:='Цифровой кошелёк *** XXX123XCXX' + LineEnding;
   //Фиктивный метод
   FSlipInfo:='Фиктивный СЛИП' + LineEnding +
   'Тип оплаты :' + IntToStr(APayTypeMethod) + LineEnding +
@@ -98,7 +104,7 @@ begin
   '      ОПЛАТА' + LineEnding +
   'Cумма : ' +FloatToStr(APaySum)+ LineEnding +
   'Комиссия : ' + FloatToStr(RoundTo(APaySum / 100, -2))+ LineEnding +
-  'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding +
+  'Дата оплаты ' +DateTimeToStr(Now)+ LineEnding + S +
   'Фиктивный СЛИП';
 
   case Random(3) of
