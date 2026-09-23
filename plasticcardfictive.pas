@@ -92,7 +92,7 @@ procedure TPlasticCardFictive.Pay(APaySum: Currency; ACheckNum: integer;
 var
   S: String;
 begin
-  if QuestionDlg('Тип оплаты', 'Опаоата пластиковой картой (ДА) или Цифровым рублём (НЕТ)', mtConfirmation, [mrYes, mrNo], '') = mrYes then
+  if QuestionDlg('Тип оплаты', 'Оплата пластиковой картой (ДА) или Цифровым рублём (НЕТ)', mtConfirmation, [mrYes, mrNo], '') = mrYes then
     S:=''
   else
     S:='Цифровой кошелёк *** XXX123XCXX' + LineEnding;
